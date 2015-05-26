@@ -1,7 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
 
-import dao.HobbyDao;
 import vo.Hobby;
+import dao.HobbyDao;
 
 public class HobbyTest
 {
@@ -24,7 +24,7 @@ public class HobbyTest
 		ArrayList hobbyList = hd.getHobbyList();
 		for(int i=0; i<hobbyList.size(); i++)
 		{
-			System.out.println(hobbyList.get(i));
+			System.out.println(hobbyList.get(i) + "tyiygjghjghjghjghj");
 		}
 	}
 }
