@@ -1,10 +1,10 @@
-package model.dao;
+package model.member.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.vo.User;
+import model.member.vo.User;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

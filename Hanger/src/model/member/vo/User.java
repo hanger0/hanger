@@ -1,4 +1,4 @@
-package model.vo;
+package model.member.vo;
 
 public class User {
 	private String id ;
