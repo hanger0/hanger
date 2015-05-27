@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
-<%@ page import="model.member.vo.User" %>
+<%@ page import="com.hanger.model.member.vo.User" %>
 
 <%
 User user = (User)request.getAttribute("users");
