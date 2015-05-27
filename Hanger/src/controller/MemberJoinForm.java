@@ -20,12 +20,11 @@ public class MemberJoinForm{
 	public ModelAndView memberJoinForm2(
 			HttpServletRequest request
 			) throws IOException {
-		System.out.println("memberJoinForm2 실행....");
 		File dayFile = new File("F:\\hanger");
 		String savePath = dayFile.getAbsolutePath();
 		int sizeLimit = 1000 * 1024 * 1024;
 		MultipartRequest mul = new MultipartRequest(request, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
-		String userId = "joinId";
+		String userId = mul.getParameter("joinId");
 		String name = mul.getParameter("name");
 		
 		ModelAndView mav = new ModelAndView();
@@ -33,7 +32,7 @@ public class MemberJoinForm{
 		mav.addObject("name", name);
 		mav.addObject("userId", userId);
 		
-		System.out.println(name + "                    " + userId);
+		System.out.println("memberJoinForm2 실행....");
 		return mav;
 	}
 }

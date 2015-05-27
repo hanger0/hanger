@@ -110,13 +110,10 @@ var InputImage = (function loadImageFile() {
                alert("이미지 파일을 업로드 하세요"); 
                return; 
             }
-            
             ImgReader.readAsDataURL(img[0]);
         }
-
-    }
-            
-            document.getElementById("imagePreview").src = document.getElementById("image").value;
+    }      
+	document.getElementById("imagePreview").src = document.getElementById("image").value;
 })();
 
 
@@ -162,7 +159,7 @@ function home()
         </dl>
        <dl>
            <dt><label for="email">Name:</label></dt>
-            <dd><INPUT class="text" type="text" name="name" maxlength="20" value="name"></dd>
+            <dd><INPUT class="text" type="text" name="name" maxlength="20"></dd>
         </dl>
     
         <dl>
