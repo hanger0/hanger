@@ -3,11 +3,15 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 
-public class MemberJoin extends AbstractController{
-	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+@Controller
+public class MemberJoin {
+	
+	@RequestMapping("/join.do")
+	protected ModelAndView memberJoin(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView() ;
 		mav.setViewName("MemberJoin");

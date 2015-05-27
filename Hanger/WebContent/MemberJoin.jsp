@@ -228,7 +228,7 @@ function home()
       <fieldset class="action">
          <!--<input type="submit" name="submit" id="joinBtn" value="Submit"/>
          <button type="button" name="test" id="cancelBtn">Cancel</button> 잠깐주석-->
-         <INPUT class = "button" type="Submit" value="회원가입"  name ="Submit" id="joinButton" style="cursor:pointer" onclick="joinBtn()">
+         <INPUT class = "button" type="button" value="회원가입"  name ="Submit" id="joinButton" style="cursor:pointer" onclick="joinBtn()">
             
          <INPUT class = "button" type="button" value="취소" name = "cancelBtn" style="cursor:pointer" name="test" onClick = "home()">
       </fieldset>

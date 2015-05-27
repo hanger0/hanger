@@ -8,9 +8,6 @@
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-	<!-- handlerMapping -->
-	<bean id = "handlerMapping" class = "org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
-	
 	<!--  요청 url과 Controller 매핑 -->
 	<bean name = "/join.do" class ="controller.MemberJoin" />
 	<bean name = "/result.do" class ="controller.MemberJoinForm" />
