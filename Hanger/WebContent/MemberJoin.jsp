@@ -56,7 +56,6 @@
    white-space: nowrap;
 }
 .text{
-
    background: white;
    border-bottom: transparent 1px solid;
    border-bottom-color: #167ac6;
@@ -163,7 +162,7 @@ function home()
         </dl>
        <dl>
            <dt><label for="email">Name:</label></dt>
-            <dd><INPUT class = "text" type="text" name="name" maxlength="20"></dd>
+            <dd><INPUT class="text" type="text" name="name" maxlength="20" value="name"></dd>
         </dl>
     
         <dl>

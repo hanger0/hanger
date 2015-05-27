@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
+<%@ page import="model.vo.User" %>
 
 <%
-	String name = (String)request.getParameter("name");
-	String userId = (String)request.getParameter("userID");
+User user = (User)request.getAttribute("users");
+String name = (String)request.getAttribute("name");
+String userId = (String)request.getAttribute("userId");
 %>
 
 <!DOCTYPE html>
