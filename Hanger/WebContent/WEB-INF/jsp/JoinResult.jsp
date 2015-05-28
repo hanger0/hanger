@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
-<%@ page import="com.hanger.model.member.vo.User" %>
 
 <%
-User user = (User)request.getAttribute("users");
 String name = (String)request.getAttribute("name");
 String userId = (String)request.getAttribute("userId");
 %>
