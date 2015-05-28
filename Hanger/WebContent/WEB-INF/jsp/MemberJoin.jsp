@@ -127,7 +127,7 @@ function home()
 </head>
 <body>
 
-<FORM id="joinForm" name="joinForm" action="/result.do" method="post" enctype="multipart/form-data">
+<FORM id="joinForm" name="joinForm" action="/result.hang" method="post" enctype="multipart/form-data">
 <div id="container">
    <fieldset>
          <INPUT type="hidden" name="func" value="member_008">

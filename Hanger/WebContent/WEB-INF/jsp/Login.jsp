@@ -47,7 +47,7 @@
 
 				function logoutAction()
 				{
-					location.href="logout.do";
+					location.href="logout.hang";
 				}
 		</SCRIPT>
 	</HEAD>
@@ -81,7 +81,7 @@
 	{
 %>
 			<TABLE border=0>
-				<FORM name="form" action="login.do" method="post">
+				<FORM name="form" action="login.hang" method="post">
 					<TR><TD>User ID : </td><td><input type="text" name="id"></TD></TR>
 					<TR>
 						<TD>User Password : </TD>
