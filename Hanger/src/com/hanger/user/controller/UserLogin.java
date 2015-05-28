@@ -15,7 +15,7 @@ import com.hanger.user.dao.UserLoginDao;
 import com.hanger.user.vo.User;
 
 @Controller
-@RequestMapping("/login.do")
+@RequestMapping("/login.hang")
 public class UserLogin extends BaseController {
 	private UserLoginDao loginDao;
 	
@@ -25,6 +25,11 @@ public class UserLogin extends BaseController {
 	public void setLoginDao(UserLoginDao loginDao)
 	{
 		this.loginDao = loginDao;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String form(){
+		return "Login";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

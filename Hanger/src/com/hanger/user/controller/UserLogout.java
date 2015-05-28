@@ -9,7 +9,7 @@ import com.hanger.common.BaseController;
 
 @Controller
 public class UserLogout extends BaseController {
-	@RequestMapping("/logout.do")
+	@RequestMapping("/logout.hang")
 	public String loginout(HttpSession session){
 		System.out.println("logout.do ½ÇÇà");
 		session.setAttribute("LoginYn", "N");

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.BaseController;
 import com.hanger.user.dao.UserJoinDao;
@@ -23,8 +24,8 @@ public class UserJoinForm extends BaseController {
 		this.userJoinDao = userJoinDao;
 	}
 
-	@RequestMapping(value="/result.do", method=RequestMethod.POST)
-	public String memberJoinForm2(
+	@RequestMapping(value="/result.hang", method=RequestMethod.POST)
+	public ModelAndView memberJoinForm2(
 			HttpServletRequest request
 			) throws IOException {
 		File dayFile = new File("F:\\hanger");
@@ -57,9 +58,12 @@ public class UserJoinForm extends BaseController {
 		user.setUserAnswer(answer);
 		user.setUserGender(gender);
 		user.setUserPostCode1(postCode1);
-		user.setUserPostCode1(postCode2);
+		user.setUserPostCode2(postCode2);
 		user.setUserAddr1(addr1);
 		user.setUserAddr2(addr2);
+		user.setUserPicPath("picPath");
+		user.setUserPicOrgName("picOrgName");
+		user.setUserPicSaveName("picSaveName");
 		user.setRegId(userId);
 		user.setRegIp(ip);
 		user.setUpdId(userId);
@@ -69,6 +73,11 @@ public class UserJoinForm extends BaseController {
 		
 		System.out.println("memberJoinForm2 ½ÇÇà....");
 		
-		return "JoinResult";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("JoinResult");
+		mav.addObject("userId", userId);
+		mav.addObject("name", pw);
+		
+		return mav;
 	}
 }

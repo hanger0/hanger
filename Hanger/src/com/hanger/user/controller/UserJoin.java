@@ -12,7 +12,7 @@ import com.hanger.common.BaseController;
 @Controller
 public class UserJoin extends BaseController {
 	
-	@RequestMapping("/join.do")
+	@RequestMapping("/join.hang")
 	protected ModelAndView memberJoin(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView() ;
