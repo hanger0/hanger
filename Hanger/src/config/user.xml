@@ -3,18 +3,17 @@
 <sqlMap namespace="Data">
 	<typeAlias alias="user" type="com.hanger.user.vo.User"/>
 	
-	<select id="getUser" resultClass="user">
+	<select id="getUser" parameterClass="user" resultClass="user">
 		SELECT
-		CODE as code, NAME as name, REG_ID as regId, REG_DATE as regDate, REG_IP as regIp,
-		UPD_ID as updId, UPD_DATE as updDate, UPD_IP as updIp, USEYN as useYn
+			USER_NAME as userName
 		FROM
-		HOBBY
-		ORDER BY
-		CODE
+			USER
+		WHERE
+			USER_ID = #userId# AND USER_PWD = #userPwd#
 	</select>
 	
 	<insert id="insertUser" parameterClass="user">
 		INSERT INTO USER(USER_CODE, USER_ID, USER_PWD, USER_NAME, USER_GENDER, USER_BIRTH, USER_PHONE, USER_QUESTION, USER_ANSWER, USER_ADDR1, USER_ADDR2, USER_POSTCODE1, USER_POSTCODE2, USER_PIC_PATH, USER_PIC_ORG_NAME, USER_PIC_SAVE_NAME, USER_SKINTYPE, USER_SKINTONE, USER_SKINPROBLEM, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
-		VALUES(CONCAT("MM",LPAD((SELECT GET_SEQ('USER_CODE')), 10, '0')), #userId#, #userPwd#, #userName#, #userGender#, #userBirth#, #userPhone#, #userQuestion#, #userAnswer#, #userAddr1#, #userAddr2#, #userPostCode1#, #userPostCode2#, #userPicPath#, #userPicOrgName#, #userPicSaveName#, #userSkinType#, #userSkinTone#, #userSkinProblem#, #regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
+		VALUES(CONCAT("UR",LPAD((SELECT GET_SEQ('USER_CODE')), 10, '0')), #userId#, #userPwd#, #userName#, #userGender#, #userBirth#, #userPhone#, #userQuestion#, #userAnswer#, #userAddr1#, #userAddr2#, #userPostCode1#, #userPostCode2#, #userPicPath#, #userPicOrgName#, #userPicSaveName#, #userSkinType#, #userSkinTone#, #userSkinProblem#, #regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>
 </sqlMap>

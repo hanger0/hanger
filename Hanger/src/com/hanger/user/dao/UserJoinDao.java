@@ -12,7 +12,7 @@ public class UserJoinDao {
 		this.smct = smct;
 	}
 
-	public void insertHobby(User user)
+	public void insertUser(User user)
 	{
 		smct.insert("insertUser", user);
 	}

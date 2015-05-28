@@ -17,6 +17,6 @@ public class UserLogout extends BaseController {
 		session.removeAttribute("ID");
 		session.removeAttribute("password");
 		
-		return root + "Login";
+		return "Login";
 	}
 }

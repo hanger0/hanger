@@ -17,14 +17,11 @@ import com.hanger.user.vo.User;
 @Controller
 @RequestMapping("/login.hang")
 public class UserLogin extends BaseController {
-	private UserLoginDao loginDao;
+	private UserLoginDao userLoginDao;
 	
-	public UserLogin()
-	{}
-
-	public void setLoginDao(UserLoginDao loginDao)
+	public void setUserLoginDao(UserLoginDao userLoginDao)
 	{
-		this.loginDao = loginDao;
+		this.userLoginDao = userLoginDao;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -39,10 +36,12 @@ public class UserLogin extends BaseController {
 			@RequestParam(value="age", defaultValue="0000") int age,
 			HttpSession session ){
 		//
-		Object[] paramArr = {userId, pass};
-		loginDao.setParamArr(paramArr);
+		User user = new User();
+		user.setUserId(userId);
+		user.setUserPwd(pass);
+		userLoginDao.getUser(user);
 		
-		List<User> uvList = (List<User>)loginDao.executeSelect();
+		List<User> uvList = (List<User>)userLoginDao.getUser(user);
 		
 		String message = "";
 		if(uvList.size()>0)
@@ -60,7 +59,7 @@ public class UserLogin extends BaseController {
 		}
 
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName(root + "Login");		// 처리 결과를 보여주는 페이지의 별칭
+		mav.setViewName("Login");		// 처리 결과를 보여주는 페이지의 별칭
 		mav.addObject("message", message);
 
 		return mav;
