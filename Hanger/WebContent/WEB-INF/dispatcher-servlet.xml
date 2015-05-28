@@ -33,11 +33,16 @@
 	<bean id="userJoinForm" class ="com.hanger.user.controller.UserJoinForm">
 		<property name="userJoinDao" ref="userJoinDao"></property>
 	</bean>
-	<bean id="userLogin" class ="com.hanger.user.controller.UserLogin"/>
+	<bean id="userLogin" class ="com.hanger.user.controller.UserLogin">
+		<property name="userLoginDao" ref="userLoginDao"></property>
+	</bean>
 	<bean id="userLogout" class ="com.hanger.user.controller.UserLogout" />
 	
 	<!--  Dao beans  -->
 	<bean id="userJoinDao" class="com.hanger.user.dao.UserJoinDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="userLoginDao" class="com.hanger.user.dao.UserLoginDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	

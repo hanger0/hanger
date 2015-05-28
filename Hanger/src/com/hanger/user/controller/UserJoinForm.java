@@ -69,7 +69,7 @@ public class UserJoinForm extends BaseController {
 		user.setUpdId(userId);
 		user.setUpdIp(ip);
 		
-		userJoinDao.insertHobby(user);
+		userJoinDao.insertUser(user);
 		
 		System.out.println("memberJoinForm2 ½ÇÇà....");
 		
