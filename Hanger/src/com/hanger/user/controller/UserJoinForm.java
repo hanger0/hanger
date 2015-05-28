@@ -46,7 +46,7 @@ public class UserJoinForm extends BaseController {
 		String postCode2 = mul.getParameter("zipCode2");
 		String addr1 = mul.getParameter("addr1");
 		String addr2 = mul.getParameter("addr2");
-		String ip = "";
+		String ip = request.getRemoteAddr();
 		
 		user.setUserId(userId);
 		user.setUserName(name);
@@ -65,7 +65,8 @@ public class UserJoinForm extends BaseController {
 		user.setUpdId(userId);
 		user.setUpdIp(ip);
 		
-
+		userJoinDao.insertHobby(user);
+		
 		System.out.println("memberJoinForm2 ½ÇÇà....");
 		
 		return "JoinResult";

@@ -202,11 +202,11 @@ function home()
       <dl>
          <dt><label for="color">Postcode:</label></dt>
          <dd>
-            <INPUT class = "text"  type="text" name="zipCode1" class="searchZipClass" size="5" readonly>
-             <INPUT  class = "text" type="text" name="zipCode2" class="searchZipClass" size="5" readonly>
+            <INPUT class = "text"  type="text" name="zipCode1" class="searchZipClass" size="5" value="123" readonly>
+             <INPUT  class = "text" type="text" name="zipCode2" class="searchZipClass" size="5" value="123" readonly>
                <INPUT  class = "button" type="button" value="快祈锅龋八祸" class="searchZipClass" style="cursor:pointer" onclick="zipcodeBtn()">
                <BR>
-               <INPUT  class = "text" type="text" name="addr1"  size="40" class="searchZipClass" readonly> (青沥备开) <BR>
+               <INPUT  class = "text" type="text" name="addr1"  size="40" class="searchZipClass" value="123" readonly> (青沥备开) <BR>
             
                <INPUT  class = "text" type="text" name="addr2" size="40"> (锅瘤 棺 惑技林家)
          </dd>
