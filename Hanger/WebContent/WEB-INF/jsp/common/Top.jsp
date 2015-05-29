@@ -15,7 +15,7 @@
       <div class="navbar-header">
          <a class="navbar-brand" href="/"> <img
             style="height: 32px; padding: 3px 0;"
-            src="/assets/images/hanger.png" id="brand-icon" alt="Hanger" />
+            src="/images/hanger.png" id="brand-icon" alt="Hanger" />
          </a>
       </div>
       <form class="navbar-form navbar-left" role="search">
@@ -27,8 +27,8 @@
       <div class="collapse navbar-collapse">
          <ul class="nav navbar-nav navbar-right unpa-navbar-right">
             <li></li>
-            <li><a href="/signin" class="remove-border">로그인</a></li>
-            <li><a href="/signin" class="remove-border">회원가입</a></li>
+            <li><a href="/login.hang" class="remove-border">로그인</a></li>
+            <li><a href="/join.hang" class="remove-border">회원가입</a></li>
          </ul>
       </div>
    </div>
@@ -59,7 +59,7 @@
          class="visible-xs navbar navbar-default navbar-fixed-top navbar HOME"
          role="navigation">
          <div style="margin: 15px">
-            <img src="images/test.png" style="float:left;"/>
+            <img src="images/hanger.png" style="float:left;"/>
             <button class="btn btn-default" style="float: right;">회원가입</button>
             <button class="btn btn-default" style="float: right;">로그인</button>
             

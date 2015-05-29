@@ -9,7 +9,7 @@
 		FROM 
 			POST_CODE 
 		WHERE 
-			ADDR LIKE '%'||#qt#||'%' 
+			ADDR LIKE '%$qt$%' 
 		ORDER BY 
 			ADDR
 	</select>
