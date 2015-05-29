@@ -1,0 +1,42 @@
+
+#wrap{
+	width: 100%; 
+	background: #EAEAEA;
+}
+
+#header{
+	width:1000px; 
+	height:200px; 
+	margin-left:0px; 
+	background:#EAEAEA;
+}
+#middle{
+	width:100%; 
+	float:left; 
+	background: gray;
+}
+#content{
+	width:100%; 
+	min-height: 600px;
+	padding-bottom: 100px;
+	float:left; 
+	background:#EBEBEB;
+}
+#sidebar{
+
+	position: fixed;
+	width: 100px;
+	height: 500px;
+	left: 80%; 
+	background:blue;
+	
+	z-index:1000;
+}
+
+#footer{
+	width:100%; 
+	height:130px; 
+	float:left; 
+	margin-left:0px; 
+	background: gray;
+}

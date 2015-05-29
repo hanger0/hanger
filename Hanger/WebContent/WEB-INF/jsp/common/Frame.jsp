@@ -15,9 +15,6 @@
 			<div id="header"> 
 				<jsp:include page ="Top.jsp"/>
 			</div>
-			<div id="nav"> 
-				<jsp:include page ="Nav.jsp"/>	
-			</div>
 			<div id="middle"> 
 				<div id="content">
 					<jsp:include page="Main.jsp" flush="true" />

@@ -57,86 +57,95 @@
 
 
 <header id ="header">
-	<nav id="nav1">
-		<ul>
-			<li>
-				<H5>
-<%
-	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y"))
-	{
-%>
-			<SPAN style="font-size:12px;"><SPAN style="color:#4291dc;"><%=name%></SPAN>님 환영합니다. | </SPAN>
-			<A id="logoutImg" style="cursor:pointer">로그아웃</A>
-<%
-	}
-	else
-	{
-%>
-			<A id="loginImg" style="cursor:pointer">로그인</A>
-<%
-	}
-%>
-<%
-	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y"))
-	{
-		if (session.getAttribute("who")!=null && ((String)session.getAttribute("who")).equals("Buyer"))
-		{
-%>				
-			 | <A id="cartImg" style="cursor:pointer">장바구니</A>
-<%
-		}
-	}
-	else
-	{
-%>
-			 | <A id="joinImg" style="cursor:pointer">회원가입</A>
-<%
-	}
-	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y"))
-	{
-		if(((String)session.getAttribute("who")).equals("Buyer"))
-		{
-%>
-			 | <A id="buyerMyPage" style="cursor:pointer">마이페이지</A>
+	<div style="width: 100%;"
+      class="hidden-xs navbar navbar-default navbar-fixed-top unpa-navbar HOME"
+      role="navigation">
+      <div class="container">
 
-<%
-		}
-		else if(((String)session.getAttribute("who")).equals("Seller"))
-		{
-%>
-			 | <A id="sellerMyPage" style="cursor:pointer">마이페이지</A>
-<%
-		}
-	}
-%>
-				</H5>
-			</li>
-		</ul>
+         <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+            	<img style="height: 32px; padding: 3px 0;" src="/images/hanger.png" id="brand-icon" alt="Hanger" />
+            </a>
+         </div>
 
-	</nav>
-	
-	<FORM id="storeListForm" action="/storeList.cookpon" method="post">	
-		<nav id="nav2">
-			<ul>
-				<li>
-				<a href="/"> <img src="image/cookponlogo.png" width="150" id="logo" style="cursor:pointer" valign="bottom"> </a>		
-				</li>
-			</ul>
-			<select id="select" name="keyType">
-				<option value="location">지역</option>
-				<option value="storeName">업체명</option>
-				<option value="foodName">음식명</option>
-			</select>
-			<ul>
-				<li>
-					<input type="text" name="keyWord" id="search">
-					<img src="image/search.JPG" style="cursor:pointer" id="searchimg">
-				</li>
-			</ul>
+         <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+               <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">검색</button>
+         </form>
+         <!-- 기본페이지에는 이거보임 -->
+         <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right unpa-navbar-right">
+               <li>
+                  <button class="compose-button sign-in-require-action">
+                     <i class="unpacon-pencil"></i>
+                  </button>
+               </li>
+               <li><a href="/signin" class="remove-border">로그인</a></li>
+               <li><a href="/signin" class="remove-border">회원가입</a></li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   <div
+      class="hidden-xs navbar navbar-default navbar-fixed-top unpa-navbar HOME"
+      style="width: 100%; position: fixed; z-index: 1000;">
+      <div
+         style="width: 50%; float: left; background: red; margin-top: 50px">
+         <ul class="nav nav-pills">
+            <li><a href="#" style="margin-left: 150px">SHOP</a>
+            <li><a href="#">BRAND</a>
+            <li><a href="#">SALE</a>
+         </ul>
+      </div>
+      <div style="width: 50%; float: right; margin-top: 50px">
+         <ul class="nav nav-pills">
+            <li><a href="#" style="margin-left: 100px;">REVIEWS</a>
+            <li><a href="#">TIPS</a>
+            <li><a href="#">HANG OUT</a>
+         </ul>
+      </div>
+   </div>
+   <!--  기본페이지 end -->
+   <!-- 화면이작아지면 보이는페이지 -->
+   <div
+      class="visible-xs navbar navbar-default navbar-fixed-top unpa-navbar HOME"
+      style="width: 100%; position: fixed; z-index: 1000; margin: 50px 0px 0px;">
+      <div style="width: 50%; float: left; background: red;">
+         <ul class="nav navbar-nav navbar-middle unpa-navbar-middle">
+            <a href="#" style="margin-left:120px">SHOP</a>
+            <a href="#">BRAND</a>
+            <a href="#">SALE</a>
+         </ul>
+      </div>
+      <div style="width: 50%; float: right; background: pink;">
+         <ul class="nav navbar-nav navbar-middle unpa-navbar-middle">
 
-		</nav>
-	</FORM>
-
+            <span class="text-right"> <a class="unpa-xs-navbar-menu sign-in"
+               href="/signin" style="margin-left: 70px;"> REVIEWS </a> <a
+               class="unpa-xs-navbar-menu sign-in" href="/signin">TIPS </a> <a
+               class="unpa-xs-navbar-menu sign-in" href="/signin">HANG OUT </a>
+            </span>
+         </ul>
+      </div>
+   </div>
+   <div id="unpa-xs-navbar"
+      class="visible-xs navbar navbar-default navbar-fixed-top unpa-navbar HOME"
+      role="navigation">
+      <div class="navbar-header">
+         <a class="navbar-brand" href="/"> <img
+            style="height: 32px; padding: 3px 0;"
+            src="/assets/images/hanger.png" id="brand-icon" alt="Hanger" />
+         </a>
+      </div>
+      </span> <span class="right"> <a class="unpa-xs-navbar-menu sign-in"
+         href="/signin"> 로그인 </a>
+      </span> <span class="right" style="margin-right: 80px;"> <a
+         class="unpa-xs-navbar-menu sign-in" href="/signin"> 회원가입 </a>
+      </span>
+   </div>
+   <!-- 화면이작으면 보이는 페이지 END -->
 </header>
 
 

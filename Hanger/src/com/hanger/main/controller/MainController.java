@@ -35,7 +35,8 @@ public class MainController extends BaseController {
 		request.setAttribute("page", "main");
 		//request.setAttribute("mainUrl", root + "storeList/StoreListView.jsp");
 		return frame;
-	}	
+	}
+	
 	protected String entoKo(String en)
 	{
 		String enKo = null;
