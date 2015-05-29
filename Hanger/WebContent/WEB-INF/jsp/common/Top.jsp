@@ -1,65 +1,14 @@
 <%@ page contentType="text/html; charset=euc-kr"%>
-<LINK rel="stylesheet" type="text/css" href="css/top.css" />
-<SCRIPT src="js/jquery-2.1.3.min.js"></SCRIPT>
 <%
 	String name="";
 	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y"))
 	{
 		name = (String)session.getAttribute("name");
-		System.out.println(name);
 	}
 %>
 
-<SCRIPT>
-	$(function(){
-		$('#searchimg').click(function(){
-			var keyword=$('input:text[name=keyWord]').val();
-			if(keyword==""){
-				alert("검색어를 입력하세요!");
-				return false;
-			}
-			storeListForm.submit();
-		
-		});
-
-		// 로그인
-		$('#loginImg').click(function(){
-			location.href="/WEB/member/LoginDetail.jsp";
-		});
-
-		// 로그아웃
-		$('#logoutImg').click(function(){
-			location.href="/myMemberServlet.mo?func=member_002";
-		});
-
-		// 회원가입
-		$('#joinImg').click(function(){
-			location.href = "/member/JoinSelect.jsp";
-		});
-
-		// 장바구니
-		$('#cartImg').click(function(){
-			location.href = "/cartServlet.mo?func=cart_view";
-		});
-
-		// 판매자 마이페이지
-		$('#sellerMyPage').click(function(){
-			location.href = "/sellerManageServlet.mo?func=seller_012";
-		});
-
-		// 구매자 마이페이지
-		$('#buyerMyPage').click(function(){
-			location.href = "/myPageServlet.mo?func=buyer_mypage_all";
-		});
-	});
-	
-</SCRIPT>
-
-
 <header id ="header">
-	<div style="width: 100%;"
-      class="hidden-xs navbar navbar-default navbar-fixed-top unpa-navbar HOME"
-      role="navigation">
+	<div style="width: 100%;" class="hidden-xs navbar navbar-default navbar-fixed-top unpa-navbar HOME" role="navigation">
       <div class="container">
 
          <div class="navbar-header">
@@ -82,8 +31,8 @@
                      <i class="unpacon-pencil"></i>
                   </button>
                </li>
-               <li><a href="/signin" class="remove-border">로그인</a></li>
-               <li><a href="/signin" class="remove-border">회원가입</a></li>
+               <li><a href="/login.hang" class="remove-border">로그인</a></li>
+               <li><a href="/join.hang" class="remove-border">회원가입</a></li>
             </ul>
          </div>
       </div>
@@ -147,5 +96,3 @@
    </div>
    <!-- 화면이작으면 보이는 페이지 END -->
 </header>
-
-

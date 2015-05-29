@@ -3,7 +3,24 @@
 
 <jsp:useBean id="inputTable" scope="request" class="java.util.Hashtable" />
 
+<%
+	if (inputTable != null && inputTable.size() != 0) {
+		ArrayList uploadFileList = (ArrayList) inputTable
+				.get("uploadFile");
+		Hashtable uploadTable = (Hashtable) uploadFileList.get(0);
+		String path = (String) uploadTable.get("savePath");
+		//System.out.println(path);	
+	}
+%>
+
 <html>
+<SCRIPT type="text/JavaScript"
+	src="${pageContext.request.contextPath}/js/jquery-2.1.3.min.js"></SCRIPT>
+<SCRIPT type="text/JavaScript"
+	src="${pageContext.request.contextPath}/js/common.js"></SCRIPT>
+<SCRIPT type="text/JavaScript"
+	src="${pageContext.request.contextPath}/js/join.js"></SCRIPT>
+
 <head>
 <title>Manager Add Item</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -74,6 +91,7 @@
 </STYLE>
 
 <script type="text/javascript">
+
 	var InputImage = (function loadImageFile() {
 		if (window.FileReader) {
 			var ImagePre;
@@ -107,6 +125,22 @@
 				.getElementById("image").value;
 	})();
 </script>
+
+<SCRIPT language="JavaScript">
+	function addItemAction()
+	{
+		var f = document.addItemForm;
+		if(f.name.value == "")
+		{
+			window.alert("상품명을 반드시 입력해야 합니다.");
+			f.name.focus();
+			return false;
+		}
+		
+		f.submit();
+	}
+</SCRIPT>
+
 <SCRIPT>
 	function home() {
 		alert("${pageContext.request.contextPath}");
@@ -258,6 +292,15 @@
 						<INPUT class="text" type="text" name="kind" maxlength="20">
 					</dd>
 				</dl>
+
+				<dl>
+					<dt>
+						<label for="stockAmount">재고</label>
+					</dt>
+					<dd>
+						<INPUT class="text" type="text" name="stockAmount" maxlength="20">
+					</dd>
+				</dl>
 			</fieldset>
 
 			<fieldset>
@@ -275,10 +318,9 @@
 			</fieldset>
 
 			<fieldset class="action">
-				<INPUT class="button" type="button" value="등록" name="Submit"
-					id="addButton" style="cursor: pointer" onclick="addBtn()">
-
-				<INPUT class="button" type="button" value="취소" name="cancelBtn"
+				<INPUT class="button" type="button" value="등록"
+					name="ManagerAddItemForm" style="cursor: pointer" onclick="addItemAction()"> 
+				<INPUT class="button" type="button" value="취소" name="cancelBtn" 
 					style="cursor: pointer" name="test" onClick="home()">
 			</fieldset>
 		</div>

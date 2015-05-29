@@ -22,7 +22,7 @@ public class Item {
 	private String itemOption3Title;
 	private String itemOption3Content;
 	private String itemKind;
-	private String itemStockAmount;
+	private int itemStockAmount;
 	private String regId;
 	private String regDate;
 	private String regIp;
@@ -156,10 +156,10 @@ public class Item {
 	public void setItemKind(String itemKind) {
 		this.itemKind = itemKind;
 	}
-	public String getItemStockAmount() {
+	public int getItemStockAmount() {
 		return itemStockAmount;
 	}
-	public void setItemStockAmount(String itemStockAmount) {
+	public void setItemStockAmount(int itemStockAmount) {
 		this.itemStockAmount = itemStockAmount;
 	}
 	public String getRegId() {

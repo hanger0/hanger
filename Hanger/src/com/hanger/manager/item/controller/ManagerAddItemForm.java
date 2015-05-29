@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
+
 import com.hanger.manager.item.dao.ManagerAddItemDao;
 import com.hanger.manager.item.vo.Item;
 import com.oreilly.servlet.MultipartRequest;
@@ -40,13 +41,37 @@ public class ManagerAddItemForm extends BaseController{
 		int itemPurchasePrice = Integer.parseInt(mul.getParameter("purchasePrice"));
 		String itemSummary = mul.getParameter("summary");
 		int itemSellMaxNum = Integer.parseInt(mul.getParameter("sellMaxNum"));
-		String itemOption1Title = mul.getParameter("option1Title");
-		String itemOption1Content = mul.getParameter("option1Content");
-		String itemOption2Title = mul.getParameter("option2Title");
-		String itemOption2Content = mul.getParameter("option2Content");
-		String itemOption3Title = mul.getParameter("option3Title");
-		String itemOption3Content = mul.getParameter("option3Content");
+		String itemOption1Title = null;
+		if(mul.getParameter("option1Title") != ""){
+			itemOption1Title = mul.getParameter("option1Title");
+		}
+		String itemOption1Content = null;
+		if(mul.getParameter("option1Content") != ""){
+			itemOption1Content = mul.getParameter("option1Content");
+		}
+		String itemOption2Title = null;
+		if(mul.getParameter("option2Title") != ""){
+			itemOption2Title = mul.getParameter("option2Title");
+		}
+		String itemOption2Content = null;
+		if(mul.getParameter("option2Content") != ""){
+			itemOption2Content = mul.getParameter("option2Content");
+		}
+		String itemOption3Title = null;
+		if(mul.getParameter("option3Title") != ""){
+			itemOption3Title = mul.getParameter("option3Title");
+		}
+		String itemOption3Content = null;
+		if(mul.getParameter("option3Content") != ""){
+			itemOption3Content = mul.getParameter("option3Content");
+		}
+		
 		String itemKind = mul.getParameter("kind");
+		int itemStockAmount = Integer.parseInt(mul.getParameter("stockAmount"));
+		String itemPicPath = "-";
+		String itemPicOrgName = "-";
+		String itemPicSaveName = "-";
+		int itemPicSize = 123;
 		String ip = request.getRemoteAddr();
 		
 		item.setBrandCode(brandCode);
@@ -63,6 +88,11 @@ public class ManagerAddItemForm extends BaseController{
 		item.setItemOption3Title(itemOption3Title);
 		item.setItemOption3Content(itemOption3Content);
 		item.setItemKind(itemKind);
+		item.setItemStockAmount(itemStockAmount);
+		item.setItemPicPath(itemPicPath);
+		item.setItemPicOrgName(itemPicOrgName);
+		item.setItemPicSaveName(itemPicSaveName);
+		item.setItemPicSize(itemPicSize);
 		item.setRegId("admin");
 		item.setRegIp(ip);
 		item.setUpdId("admin");
@@ -73,7 +103,7 @@ public class ManagerAddItemForm extends BaseController{
 		System.out.println("manager add item form 실행");
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("ManagerAddItem");
+		mav.setViewName("../../index"); // 상품등록 끝나고 돌아갈 화면
 		
 		return mav;
 	}

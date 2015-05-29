@@ -16,7 +16,7 @@ public class UserJoin extends BaseController {
 	protected ModelAndView memberJoin(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mav = new ModelAndView() ;
-		mav.setViewName("MemberJoin");
+		mav.setViewName("user/Join");
 		
 		System.out.println("MemberJoin...");
 		return mav ;

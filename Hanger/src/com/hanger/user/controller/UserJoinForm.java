@@ -24,7 +24,7 @@ public class UserJoinForm extends BaseController {
 		this.userJoinDao = userJoinDao;
 	}
 
-	@RequestMapping(value="/result.hang", method=RequestMethod.POST)
+	@RequestMapping(value="/joinResult.hang", method=RequestMethod.POST)
 	public ModelAndView memberJoinForm2(
 			HttpServletRequest request
 			) throws IOException {
