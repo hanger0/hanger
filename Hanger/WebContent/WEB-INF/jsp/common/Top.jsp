@@ -136,7 +136,7 @@
       <div class="navbar-header">
          <a class="navbar-brand" href="/"> <img
             style="height: 32px; padding: 3px 0;"
-            src="/assets/images/hanger.png" id="brand-icon" alt="Hanger" />
+            src="/images/hanger.png" id="brand-icon" alt="Hanger" />
          </a>
       </div>
       </span> <span class="right"> <a class="unpa-xs-navbar-menu sign-in"
