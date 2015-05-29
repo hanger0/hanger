@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.hanger.common.BaseController;
+import com.hanger.common.controller.BaseController;
 
 @Controller
 public class UserLogout extends BaseController {

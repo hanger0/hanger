@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/context   
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	<!--com.cookpon2 하위 모든 패키지에 있는 파일의 어노테이션을 스캔해서 빈으로 등록 -->
+	<context:component-scan base-package="com.hanger" />
+	
+	<!-- annotation을 쓰겠다 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<context:property-placeholder location="classpath:config/db.properties" />
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -37,12 +45,19 @@
 		<property name="userLoginDao" ref="userLoginDao"></property>
 	</bean>
 	<bean id="userLogout" class ="com.hanger.user.controller.UserLogout" />
+	<bean id="managerAddItem" class="com.hanger.manager.item.controller.ManagerAddItem"/>
+	<bean id="managerAddItemForm" class="com.hanger.manager.item.controller.ManagerAddItemForm">
+		<property name="managerAddItemDao" ref="managerAddItemDao"></property>
+	</bean>
 	
 	<!--  Dao beans  -->
 	<bean id="userJoinDao" class="com.hanger.user.dao.UserJoinDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="userLoginDao" class="com.hanger.user.dao.UserLoginDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="managerAddItemDao" class="com.hanger.manager.item.dao.ManagerAddItemDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	

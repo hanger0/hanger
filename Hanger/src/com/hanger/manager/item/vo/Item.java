@@ -2,7 +2,7 @@ package com.hanger.manager.item.vo;
 
 public class Item {
 	private String itemCode;
-	private String brandName;
+	private String brandCode;
 	private String itemName;
 	private int itemMarketPrice;
 	private int itemSellPrice;
@@ -36,11 +36,11 @@ public class Item {
 	public void setItemCode(String itemCode) {
 		this.itemCode = itemCode;
 	}
-	public String getBrandName() {
-		return brandName;
+	public String getBrandCode() {
+		return brandCode;
 	}
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
+	public void setBrandCode(String brandCode) {
+		this.brandCode = brandCode;
 	}
 	public String getItemName() {
 		return itemName;

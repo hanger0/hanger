@@ -1,0 +1,48 @@
+.unpa-article-wrap {
+  .card {
+    margin: 18px auto;
+    background-color: #fff;
+    border-radius: 2px;
+    .card-title {
+      .unpa-font-style(24px, @unpa-weight-light, #555);
+    }
+  }
+  .feed-list {
+    padding: 24px;
+  }
+  .header {
+    .image {
+      width: 100%;
+      background-color: #555;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      position: relative;
+      &:after {
+        padding-top: 40%;
+        display: block;
+        content: '';
+      }
+    }
+  }
+  .body {
+    padding: 0 24px 24px;
+    .article-title {
+      display: inline-block;
+      border-bottom: 1px solid #ddd;
+      margin-top: 55px;
+      margin-bottom: 55px;
+      .unpa-font-style(36px, @unpa-weight-medium, #555);
+    }
+    .article-text {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .article-comments {
+      margin-top: 55px;
+    }
+    iframe {
+      width: 100%;
+    }
+  }
+}

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hanger.common.BaseController;
+import com.hanger.common.controller.BaseController;
 import com.hanger.user.dao.UserJoinDao;
 import com.hanger.user.vo.User;
 import com.oreilly.servlet.MultipartRequest;

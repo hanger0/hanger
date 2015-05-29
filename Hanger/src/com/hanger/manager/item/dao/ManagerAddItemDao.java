@@ -12,7 +12,7 @@ public class ManagerAddItemDao {
 		this.smct = smct;
 	}
 
-	public void insertHobby(Item item)
+	public void insertItem(Item item)
 	{
 		smct.insert("insertItem", item);
 	}

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hanger.common.BaseController;
+import com.hanger.common.controller.BaseController;
 import com.hanger.user.dao.UserLoginDao;
 import com.hanger.user.vo.User;
 
@@ -26,7 +26,7 @@ public class UserLogin extends BaseController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String form(){
-		return "Login";
+		return "MainPage";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

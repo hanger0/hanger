@@ -1,0 +1,175 @@
+.unpa-feed-detail-wrap.brand {
+  background-color: #f6f6f6;
+  position: relative;
+  .header {
+    margin-top: 16px;
+    position: relative;
+    padding: 0 40px;
+    background-color: #fff;
+    @media (max-width: 767px) {
+      padding: 0 18px;
+    }
+    .brand-main-image {
+      width: 124px;
+      height: 124px;
+      display: block;
+      margin: 56px auto 16px;
+      background-color: #fff;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      border-radius: 50%;
+      border: 3px solid #f2f2f2;
+    }
+    .brand-name {
+      display: block;
+      text-align: center;
+      .unpa-font-style(32px, @unpa-weight-medium, #333);
+      @media (max-width: 767px) {
+        font-size: 18px;
+      }
+      .brand-sale-badge {
+        .unpa-font-style(14px, @unpa-weight-light, #fff);
+        background-color: @unpa-orange;
+        display: inline-block;
+        border-radius: 1em;
+        padding: 4px 8px;
+        vertical-align: middle;
+        line-height: 1em;
+      }
+    }
+    .count-info {
+      display: block;
+      text-align: center;
+      margin: 26px auto 46px;
+      @media (max-width: 767px) {
+        margin: 12px auto 12px;
+      }
+      & > div {
+        display: inline-block;
+        &:not(:last-child) {
+          margin-right: 8px;
+        }
+        .unpa-font-style(12px, @unpa-weight-medium, #aaa);
+        .value {
+          .unpa-font-style(12px, @unpa-weight-medium, #333);
+        }
+      }
+    }
+    .user-action-box {
+      border-top: 1px solid #f2f2f2;
+      text-align: center;
+      a {
+        text-decoration: none;
+      }
+      .action {
+        cursor: pointer;
+        margin: 20px 20px;
+        display: inline-block;
+        .unpa-font-style(16px, @unpa-weight-medium, #ccc);
+        @media (max-width: 767px) {
+          margin: 6px;
+          font-size: 12px;
+        }
+        i {
+          margin-right: 12px;
+        }
+        .like-button {
+          color: #ccc;
+          &:hover {
+            color: #aaa;
+          }
+          &.liked {
+            &:hover {
+              color: #ff8041;
+              i, span.text {
+                color: #ff8041;
+              }
+            }
+            color: @unpa-orange;
+          }
+        }
+      }
+    }
+  }
+  .card {
+    background-color: #fff;
+    border: 1px solid #f2f2f2;
+    border-radius: 2px;
+    margin: 25px 40px;
+    @media (max-width: 767px) {
+      margin: 12px 0px;
+    }
+  }
+  .sale-info {
+    background-color: #fff;
+    border-radius: 2px;
+    border: 1px solid #f2f2f2;
+    padding: 24px;
+    @media (max-width: 767px) {
+      padding: 12px;
+    }
+    button.sale-info-toggle {
+      background-color: #ccc;
+      color: #fff;
+      font-size: 14px;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: @unpa-weight-medium;
+      margin: 0 auto;
+      display: block;
+      &:hover {
+        background-color: @unpa-orange;
+      }
+    }
+    & > div {
+    }
+    & > .title {
+      .unpa-font-style(18px, @unpa-weight-medium, #555);
+    }
+    .sales {
+      .sale {
+        margin: 20px auto;
+        .icon {
+          display: inline-block;
+          margin-right: 12px;
+          vertical-align: top;
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+        .sale-detail {
+          display: inline-block;
+          .title {
+            .unpa-font-style(18px, @unpa-weight-medium, #333);
+          }
+          .description {
+            .unpa-font-style(14px, @unpa-weight-medium, #333);
+            margin-bottom: 8px;
+          }
+        }
+        .date, .place {
+          .title {
+            .unpa-font-style(14px, @unpa-weight-medium, #333);
+          }
+          .value {
+            .unpa-font-style(14px, @unpa-weight-medium, #888);
+          }
+        }
+      }
+    }
+  }//sale-info
+  .product-info {
+    border: none;
+    background-color: transparent;
+    & > .title {
+      .unpa-font-style(20px, @unpa-weight-medium, #888);
+      margin-bottom: 24px;
+      @media (max-width: 767px) {
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+    }
+  } //product-info
+}

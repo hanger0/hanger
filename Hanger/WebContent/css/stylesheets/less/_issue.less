@@ -1,0 +1,39 @@
+.unpa-issue-list-wrap {
+  .unpa-issue-card {
+    &:hover {
+      .content .title {
+        color: @unpa-orange;
+      }
+    }
+    color: #555;
+    text-decoration: none;
+    background-color: #fff;
+    display: block;
+    border-radius: 2px;
+    margin-bottom: 24px;
+    .image {
+      width: 100%;
+      background-color: #555;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      position: relative;
+      &:after {
+        padding-top: 40%;
+        display: block;
+        content: '';
+      }
+    }
+    .content {
+      padding: 12px;
+      .title {
+        .unpa-font-style(18px, @unpa-weight-medium, #333);
+        line-height: 1.2em;
+      }
+      .category {
+        margin-top: 10px;
+        .unpa-font-style(18px, @unpa-weight-medium, #888);
+      }
+    }
+  }
+}

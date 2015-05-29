@@ -1,0 +1,25 @@
+@unpa-white: #fff;
+@unpa-orange: #ff5400;
+@unpa-green: #c9cf31;
+@unpa-gray: #a6a8ab;
+@unpa-light-gray: #e6e7e8;
+@unpa-default-background: #F6F6F6;
+@unpa-blue: #0078ff;
+@unpa-light-blue: #1babd5;
+@unpa-violet: #ff47af;
+@unpa-mint: #00ffde;
+
+@unpa-weight-light: 400;
+@unpa-weight-medium: 600;
+@unpa-weight-bold: 800;
+
+.unpa-box-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+  -webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+  -moz-box-shadow:	    @x @y @blur @spread rgba(0, 0, 0, @alpha);
+  box-shadow:		    @x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+.unpa-font-style (@font-size: 14px, @font-weight: 600, @color: #000000) {
+  font-size: @font-size;
+  font-weight: @font-weight;
+  color: @color;
+}
