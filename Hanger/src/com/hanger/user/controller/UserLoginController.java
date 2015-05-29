@@ -12,11 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.user.dao.UserLoginDao;
-import com.hanger.user.vo.User;
+import com.hanger.user.vo.UserVo;
 
 @Controller
 @RequestMapping("/login.hang")
-public class UserLogin extends BaseController {
+public class UserLoginController extends BaseController {
 	private UserLoginDao userLoginDao;
 	
 	public void setUserLoginDao(UserLoginDao userLoginDao)
@@ -36,12 +36,12 @@ public class UserLogin extends BaseController {
 			@RequestParam(value="age", defaultValue="0000") int age,
 			HttpSession session ){
 		//
-		User user = new User();
+		UserVo user = new UserVo();
 		user.setUserId(userId);
 		user.setUserPwd(pass);
 		userLoginDao.getUser(user);
 		
-		List<User> uvList = (List<User>)userLoginDao.getUser(user);
+		List<UserVo> uvList = (List<UserVo>)userLoginDao.getUser(user);
 		
 		String message = "";
 		if(uvList.size()>0)

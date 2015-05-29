@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hanger.common.controller.BaseController;
 
 @Controller
-public class UserJoin extends BaseController {
+public class UserJoinController extends BaseController {
 	
 	@RequestMapping("/join.hang")
 	protected ModelAndView memberJoin(HttpServletRequest request, HttpServletResponse response) {

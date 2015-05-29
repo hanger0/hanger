@@ -2,7 +2,7 @@ package com.hanger.user.dao;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.hanger.user.vo.User;
+import com.hanger.user.vo.UserVo;
 
 public class UserJoinDao {
 	private SqlMapClientTemplate smct;
@@ -12,7 +12,7 @@ public class UserJoinDao {
 		this.smct = smct;
 	}
 
-	public void insertUser(User user)
+	public void insertUser(UserVo user)
 	{
 		smct.insert("insertUser", user);
 	}

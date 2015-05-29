@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.hanger.user.vo.ZipCode;
+import com.hanger.user.vo.ZipCodeVo;
 
 public class UserJoinZipCodeDao {
 	private SqlMapClientTemplate smct;
@@ -15,9 +15,9 @@ public class UserJoinZipCodeDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<ZipCode> searchZipCode(String qt)
+	public ArrayList<ZipCodeVo> searchZipCode(String qt)
 	{
 		System.out.println("qt   :   " + qt);
-		return (ArrayList<ZipCode>)smct.queryForList("searchZipCode", qt);
+		return (ArrayList<ZipCodeVo>)smct.queryForList("searchZipCode", qt);
 	}
 }

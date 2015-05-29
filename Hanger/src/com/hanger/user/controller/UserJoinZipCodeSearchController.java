@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hanger.user.dao.UserJoinZipCodeDao;
 
 @Controller
-public class UserJoinZipCodeSearch {
+public class UserJoinZipCodeSearchController {
 	//
 	UserJoinZipCodeDao userJoinZipCodeDao;
 	

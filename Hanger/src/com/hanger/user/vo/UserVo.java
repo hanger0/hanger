@@ -1,6 +1,6 @@
 package com.hanger.user.vo;
 
-public class User {
+public class UserVo {
 	private String userCode;
 	private String userId;
 	private String userPwd;

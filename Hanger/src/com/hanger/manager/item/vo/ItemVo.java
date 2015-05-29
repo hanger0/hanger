@@ -1,6 +1,6 @@
 package com.hanger.manager.item.vo;
 
-public class Item {
+public class ItemVo {
 	private String itemCode;
 	private String brandCode;
 	private String itemName;

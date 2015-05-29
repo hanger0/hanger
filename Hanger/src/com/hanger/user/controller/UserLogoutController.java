@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hanger.common.controller.BaseController;
 
 @Controller
-public class UserLogout extends BaseController {
+public class UserLogoutController extends BaseController {
 	@RequestMapping("/logout.hang")
 	public String loginout(HttpSession session){
 		System.out.println("logout.do ½ÇÇà");

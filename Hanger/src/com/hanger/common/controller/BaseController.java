@@ -1,5 +1,6 @@
 package com.hanger.common.controller;
 
+
 public class BaseController {
 	protected final String full = "/common/Full";
 	protected final String frame = "/common/Frame";

@@ -37,19 +37,19 @@
 	</bean>
 
 	<!--  요청 url과 Controller 매핑 -->
-	<bean id="userJoin" class ="com.hanger.user.controller.UserJoin" />
-	<bean id="userJoinForm" class ="com.hanger.user.controller.UserJoinForm">
+	<bean id="userJoinController" class ="com.hanger.user.controller.UserJoinController" />
+	<bean id="userJoinResultController" class ="com.hanger.user.controller.UserJoinResultController">
 		<property name="userJoinDao" ref="userJoinDao"></property>
 	</bean>
-	<bean id="userJoinZipCodeSearch" class ="com.hanger.user.controller.UserJoinZipCodeSearch">
+	<bean id="userJoinZipCodeSearchController" class ="com.hanger.user.controller.UserJoinZipCodeSearchController">
 		<property name="userJoinZipCodeDao" ref="userJoinZipCodeDao"></property>
 	</bean>
-	<bean id="userLogin" class ="com.hanger.user.controller.UserLogin">
+	<bean id="userLoginController" class ="com.hanger.user.controller.UserLoginController">
 		<property name="userLoginDao" ref="userLoginDao"></property>
 	</bean>
-	<bean id="userLogout" class ="com.hanger.user.controller.UserLogout" />
-	<bean id="managerAddItem" class="com.hanger.manager.item.controller.ManagerAddItem"/>
-	<bean id="managerAddItemForm" class="com.hanger.manager.item.controller.ManagerAddItemForm">
+	<bean id="userLogoutController" class ="com.hanger.user.controller.UserLogoutController" />
+	<bean id="managerAddItemController" class="com.hanger.manager.item.controller.ManagerAddItemController"/>
+	<bean id="managerAddItemFormController" class="com.hanger.manager.item.controller.ManagerAddItemFormController">
 		<property name="managerAddItemDao" ref="managerAddItemDao"></property>
 	</bean>
 	

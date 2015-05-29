@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.hanger.user.vo.User;
+import com.hanger.user.vo.UserVo;
 
 public class UserLoginDao {
 	//
@@ -16,8 +16,8 @@ public class UserLoginDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<User> getUser(User user)
+	public ArrayList<UserVo> getUser(UserVo user)
 	{
-		return (ArrayList<User>)smct.queryForList("getUser", user);
+		return (ArrayList<UserVo>)smct.queryForList("getUser", user);
 	}
 }

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.hanger.user.vo.ZipCode" %>
+<%@ page import="com.hanger.user.vo.ZipCodeVo" %>
 
 <%
 	String qt = (String)request.getAttribute("qt");
@@ -76,7 +76,7 @@
 		{
 			for(int i=0; i<zipCodeList.size(); i++)
 			{
-				ZipCode zipCode = (ZipCode)zipCodeList.get(i);
+				ZipCodeVo zipCode = (ZipCodeVo)zipCodeList.get(i);
 				String code = (String)zipCode.getCode();
 				String code1 = code.substring(0, 3);
 				String code2 = code.substring(4, 7);

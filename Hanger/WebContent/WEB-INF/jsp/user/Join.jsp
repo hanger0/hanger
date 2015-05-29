@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 	<head>
 		<!-- meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"/ -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +8,12 @@
 		<!-- Bootstrap -->
 		<link rel="stylesheet" media="screen" href="/css/bootstrap/bootstrap.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<!-- ë¶€ê°€ì ì¸ í…Œë§ˆ -->
+		<!-- ºÎ°¡ÀûÀÎ Å×¸¶ -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-		<!-- í•©ì³ì§€ê³  ìµœì†Œí™”ëœ ìµœì‹  ìžë°”ìŠ¤í¬ë¦½íŠ¸ -->
+		<!-- ÇÕÃÄÁö°í ÃÖ¼ÒÈ­µÈ ÃÖ½Å ÀÚ¹Ù½ºÅ©¸³Æ® -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		<script src="/js/javascripts/jquery-1.11.3.min.js" type="text/javascript"></script>
-		<!-- ê¸°ì¡´ js íŒŒì¼ë“¤-->
+		<!-- ±âÁ¸ js ÆÄÀÏµé-->
 		<script src="/js/user/join.js" type="text/javascript"></script>
 		<script src="/js/common/common.js" type="text/javascript"></script>
 		
@@ -41,7 +41,7 @@ var InputImage = (function loadImageFile() {
             var img = document.getElementById("image").files;
            
             if (!fileType.test(img[0].type)) { 
-               alert("ì´ë¯¸ì§€ íŒŒì¼ì„ ì—…ë¡œë“œ í•˜ì„¸ìš”"); 
+               alert("ÀÌ¹ÌÁö ÆÄÀÏÀ» ¾÷·Îµå ÇÏ¼¼¿ä"); 
                return; 
             }
             
@@ -155,7 +155,7 @@ H4
     <INPUT type="hidden" name="checkId" value="">
 	<div class="col-md-12">
 		<h1>Join</h1>
-		<H4>í•„ìˆ˜ ì •ë³´</H4>
+		<H4>ÇÊ¼ö Á¤º¸</H4>
 		<BR><BR><BR>
 	</div>
 	
@@ -228,14 +228,14 @@ H4
                 </div>
                 <div class="col-sm-3">
                     <select name="month" id="dobMonth" class="form-control" style="width:100px;">
-                        <option value="0" selected="1">Month</option><option value="01">1ì›”</option><option value="02">2ì›”</option><option value="03">3ì›”</option><option value="04">
-		         		4ì›”</option><option value="05">5ì›”</option><option value="06">6ì›”</option><option value="07">7ì›”</option><option value="08">8ì›”</option><option value="09">
-		         		9ì›”</option><option value="10">10ì›”</option><option value="11">11ì›”</option><option value="12">12ì›”</option>
+                        <option value="0" selected="1">Month</option><option value="01">1¿ù</option><option value="02">2¿ù</option><option value="03">3¿ù</option><option value="04">
+		         		4¿ù</option><option value="05">5¿ù</option><option value="06">6¿ù</option><option value="07">7¿ù</option><option value="08">8¿ù</option><option value="09">
+		         		9¿ù</option><option value="10">10¿ù</option><option value="11">11¿ù</option><option value="12">12¿ù</option>
                     </select>
                 </div>
                 <div class="col-sm-3">
                     <select name="day" id="dobday" class="form-control" style="width:100px;">
-                       <option value="0" selected="1">day</option><option value="01">1ì¼</option><option value="02">2ì¼</option><option value="03">3ì¼</option><option value="04">4ì¼</option><option value="05">5ì¼</option><option value="06">6ì¼</option><option value="07">7ì¼</option><option value="08">8ì¼</option><option value="09">9ì¼</option><option value="10">10ì¼</option><option value="11">11ì¼</option><option value="12">12ì¼</option><option value="13">13ì¼</option><option value="14">14ì¼</option><option value="15">15ì¼</option><option value="16">16ì¼</option><option value="17">17ì¼</option><option value="18">18ì¼</option><option value="19">19ì¼</option><option value="20">20ì¼</option><option value="21">21ì¼</option><option value="22">22ì¼</option><option value="23">23ì¼</option><option value="24">24ì¼</option><option value="25">25ì¼</option><option value="26">26ì¼</option><option value="27">27ì¼</option><option value="28">28ì¼</option><option value="29">29ì¼</option><option value="30">30ì¼</option><option value="31">31ì¼</option>
+                       <option value="0" selected="1">day</option><option value="01">1ÀÏ</option><option value="02">2ÀÏ</option><option value="03">3ÀÏ</option><option value="04">4ÀÏ</option><option value="05">5ÀÏ</option><option value="06">6ÀÏ</option><option value="07">7ÀÏ</option><option value="08">8ÀÏ</option><option value="09">9ÀÏ</option><option value="10">10ÀÏ</option><option value="11">11ÀÏ</option><option value="12">12ÀÏ</option><option value="13">13ÀÏ</option><option value="14">14ÀÏ</option><option value="15">15ÀÏ</option><option value="16">16ÀÏ</option><option value="17">17ÀÏ</option><option value="18">18ÀÏ</option><option value="19">19ÀÏ</option><option value="20">20ÀÏ</option><option value="21">21ÀÏ</option><option value="22">22ÀÏ</option><option value="23">23ÀÏ</option><option value="24">24ÀÏ</option><option value="25">25ÀÏ</option><option value="26">26ÀÏ</option><option value="27">27ÀÏ</option><option value="28">28ÀÏ</option><option value="29">29ÀÏ</option><option value="30">30ÀÏ</option><option value="31">31ÀÏ</option>
                     </select>
                 </div>
             </div>
@@ -274,7 +274,7 @@ H4
 </div>
 <div class="form-horizontal form-horizontal1" role="form">
    	<div class="col-md-12">
-		<H4>ì„ íƒ ì •ë³´</H4>
+		<H4>¼±ÅÃ Á¤º¸</H4>
 		<BR><BR><BR>
 	</div>
     <div class="form-group">
@@ -288,10 +288,10 @@ H4
         <label for="skintype" class="col-sm-2 control-label">SkinType : </label>
         <div class="col-sm-10">
             <select name="ctl00$MainContent$lstCountry" id="skintype" class="form-control">
-                <option value="1">ê±´ì„±</option>
-                <option value="2">ì§€ì„±</option>
-                <option value="3">ì¤‘ì„±</option>
-                <option value="4">ë³µí•©ì„±</option>
+                <option value="1">°Ç¼º</option>
+                <option value="2">Áö¼º</option>
+                <option value="3">Áß¼º</option>
+                <option value="4">º¹ÇÕ¼º</option>
 
             </select>
         </div>
@@ -301,10 +301,10 @@ H4
         <label for="skintone" class="col-sm-2 control-label">SkinTone : </label>
         <div class="col-sm-10">
             <select name="ctl00$MainContent$lstCountry" id="skintone" class="form-control">
-                <option value="1">í°ìƒ‰</option>
-                <option value="2">í™©ìƒ‰</option>
-                <option value="3">ê²€ì •ìƒ‰</option>
-                <option value="4">íƒœë‹í•œí”¼ë¶€</option>
+                <option value="1">Èò»ö</option>
+                <option value="2">È²»ö</option>
+                <option value="3">°ËÁ¤»ö</option>
+                <option value="4">ÅÂ´×ÇÑÇÇºÎ</option>
             </select>
         </div>
     </div>
@@ -315,15 +315,15 @@ H4
 
             <label class="checkbox-inline">
                 <input type="checkbox" name="optGender" id="optGenderMan" value="F">
-     			í”¼ì§€
+     			ÇÇÁö
             </label>
             <label class="checkbox-inline">
                 <input type="checkbox" name="optGender" id="optGenderWomen" value="M">
-  				ê°ì§ˆì œê±°
+  				°¢ÁúÁ¦°Å
             </label>
             <label class="checkbox-inline">
                 <input type="checkbox" name="optGender" id="optGenderWomen" value="M">
-  				ì£¼ë¦„ê°œì„ 
+  				ÁÖ¸§°³¼±
             </label>
         </div>
         <label for="skintrouble" class="col-sm-2 control-label"> </label>
@@ -331,15 +331,15 @@ H4
          
             <label class="checkbox-inline">
                 <input type="checkbox" name="optGender" id="optGenderWomen" value="M">
-  				í”¼ë¶€ë¯¸ë°±
+  				ÇÇºÎ¹Ì¹é
             </label>
             <label class="checkbox-inline">
                 <input type="checkbox" name="optGender" id="optGenderWomen" value="M">
-  				í”¼ë¶€ë³´ìŠµ
+  				ÇÇºÎº¸½À
             </label>
             <label class="checkbox-inline">
                 <input type="checkbox" name="optGender" id="optGenderWomen" value="M">
-  				ë³´ìŠµ
+  				º¸½À
             </label>
         </div>
     </div>

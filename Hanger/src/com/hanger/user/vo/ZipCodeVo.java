@@ -1,6 +1,6 @@
 package com.hanger.user.vo;
 
-public class ZipCode {
+public class ZipCodeVo {
 	private String code;
 	private String addr;
 	private String bunji;

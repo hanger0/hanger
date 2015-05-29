@@ -13,12 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hanger.common.controller.BaseController;
 
 import com.hanger.manager.item.dao.ManagerAddItemDao;
-import com.hanger.manager.item.vo.Item;
+import com.hanger.manager.item.vo.ItemVo;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
-public class ManagerAddItemForm extends BaseController{
+public class ManagerAddItemFormController extends BaseController{
 	private ManagerAddItemDao managerAddItemDao;
 	
 	public void setManagerAddItemDao(ManagerAddItemDao managerAddItemDao){
@@ -32,7 +32,7 @@ public class ManagerAddItemForm extends BaseController{
 		int sizeLimit = 1000 * 1024 * 1024;
 		MultipartRequest mul = new MultipartRequest(request, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
-		Item item = new Item();
+		ItemVo item = new ItemVo();
 		
 		String brandCode = mul.getParameter("brand");
 		String itemName = mul.getParameter("name");
