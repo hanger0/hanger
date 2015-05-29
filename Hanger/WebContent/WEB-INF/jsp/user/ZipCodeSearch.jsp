@@ -1,19 +1,17 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
 <%@ page import="java.util.*" %>
-
-<jsp:useBean id="outputTable" scope="request" class="java.util.Hashtable" />
-<jsp:useBean id="inputTable" scope="request" class="java.util.Hashtable" />
+<%@ page import="com.hanger.user.vo.ZipCode" %>
 
 <%
-	String qt = (String)inputTable.get("qt");
-	ArrayList zipCodeList = (ArrayList)outputTable.get("zipCodeList");
+	String qt = (String)request.getAttribute("qt");
+	ArrayList zipCodeList = (ArrayList)request.getAttribute("zipCodeList");
 
 	if(qt==null || qt.equals("null"))
 	{
 		qt = "";
 	}
 %>
-<SCRIPT type="text/JavaScript" src="/js/common.js"></SCRIPT>
+<SCRIPT type="text/JavaScript" src="/js/common/common.js"></SCRIPT>
 <SCRIPT>
 	function zipCodeSelectAction(code1, code2, addr)
 	{
@@ -55,7 +53,7 @@
 		</TD>
 	</TR>
 	<TR><TD height="10"></TD></TR>
-	<FORM name="zipCodeSearchForm" action="/commonServlet.mo" method="post" onSubmit="return false;">
+	<FORM name="zipCodeSearchForm" action="/zipCodeSearch.hang" method="post" onSubmit="return false;">
 		<INPUT type="hidden" name="func" value="common_002">
 		<TR>
 			<TD align="center">
@@ -78,11 +76,11 @@
 		{
 			for(int i=0; i<zipCodeList.size(); i++)
 			{
-				Hashtable zipCodeTable = (Hashtable)zipCodeList.get(i);
-				String code = (String)zipCodeTable.get("CODE");
+				ZipCode zipCode = (ZipCode)zipCodeList.get(i);
+				String code = (String)zipCode.getCode();
 				String code1 = code.substring(0, 3);
 				String code2 = code.substring(4, 7);
-				String addr = (String)zipCodeTable.get("ADDR");
+				String addr = (String)zipCode.getAddr();
 %>
 				<TR>
 					<TD width="70" align="center" bgcolor="#FFFFFF"><%= code%></TD>

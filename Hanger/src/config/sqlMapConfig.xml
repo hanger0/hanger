@@ -4,5 +4,6 @@
 
 <sqlMapConfig>
 	<sqlMap resource="config/user/user.xml"/>
+	<sqlMap resource="config/user/zipCode.xml"/>
 	<sqlMap resource="config/manager/item/item.xml"/>
 </sqlMapConfig>

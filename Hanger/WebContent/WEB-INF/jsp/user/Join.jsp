@@ -176,14 +176,14 @@ H4
     <div class="form-group">
         <label for="password1" class="col-sm-2 control-label">Password : </label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="pass1" name="pass1" placeholder="Password">
+            <input type="password" class="form-control" id="password1" name="pass1" placeholder="Password">
         </div>
     </div>
     
      <div class="form-group">
         <label for="password2" class="col-sm-2 control-label">Pass Confirm : </label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="pass2" name="pass2" placeholder="Password Confirm">
+            <input type="password" class="form-control" id="password2" name="pass2" placeholder="Password Confirm">
         </div>
     </div>
     
@@ -197,7 +197,7 @@ H4
     <div class="form-group">
         <label for="phone" class="col-sm-2 control-label">Phone : </label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="phone" name="mobile" placeholder="Phone Number">
+            <input type="text" class="form-control" id="phone" name="mobile" placeholder="Phone Number" maxlength="11">
         </div>
     </div>
  
@@ -260,7 +260,7 @@ H4
 		<label for="zipcode1" class="col-sm-2 control-label">Postcode :</label>
    	    <INPUT type="text" name="zipCode1" class="form-control zip1" id="zipCode1" size="5" readonly>
       	<INPUT type="text" name="zipCode2" class="form-control zip1" size="5" readonly>
-        <INPUT type="button" value="Search" class="form-control zip1" style="cursor:pointer" id="zipSearch"onclick="zipcodeBtn()">
+        <INPUT type="button" value="Search" class="form-control zip1" style="cursor:pointer" id="zipSearch" onclick="zipcodeBtn()">
     </div>
     
      <div class="form-group">

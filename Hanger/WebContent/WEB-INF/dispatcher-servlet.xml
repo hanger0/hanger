@@ -41,6 +41,9 @@
 	<bean id="userJoinForm" class ="com.hanger.user.controller.UserJoinForm">
 		<property name="userJoinDao" ref="userJoinDao"></property>
 	</bean>
+	<bean id="userJoinZipCodeSearch" class ="com.hanger.user.controller.UserJoinZipCodeSearch">
+		<property name="userJoinZipCodeDao" ref="userJoinZipCodeDao"></property>
+	</bean>
 	<bean id="userLogin" class ="com.hanger.user.controller.UserLogin">
 		<property name="userLoginDao" ref="userLoginDao"></property>
 	</bean>
@@ -58,6 +61,9 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="managerAddItemDao" class="com.hanger.manager.item.dao.ManagerAddItemDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="userJoinZipCodeDao" class="com.hanger.user.dao.UserJoinZipCodeDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	
