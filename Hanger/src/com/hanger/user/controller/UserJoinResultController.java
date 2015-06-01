@@ -2,9 +2,7 @@ package com.hanger.user.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Hashtable;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,17 +39,18 @@ public class UserJoinResultController extends BaseController {
 		MultipartRequest mul = new MultipartRequest(request, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		Enumeration formNames=mul.getFileNames();
-		ArrayList uploadFileList = new ArrayList();
 		String fileFormName=(String)formNames.nextElement(); // 업로드 하는 파일이 많을 경우 while 을 사용
 		String orgFileName=mul.getOriginalFileName(fileFormName); // 업로드된 파일의 이름 얻기
 		String saveFileName=mul.getFilesystemName(fileFormName); // 업로드되어 저장된 파일의 이름 얻기
-		if(saveFileName!=null && saveFileName.length()>0)
-		{
-		   Hashtable tempFileTable = new Hashtable();
-		   tempFileTable.put("savePath", savePath);
-		   tempFileTable.put("orgFileName", orgFileName);
-		   tempFileTable.put("saveFileName", saveFileName);
-		   uploadFileList.add(tempFileTable);
+
+		if(savePath == null){
+			savePath = "F:\\hanger";
+		}
+		if(orgFileName == null){
+			orgFileName = "default.jpg";
+		}
+		if(saveFileName == null){
+			saveFileName = "default.jpg";
 		}
 		
 		UserVo user = new UserVo();
@@ -68,6 +67,17 @@ public class UserJoinResultController extends BaseController {
 		String addr1 = mul.getParameter("addr1");
 		String addr2 = mul.getParameter("addr2");
 		String ip = request.getRemoteAddr();
+		String [] skinProblems = mul.getParameterValues("skinProblem");
+		String skinTone = mul.getParameter("skinTone");
+		String skinType = mul.getParameter("skinType");
+		
+		String skinProblem = null;
+		if(skinProblems != null){
+			skinProblem = skinProblems[0];
+			for(int i = 1; i < skinProblems.length; i++){
+				skinProblem += "^" + skinProblems[i];
+			}
+		}
 		
 		user.setUserId(userId);
 		user.setUserName(name);
@@ -88,6 +98,9 @@ public class UserJoinResultController extends BaseController {
 		user.setRegIp(ip);
 		user.setUpdId(userId);
 		user.setUpdIp(ip);
+		user.setUserSkinProblem(skinProblem);
+		user.setUserSkinTone(skinTone);
+		user.setUserSkinType(skinType);
 		
 		userJoinDao.insertUser(user);
 		
@@ -95,9 +108,6 @@ public class UserJoinResultController extends BaseController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(moveUrl);
-		mav.addObject("userId", userId);
-		mav.addObject("name", pw);
-		mav.addObject("uploadFileList", uploadFileList);
 		mav.addObject("mainUrl", mainUrl);
 		
 		return mav;

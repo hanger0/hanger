@@ -49,6 +49,10 @@ var InputImage = (function loadImageFile() {
         }
 
     }
+    
+    function cancelBtn(){
+    	location.href = "common/Frame";
+    }
             
     document.getElementById("imagePreview").src = document.getElementById("image").value;
 })();
@@ -291,14 +295,13 @@ H4
     	</div>
     </div>
     <div class="form-group">
-        <label for="skintype" class="col-sm-2 control-label">SkinType : </label>
+        <label for="skinType" class="col-sm-2 control-label">SkinType : </label>
         <div class="col-sm-10">
-            <select name="ctl00$MainContent$lstCountry" id="skintype" class="form-control">
-                <option value="1">건성</option>
-                <option value="2">지성</option>
-                <option value="3">중성</option>
-                <option value="4">복합성</option>
-
+            <select name="skinType" id="skinType" class="form-control">
+                <option value="001">건성</option>
+                <option value="002">지성</option>
+                <option value="003">중성</option>
+                <option value="004">복합성</option>
             </select>
         </div>
     </div>
@@ -306,11 +309,10 @@ H4
     <div class="form-group">
         <label for="skintone" class="col-sm-2 control-label">SkinTone : </label>
         <div class="col-sm-10">
-            <select name="ctl00$MainContent$lstCountry" id="skintone" class="form-control">
-                <option value="1">흰색</option>
-                <option value="2">황색</option>
-                <option value="3">검정색</option>
-                <option value="4">태닝한피부</option>
+            <select name="skinTone" id="skinTone" class="form-control">
+                <option value="13">13호</option>
+                <option value="21">21호</option>
+                <option value="23">23호</option>
             </select>
         </div>
     </div>
@@ -318,40 +320,38 @@ H4
     <div class="form-group">
         <label for="skintrouble" class="col-sm-2 control-label">Skin Trouble : </label>
         <div class="col-sm-10 checks">
-
             <label class="checkbox-inline">
-                <input type="checkbox" name="optGender" id="optGenderMan" value="F">
+                <input type="checkbox" name="skinProblem" value="001">
      			피지
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" name="optGender" id="optGenderWomen" value="M">
+                <input type="checkbox" name="skinProblem" value="002">
   				각질제거
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" name="optGender" id="optGenderWomen" value="M">
+                <input type="checkbox" name="skinProblem" value="003">
   				주름개선
             </label>
         </div>
         <label for="skintrouble" class="col-sm-2 control-label"> </label>
         <div class="col-sm-10 checks">
-         
             <label class="checkbox-inline">
-                <input type="checkbox" name="optGender" id="optGenderWomen" value="M">
+                <input type="checkbox" name="skinProblem" value="004">
   				피부미백
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" name="optGender" id="optGenderWomen" value="M">
+                <input type="checkbox" name="skinProblem" value="005">
   				피부보습
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" name="optGender" id="optGenderWomen" value="M">
+                <input type="checkbox" name="skinProblem" value="006">
   				보습
             </label>
         </div>
     </div>
     
     <div class="form-group">
-        <button type="button" class="btn pull-right">Cancel</button>
+        <button type="button" class="btn pull-right" onclick="cancelBtn()">Cancel</button>
 		<INPUT type="button" value="Join" id="joinButton" style="cursor:pointer" class="btn pull-right" onclick="joinBtn()">
 	</div>
 </form>

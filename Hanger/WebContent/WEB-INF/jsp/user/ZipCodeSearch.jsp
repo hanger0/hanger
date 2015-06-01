@@ -13,6 +13,10 @@
 %>
 <SCRIPT type="text/JavaScript" src="/js/common/common.js"></SCRIPT>
 <SCRIPT>
+	$(document).ready(function(){
+		$('input:text[name=qt]').select();
+	});
+	
 	function zipCodeSelectAction(code1, code2, addr)
 	{
 		opener.joinForm.zipCode1.value = code1;
@@ -54,7 +58,6 @@
 	</TR>
 	<TR><TD height="10"></TD></TR>
 	<FORM name="zipCodeSearchForm" action="/zipCodeSearch.hang" method="post" onSubmit="return false;">
-		<INPUT type="hidden" name="func" value="common_002">
 		<TR>
 			<TD align="center">
 				<INPUT type="text" size="20" name="qt" value="<%= qt%>" onkeydown="if(event.keyCode == 13){zipCodeSearchAction();}">

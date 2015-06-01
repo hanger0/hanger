@@ -19,6 +19,22 @@ $(function(){
 		// id값 체크
 		var idValue = trim(f.joinId.value);
 
+		if(trim(f.joinId.value)!="")
+		{
+			if(isEmailChar(f.joinId.value))
+			{
+				var resultMessage = "'<FONT color='red'>이메일 형식에 맞지 않습니다.</FONT>'";
+				$('#idCheckMessage').html(resultMessage);
+				return false;
+			}
+			if((f.joinId.value).indexOf("@") == -1 || (f.joinId.value).indexOf(".") == -1 || (f.joinId.value).indexOf(".")<(f.joinId.value).indexOf("@") || isNum((f.joinId.value).charAt(0)))
+			{
+				var resultMessage = "'<FONT color='red'>이메일 형식에 맞지 않습니다.</FONT>'";
+				$('#idCheckMessage').html(resultMessage);
+				return false;
+			}
+		}
+		
 		$.ajax({
 			type: "POST", 
 			url: "/idCheck.hang",
@@ -118,10 +134,6 @@ function joinBtn(){
 		return false;
 	}
 	if(phone.substring(0, 3) != "010"){
-		window.alert("전화번호를 확인해주세요.");
-		return false;
-	}
-	if(phone.length != "11"){
 		window.alert("전화번호를 확인해주세요.");
 		return false;
 	}
