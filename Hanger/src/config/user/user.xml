@@ -16,4 +16,9 @@
 		INSERT INTO USER(USER_CODE, USER_ID, USER_PWD, USER_NAME, USER_GENDER, USER_BIRTH, USER_PHONE, USER_QUESTION, USER_ANSWER, USER_ADDR1, USER_ADDR2, USER_POSTCODE1, USER_POSTCODE2, USER_PIC_PATH, USER_PIC_ORG_NAME, USER_PIC_SAVE_NAME, USER_SKINTYPE, USER_SKINTONE, USER_SKINPROBLEM, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
 		VALUES(CONCAT("UR",LPAD((SELECT GET_SEQ('USER_CODE')), 10, '0')), #userId#, #userPwd#, #userName#, #userGender#, #userBirth#, #userPhone#, #userQuestion#, #userAnswer#, #userAddr1#, #userAddr2#, #userPostCode1#, #userPostCode2#, #userPicPath#, #userPicOrgName#, #userPicSaveName#, #userSkinType#, #userSkinTone#, #userSkinProblem#, #regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>
+	
+	<update id="updateUser" parameterClass="user">
+		update user set USER_PWD = #userPwd#, USER_NAME = #userName#, USER_PHONE = #userPhone#, USER_QUESTION = #userQuestion#, USER_ANSWER = #userAnswer#, USER_ADDR1 = #userAddr1#, USER_ADDR2 = #userAddr2#, USER_POSTCODE1 = #userPostCode1#, USER_POSTCODE2 = #userPostCode2#, USER_PIC_PATH = #userPicPath#, USER_PIC_ORG_NAME = #userPicOrgName#, USER_PIC_SAVE_NAME = #userPicSaveName#, USER_SKINTYPE = #userSkinType#, USER_SKINTONE = #userSkinTone#, USER_SKINPROBLEM = #userSkinProblem#, upd_id = #updId#, UPD_DATE = #updDate#, UPD_IP = #updIp#
+		where USER_ID = #userId#
+	</update>
 </sqlMap>
