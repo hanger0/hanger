@@ -69,8 +69,6 @@ public class UserJoinResultController extends BaseController {
 		String addr2 = mul.getParameter("addr2");
 		String ip = request.getRemoteAddr();
 		
-		System.out.println("name  :  " + name);
-		
 		user.setUserId(userId);
 		user.setUserName(name);
 		user.setUserPwd(pw);
@@ -96,10 +94,11 @@ public class UserJoinResultController extends BaseController {
 		System.out.println("memberJoinForm2 ½ÇÇà....");
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(frame);
+		mav.setViewName(moveUrl);
 		mav.addObject("userId", userId);
 		mav.addObject("name", pw);
 		mav.addObject("uploadFileList", uploadFileList);
+		mav.addObject("mainUrl", mainUrl);
 		
 		return mav;
 	}

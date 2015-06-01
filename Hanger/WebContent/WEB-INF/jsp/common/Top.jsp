@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=euc-kr"%>
 <%
-	String name="";
-	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y"))
-	{
+	String name="abcd";
+	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
 		name = (String)session.getAttribute("name");
 	}
 %>
@@ -27,8 +26,18 @@
       <div class="collapse navbar-collapse">
          <ul class="nav navbar-nav navbar-right unpa-navbar-right">
             <li></li>
+<%
+	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
+%>
+			<li><a href="/logout.hang">로그아웃</a></li>
+<%
+	} else {
+%>
             <li><a href="/login.hang" class="remove-border">로그인</a></li>
             <li><a href="/join.hang" class="remove-border">회원가입</a></li>
+<%
+	}
+%>
          </ul>
       </div>
    </div>
@@ -39,16 +48,16 @@
       <div
          style="width: 50%; float: left; background: red; margin-top: 50px">
          <ul class="nav nav-pills">
-            <li><a href="#" style="margin-left: 150px">SHOP</a>
-            <li><a href="#">BRAND</a>
-            <li><a href="#">SALE</a>
+            <li><a href="#" style="margin-left: 150px">SHOP</a></li>
+            <li><a href="#">BRAND</a></li>
+            <li><a href="#">SALE</a></li>
          </ul>
       </div>
       <div style="width: 50%; float: right; margin-top: 50px">
          <ul class="nav nav-pills">
-            <li><a href="#" style="margin-left: 100px;">REVIEWS</a>
-            <li><a href="#">TIPS</a>
-            <li><a href="#">HANG OUT</a>
+            <li><a href="#" style="margin-left: 100px;">REVIEWS</a></li>
+            <li><a href="#">TIPS</a></li>
+            <li><a href="#">HANG OUT</a></li>
          </ul>
       </div>
    </div>
@@ -60,12 +69,20 @@
          role="navigation">
          <div style="margin: 15px">
             <img src="images/hanger.png" style="float:left;"/>
-            <button class="btn btn-default" style="float: right;">회원가입</button>
-            <button class="btn btn-default" style="float: right;">로그인</button>
-            
             <input type="text" placeholder="search for.." style="float:left;">
             <button class="btn btn-default" style="float:left;">검색</button>
-         
+<%
+	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
+%>
+			<button class="btn btn-default" style="float: right;">로그아웃</button>
+<%
+	} else {
+%>
+            <button class="btn btn-default" style="float: right;">회원가입</button>
+            <button class="btn btn-default" style="float: right;">로그인</button>
+<%
+	}
+%>
          </div>
       </div>
    </div>

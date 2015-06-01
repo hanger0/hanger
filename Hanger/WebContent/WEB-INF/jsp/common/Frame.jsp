@@ -1,5 +1,14 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
 
+<%
+	String mainUrl = (String)request.getAttribute("mainUrl");
+	String message = "";
+	if(request.getAttribute("message")!=null && ((String)request.getAttribute("message")).length()>0)
+	{
+		message = (String)request.getAttribute("message");
+	}
+%>
+
 <META charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- BootStrap 시작 -->
@@ -16,9 +25,17 @@
 <script src="/assets/javascripts/jquery-2.1.3.min.js"
    type="text/javascript"></script>
 <!-- JQuery 종료 -->
+
 <HTML>
 	<HEAD>
 		<TITLE>hanger</TITLE>
+<%
+	if(message.length()>0) {
+%>
+		<SCRIPT>window.alert("<%= message%>");</SCRIPT>
+<%
+	}
+%>
 	</HEAD>
 	
 	<BODY style="margin:0px">
@@ -29,7 +46,7 @@
 			</div>
 			<div id="middle"> 
 				<div id="content">
-					<jsp:include page="Main.jsp" flush="true" />
+					<jsp:include page="<%= mainUrl %>" flush="true" />
 				</div>
 				<!--
 				<div id="sidebar"> 

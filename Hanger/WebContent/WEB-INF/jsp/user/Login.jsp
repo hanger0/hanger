@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%
+	String message = "";
+	if(request.getAttribute("message")!=null && ((String)request.getAttribute("message")).length()>0)
+	{
+		message = (String)request.getAttribute("message");
+	}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,6 +37,13 @@ body
 	background-color:#f7f7f7;
 }
 </style>
+<%
+	if(message.length()>0) {
+%>
+		<SCRIPT>window.alert("<%= message%>");</SCRIPT>
+<%
+	}
+%>
 </head>
 <body>
 <div class="main">
@@ -38,21 +52,22 @@ body
 		<div class="col-md-12">
 			<h1>Login</h1>
 		</div>
-		<form role="form" role="form">
+		<form role="form" action="/login.hang" method="POST">
 			<div class="form-group">
 		        <label for="login-username"><i class="icon-user"></i> <b>Email</b></label>
-				<input class="form-control" id="login-username" type="text" placeholder="">				
+				<input class="form-control" id="login-username" name="userId" type="text" placeholder="">				
 		        <label for="login-password"><i class="icon-lock"></i> <b>Password</b></label>
-				<input class="form-control" id="login-password" type="password" placeholder="">
+				<input class="form-control" id="login-password" name="userPass" type="password" placeholder="">
 				
-				<a href="page-password-reset.html" class="forgot-password">Forgot password?</a>
+				<a href="#" class="forgot-password">Forgot password?</a>
 				<div class="not-member">
-					<p>Not a member? <a href="page-register.html">Register here</a></p>
+					<p>Not a member? <a href="/join.hang">Register here</a></p>
 				</div>
 				<button type="submit" class="btn pull-right">Login</button>
 				</form>
 				<div class="clearfix"></div>
-			</div>				
+			</div>
+		</FORM>			
 	</div>
 </CENTER>
 </div>
