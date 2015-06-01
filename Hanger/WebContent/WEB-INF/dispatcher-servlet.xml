@@ -44,6 +44,9 @@
 	<bean id="userJoinZipCodeSearchController" class ="com.hanger.user.controller.UserJoinZipCodeSearchController">
 		<property name="userJoinZipCodeDao" ref="userJoinZipCodeDao"></property>
 	</bean>
+	<bean id="userIdCheckController" class ="com.hanger.user.controller.UserIdCheckController">
+		<property name="userIdCheckDao" ref="userIdCheckDao"></property>
+	</bean>
 	<bean id="userLoginController" class ="com.hanger.user.controller.UserLoginController">
 		<property name="userLoginDao" ref="userLoginDao"></property>
 	</bean>
@@ -64,6 +67,9 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="userJoinZipCodeDao" class="com.hanger.user.dao.UserJoinZipCodeDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="userIdCheckDao" class="com.hanger.user.dao.UserIdCheckDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	

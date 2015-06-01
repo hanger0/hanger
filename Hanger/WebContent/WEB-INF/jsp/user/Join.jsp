@@ -14,8 +14,8 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		<script src="/js/javascripts/jquery-1.11.3.min.js" type="text/javascript"></script>
 		<!-- 기존 js 파일들-->
-		<script src="/js/user/join.js" type="text/javascript"></script>
 		<script src="/js/common/common.js" type="text/javascript"></script>
+		<script src="/js/user/join.js" type="text/javascript"></script>
 		
 <script type="text/javascript">
 var InputImage = (function loadImageFile() {
@@ -50,7 +50,7 @@ var InputImage = (function loadImageFile() {
 
     }
             
-            document.getElementById("imagePreview").src = document.getElementById("image").value;
+    document.getElementById("imagePreview").src = document.getElementById("image").value;
 })();
 
 </script>
@@ -141,18 +141,17 @@ H4
 	width:300px;
 }
 </STYLE>
-	</head>
-	<body>
+</head>
+<body>
 <CENTER>
 	<div class="form-horizontal" role="form">
 	
 <form role="form" id="joinForm" name="joinForm" method="post" action="/joinResult.hang" enctype="multipart/form-data">
-	<INPUT type="hidden" name="func" value="member_008">
-    <INPUT type="hidden" name="picPath" value="">
-    <INPUT type="hidden" name="picOrgName" value="">
-    <INPUT type="hidden" name="picSaveName" value="">
-    <INPUT type="hidden" name="picSize" value="">
-    <INPUT type="hidden" name="checkId" value="">
+    <INPUT type="hidden" name="picPath" value="" />
+    <INPUT type="hidden" name="picOrgName" value="" />
+    <INPUT type="hidden" name="picSaveName" value="" />
+    <INPUT type="hidden" name="picSize" value="" />
+    <INPUT type="hidden" name="idCheckYn" value="N" />
 	<div class="col-md-12">
 		<h1>Join</h1>
 		<H4>필수 정보</H4>

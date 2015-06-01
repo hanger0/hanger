@@ -5,11 +5,7 @@ $(function(){
 		//location.href="/memberServlet.mo?func=member_002"; //메인으로 가짐
 		location.href="/member/MemberLogin.jsp";
 	});
-
-	$('#idCheckBtn').click(function(){
-		idCheckAction();
-	});
-
+	
 	var idInput = $('input:text[name=joinId]');
 	idInput.keypress(function(event){
 		if(event.keyCode == 13)
@@ -19,35 +15,15 @@ $(function(){
 		}
 	});
 
-	function idCheckAction(){
+	$("input:text[name=joinId]").keyup(function(key){
 		// id값 체크
 		var idValue = trim(f.joinId.value);
 
-		if(trim(idValue)==""){
-			window.alert("아이디를 입력해주세요.");
-			return false;
-		}
-		if(trim(idValue)!="")
-		{
-			if(isEmailChar(idValue))
-			{
-				window.alert("아이디는 영문 소문자와 숫자, '@', '.' 만이 입력가능합니다.");
-				f.joinId.select();
-				return false;
-			}
-			if((idValue).indexOf("@") == -1 || (idValue).indexOf(".") == -1 || (idValue).indexOf(".")<(idValue).indexOf("@") || isNum((idValue).charAt(0)))
-			{
-				window.alert("아이디를 확인 하세요.");
-				f.joinId.select();
-				return false;
-			}
-		}
-
 		$.ajax({
 			type: "POST", 
-			url: "/memberServlet.mo",
+			url: "/idCheck.hang",
 			dataType: "text",
-			data: "func=member_009&joinId=" + idValue, 
+			data: "joinId=" + idValue, 
 			success: function(text){
 				var resultText = trim(text);
 				var resultArr = resultText.split("^");
@@ -57,17 +33,15 @@ $(function(){
 				if(resultCode=="1")
 				{
 					$("input:hidden[name=idCheckYn]").val('Y');
-					$("input:hidden[name=checkId]").val(idValue);
 				}
 				else
 				{
 					$("input:hidden[name=idCheckYn]").val('N');
-					$("input:hidden[name=checkId]").val('');
 				}
 				$('#idCheckMessage').html(resultMessage);
 			}
 		});
-	}
+	});
 });
 function joinBtn(){
 	var f = document.joinForm;
@@ -179,20 +153,15 @@ function joinBtn(){
 		f.addr2.select();
 		return false;
 	}
-	/*
+
 	if($("input:hidden[name=idCheckYn]").val()=="N")
 	{
-		window.alert("중복확인을 해주세요");
+		window.alert("중복된 아이디 입니다.");
 		return false;
 	}
-	if($("input:hidden[name=checkId]").val() != trim(f.joinId.value))
-	{
-		alert("중복확인한 값이 다릅니다.");
-		return false;
-	}*/
+	
 	window.alert("회원가입을 축하드립니다.\n 로그인 후 이용하세요.");
 	f.addr2.value = trim(f.addr2.value);
-	f.func.value ="member_008";
 	f.submit();
 }
 

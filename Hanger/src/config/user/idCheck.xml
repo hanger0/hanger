@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="user" type="com.hanger.user.vo.UserVo"/>
+	
+	<select id="idCheck" parameterClass="String" resultClass="user">
+		SELECT
+			USER_ID as userId
+		FROM
+			USER
+		WHERE
+			USER_ID = #userId#
+	</select>
+</sqlMap>
