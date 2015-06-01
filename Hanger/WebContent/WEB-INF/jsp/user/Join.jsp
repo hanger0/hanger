@@ -49,10 +49,6 @@ var InputImage = (function loadImageFile() {
         }
 
     }
-    
-    function cancelBtn(){
-    	location.href = "common/Frame";
-    }
             
     document.getElementById("imagePreview").src = document.getElementById("image").value;
 })();

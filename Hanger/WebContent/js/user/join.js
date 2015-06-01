@@ -59,6 +59,11 @@ $(function(){
 		});
 	});
 });
+
+function cancelBtn(){
+	location.href = "/main.hang";
+}
+
 function joinBtn(){
 	var f = document.joinForm;
 

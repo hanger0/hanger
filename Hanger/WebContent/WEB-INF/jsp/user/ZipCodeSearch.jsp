@@ -13,10 +13,6 @@
 %>
 <SCRIPT type="text/JavaScript" src="/js/common/common.js"></SCRIPT>
 <SCRIPT>
-	$(document).ready(function(){
-		$('input:text[name=qt]').select();
-	});
-	
 	function zipCodeSelectAction(code1, code2, addr)
 	{
 		opener.joinForm.zipCode1.value = code1;
