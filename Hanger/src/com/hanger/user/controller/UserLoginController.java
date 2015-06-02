@@ -3,7 +3,6 @@ package com.hanger.user.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +30,9 @@ public class UserLoginController extends BaseController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView submit(
-			HttpServletRequest req,
-			HttpSession session ){
+			HttpServletRequest req){
 		//
+		session = req.getSession(false);
 		String userId = req.getParameter("userId");
 		String pass = req.getParameter("userPass");
 		
@@ -61,7 +60,7 @@ public class UserLoginController extends BaseController {
 		}
 
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName(moveUrl);		// 처리 결과를 보여주는 페이지의 별칭
+		mav.setViewName(moveUrl);
 		mav.addObject("message", message);
 		mav.addObject("mainUrl", mainUrl);
 

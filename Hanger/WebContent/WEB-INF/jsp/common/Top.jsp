@@ -1,20 +1,18 @@
 <%@ page contentType="text/html; charset=euc-kr"%>
 <%
-	String name="abcd";
+	String name="";
 	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
 		name = (String)session.getAttribute("name");
 	}
 %>
-
 <header id ="header">
    <!--기본페이지에는 이거보임-->
    <div style="width: 100%;"
       class="hidden-xs navbar navbar-default navbar-fixed-top navbar HOME"
       role="navigation">
       <div class="navbar-header">
-         <a class="navbar-brand" href="/"> <img
-            style="height: 32px; padding: 3px 0;"
-            src="/images/hanger.png" id="brand-icon" alt="Hanger" />
+         <a class="navbar-brand" href="/"> <img style="height: 32px; padding: 3px 0;"
+            src="images/hanger.png" id="brand-icon" alt="Hanger" />
          </a>
       </div>
       <form class="navbar-form navbar-left" role="search">
@@ -25,11 +23,15 @@
       </form>
       <div class="collapse navbar-collapse">
          <ul class="nav navbar-nav navbar-right unpa-navbar-right">
-            <li></li>
+         <li></li>
 <%
 	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
 %>
-			<li><a href="/logout.hang">로그아웃</a></li>
+			<li><a href="#"><img src="images/icons/top/mypage.jpg" /></a></li>
+			<li><a href="#"><img src="images/icons/top/friend.jpg" /></a></li>
+			<li><a href="#"><img src="images/icons/top/cart.jpg" /></a></li>
+			<li><a href="#"><img src="images/icons/top/ball.jpg" /></a></li>
+			<li><a href="/logout.hang"><img src="images/icons/top/option.jpg" /></a></li>
 <%
 	} else {
 %>
@@ -78,8 +80,8 @@
 <%
 	} else {
 %>
-            <button class="btn btn-default" style="float: right;">회원가입</button>
-            <button class="btn btn-default" style="float: right;">로그인</button>
+            <li><a href="/login.hang" class="remove-border" style="float: right;">로그인</a></li>
+            <li><a href="/join.hang" class="remove-border" style="float: right;">회원가입</a></li>
 <%
 	}
 %>

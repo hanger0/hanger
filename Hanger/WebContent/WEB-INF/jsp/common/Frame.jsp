@@ -7,10 +7,16 @@
 	{
 		message = (String)request.getAttribute("message");
 	}
+	response.setHeader("Cache-Control","no-store");   
+	response.setHeader("Pragma","no-cache");   
+	response.setDateHeader("Expires",0);
 %>
 
 <META charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<META http-equiv="Expires" content="-1"> 
+<META http-equiv="Pragma" content="no-cache"> 
+<META http-equiv="Cache-Control" content="No-Cache"> 
 <!-- BootStrap ½ÃÀÛ -->
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

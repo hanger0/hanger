@@ -1,5 +1,6 @@
 package com.hanger.user.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -11,15 +12,13 @@ import com.hanger.common.controller.BaseController;
 @Controller
 public class UserLogoutController extends BaseController {
 	@RequestMapping("/logout.hang")
-	public ModelAndView loginout(HttpSession session){
+	public ModelAndView loginout(HttpServletRequest req){
+		HttpSession session = req.getSession(false);
 		System.out.println("logout.do ½ÇÇà");
 		session.setAttribute("loginYn", "N");
-		
-		session.removeAttribute("ID");
-		session.removeAttribute("password");
+		session.removeAttribute("name");
 		
 		moveUrl = "common/Frame";
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(moveUrl);
 		mav.addObject("mainUrl", mainUrl);
