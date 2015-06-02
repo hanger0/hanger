@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.hanger.user.vo.RelationVo;
+import com.hanger.user.vo.UserVo;
 
 public class RelationSearchDao {
 	//
@@ -15,7 +16,7 @@ public class RelationSearchDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<RelationVo> searchRelation(RelationVo relation){
-		return (ArrayList<RelationVo>)smct.queryForList("selectRelation", relation);
+	public ArrayList<UserVo> searchRelation(RelationVo relation){
+		return (ArrayList<UserVo>)smct.queryForList("selectRelation", relation);
 	}
 }

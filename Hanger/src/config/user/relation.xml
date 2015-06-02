@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="Data">
-	<typeAlias alias="relation" type="com.hanger.user.vo.relationVo"/>
+	<typeAlias alias="relation" type="com.hanger.user.vo.RelationVo"/>
+	<typeAlias alias="user" type="com.hanger.user.vo.UserVo"/>
 	
 	<insert id="insertRelation" parameterClass="relation">
 		INSERT INTO RELATION(RELATION_FOLLOWER, RELATION_FOLLOWING)
@@ -13,7 +14,7 @@
 		WHERE RELATION_FOLLOWER = #relationFollower# AND RELATION_FOLLOWING = #relationFollowing#	
 	</delete>
 	
-	<select id="selectRelation" parameterClass="relation" resultClass="relation">
+	<select id="selectRelation" parameterClass="relation" resultClass="user">
 		SELECT D.MEMBER_NAME, D.MEMBER_PIC_PATH, D.MEMBER_PIC_SAVE_NAME, D.MEMBER_CODE FROM 
 		(SELECT A.RELATION_FOLLOWING FROM RELATION A, MEMBER B  WHERE B.MEMBER_CODE = #relationFollower# 
 		AND A.RELATION_FOLLOWER = B.MEMBER_CODE) C, MEMBER D WHERE C.RELATION_FOLLOWING=D.MEMBER_CODE 
