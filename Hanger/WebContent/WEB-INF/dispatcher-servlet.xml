@@ -50,6 +50,9 @@
 	<bean id="userLoginController" class ="com.hanger.user.controller.UserLoginController">
 		<property name="userLoginDao" ref="userLoginDao"></property>
 	</bean>
+	<bean id="userUpdateController" class ="com.hanger.user.controller.UserUpdateController">
+		<property name="userUpdateDao" ref="userUpdateDao"></property>
+	</bean>
 	<bean id="userLogoutController" class ="com.hanger.user.controller.UserLogoutController" />
 	<bean id="managerAddItemController" class="com.hanger.manager.item.controller.ManagerAddItemController"/>
 	<bean id="managerAddItemFormController" class="com.hanger.manager.item.controller.ManagerAddItemFormController">
@@ -70,6 +73,9 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="userIdCheckDao" class="com.hanger.user.dao.UserIdCheckDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="userUpdateDao" class="com.hanger.user.dao.UserUpdateDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	

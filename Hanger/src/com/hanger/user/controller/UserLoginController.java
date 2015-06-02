@@ -48,6 +48,7 @@ public class UserLoginController extends BaseController {
 			String name = (String)uvList.get(0).getUserName();
 			System.out.println("로그인 성공");
 			session.setAttribute("loginYn", "Y");
+			session.setAttribute("userId", userId);
 			session.setAttribute("name", name);
 			
 			message = "반갑습니다. " + name + " 님";
