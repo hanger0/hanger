@@ -12,4 +12,10 @@
 		DELETE FROM RELATION 
 		WHERE RELATION_FOLLOWER = #relationFollower# AND RELATION_FOLLOWING = #relationFollowing#	
 	</delete>
+	
+	<select id="selectRelation" parameterClass="relation" resultClass="relation">
+		SELECT D.MEMBER_NAME, D.MEMBER_PIC_PATH, D.MEMBER_PIC_SAVE_NAME, D.MEMBER_CODE FROM 
+		(SELECT A.RELATION_FOLLOWING FROM RELATION A, MEMBER B  WHERE B.MEMBER_CODE = #relationFollower# 
+		AND A.RELATION_FOLLOWER = B.MEMBER_CODE) C, MEMBER D WHERE C.RELATION_FOLLOWING=D.MEMBER_CODE 
+	</select>
 </sqlMap>

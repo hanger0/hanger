@@ -65,6 +65,9 @@
 	<bean id="relationDeleteController" class ="com.hanger.user.controller.RelationDeleteController">
 		<property name="relationDeleteDao" ref="relationDeleteDao"></property>
 	</bean>
+	<bean id="relationSearchController" class ="com.hanger.user.controller.RelationSearchController">
+		<property name="relationSearchDao" ref="relationSearchDao"></property>
+	</bean>
 	
 	<!-- Item 요청 url과 Controller 매핑 -->
 	<bean id="managerAddItemController" class="com.hanger.manager.item.controller.ManagerAddItemController"/>
@@ -97,6 +100,9 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="relationDeleteDao" class="com.hanger.user.dao.RelationDeleteDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="relationSearchDao" class="com.hanger.user.dao.RelationSearchDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.user.dao.RelationDeleteDao;
@@ -18,6 +19,7 @@ public class RelationDeleteController extends BaseController {
 		this.relationDeleteDao = relationDeleteDao;
 	}
 	
+	@RequestMapping("/relationDelete.hang")
 	public String relationDelete(HttpServletRequest req){
 		//
 		HttpSession session = req.getSession();

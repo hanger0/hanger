@@ -19,7 +19,7 @@ public class RelationInsertController extends BaseController {
 		this.relationInsertDao = relationInsertDao;
 	}
 	
-	@RequestMapping("/insertRelation.hang")
+	@RequestMapping("/relationInsert.hang")
 	public String insertRelation(HttpServletRequest req){
 		//
 		HttpSession session = req.getSession();
