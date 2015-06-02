@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=euc-kr"%>
 <%
-	String name="";
+	String myName="";
 	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
-		name = (String)session.getAttribute("name");
+		myName = (String)session.getAttribute("myUserName");
 	}
 %>
 <header id ="header">

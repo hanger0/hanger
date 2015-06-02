@@ -45,13 +45,15 @@ public class UserLoginController extends BaseController {
 		
 		String message = "";
 		if(uvList != null && uvList.size()>0) {
-			String name = (String)uvList.get(0).getUserName();
+			String myName = (String)uvList.get(0).getUserName();
+			String myCode = (String)uvList.get(0).getUserCode();
 			System.out.println("·Î±×ÀÎ ¼º°ø");
 			session.setAttribute("loginYn", "Y");
-			session.setAttribute("userId", userId);
-			session.setAttribute("name", name);
+			session.setAttribute("myUserId", userId);
+			session.setAttribute("myUserName", myName);
+			session.setAttribute("myUserCode", myCode);
 			
-			message = "¹Ý°©½À´Ï´Ù. " + name + " ´Ô";
+			message = "¹Ý°©½À´Ï´Ù. " + myName + " ´Ô";
 			moveUrl = "common/Frame";
 		}
 		else {

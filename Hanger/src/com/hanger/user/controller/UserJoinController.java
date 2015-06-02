@@ -1,7 +1,6 @@
 package com.hanger.user.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -14,12 +13,12 @@ import com.hanger.common.controller.BaseController;
 public class UserJoinController extends BaseController {
 	
 	@RequestMapping("/join.hang")
-	protected ModelAndView memberJoin(HttpServletRequest request, HttpServletResponse response) {
+	protected ModelAndView memberJoin(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		
 		ModelAndView mav = new ModelAndView() ;
 		if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
-			mav.setViewName("common/Frame");
+			mav.setViewName(moveUrl);
 			mav.addObject("mainUrl", mainUrl);
 			mav.addObject("message", "이미 로그인된 상태입니다.");
 		} else {

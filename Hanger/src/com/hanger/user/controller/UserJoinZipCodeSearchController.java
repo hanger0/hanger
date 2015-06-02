@@ -18,6 +18,11 @@ public class UserJoinZipCodeSearchController {
 	public void setUserJoinZipCodeDao(UserJoinZipCodeDao userJoinZipCodeDao) {
 		this.userJoinZipCodeDao = userJoinZipCodeDao;
 	}
+	
+	@RequestMapping("/zipCode.hang")
+	public String goZipCodeSearch(){
+		return "user/ZipCodeSearch";
+	}
 
 	@RequestMapping("/zipCodeSearch.hang")
 	public ModelAndView search(HttpServletRequest req){

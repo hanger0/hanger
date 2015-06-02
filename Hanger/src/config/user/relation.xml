@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="relation" type="com.hanger.user.vo.relationVo"/>
+	
+	<insert id="insertRelation" parameterClass="relation">
+		INSERT INTO RELATION(RELATION_FOLLOWER, RELATION_FOLLOWING)
+		VALUES(#relationFollower#, #relationFollowing#);
+	</insert>
+	
+	<delete id="deleteRelation" parameterClass="relation">
+		DELETE FROM RELATION 
+		WHERE RELATION_FOLLOWER = #relationFollower# AND RELATION_FOLLOWING = #relationFollowing#	
+	</delete>
+</sqlMap>

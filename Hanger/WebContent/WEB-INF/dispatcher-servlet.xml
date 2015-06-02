@@ -36,7 +36,7 @@
 		<property name="sqlMapClient" ref="sqlMapClient"/>
 	</bean>
 
-	<!--  요청 url과 Controller 매핑 -->
+	<!-- User 요청 url과 Controller 매핑 -->
 	<bean id="userJoinController" class ="com.hanger.user.controller.UserJoinController" />
 	<bean id="userJoinResultController" class ="com.hanger.user.controller.UserJoinResultController">
 		<property name="userJoinDao" ref="userJoinDao"></property>
@@ -53,20 +53,30 @@
 	<bean id="userUpdateController" class ="com.hanger.user.controller.UserUpdateController">
 		<property name="userUpdateDao" ref="userUpdateDao"></property>
 	</bean>
+	<bean id="userDeleteController" class ="com.hanger.user.controller.UserDeleteController">
+		<property name="userDeleteDao" ref="userDeleteDao"></property>
+	</bean>
 	<bean id="userLogoutController" class ="com.hanger.user.controller.UserLogoutController" />
+	
+	<!-- Relation 요청 url과 Controller 매핑 -->
+	<bean id="relationInsertController" class ="com.hanger.user.controller.RelationInsertController">
+		<property name="relationInsertDao" ref="relationInsertDao"></property>
+	</bean>
+	<bean id="relationDeleteController" class ="com.hanger.user.controller.RelationDeleteController">
+		<property name="relationDeleteDao" ref="relationDeleteDao"></property>
+	</bean>
+	
+	<!-- Item 요청 url과 Controller 매핑 -->
 	<bean id="managerAddItemController" class="com.hanger.manager.item.controller.ManagerAddItemController"/>
 	<bean id="managerAddItemFormController" class="com.hanger.manager.item.controller.ManagerAddItemFormController">
 		<property name="managerAddItemDao" ref="managerAddItemDao"></property>
 	</bean>
 	
-	<!--  Dao beans  -->
+	<!-- User Dao beans  -->
 	<bean id="userJoinDao" class="com.hanger.user.dao.UserJoinDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="userLoginDao" class="com.hanger.user.dao.UserLoginDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
-	</bean>
-	<bean id="managerAddItemDao" class="com.hanger.manager.item.dao.ManagerAddItemDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="userJoinZipCodeDao" class="com.hanger.user.dao.UserJoinZipCodeDao">
@@ -76,6 +86,22 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="userUpdateDao" class="com.hanger.user.dao.UserUpdateDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="userDeleteDao" class="com.hanger.user.dao.UserDeleteDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	
+	<!-- Relation Dao beans  -->
+	<bean id="relationInsertDao" class="com.hanger.user.dao.RelationInsertDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="relationDeleteDao" class="com.hanger.user.dao.RelationDeleteDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	
+	<!-- Item Dao beans  -->
+	<bean id="managerAddItemDao" class="com.hanger.manager.item.dao.ManagerAddItemDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	
