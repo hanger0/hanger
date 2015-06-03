@@ -60,6 +60,9 @@
 	<bean id="userSearchController" class ="com.hanger.user.controller.UserSearchController">
 		<property name="userSearchDao" ref="userSearchDao"></property>
 	</bean>
+	<bean id="userFindPasswordController" class ="com.hanger.user.controller.UserFindPasswordController">
+		<property name="userFindPasswordDao" ref="userFindPasswordDao"></property>
+	</bean>
 	
 	<!-- Relation 요청 url과 Controller 매핑 -->
 	<bean id="relationInsertController" class ="com.hanger.user.controller.RelationInsertController">
@@ -103,6 +106,9 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="userSearchDao" class="com.hanger.user.dao.UserSearchDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="userFindPasswordDao" class="com.hanger.user.dao.UserFindPasswordDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	

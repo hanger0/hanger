@@ -39,4 +39,13 @@
   			a.USER_NAME, a.USER_ID, a.USER_PHONE, a.USER_PIC_PATH, a.USER_PIC_SAVE_NAME,  
 			a.USER_CODE, a.USER_SKINTYPE, a.USER_SKINTONE, a.USER_SKINPROBLEM
 	</select>
+	
+	<select id="selectPassword" parameterClass="user">
+		SELECT 
+			MEMBER_PWD 
+		FROM 
+			USER 
+		WHERE 
+			USER_ID = #userId# AND USER_ANSWER = #userAnswer# AND USER_QUESTION = #userQuestion# AND USER_USE_YN = 'Y'
+	</select>
 </sqlMap>
