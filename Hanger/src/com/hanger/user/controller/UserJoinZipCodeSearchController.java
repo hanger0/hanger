@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.user.dao.UserJoinZipCodeDao;
+import com.hanger.user.vo.ZipCodeVo;
 
 @Controller
 public class UserJoinZipCodeSearchController {
@@ -27,7 +28,7 @@ public class UserJoinZipCodeSearchController {
 	@RequestMapping("/zipCodeSearch.hang")
 	public ModelAndView search(HttpServletRequest req){
 		String qt = req.getParameter("qt");
-		List zipCodeList = userJoinZipCodeDao.searchZipCode(qt);
+		List<ZipCodeVo> zipCodeList = userJoinZipCodeDao.searchZipCode(qt);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("user/ZipCodeSearch");

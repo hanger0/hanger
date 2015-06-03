@@ -57,6 +57,9 @@
 		<property name="userDeleteDao" ref="userDeleteDao"></property>
 	</bean>
 	<bean id="userLogoutController" class ="com.hanger.user.controller.UserLogoutController" />
+	<bean id="userSearchController" class ="com.hanger.user.controller.UserSearchController">
+		<property name="userSearchDao" ref="userSearchDao"></property>
+	</bean>
 	
 	<!-- Relation 요청 url과 Controller 매핑 -->
 	<bean id="relationInsertController" class ="com.hanger.user.controller.RelationInsertController">
@@ -92,6 +95,9 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="userDeleteDao" class="com.hanger.user.dao.UserDeleteDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="userSearchDao" class="com.hanger.user.dao.UserSearchDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	

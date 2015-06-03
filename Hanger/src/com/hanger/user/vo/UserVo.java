@@ -26,6 +26,8 @@ public class UserVo {
 	private String updId;
 	private String updDate;
 	private String updIp;
+	private int followerCount;
+	private int potingCount;
 	public String getUserCode() {
 		return userCode;
 	}
@@ -175,5 +177,17 @@ public class UserVo {
 	}
 	public void setUpdIp(String updIp) {
 		this.updIp = updIp;
+	}
+	public int getFollowerCount() {
+		return followerCount;
+	}
+	public void setFollowerCount(int followerCount) {
+		this.followerCount = followerCount;
+	}
+	public int getPotingCount() {
+		return potingCount;
+	}
+	public void setPotingCount(int potingCount) {
+		this.potingCount = potingCount;
 	}
 }

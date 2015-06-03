@@ -27,7 +27,7 @@ public class RelationInsertController extends BaseController {
 		RelationVo relation = new RelationVo();
 		relation.setRelationFollower(myUserCode);
 		String relationFollowing = req.getParameter("userCode");
-		relation.setRelationFollowing(relationFollowing );
+		relation.setRelationFollowing(relationFollowing);
 		
 		relationInsertDao.insertRelation(relation);
 		
