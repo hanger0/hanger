@@ -80,6 +80,14 @@
 	<bean id="managerAddItemFormController" class="com.hanger.manager.item.controller.ManagerAddItemFormController">
 		<property name="managerAddItemDao" ref="managerAddItemDao"></property>
 	</bean>
+	<bean id="managerBrandController" class="com.hanger.manager.item.controller.ManagerBrandController"/>
+	<bean id="managerSearchBrandController" class="com.hanger.manager.item.controller.ManagerSearchBrandController">
+		<property name="managerSearchBrandDao" ref="managerSearchBrandDao"></property>
+	</bean>
+	<bean id="managerAddBrandController" class="com.hanger.manager.item.controller.ManagerAddBrandController">
+		<property name="managerAddBrandDao" ref="managerAddBrandDao"></property>
+		<property name="managerSearchBrandDao" ref="managerSearchBrandDao"></property>
+	</bean>
 
 	<!-- Order 요청 url과 Controller 매핑 -->
 	<bean id="orderBuyController" class="com.hanger.order.controller.OrderBuyController">
@@ -125,6 +133,12 @@
 	
 	<!-- Manager/Item Dao beans  -->
 	<bean id="managerAddItemDao" class="com.hanger.manager.item.dao.ManagerAddItemDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="managerSearchBrandDao" class="com.hanger.manager.item.dao.ManagerSearchBrandDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="managerAddBrandDao" class="com.hanger.manager.item.dao.ManagerAddBrandDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	

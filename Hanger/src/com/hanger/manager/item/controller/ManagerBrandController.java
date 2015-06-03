@@ -10,17 +10,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hanger.common.controller.BaseController;
 
 @Controller
-public class ManagerAddItemController extends BaseController {
-	@RequestMapping("/addItem.hang")
-	protected ModelAndView memberJoin(HttpServletRequest request,
-			HttpServletResponse response) {
-
-		moveUrl = "manager/item/ManagerAddItem";
-
+public class ManagerBrandController extends BaseController{
+	@RequestMapping("/brand.hang")
+	protected ModelAndView searchBrand(HttpServletRequest request, HttpServletResponse response){
+		
+		moveUrl = "manager/item/SearchBrand";
+		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(moveUrl); // 어떤 jsp로 가는지
-
-		System.out.println("AddItem...");
+		mav.setViewName(moveUrl);
+		
+		System.out.println("SearchBrand...");
 		return mav;
 	}
 }
+
+
