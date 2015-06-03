@@ -1,6 +1,7 @@
 package com.hanger.user.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
@@ -15,7 +16,7 @@ public class UserSearchDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<UserVo> searchUser(String qt){
-		return (ArrayList<UserVo>)smct.queryForList("searchUser", qt);
+	public ArrayList<UserVo> searchUser(HashMap<String, String> map){
+		return (ArrayList<UserVo>)smct.queryForList("searchUser", map);
 	}
 }

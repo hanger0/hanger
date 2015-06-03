@@ -8,4 +8,5 @@
 	<sqlMap resource="config/user/idCheck.xml"/>
 	<sqlMap resource="config/user/relation.xml"/>
 	<sqlMap resource="config/manager/item/item.xml"/>
+	<sqlMap resource="config/order/buy.xml"/>
 </sqlMapConfig>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="order" type="com.hanger.order.vo.OrderVo"/>
+	
+	<insert id="insertOrdering" parameterClass="order">
+		insert into ordering (order_code, user_code, order_used_mileage, order_state, reg_id, reg_date, reg_ip, upd_id, upd_date, upd_ip)
+		values (#orderCode#, #userCode#, #orderUsedMileage#, #orderState#, #regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
+	</insert>
+	
+	<insert id="insertOrderInfo" parameterClass="order">
+		insert into order_info(order_info_code, order_code, item_code, order_item_amount, order_item_verify, order_item_recom)
+		values(CONCAT("OI",LPAD((SELECT GET_SEQ('ORDER_CODE')), 10, '0')), #orderCode#, #itemCode#, #orderItemAmount#, #orderItemVerify#, #orderItemRecom#)
+	</insert>
+	
+	<select id="selectSeq" resultClass="String">
+		SELECT CONCAT("OR",LPAD((SELECT GET_SEQ('ORDER_CODE')), 10, '0')) as orderCode FROM DUAL
+	</select>
+</sqlMap>

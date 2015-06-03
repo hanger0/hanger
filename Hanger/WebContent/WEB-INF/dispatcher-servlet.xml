@@ -72,10 +72,15 @@
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
 	</bean>
 	
-	<!-- Item 요청 url과 Controller 매핑 -->
+	<!-- Manager/Item 요청 url과 Controller 매핑 -->
 	<bean id="managerAddItemController" class="com.hanger.manager.item.controller.ManagerAddItemController"/>
 	<bean id="managerAddItemFormController" class="com.hanger.manager.item.controller.ManagerAddItemFormController">
 		<property name="managerAddItemDao" ref="managerAddItemDao"></property>
+	</bean>
+
+	<!-- Order 요청 url과 Controller 매핑 -->
+	<bean id="orderBuyController" class="com.hanger.order.controller.OrderBuyController">
+		<property name="orderBuyDao" ref="orderBuyDao"></property>
 	</bean>
 	
 	<!-- User Dao beans  -->
@@ -112,11 +117,16 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	
-	<!-- Item Dao beans  -->
+	<!-- Manager/Item Dao beans  -->
 	<bean id="managerAddItemDao" class="com.hanger.manager.item.dao.ManagerAddItemDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	
+	<!-- Order Dao beans  -->
+	<bean id="orderBuyDao" class="com.hanger.order.dao.OrderBuyDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+
 	<!-- 컨트롤러의 처리 결과를 보여줄 뷰를 선택하는 방식 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
