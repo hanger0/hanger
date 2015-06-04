@@ -5,7 +5,7 @@
 		<META http-equiv="Content-Type" content="text/html; charset=euc-kr">
 	</HEAD>
 		<BODY>
-			<Form action="/userSearch.hang" method="POST">
+			<Form action="/buyOrder.hang" method="POST">
 				<input type="text" name="qt"/>
 				<input type="submit" value="찾기"/>
 			</Form>

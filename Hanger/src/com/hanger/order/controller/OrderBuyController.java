@@ -29,6 +29,13 @@ public class OrderBuyController extends BaseController {
 		String ip = req.getRemoteAddr();
 		String orderCode = orderBuyDao.selectSeq();
 		String itemCode = req.getParameter("itemCode");
+		String orderName = req.getParameter("orderName");
+		String orderPhone = req.getParameter("orderPhone");
+		String orderAddr1 = req.getParameter("orderAddr1");
+		String orderAddr2 = req.getParameter("orderAddr2");
+		String orderPostCode1 = req.getParameter("orderPostCode1");
+		String orderPostCode2 = req.getParameter("orderPostCode2");
+		String orderMemo = req.getParameter("orderMemo");
 		String orderItemAmount = req.getParameter("orderItemAmount");
 		String orderItemVerify = req.getParameter("orderItemVerify");
 		String orderItemRecom = req.getParameter("orderItemRecom");
@@ -39,6 +46,13 @@ public class OrderBuyController extends BaseController {
 		order.setUserCode(myUserCode);
 		order.setOrderCode(orderCode);
 		order.setItemCode(itemCode);
+		order.setOrderName(orderName);
+		order.setOrderPhone(orderPhone);
+		order.setOrderAddr1(orderAddr1);
+		order.setOrderAddr2(orderAddr2);
+		order.setOrderPostCode1(orderPostCode1);
+		order.setOrderPostCode2(orderPostCode2);
+		order.setOrderMemo(orderMemo);
 		order.setOrderItemAmount(orderItemAmount);
 		order.setOrderItemVerify(orderItemVerify);
 		order.setOrderItemRecom(orderItemRecom);

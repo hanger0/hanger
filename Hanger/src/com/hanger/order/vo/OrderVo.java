@@ -5,6 +5,13 @@ public class OrderVo {
 	private String orderCode;
 	private String itemCode;
 	private String userCode;
+	private String orderName;
+	private String orderPhone;
+	private String orderAddr1;
+	private String orderAddr2;
+	private String orderPostCode1;
+	private String orderPostCode2;
+	private String orderMemo;
 	private String orderItemAmount;
 	private String orderItemVerify;
 	private String orderItemRecom;
@@ -16,6 +23,7 @@ public class OrderVo {
 	private String updId;
 	private String updDate;
 	private String updIp;
+	
 	public String getOrderInfoCode() {
 		return orderInfoCode;
 	}
@@ -39,6 +47,48 @@ public class OrderVo {
 	}
 	public void setUserCode(String userCode) {
 		this.userCode = userCode;
+	}
+	public String getOrderName() {
+		return orderName;
+	}
+	public void setOrderName(String orderName) {
+		this.orderName = orderName;
+	}
+	public String getOrderPhone() {
+		return orderPhone;
+	}
+	public void setOrderPhone(String orderPhone) {
+		this.orderPhone = orderPhone;
+	}
+	public String getOrderAddr1() {
+		return orderAddr1;
+	}
+	public void setOrderAddr1(String orderAddr1) {
+		this.orderAddr1 = orderAddr1;
+	}
+	public String getOrderAddr2() {
+		return orderAddr2;
+	}
+	public void setOrderAddr2(String orderAddr2) {
+		this.orderAddr2 = orderAddr2;
+	}
+	public String getOrderPostCode1() {
+		return orderPostCode1;
+	}
+	public void setOrderPostCode1(String orderPostCode1) {
+		this.orderPostCode1 = orderPostCode1;
+	}
+	public String getOrderPostCode2() {
+		return orderPostCode2;
+	}
+	public void setOrderPostCode2(String orderPostCode2) {
+		this.orderPostCode2 = orderPostCode2;
+	}
+	public String getOrderMemo() {
+		return orderMemo;
+	}
+	public void setOrderMemo(String orderMemo) {
+		this.orderMemo = orderMemo;
 	}
 	public String getOrderItemAmount() {
 		return orderItemAmount;
