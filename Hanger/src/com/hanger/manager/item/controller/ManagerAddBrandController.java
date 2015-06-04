@@ -13,7 +13,6 @@ import com.hanger.common.controller.BaseController;
 import com.hanger.manager.item.dao.ManagerAddBrandDao;
 import com.hanger.manager.item.dao.ManagerSearchBrandDao;
 import com.hanger.manager.item.vo.BrandVo;
-import com.oreilly.servlet.MultipartRequest;
 
 @Controller
 public class ManagerAddBrandController extends BaseController {
