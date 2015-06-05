@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="Data">
-	<typeAlias alias="item" type="com.hanger.manager.item.vo.ManagerItemVo"/>
+	<typeAlias alias="managerItem" type="com.hanger.manager.item.vo.ManagerItemVo"/>
 	
-	<insert id="insertItem" parameterClass="item">
+	<insert id="insertItem" parameterClass="managerItem">
 		INSERT INTO ITEM(ITEM_CODE, BRAND_CODE, ITEM_NAME, ITEM_MARKET_PRICE, ITEM_SELL_PRICE, ITEM_PURCHASE_PRICE, 
 		ITEM_SUMMARY, ITEM_SELL_MAXNUM, ITEM_OPTION1_TITLE, ITEM_OPTION1_CONTENT, ITEM_OPTION2_TITLE, ITEM_OPTION2_CONTENT, ITEM_OPTION3_TITLE, ITEM_OPTION3_CONTENT, 
-		ITEM_MANUFACTURE_DATE, ITEM_EXPIRE_DATE, 
+		ITEM_MANUFACTURE_DATE, ITEM_EXPIRE_DATE, ITEM_RELEASE_DATE, ITEM_FEATURE, 
 		ITEM_PIC_PATH, ITEM_PIC_ORGNAME, ITEM_PIC_SAVENAME, ITEM_PIC_SIZE, ITEM_STOCK_AMOUNT, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
 		VALUES(CONCAT("IT",LPAD((SELECT GET_SEQ('ITEM_CODE')), 10, '0')), 
 		#brandCode#, #itemName#, #itemMarketPrice#, #itemSellPrice#, #itemPurchasePrice#, 
 		#itemSummary#, #itemSellMaxNum#, #itemOption1Title#, #itemOption1Content#, #itemOption2Title#, #itemOption2Content#, #itemOption3Title#, #itemOption3Content#, 
-		#itemManufactureDate#, #itemExpireDate#, 
+		#itemManufactureDate#, #itemExpireDate#, #itemReleaseDate#, #itemFeature#, 
 		#itemMainPicPath#, #itemMainPicOrgName#, #itemMainPicSaveName#, #itemMainPicSize#, #itemStockAmount#, 
 		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>
 	
-	<select id="getNowSeq" parameterClass="String" resultClass="String">
-		SELECT
-			ID as sequence
-		FROM
-			SEQUENCE
-		WHERE
-			SEQ_NAME = 'ITEM_CODE'
-	</select>
+	<insert id="insertItemCategory" parameterClass="String">
+		INSERT INTO ITEM_CATEGORY(ITEM_CODE, CATEGORY3_CODE)
+		VALUES(CONCAT("IT", LPAD((SELECT ID as seq FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_CODE'), 10, '0')), #itemCategoryValue#)
+	</insert>
 	
 	<select id="addItemPicCode" parameterClass="String" resultClass="String">
 		SELECT GET_SEQ('ITEM_PIC_CODE');
 	</select>
 	
-	<insert id="insertItemPic" parameterClass="item">
+	<insert id="insertItemPic" parameterClass="managerItem">
 		INSERT INTO ITEM_PIC(ITEM_PIC_CODE, ITEM_CODE,
 		ITEM_PIC_PATH, ITEM_PIC_ORGNAME, ITEM_PIC_SAVENAME, ITEM_PIC_SIZE,
 		REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)

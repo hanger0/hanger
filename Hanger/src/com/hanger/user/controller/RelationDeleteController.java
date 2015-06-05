@@ -68,7 +68,6 @@ public class RelationDeleteController extends BaseController {
 		relation.setRelationFollowing(userCode);
 		
 		relationDeleteDao.deleteRelation(relation);
-		System.out.println(relationDeleteDao.deleteRelation(relation));
 		ArrayList<UserVo> followingList = relationSearchDao.searchFollowingRelation(myUserCode);
 		
 		mainUrl = "/WEB-INF/jsp/user/mypage/FlowSearch.jsp";

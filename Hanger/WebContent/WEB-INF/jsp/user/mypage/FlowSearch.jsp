@@ -2,7 +2,6 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.hanger.user.vo.*" %>
 <%
-	System.out.print("리스트가 있을까?   ");
 	ArrayList<UserVo> followerList = (ArrayList<UserVo>)request.getAttribute("followerList");
 	ArrayList<UserVo> followingList = (ArrayList<UserVo>)request.getAttribute("followingList");
 	ArrayList<UserVo> userList = (ArrayList<UserVo>)request.getAttribute("userList");
@@ -57,6 +56,8 @@
 }
 </STYLE>
 <script>
+$(function(){
+	alert("asdfasdfasdf");
 	function goFollowerList(){
 		location.href="/relationFollowerSearch.hang";
 	}
@@ -70,7 +71,7 @@
 	}
 	function insertFollower(){
 		var f = document.insertFollower;
-		
+
 		f.submit();
 	}
 	function deleteFollower(){
@@ -80,16 +81,15 @@
 	}
 	function insertSearch(){
 		var f = document.insertSearch;
-		
-		window.alert("sdfsdf");
-		
+		alert("insert");
 		f.submit();
 	}
 	function deleteSearch(){
 		var f = document.deleteSearch;
-		
+		alert("delete");
 		f.submit();
 	}
+});
 </script>
 </head>
 <body style="background-color: #EBEBEB">
@@ -284,7 +284,7 @@
 %>
 				<form id="deleteSearch" name="deleteSearch" action="/relationSearchDelete.hang" method="POST">
 				  	  <input type="hidden" name="userCode" value="<%= user.getUserCode() %>"/>
-				  	  <input type="hidden" id="deleteQt"/>
+				  	  <input type="hidden" name="qt" value="delelelelte!!!!!!"/>
 	                  <button class="user-follow-button followed" onClick="deleteSearch()">
 	                     	팔로우 취소
 	                  </button>
@@ -294,7 +294,7 @@
 %>
 				<form id="insertSearch" name="insertSearch" action="/relationSearchInsert.hang" method="POST">
 				  	  <input type="hidden" name="userCode" value="<%= user.getUserCode() %>"/>
-				  	  <input type="hidden" id="insertQt"/>
+				  	  <input type="hidden" name="qt" value="insert!!!"/>
 	                  <button class="user-follow-button followed" onClick="insertSearch()">
 	                     	팔로우 맺기
 	                  </button>

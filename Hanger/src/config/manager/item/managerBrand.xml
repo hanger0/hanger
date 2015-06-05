@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="Data">
-	<typeAlias alias="brand" type="com.hanger.manager.item.vo.ManagerBrandVo"/>
+	<typeAlias alias="managerBrand" type="com.hanger.manager.item.vo.ManagerBrandVo"/>
 	
-	<select id="brandList" parameterClass="String" resultClass="brand">
+	<select id="brandList" parameterClass="String" resultClass="managerBrand">
 		SELECT
 			BRAND_NAME as brandName
 		FROM
@@ -14,7 +14,7 @@
 			BRAND_NAME
 	</select>
 	
-	<select id="searchCompleteBrand" parameterClass="String" resultClass="brand">
+	<select id="searchCompleteBrand" parameterClass="String" resultClass="managerBrand">
 		SELECT
 			BRAND_NAME as brandName
 		FROM
@@ -25,7 +25,7 @@
 			BRAND_NAME
 	</select>
 	
-	<insert id="insertBrand" parameterClass="brand">
+	<insert id="insertBrand" parameterClass="managerBrand">
 		INSERT INTO BRAND(BRAND_CODE, BRAND_NAME) 
 		VALUES(CONCAT("B",LPAD((SELECT GET_SEQ('BRAND_CODE')), 4, '0')), 
 		#brandName#)

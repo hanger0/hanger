@@ -60,6 +60,8 @@ public class RelationInsertController extends BaseController {
 		//
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
+		String qt = (String)req.getAttribute("qt");
+		System.out.println(qt + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
 		RelationVo relation = new RelationVo();
 		relation.setRelationFollower(myUserCode);
 		String relationFollowing = req.getParameter("userCode");

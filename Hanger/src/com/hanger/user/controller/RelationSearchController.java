@@ -44,7 +44,6 @@ public class RelationSearchController extends BaseController {
 		ArrayList<UserVo> followingList = relationSearchDao.searchFollowingRelation(myUserCode);
 		
 		mainUrl = "/WEB-INF/jsp/user/mypage/FlowSearch.jsp";
-		System.out.println(followingList);
 		req.setAttribute("followingList", followingList);
 		req.setAttribute("mainUrl", mainUrl);
 		

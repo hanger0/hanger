@@ -21,6 +21,10 @@ public class ManagerAddItemDao {
 		smct.insert("insertItem", item);
 	}
 	
+	public void insertItemCategory(String category){
+		smct.insert("insertItemCategory", category);
+	}
+	
 	public void insertItemPic(ManagerItemVo item)
 	{
 		((SqlMapClientOperations) smct).queryForList("addItemPicCode");

@@ -129,6 +129,14 @@ public class ManagerAddItemFormController extends BaseController{
 		
 		System.out.println("manager add item form ½ÇÇà");
 		
+		String[] itemCategoryArr = itemCategory.split("/");
+		for(int i = 0; i < itemCategoryArr.length; i++){
+			String itemCategoryValue = itemCategoryArr[i];
+			managerAddItemDao.insertItemCategory(itemCategoryValue);
+		}
+		
+		
+		
 		for(int i = 1; i < 6; i++){
 //			fileFormName = (String)formNames.nextElement();
 //			System.out.println(fileFormName);

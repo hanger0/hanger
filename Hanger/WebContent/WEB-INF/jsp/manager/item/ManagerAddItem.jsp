@@ -129,9 +129,8 @@
 						<label for="marketPrice">시장가:</label>
 					</dt>
 					<dd>
-						<INPUT class="text" type="text" name="marketPrice" maxlength="20">
+						<INPUT class="text" type="text" name="marketPrice" maxlength="20">원
 					</dd>
-					원
 				</dl>
 
 				<dl>
@@ -139,9 +138,8 @@
 						<label for="sellPrice">판매가:</label>
 					</dt>
 					<dd>
-						<INPUT class="text" type="text" name="sellPrice" maxlength="20">
+						<INPUT class="text" type="text" name="sellPrice" maxlength="20">원
 					</dd>
-					원
 				</dl>
 
 				<dl>
@@ -150,9 +148,9 @@
 					</dt>
 					<dd>
 						<INPUT class="text" type="text" name="purchasePrice"
-							maxlength="20">
+							maxlength="20">원
 					</dd>
-					원
+					
 				</dl>
 				
 				<dl>
