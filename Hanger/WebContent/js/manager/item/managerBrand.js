@@ -29,3 +29,11 @@ function addBrand(){
 		
 	f.submit();
 }
+
+function brandSelectAction(brandCode, brandName)
+{
+	opener.addItemForm.brandCode.value = brandCode;
+	opener.addItemForm.brandName.value = brandName;
+
+	window.self.close();
+}

@@ -60,17 +60,18 @@ public class RelationInsertController extends BaseController {
 		//
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
-		String qt = (String)req.getAttribute("qt");
-		System.out.println(qt + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+		String userCode = req.getParameter("userCode");
+		String qt = req.getParameter("insertQt");
+		
 		RelationVo relation = new RelationVo();
 		relation.setRelationFollower(myUserCode);
-		String relationFollowing = req.getParameter("userCode");
-		relation.setRelationFollowing(relationFollowing);
+		relation.setRelationFollowing(userCode);
 		
 		relationInsertDao.insertRelation(relation);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", myUserCode);
+		map.put("qt", qt);
 		
 		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
 		
@@ -78,6 +79,7 @@ public class RelationInsertController extends BaseController {
 		
 		req.setAttribute("userList", userList);
 		req.setAttribute("mainUrl", mainUrl);
+		req.setAttribute("qt", qt);
 		
 		return moveUrl;
 	}

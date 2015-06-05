@@ -100,18 +100,10 @@
 						<label for="brand">브랜드:</label>
 					</dt>
 					<dd>
-						<select class="text" name="brand" id="brand" size="1">
-							<option value="0" selected="1">브랜드선택</option>
-							<option value="B0001">HERA</option>
-							<option value="B0002">MAC</option>
-							<option value="B0003">DIOR</option>
-							<option value="B0004">CHANEL</option>
-							<option value="B0005">IOPE</option>
-							<option value="B0006">MISHA</option>
-						</select>
+						<input class="text" name="brandName" id="brandName" size="60" onclick="searchBrand();" readonly/>
+						<input type="hidden" id="brandCode" name="brandCode" value=""/>
 						
-						<INPUT class="button" type="button" value="브랜드 등록"
-						style="cursor: pointer" onclick="searchBrand()"> 
+						<INPUT class="button" type="button" value="브랜드 검색" style="cursor: pointer" onclick="searchBrand()"> 
 					</dd>
 				</dl>
 				

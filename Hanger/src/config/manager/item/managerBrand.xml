@@ -5,7 +5,7 @@
 	
 	<select id="brandList" parameterClass="String" resultClass="managerBrand">
 		SELECT
-			BRAND_NAME as brandName
+			BRAND_CODE as brandCode, BRAND_NAME as brandName
 		FROM
 			BRAND
 		WHERE
@@ -16,7 +16,7 @@
 	
 	<select id="searchCompleteBrand" parameterClass="String" resultClass="managerBrand">
 		SELECT
-			BRAND_NAME as brandName
+			BRAND_CODE as brandCode, BRAND_NAME as brandName
 		FROM
 			BRAND
 		WHERE

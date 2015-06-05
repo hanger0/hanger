@@ -38,6 +38,8 @@ public class UserSearchController extends BaseController {
 		
 		req.setAttribute("userList", userList);
 		req.setAttribute("mainUrl", mainUrl);
+		req.setAttribute("qt",qt);
+		
 		return moveUrl;
 	}
 }

@@ -27,7 +27,7 @@ public class ManagerAddItemFormController extends BaseController{
 	
 	@RequestMapping(value="/managerAddItemResult.hang", method=RequestMethod.POST)
 	public ModelAndView managerAddItemForm(HttpServletRequest request) throws IOException{
-		File dayFile = new File("C:\\hanger\\upfile\\manager\\item");
+		File dayFile = new File("F:\\hanger\\upfile\\item");
 		if(!dayFile.exists())
 		{
 			dayFile.mkdirs();
@@ -38,7 +38,7 @@ public class ManagerAddItemFormController extends BaseController{
 		
 		ManagerItemVo item = new ManagerItemVo();
 		
-		String brandCode = mul.getParameter("brand");
+		String brandCode = mul.getParameter("brandCode");
 		String itemName = mul.getParameter("name");
 		int itemMarketPrice = Integer.parseInt(mul.getParameter("marketPrice"));
 		int itemSellPrice = Integer.parseInt(mul.getParameter("sellPrice"));

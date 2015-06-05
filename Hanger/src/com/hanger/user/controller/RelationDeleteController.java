@@ -84,6 +84,7 @@ public class RelationDeleteController extends BaseController {
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String userCode = req.getParameter("userCode");
+		String qt = req.getParameter("deleteQt");
 		
 		RelationVo relation = new RelationVo();
 		relation.setRelationFollower(myUserCode);
@@ -93,6 +94,7 @@ public class RelationDeleteController extends BaseController {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", myUserCode);
+		map.put("qt", qt);
 		
 		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
 		
@@ -100,6 +102,7 @@ public class RelationDeleteController extends BaseController {
 		
 		req.setAttribute("userList", userList);
 		req.setAttribute("mainUrl", mainUrl);
+		req.setAttribute("qt", qt);
 		
 		return moveUrl;
 	}
