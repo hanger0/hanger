@@ -1,8 +1,12 @@
 package com.hanger.manager.item.dao;
 
+import java.util.ArrayList;
+
+import org.springframework.orm.ibatis.SqlMapClientOperations;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.hanger.manager.item.vo.ItemVo;
+import com.hanger.manager.item.vo.ManagerItemVo;
+import com.hanger.user.vo.UserVo;
 
 public class ManagerAddItemDao {
 	private SqlMapClientTemplate smct;
@@ -12,8 +16,14 @@ public class ManagerAddItemDao {
 		this.smct = smct;
 	}
 
-	public void insertItem(ItemVo item)
+	public void insertItem(ManagerItemVo item)
 	{
 		smct.insert("insertItem", item);
+	}
+	
+	public void insertItemPic(ManagerItemVo item)
+	{
+		((SqlMapClientOperations) smct).queryForList("addItemPicCode");
+		smct.insert("insertItemPic", item);
 	}
 }

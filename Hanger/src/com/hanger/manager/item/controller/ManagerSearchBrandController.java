@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.manager.item.dao.ManagerSearchBrandDao;
-import com.hanger.manager.item.vo.BrandVo;
+import com.hanger.manager.item.vo.ManagerBrandVo;
 
 @Controller
 public class ManagerSearchBrandController extends BaseController{
@@ -20,15 +20,15 @@ public class ManagerSearchBrandController extends BaseController{
 		this.managerSearchBrandDao = managerSearchBrandDao;
 	}
 
-	@RequestMapping("/searchBrand.hang")
+	@RequestMapping("/managerSearchBrand.hang")
 	public ModelAndView searchBrnad(
 			@RequestParam("inputBrand") String inputBrand){
 		
-		moveUrl = "manager/item/BrandList";
+		moveUrl = "manager/item/ManagerBrandList";
 		
 		System.out.println("Brand check controller");
 		
-		List<BrandVo> brandList = managerSearchBrandDao.searchBrand(inputBrand);
+		List<ManagerBrandVo> brandList = managerSearchBrandDao.searchBrand(inputBrand);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(moveUrl);

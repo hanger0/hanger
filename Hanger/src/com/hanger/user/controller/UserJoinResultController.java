@@ -27,16 +27,17 @@ public class UserJoinResultController extends BaseController {
 
 	@RequestMapping(value="/joinResult.hang", method=RequestMethod.POST)
 	public ModelAndView memberJoinForm2(
-			HttpServletRequest request
+			HttpServletRequest req
 			) throws IOException {
-		File dayFile = new File("F:\\hanger");
+		String path = "C:\\hanger\\user\\profile";
+		File dayFile = new File(path);
 		if(!dayFile.exists())
 		{
 			dayFile.mkdirs();
 		}
 		String savePath = dayFile.getAbsolutePath();
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(request, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(req, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		Enumeration formNames=mul.getFileNames();
 		String fileFormName=(String)formNames.nextElement(); // 업로드 하는 파일이 많을 경우 while 을 사용
@@ -66,7 +67,7 @@ public class UserJoinResultController extends BaseController {
 		String postCode2 = mul.getParameter("zipCode2");
 		String addr1 = mul.getParameter("addr1");
 		String addr2 = mul.getParameter("addr2");
-		String ip = request.getRemoteAddr();
+		String ip = req.getRemoteAddr();
 		String [] skinProblems = mul.getParameterValues("skinProblem");
 		String skinTone = mul.getParameter("skinTone");
 		String skinType = mul.getParameter("skinType");

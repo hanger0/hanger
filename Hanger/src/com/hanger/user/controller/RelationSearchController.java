@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.user.dao.RelationSearchDao;
-import com.hanger.user.vo.RelationVo;
 import com.hanger.user.vo.UserVo;
 
 @Controller
@@ -22,14 +21,32 @@ public class RelationSearchController extends BaseController {
 		this.relationSearchDao = relationSearchDao;
 	}
 	
-	@RequestMapping("/relationSearch.hang")
-	public String relationSearch(HttpServletRequest req){
+	@RequestMapping("/relationFollowerSearch.hang")
+	public String relationFollowerSearch(HttpServletRequest req){
+		System.out.println("relationFollowerSearch");
 		HttpSession session = req.getSession();
-		RelationVo relation = new RelationVo();
-		relation.setRelationFollower((String)session.getAttribute("myUserCode"));
-		ArrayList<UserVo> userList = relationSearchDao.searchRelation(relation);
+		String myUserCode = (String)session.getAttribute("myUserCode");
+		ArrayList<UserVo> followerList = relationSearchDao.searchFollowerRelation(myUserCode);
 		
-		req.setAttribute("userList", userList);
+		mainUrl = "/WEB-INF/jsp/user/mypage/FlowSearch.jsp";
+		
+		req.setAttribute("followerList", followerList);
+		req.setAttribute("mainUrl", mainUrl);
+		
+		return moveUrl;
+	}
+	
+	@RequestMapping("/relationFollowingSearch.hang")
+	public String relationFollowingSearch(HttpServletRequest req){
+		System.out.println("relationFollowingSearch");
+		HttpSession session = req.getSession();
+		String myUserCode = (String)session.getAttribute("myUserCode");
+		ArrayList<UserVo> followingList = relationSearchDao.searchFollowingRelation(myUserCode);
+		
+		mainUrl = "/WEB-INF/jsp/user/mypage/FlowSearch.jsp";
+		System.out.println(followingList);
+		req.setAttribute("followingList", followingList);
+		req.setAttribute("mainUrl", mainUrl);
 		
 		return moveUrl;
 	}

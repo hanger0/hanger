@@ -27,7 +27,7 @@
 <%
 	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
 %>
-			<li><a href="#"><img src="images/icons/top/mypage.jpg" /></a></li>
+			<li><a href="/relationFollowingSearch.hang"><img src="images/icons/top/mypage.jpg" /></a></li>
 			<li><a href="#"><img src="images/icons/top/friend.jpg" /></a></li>
 			<li><a href="#"><img src="images/icons/top/cart.jpg" /></a></li>
 			<li><a href="#"><img src="images/icons/top/ball.jpg" /></a></li>

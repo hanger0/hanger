@@ -11,7 +11,7 @@ import com.hanger.common.controller.BaseController;
 
 @Controller
 public class ManagerAddItemController extends BaseController {
-	@RequestMapping("/addItem.hang")
+	@RequestMapping("/managerAddItem.hang")
 	protected ModelAndView memberJoin(HttpServletRequest request,
 			HttpServletResponse response) {
 

@@ -14,12 +14,9 @@
 %>
 
 <html>
-<SCRIPT type="text/JavaScript"
-	src="${pageContext.request.contextPath}/js/jquery-2.1.3.min.js"></SCRIPT>
-<SCRIPT type="text/JavaScript"
-	src="${pageContext.request.contextPath}/js/common.js"></SCRIPT>
-<SCRIPT type="text/JavaScript"
-	src="${pageContext.request.contextPath}/js/join.js"></SCRIPT>
+<SCRIPT src="/js/jquery-2.1.3.min.js"></SCRIPT>
+<SCRIPT src="/js/common/common.js"></SCRIPT>
+<script src="/js/manager/item/managerItem.js" type="text/javascript"></script>
 
 <head>
 <title>Manager Add Item</title>
@@ -90,67 +87,10 @@
 }
 </STYLE>
 
-<script type="text/javascript">
-
-	var InputImage = (function loadImageFile() {
-		if (window.FileReader) {
-			var ImagePre;
-			var ImgReader = new window.FileReader();
-			var fileType = /^(?:image\/bmp|image\/gif|image\/jpeg|image\/png|image\/x\-xwindowdump|image\/x\-portable\-bitmap)$/i;
-
-			ImgReader.onload = function(Event) {
-				if (!ImagePre) {
-					var newPreview = document.getElementById("imagePreview");
-					ImagePre = new Image();
-					ImagePre.style.width = "150px";
-					ImagePre.style.height = "180px";
-					newPreview.appendChild(ImagePre);
-				}
-				ImagePre.src = Event.target.result;
-
-			};
-
-			return function() {
-
-				var img = document.getElementById("image").files;
-
-				if (!fileType.test(img[0].type)) {
-					alert("이미지 파일을 업로드 하세요");
-					return;
-				}
-				ImgReader.readAsDataURL(img[0]);
-			}
-		}
-		document.getElementById("imagePreview").src = document
-				.getElementById("image").value;
-	})();
-
-	function addItemAction()
-	{
-		var f = document.addItemForm;
-		if(f.name.value == "")
-		{
-			window.alert("상품명을 반드시 입력해야 합니다.");
-			f.name.focus();
-			return false;
-		}
-		
-		f.submit();
-	}
-
-	function home() {
-		alert("${pageContext.request.contextPath}");
-	}
-	
-	function searchBrand()
-	{
-		window.open("/brand.hang", "브랜드 등록", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=420, height=500");
-	}
-</SCRIPT>
 </head>
 
 <body>
-	<form id="addItemForm" name="addItemForm" action="/addItemResult.hang"
+	<form id="addItemForm" name="addItemForm" action="/managerAddItemResult.hang"
 		method="post" enctype="multipart/form-data">
 		<div id="container">
 			<fieldset>
@@ -169,9 +109,12 @@
 							<option value="B0005">IOPE</option>
 							<option value="B0006">MISHA</option>
 						</select>
+						
+						<INPUT class="button" type="button" value="브랜드 등록"
+						style="cursor: pointer" onclick="searchBrand()"> 
 					</dd>
 				</dl>
-
+				
 				<dl>
 					<dt>
 						<label for="name">상품 이름:</label>
@@ -188,6 +131,7 @@
 					<dd>
 						<INPUT class="text" type="text" name="marketPrice" maxlength="20">
 					</dd>
+					원
 				</dl>
 
 				<dl>
@@ -197,6 +141,7 @@
 					<dd>
 						<INPUT class="text" type="text" name="sellPrice" maxlength="20">
 					</dd>
+					원
 				</dl>
 
 				<dl>
@@ -206,6 +151,37 @@
 					<dd>
 						<INPUT class="text" type="text" name="purchasePrice"
 							maxlength="20">
+					</dd>
+					원
+				</dl>
+				
+				<dl>
+					<dt>
+						<label for="manufactureDate">제조일자:</label>
+					</dt>
+					<dd>
+						<INPUT class="text" type="text" name="manufactureDate"
+							maxlength="8">
+					</dd>
+				</dl>
+				
+				<dl>
+					<dt>
+						<label for="expireDate">유효기간:</label>
+					</dt>
+					<dd>
+						<INPUT class="text" type="text" name="expireDate"
+							maxlength="20">
+					</dd>
+				</dl>
+				
+				<dl>
+					<dt>
+						<label for="releaseDate">발매일자:</label>
+					</dt>
+					<dd>
+						<INPUT class="text" type="text" name="releaseDate"
+							maxlength="8">
 					</dd>
 				</dl>
 
@@ -287,12 +263,22 @@
 
 				<dl>
 					<dt>
-						<label for="kind">상품종류</label>
+						<label for="category">상품종류</label>
 					</dt>
 					<dd>
-						<INPUT class="text" type="text" name="kind" maxlength="20">
+						<INPUT class="text" type="text" name="category" maxlength="20">
 					</dd>
 				</dl>
+				
+				<dl>
+					<dt>
+						<label for="feature">상품특징</label>
+					</dt>
+					<dd>
+						<INPUT class="text" type="text" name="feature" maxlength="20">
+					</dd>
+				</dl>
+				
 
 				<dl>
 					<dt>
@@ -305,15 +291,85 @@
 			</fieldset>
 
 			<fieldset>
-				<legend>UpLoad File</legend>
+				<legend>상품 메인이미지</legend>
 				<dl>
 					<dt>
 						<label for="test">Uploaded Image:</label>
 					</dt>
 					<dd>
-						<input class="button" id="image" name="image" type="file"
-							onchange="InputImage()">
-						<div id="imagePreview"></div>
+						<input class="button" id="mainPic" name="mainPic" type="file"
+							onchange="InputMainPic()">
+						<div id="mainPicPreview"></div>
+					</dd>
+				</dl>
+			</fieldset>
+			
+			<fieldset>
+				<legend>상품 설명 이미지1</legend>
+				<dl>
+					<dt>
+						<label for="test">Uploaded Image:</label>
+					</dt>
+					<dd>
+						<input class="button" id="detailPic1" name="detailPic1" type="file"
+							onchange="InputDetailPic1()">
+						<div id="detailPic1Preview"></div>
+					</dd>
+				</dl>
+			</fieldset>
+			
+			<fieldset>
+				<legend>상품 설명 이미지2</legend>
+				<dl>
+					<dt>
+						<label for="test">Uploaded Image:</label>
+					</dt>
+					<dd>
+						<input class="button" id="detailPic2" name="detailPic2" type="file"
+							onchange="InputDetailPic2()">
+						<div id="detailPic2Preview"></div>
+					</dd>
+				</dl>
+			</fieldset>
+			
+			<fieldset>
+				<legend>상품 설명 이미지3</legend>
+				<dl>
+					<dt>
+						<label for="test">Uploaded Image:</label>
+					</dt>
+					<dd>
+						<input class="button" id="detailPic3" name="detailPic3" type="file"
+							onchange="InputDetailPic3()">
+						<div id="detailPic3Preview"></div>
+					</dd>
+				</dl>
+			</fieldset>
+			
+			<fieldset>
+				<legend>상품 설명 이미지4</legend>
+				<dl>
+					<dt>
+						<label for="test">Uploaded Image:</label>
+					</dt>
+					<dd>
+						<input class="button" id="detailPic4" name="detailPic4" type="file"
+							onchange="InputDetailPic4()">
+						<div id="detailPic4Preview"></div>
+					</dd>
+				</dl>
+			</fieldset>
+			
+			<fieldset>
+				<legend>상품 설명 이미지5</legend>
+				<dl>
+					<dt>
+						<label for="test">Uploaded Image:</label>
+					</dt>
+					<dd>
+						<input class="button" id="detailPic5" name="detailPic5" type="file"
+							onchange="InputDetailPic5()">
+						<div id="detailPic5Preview"></div>
 					</dd>
 				</dl>
 			</fieldset>
@@ -325,10 +381,7 @@
 					style="cursor: pointer" name="test" onClick="home()">
 			</fieldset>
 			
-			<fieldset class="action">
-				<INPUT class="button" type="button" value="브랜드 등록"
-					style="cursor: pointer" onclick="searchBrand()"> 
-			</fieldset>
+			
 		</div>
 	</form>
 </body>

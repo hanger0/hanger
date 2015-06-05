@@ -11,10 +11,10 @@ import com.hanger.common.controller.BaseController;
 
 @Controller
 public class ManagerBrandController extends BaseController{
-	@RequestMapping("/brand.hang")
+	@RequestMapping("/managerBrand.hang")
 	protected ModelAndView searchBrand(HttpServletRequest request, HttpServletResponse response){
 		
-		moveUrl = "manager/item/SearchBrand";
+		moveUrl = "manager/item/ManagerSearchBrand";
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(moveUrl);

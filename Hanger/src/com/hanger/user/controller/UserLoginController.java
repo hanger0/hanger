@@ -3,6 +3,7 @@ package com.hanger.user.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,8 @@ public class UserLoginController extends BaseController {
 	public ModelAndView submit(
 			HttpServletRequest req){
 		//
+		HttpSession session = req.getSession();
+		System.out.println("로그인 컨트롤러");
 		session = req.getSession(false);
 		String userId = req.getParameter("userId");
 		String pass = req.getParameter("userPass");
@@ -39,8 +42,7 @@ public class UserLoginController extends BaseController {
 		UserVo user = new UserVo();
 		user.setUserId(userId);
 		user.setUserPwd(pass);
-		userLoginDao.getUser(user);
-		System.out.println("로그인 컨트롤러");
+		
 		List<UserVo> uvList = (List<UserVo>)userLoginDao.getUser(user);
 		
 		String message = "";

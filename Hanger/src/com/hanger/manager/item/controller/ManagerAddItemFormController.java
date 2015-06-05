@@ -2,6 +2,7 @@ package com.hanger.manager.item.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
-
 import com.hanger.manager.item.dao.ManagerAddItemDao;
-import com.hanger.manager.item.vo.ItemVo;
+import com.hanger.manager.item.vo.ManagerItemVo;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -25,14 +25,18 @@ public class ManagerAddItemFormController extends BaseController{
 		this.managerAddItemDao = managerAddItemDao;
 	}
 	
-	@RequestMapping(value="/addItemResult.hang", method=RequestMethod.POST)
+	@RequestMapping(value="/managerAddItemResult.hang", method=RequestMethod.POST)
 	public ModelAndView managerAddItemForm(HttpServletRequest request) throws IOException{
-		File dayFile = new File("F:\\hanger");
+		File dayFile = new File("F:\\hanger\\upfile\\item");
+		if(!dayFile.exists())
+		{
+			dayFile.mkdirs();
+		}
 		String savePath = dayFile.getAbsolutePath();
 		int sizeLimit = 1000 * 1024 * 1024;
 		MultipartRequest mul = new MultipartRequest(request, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
-		ItemVo item = new ItemVo();
+		ManagerItemVo item = new ManagerItemVo();
 		
 		String brandCode = mul.getParameter("brand");
 		String itemName = mul.getParameter("name");
@@ -41,6 +45,9 @@ public class ManagerAddItemFormController extends BaseController{
 		int itemPurchasePrice = Integer.parseInt(mul.getParameter("purchasePrice"));
 		String itemSummary = mul.getParameter("summary");
 		int itemSellMaxNum = Integer.parseInt(mul.getParameter("sellMaxNum"));
+		String itemManufactureDate = mul.getParameter("manufactureDate");
+		String itemExpireDate = mul.getParameter("expireDate");
+		String itemReleaseDate = mul.getParameter("releaseDate");
 		String itemOption1Title = null;
 		if(mul.getParameter("option1Title") != ""){
 			itemOption1Title = mul.getParameter("option1Title");
@@ -66,12 +73,24 @@ public class ManagerAddItemFormController extends BaseController{
 			itemOption3Content = mul.getParameter("option3Content");
 		}
 		
-		String itemKind = mul.getParameter("kind");
+		String itemCategory = mul.getParameter("category");
+		String itemFeature = mul.getParameter("feature");
 		int itemStockAmount = Integer.parseInt(mul.getParameter("stockAmount"));
-		String itemPicPath = "-";
-		String itemPicOrgName = "-";
-		String itemPicSaveName = "-";
-		int itemPicSize = 123;
+		
+		Enumeration formNames = mul.getFileNames();
+//		String fileFormName=(String)formNames.nextElement(); // 업로드 하는 파일이 많을 경우 while 을 사용
+//		System.out.println(fileFormName);
+		
+		String itemMainPicPath = savePath;
+		String itemMainPicOrgName = mul.getOriginalFileName("mainPic");
+		String itemMainPicSaveName = mul.getFilesystemName("mainPic");
+		int itemMainPicSize = 0;
+		
+		String itemDetailPicPath = savePath;
+		String itemDetailPicOrgName = "";
+		String itemDetailPicSaveName = "";
+		int itemDetailPicSize = 0;
+
 		String ip = request.getRemoteAddr();
 		
 		item.setBrandCode(brandCode);
@@ -81,18 +100,26 @@ public class ManagerAddItemFormController extends BaseController{
 		item.setItemPurchasePrice(itemPurchasePrice);
 		item.setItemSummary(itemSummary);
 		item.setItemSellMaxNum(itemSellMaxNum);
+		item.setItemManufactureDate(itemManufactureDate);
+		item.setItemExpireDate(itemExpireDate);
+		item.setItemReleaseDate(itemReleaseDate);
 		item.setItemOption1Title(itemOption1Title);
 		item.setItemOption1Content(itemOption1Content);
 		item.setItemOption2Title(itemOption2Title);
 		item.setItemOption2Content(itemOption2Content);
 		item.setItemOption3Title(itemOption3Title);
 		item.setItemOption3Content(itemOption3Content);
-		item.setItemKind(itemKind);
+		item.setItemCategory(itemCategory);
+		item.setItemFeature(itemFeature);
 		item.setItemStockAmount(itemStockAmount);
-		item.setItemPicPath(itemPicPath);
-		item.setItemPicOrgName(itemPicOrgName);
-		item.setItemPicSaveName(itemPicSaveName);
-		item.setItemPicSize(itemPicSize);
+		item.setItemMainPicPath(itemMainPicPath);
+		item.setItemMainPicOrgName(itemMainPicOrgName);
+		item.setItemMainPicSaveName(itemMainPicSaveName);
+		item.setItemMainPicSize(itemMainPicSize);
+		item.setItemDetailPicPath(itemDetailPicPath);
+		item.setItemDetailPicOrgName(itemDetailPicOrgName);
+		item.setItemDetailPicSaveName(itemDetailPicSaveName);
+		item.setItemDetailPicSize(itemDetailPicSize);
 		item.setRegId("admin");
 		item.setRegIp(ip);
 		item.setUpdId("admin");
@@ -101,6 +128,26 @@ public class ManagerAddItemFormController extends BaseController{
 		managerAddItemDao.insertItem(item);
 		
 		System.out.println("manager add item form 실행");
+		
+		for(int i = 1; i < 6; i++){
+//			fileFormName = (String)formNames.nextElement();
+//			System.out.println(fileFormName);
+			if(mul.getOriginalFileName("detailPic" + i) != null){
+				System.out.println("im in!!!");
+
+				itemDetailPicPath = savePath;
+				itemDetailPicOrgName = mul.getOriginalFileName("detailPic" + i);
+				itemDetailPicSaveName = mul.getFilesystemName("detailPic" + i);
+				itemDetailPicSize = 0;
+	
+				item.setItemDetailPicPath(itemDetailPicPath);
+				item.setItemDetailPicOrgName(itemDetailPicOrgName);
+				item.setItemDetailPicSaveName(itemDetailPicSaveName);
+				item.setItemDetailPicSize(itemDetailPicSize);
+				
+				managerAddItemDao.insertItemPic(item);
+			}
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("../../index"); // 상품등록 끝나고 돌아갈 화면

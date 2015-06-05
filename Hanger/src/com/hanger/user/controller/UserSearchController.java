@@ -25,15 +25,19 @@ public class UserSearchController extends BaseController {
 	@RequestMapping("/userSearch.hang")
 	public String userSearch(HttpServletRequest req){
 		HttpSession session = req.getSession(false);
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String qt = req.getParameter("qt");
+		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", myUserCode);
 		map.put("qt", qt);
 		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
+
+		mainUrl = "/WEB-INF/jsp/user/mypage/FlowSearch.jsp";
 		
 		req.setAttribute("userList", userList);
-		moveUrl = "index3";
+		req.setAttribute("mainUrl", mainUrl);
 		return moveUrl;
 	}
 }

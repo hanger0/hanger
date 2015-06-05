@@ -12,7 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hanger.common.controller.BaseController;
 import com.hanger.manager.item.dao.ManagerAddBrandDao;
 import com.hanger.manager.item.dao.ManagerSearchBrandDao;
-import com.hanger.manager.item.vo.BrandVo;
+import com.hanger.manager.item.vo.ManagerBrandVo;
+import com.oreilly.servlet.MultipartRequest;
 
 @Controller
 public class ManagerAddBrandController extends BaseController {
@@ -26,15 +27,15 @@ public class ManagerAddBrandController extends BaseController {
 		this.managerAddBrandDao = managerAddBrandDao;
 	}
 
-	@RequestMapping(value = "/addBrand.hang")
+	@RequestMapping(value = "/managerAddBrand.hang")
 	protected ModelAndView addBrand(HttpServletRequest request,
 			HttpServletResponse response) {
 
-		BrandVo brand = new BrandVo();
+		ManagerBrandVo brand = new ManagerBrandVo();
 		String brandName = request.getParameter("brandName");
 		String message = "이미 등록되어 있는 브랜드입니다.";
 		
-		List<BrandVo> brandList = managerSearchBrandDao.searchCompleteBrand(brandName);		
+		List<ManagerBrandVo> brandList = managerSearchBrandDao.searchCompleteBrand(brandName);		
 		
 		System.out.println("Try to add brand");
 		

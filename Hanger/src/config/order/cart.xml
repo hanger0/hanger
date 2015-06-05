@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="cart" type="com.hanger.order.vo.CartVo"/>
+	
+	<insert id="insertCart" parameterClass="cart">
+		insert into cart(user_code, item_code, cart_item_option1, cart_item_option2, cart_item_option3, cart_item_amount, cart_item_recom, reg_id, reg_date, reg_ip, upd_id, upd_date, upd_ip)
+		values (#userCode#, #itemCode#, #cartItemOption1#, #cartItemOption2#, #cartItemOption3#, #cartItemAmount#, #cartItemRecom#, #regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
+	</insert>
+</sqlMap>

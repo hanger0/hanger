@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.hanger.manager.item.vo.BrandVo;
+import com.hanger.manager.item.vo.ManagerBrandVo;
 
 public class ManagerAddBrandDao {
 	private SqlMapClientTemplate smct;
@@ -14,7 +14,7 @@ public class ManagerAddBrandDao {
 		this.smct = smct;
 	}
 	
-	public void insertBrand(BrandVo brand)
+	public void insertBrand(ManagerBrandVo brand)
 	{
 		smct.insert("insertBrand", brand);
 	}

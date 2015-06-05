@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.hanger.manager.item.vo.BrandVo;
+import com.hanger.manager.item.vo.ManagerBrandVo;
 
 public class ManagerSearchBrandDao {
 	private SqlMapClientTemplate smct;
@@ -15,15 +15,15 @@ public class ManagerSearchBrandDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<BrandVo> searchBrand(String inputBrand)
+	public List<ManagerBrandVo> searchBrand(String inputBrand)
 	{
-		return (List<BrandVo>)smct.queryForList("brandList", inputBrand);
+		return (List<ManagerBrandVo>)smct.queryForList("brandList", inputBrand);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<BrandVo> searchCompleteBrand(String inputBrand)
+	public List<ManagerBrandVo> searchCompleteBrand(String inputBrand)
 	{
-		return (List<BrandVo>)smct.queryForList("searchCompleteBrand", inputBrand);
+		return (List<ManagerBrandVo>)smct.queryForList("searchCompleteBrand", inputBrand);
 	}
 	
 }

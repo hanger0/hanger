@@ -14,9 +14,34 @@
 		WHERE RELATION_FOLLOWER = #relationFollower# AND RELATION_FOLLOWING = #relationFollowing#	
 	</delete>
 	
-	<select id="selectRelation" parameterClass="relation" resultClass="user">
-		SELECT D.MEMBER_NAME, D.MEMBER_PIC_PATH, D.MEMBER_PIC_SAVE_NAME, D.MEMBER_CODE FROM 
-		(SELECT A.RELATION_FOLLOWING FROM RELATION A, MEMBER B  WHERE B.MEMBER_CODE = #relationFollower# 
-		AND A.RELATION_FOLLOWER = B.MEMBER_CODE) C, MEMBER D WHERE C.RELATION_FOLLOWING=D.MEMBER_CODE 
+	<select id="selectFollowingRelation" parameterClass="String" resultClass="user">
+		SELECT 
+			D.USER_NAME as userName, D.USER_ID as userId, D.USER_PHONE as userPhone, D.USER_PIC_PATH as userPicPath, D.USER_PIC_SAVE_NAME as userPicSaveName, 
+			D.USER_CODE as userCode, D.USER_SKINTYPE as userSkinType, D.USER_SKINTONE as userSkinTone, D.USER_SKINPROBLEM as userSkinProblem, count(E.RELATION_FOLLOWING) as followerCount,
+      		count(F.posting_code) as postingCount
+		FROM 
+			(SELECT A.RELATION_FOLLOWING FROM RELATION A, USER B  WHERE B.USER_CODE = #myUserCode# AND 
+			A.RELATION_FOLLOWER = B.USER_CODE) C, USER D left join relation E on D.USER_CODE = E.RELATION_FOLLOWER left join review F on D.USER_CODE = F.USER_CODE
+		WHERE 
+			C.RELATION_FOLLOWING = D.USER_CODE AND D.USER_USE_YN = 'Y' AND NOT D.USER_CODE = #myUserCode#
+		GROUP BY
+			D.USER_NAME, D.USER_ID, D.USER_PHONE, D.USER_PIC_PATH, D.USER_PIC_SAVE_NAME, 
+			D.USER_CODE, D.USER_SKINTYPE, D.USER_SKINTONE, D.USER_SKINPROBLEM
+	</select>
+	
+	<select id="selectFollowerRelation" parameterClass="String" resultClass="user">
+		SELECT 
+			D.USER_NAME as userName, D.USER_ID as userId, D.USER_PHONE as userPhone, D.USER_PIC_PATH as userPicPath, D.USER_PIC_SAVE_NAME as userPicSaveName, 
+			D.USER_CODE as userCode, D.USER_SKINTYPE as userSkinType, D.USER_SKINTONE as userSkinTone, D.USER_SKINPROBLEM as userSkinProblem, count(E.RELATION_FOLLOWING) as followerCount,
+      		count(F.posting_code) as postingCount, G.RELATION_FOLLOWING as relationFollowing
+		FROM 
+			(SELECT A.RELATION_FOLLOWER FROM RELATION A, USER B  WHERE B.USER_CODE = #myUserCode# AND 
+			A.RELATION_FOLLOWING = B.USER_CODE) C, USER D left join relation E on D.USER_CODE = E.RELATION_FOLLOWER left join review F on D.USER_CODE = F.USER_CODE
+      		left join (SELECT relation_following FROM relation WHERE relation_follower = #myUserCode#)G on D.USER_CODE = G.RELATION_FOLLOWING
+		WHERE 
+			C.RELATION_FOLLOWER = D.USER_CODE AND D.USER_USE_YN = 'Y' AND NOT D.USER_CODE = #myUserCode#
+		GROUP BY
+			D.USER_NAME, D.USER_ID, D.USER_PHONE, D.USER_PIC_PATH, D.USER_PIC_SAVE_NAME, 
+			D.USER_CODE, D.USER_SKINTYPE, D.USER_SKINTONE, D.USER_SKINPROBLEM
 	</select>
 </sqlMap>

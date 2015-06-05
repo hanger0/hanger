@@ -9,7 +9,6 @@
 	}
 %>
 
-<META charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- BootStrap 시작 -->
 <link rel="stylesheet"
@@ -22,7 +21,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- BootStrap 종료 -->
 <!-- JQuery 시작 -->
-<script src="/assets/javascripts/jquery-2.1.3.min.js"
+<script src="/js/jquery-2.1.3.min.js"
    type="text/javascript"></script>
 <!-- JQuery 종료 -->
 
