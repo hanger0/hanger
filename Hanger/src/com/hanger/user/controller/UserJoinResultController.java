@@ -29,7 +29,7 @@ public class UserJoinResultController extends BaseController {
 	public ModelAndView memberJoinForm2(
 			HttpServletRequest req
 			) throws IOException {
-		String path = "C:\\hanger\\user\\profile";
+		String path = "C:\\hanger\\upfile\\user\\profile";
 		File dayFile = new File(path);
 		if(!dayFile.exists())
 		{

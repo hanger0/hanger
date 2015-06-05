@@ -27,7 +27,7 @@ public class ManagerAddItemFormController extends BaseController{
 	
 	@RequestMapping(value="/managerAddItemResult.hang", method=RequestMethod.POST)
 	public ModelAndView managerAddItemForm(HttpServletRequest request) throws IOException{
-		File dayFile = new File("F:\\hanger\\upfile\\item");
+		File dayFile = new File("C:\\hanger\\upfile\\manager\\item");
 		if(!dayFile.exists())
 		{
 			dayFile.mkdirs();
