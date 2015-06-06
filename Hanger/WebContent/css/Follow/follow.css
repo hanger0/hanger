@@ -221,7 +221,6 @@ html {
 
 .user-card {
 	border-radius: 2px;
-	text-align: center;
 	padding-top: 16px;
 	position: relative;
 	background-color: rgb(255, 255, 255);
@@ -324,7 +323,6 @@ button {
 
 [class^='unpacon-']::before, [class*=' unpacon-']::before {
 	width: 1em;
-	text-align: center;
 	text-transform: none;
 	line-height: 1em;
 	font-family: "fontello";

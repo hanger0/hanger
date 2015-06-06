@@ -21,8 +21,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- BootStrap 종료 -->
 <!-- JQuery 시작 -->
-<script src="/js/jquery-2.1.3.min.js"
-   type="text/javascript"></script>
+<script src="/js/jquery-2.1.3.min.js" type="text/javascript"></script>
 <!-- JQuery 종료 -->
 
 <HTML>
@@ -38,7 +37,6 @@
 	</HEAD>
 	
 	<BODY style="margin:0px">
-	<center>
 		<div id="wrap">
 			<div id="header"> 
 				<jsp:include page ="Top.jsp"/>
@@ -57,8 +55,6 @@
 				<jsp:include page ="Bottom.jsp"/>
 			</div>
 		</div>
-	</center>	
 	</BODY>
-
 <HTML>
 

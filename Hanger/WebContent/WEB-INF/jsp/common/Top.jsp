@@ -1,111 +1,260 @@
 <%@ page contentType="text/html; charset=euc-kr"%>
 <%
-	String myName="";
-	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
-		myName = (String)session.getAttribute("myUserName");
-	}
+   String myName="";
+   if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
+      myName = (String)session.getAttribute("myUserName");
+   }
 %>
+<script type="text/javascript">
+$(document).ready(function($){
+   
+   $('#mega-menu-3').dcMegaMenu({
+      rowItems: '7',
+      speed: 'fast',
+      effect: 'fade'
+   });
+   $('#mega-menu-9').dcMegaMenu({
+      rowItems: '3',
+      speed: 'fast',
+      effect: 'fade'
+   });
+});
+</script>
+
+<link href="css/skins/grey.css" rel="stylesheet" type="text/css" />
+<link href="css/skins/white.css" rel="stylesheet" type="text/css" />
+<script type='text/javascript' src='js/jquery.dcmegamenu.1.2.js'></script>
+<style>
+.headli
+{
+	width:50px;
+	height:40px;
+}
+</style>
 <header id ="header">
    <!--기본페이지에는 이거보임-->
-   <div style="width: 100%;"
-      class="hidden-xs navbar navbar-default navbar-fixed-top navbar HOME"
-      role="navigation">
-      <div class="navbar-header">
-         <a class="navbar-brand" href="/"> <img style="height: 32px; padding: 3px 0;"
-            src="images/hanger.png" id="brand-icon" alt="Hanger" />
+         <div style="width: 100%;" class="hidden-xs navbar navbar-default navbar-fixed-top navbar HOME" role="navigation">
+      <div class="navbar-header" style = "margin-left:160px">
+         <a class="navbar-brand" href="/">
+            <img style="height: 32px; padding: 3px 0;" src="/assets/images/hanger.png" id="brand-icon" alt="Hanger" />
          </a>
       </div>
       <form class="navbar-form navbar-left" role="search">
-         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-         </div>
+         <div class="form-group" style = "margin-left:65%;width:100%">
+            <input type="text" class="form-control" placeholder="Search" style = "width:300px">
          <button type="submit" class="btn btn-default">검색</button>
+         </div>
       </form>
       <div class="collapse navbar-collapse">
-         <ul class="nav navbar-nav navbar-right unpa-navbar-right">
-         <li></li>
+         <ul class="nav navbar-nav navbar-right unpa-navbar-right" style = "margin-right:6%">
+            <li></li>
 <%
-	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
+   if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
 %>
-			<li><a href="/relationFollowingSearch.hang"><img src="images/icons/top/mypage.jpg" /></a></li>
-			<li><a href="#"><img src="images/icons/top/friend.jpg" /></a></li>
-			<li><a href="#"><img src="images/icons/top/cart.jpg" /></a></li>
-			<li><a href="#"><img src="images/icons/top/ball.jpg" /></a></li>
-			<li><a href="/logout.hang"><img src="images/icons/top/option.jpg" /></a></li>
+         <li class = "headli"><a href="/relationFollowingSearch.hang"><img src="images/icons/top/mypage.jpg" /></a></li>
+         <li class = "headli"><a href="#"><img src="images/icons/top/friend.jpg" /></a></li>
+         <li class = "headli"><a href="#"><img src="images/icons/top/cart.jpg" /></a></li>
+         <li class = "headli"><a href="#"><img src="images/icons/top/ball.jpg" /></a></li>
+         <li class = "headli"><a href="/logout.hang"><img src="images/icons/top/option.jpg" /></a></li>
 <%
-	} else {
+   } else {
 %>
             <li><a href="/login.hang" class="remove-border">로그인</a></li>
-            <li><a href="/join.hang" class="remove-border">회원가입</a></li>
+            <li><a href="/join.hang" class="remove-border" style = "margin-right:165px">회원가입</a></li>
 <%
-	}
+   }
 %>
          </ul>
       </div>
    </div>
+    <div class="hidden-xs navbar navbar-default navbar-fixed-top unpa-navbar HOME" style="width: 100%; position: fixed; z-index: 1000;height:50px">
+   <!-- 띄어쓰기 -->
+   <p><br><p><br><p>
+   
+       <div class="demo-container" style = "margin-top:-1%;float:left;width:50%">
+      <div class="grey">
+      <ul id="mega-menu-3" class="mega-menu">
+         <li style = "margin-left:23%">
+            <a href="#">&nbsp;</a>
+         </li>
+         <li><a href="ItemList.jsp">SHOP</a>
+            <ul>
+               <li style = "margin-left:10%"><a href = "#"><font size = "4"><b>메이크업</b></font></a>
+                   <ul style = "background-color:white"><p><br>
+                     <li><a href = "#"><font size = "2"><b>페이스 메이크업</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>아이 메이크업</b></font></a>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>립 메이크업</b></font></a>
+                  </ul>
+               <li><a href = "#"><font size = "4"><b>스킨케어</b></font></a>
+                   <ul><p><br>
+                      <li><a href = "#"><font size = "2"><b>클렌징</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li><a href = "#"><font size = "2"><b> 모이스쳐</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li><a href = "#"><font size = "2"><b> 팩 & 패치</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li><a href = "#"><font size = "2"><b> 선 케어</b></font></a></li>
+                  </ul>
+               </li>
+               <li><a href = "#"><font size = "4"><b>헤어 & 바디</b></font></a>
+                   <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 헤어</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 바디</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 핸드 & 풋</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 다이어트</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 생활뷰티</b></font></a></li>
+                  </ul>
+               <li><a href = "#"><font size = "4"><b>향수</b></font></a>
+                   <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 여성향수</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 남성향수</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 캔들 & 디퓨저</b></font></a></li>
+                  </ul>
+               <li><a href = "#"><font size = "4"><b>도구 & 기기</b></font></a>
+                   <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 뷰티기기</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 바디기기</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b> 도구</b></font></a></li>
+                  </ul>
+               </ul>
+            </li>
+         <li><a href="Brand.jsp">BRAND</a>
+            <ul>
+               <li style = "margin-left:10%"><a href = "#"><font size = "4"><b>알파벳 순</b></font></a>
+                   <ul style = "background-color:white"><p><br>
+                     <li><a href = "#"><font size = "2"><b>A</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>B</b></font></a>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>C</b></font></a>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>D</b></font></a>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>E</b></font></a>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>F</b></font></a>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>G</b></font></a>
+                  </ul>
+               <li style = "margin-top:20px">
+                   <ul><p><br>
+                      <li><a href = "#"><font size = "2"><b>H</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li><a href = "#"><font size = "2"><b>I</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li><a href = "#"><font size = "2"><b>J</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li><a href = "#"><font size = "2"><b>K</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>L</b></font></a>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>M</b></font></a>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>N</b></font></a>
+                  </ul>
+               </li>
+               <li style = "margin-top:20px">
+                   <ul><br>
+                      <li ><a href = "#"><font size = "2"><b>O</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b>P</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b>Q</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b>R</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b>S</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>T</b></font></a>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>U</b></font></a>
+                  </ul>
+               <li style = "margin-top:20px">
+                   <ul><br>
+                      <li ><a href = "#"><font size = "2"><b>V</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b>W</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                      <li ><a href = "#"><font size = "2"><b>X</b></font></a></li>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>Y</b></font></a>
+                  </ul>
+                  <ul><br>
+                     <li><a href = "#"><font size = "2"><b>Z</b></font></a>
+                  </ul>
+               </ul>
+         </li>
+         <li><a href="Sale.jsp">SALE</a>
+         </li>
+      </ul>
    </div>
-   <div
-      class="hidden-xs navbar navbar-default navbar-fixed-top unpa-navbar HOME"
-      style="width: 100%; position: fixed; z-index: 1000;">
-      <div
-         style="width: 50%; float: left; background: red; margin-top: 50px">
-         <ul class="nav nav-pills">
-            <li><a href="#" style="margin-left: 150px">SHOP</a></li>
-            <li><a href="#">BRAND</a></li>
-            <li><a href="#">SALE</a></li>
-         </ul>
-      </div>
-      <div style="width: 50%; float: right; margin-top: 50px">
-         <ul class="nav nav-pills">
-            <li><a href="#" style="margin-left: 100px;">REVIEWS</a></li>
-            <li><a href="#">TIPS</a></li>
-            <li><a href="#">HANG OUT</a></li>
-         </ul>
-      </div>
-   </div>
+</div>
+<!-- 우측 메뉴 바 -->
+<div class="demo-container" style = "margin-top:-1%;float:right;width:50%">
+<div class="white">  
+<ul id="mega-menu-9" class="mega-menu">
+      <li style = "margin-left:12%">
+            <a href="#">&nbsp;</a>
+      </li>
+   <li><a href="MainReview.jsp">REVIEW</a>
+   </li>
+   <li><a href="TipPage.jsp">TIPS</a>
+   
+   </li>
+   <li><a href="#">HANG OUT</a>
+
+   </li>
+</ul>
+</div>
+</div>
+</div>
+      <!-- 실험 -->
    <!-- 기본페이지 END -->
-   <!-- 작은페이지 start -->
-   <div class="container">
-      <div style="width: 100%;"
-         class="visible-xs navbar navbar-default navbar-fixed-top navbar HOME"
-         role="navigation">
-         <div style="margin: 15px">
-            <img src="images/hanger.png" style="float:left;"/>
-            <input type="text" placeholder="search for.." style="float:left;">
-            <button class="btn btn-default" style="float:left;">검색</button>
-<%
-	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
-%>
-			<button class="btn btn-default" style="float: right;">로그아웃</button>
-<%
-	} else {
-%>
-            <li><a href="/login.hang" class="remove-border" style="float: right;">로그인</a></li>
-            <li><a href="/join.hang" class="remove-border" style="float: right;">회원가입</a></li>
-<%
-	}
-%>
-         </div>
-      </div>
-   </div>
-   <div
-      class="visible-xs navbar navbar-default navbar-fixed-top unpa-navbar HOME"
-      style="width: 100%; position: relative; z-index: 1000;">
-      <div
-         style="width: 50%; float: left; background: red; margin-top: 50px">
-         <ul class="nav nav-pills">
-            <li><a href="#" style="margin-left: 100px">SHOP</a>
-            <li><a href="#">BRAND</a>
-            <li><a href="#">SALE</a>
-         </ul>
-      </div>
-      <div style="width: 50%; float: right; margin-top: 50px">
-         <ul class="nav nav-pills">
-            <li><a href="#" style="margin-left: 50px;">REVIEWS</a>
-            <li><a href="#">TIPS</a>
-            <li><a href="#">HANG OUT</a>
-         </ul>
-      </div>
-   </div>
-   <!-- 작은페이지 END -->
+</div>
+   <!-- 기본페이지 END -->
+   
 </header>

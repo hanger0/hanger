@@ -14,7 +14,7 @@ public class UserLogoutController extends BaseController {
 	@RequestMapping("/logout.hang")
 	public ModelAndView loginout(HttpServletRequest req){
 		//
-		log("logout ì»¨íŠ¸ë¡¤ëŸ¬");
+		log("logout ÄÁÆ®·Ñ·¯");
 		
 		HttpSession session = req.getSession(false);
 		session.setAttribute("loginYn", "N");

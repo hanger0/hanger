@@ -111,14 +111,14 @@ $(function(){
          </div>
          <div class="col-sm-4 infos" style="width:50%;background-color:orange">
             <div style="width:100%;">
-               <h5>네이처리퍼블릭</h3>
+               <h5>네이처리퍼블릭</h5>
                <h3>존나 좋은 모공제거 코팩이다 헤헤헤헤</h3>
             </div>
          </div>
    </div>
          <div class="thumbnail" >
             <div class = "menubar" style = "width:100%;height:40px;">
-            <ul class="nav nav-pills" style="display:table;margin-left:auto;margin-right:auto" align = "center">
+            <ul class="nav nav-pills" style="display:table;margin-left:auto;margin-right:auto" align="center">
                <li role="presentation" class="" style="width: 120px; height: 100px;">
                   <a href="MyReview.jsp">리뷰</a></li>
                <li role="presentation" class="" style="width: 120px; height: 100px">
@@ -147,8 +147,8 @@ $(function(){
             <p><br>
          </div>
          
-       <div class = "thumbnail" style = "display:table;margin-left:auto;margin-right:auto">
-       <div class="row unpa-card-row row-flex-height-md">
+       <div class = "thumbnail" style = "display:table;margin-left:auto;margin-right:auto;width:100%">
+       <div class="row row-flex-height-md" style = "width:100%;height:20%">
 <%
 	if(followingList != null){
 %>
@@ -158,14 +158,12 @@ $(function(){
 			UserVo user = followingList.get(i);
 %>
             <div class="col-sm-3" style="display:table;">
-               <div class="unpa-card user-card followable  followed" style = " width:170px;display:table;margin-left:auto;margin-right:auto;">
+               <div class="user-card followable  followed" style = " width:170px;display:table;margin-left:auto;margin-right:auto;">
                   <!-- 클릭시 사용자 정보로 이동 -->
                   <a href="#">
-                     <div class="unpa-user-labels"></div>
                      <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
                      <div class="user-nickname"><%= user.getUserName() %></div>
                      <div class="user-skin-info">
-
                         <!-- 피부 건성인지 지성인지 -->
                         <div class="empty"><%= user.getUserSkinType() %></div>
                         <!-- 피부 몇호인지 ex 23호 -->
@@ -192,11 +190,7 @@ $(function(){
             </div>
 <%
 		}
-	} else {
-%>
-		Following이 없습니다.
-<%
-	}
+	} 
 
 	if(followerList != null){
 %>
@@ -206,10 +200,9 @@ $(function(){
 			UserVo user = followerList.get(i);
 %>
             <div class="col-sm-3" style="display:table;">
-               <div class="unpa-card user-card followable  followed" style = " width:170px;display:table;margin-left:auto;margin-right:auto;">
+               <div class="user-card followable  followed" style = " width:170px;display:table;margin-left:auto;margin-right:auto;">
                   <!-- 클릭시 사용자 정보로 이동 -->
                   <a href="#">
-                     <div class="unpa-user-labels"></div>
                      <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
                      <div class="user-nickname"><%= user.getUserName() %></div>
                      <div class="user-skin-info">
@@ -256,11 +249,7 @@ $(function(){
 <%
 		}
 	}
-	else {
-%>
-				Follower가 없습니다.
-<%
-			}
+	
 	if(userList != null){
 %>
         <h4 class="titles" style = "margin-left:40px"><font size = "4"><b>팔로워 검색</b></font></h4><br>
@@ -269,10 +258,9 @@ $(function(){
 			UserVo user = userList.get(i);
 %>
             <div class="col-sm-3" style="display:table;">
-               <div class="unpa-card user-card followable  followed" style = " width:170px;display:table;margin-left:auto;margin-right:auto;">
+               <div class="user-card followable  followed" style = " width:170px;display:table;margin-left:auto;margin-right:auto;">
                   <!-- 클릭시 사용자 정보로 이동 -->
                   <a href="#">
-                     <div class="unpa-user-labels"></div>
                      <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
                      <div class="user-nickname"><%= user.getUserName() %></div>
                      <div class="user-skin-info">
@@ -320,9 +308,23 @@ $(function(){
             </div>
 <%
 		}
-	} else {
+	}
+	if(followerList != null && followerList.size() == 0 && followingList == null && userList == null){
+%>
+		팔로워가 없습니다.
+		<BR><br><BR>
+<%
+	}
+	if(followerList == null && followingList != null && followingList.size() == 0 && userList == null){
+%>
+		팔로잉이 없습니다.
+		<BR><br><BR>
+<%
+	}
+	if(followerList == null && followingList == null && userList != null && userList.size() == 0){
 %>
 		검색 결과가 없습니다.
+		<BR><br><BR>
 <%
 	}
 %>
