@@ -33,8 +33,9 @@ public class UserLoginController extends BaseController {
 	public ModelAndView submit(
 			HttpServletRequest req){
 		//
+		log("로그인 컨트롤러");
+		
 		HttpSession session = req.getSession();
-		System.out.println("로그인 컨트롤러");
 		session = req.getSession(false);
 		String userId = req.getParameter("userId");
 		String pass = req.getParameter("userPass");
@@ -43,7 +44,7 @@ public class UserLoginController extends BaseController {
 		user.setUserId(userId);
 		user.setUserPwd(pass);
 		
-		List<UserVo> uvList = (List<UserVo>)userLoginDao.getUser(user);
+		List<UserVo> uvList = (List<UserVo>)userLoginDao.loginUser(user);
 		
 		String message = "";
 		if(uvList != null && uvList.size()>0) {

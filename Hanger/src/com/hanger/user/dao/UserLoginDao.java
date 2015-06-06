@@ -16,8 +16,8 @@ public class UserLoginDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<UserVo> getUser(UserVo user)
+	public ArrayList<UserVo> loginUser(UserVo user)
 	{
-		return (ArrayList<UserVo>)smct.queryForList("getUser", user);
+		return (ArrayList<UserVo>)smct.queryForList("loginUser", user);
 	}
 }

@@ -57,12 +57,12 @@
 </STYLE>
 <script>
 $(function(){
-	function goFollowerList(){
+	$('#goFollowerList').click(function(){
 		location.href="/relationFollowerSearch.hang";
-	}
-	function goFollowingList(){
+	});
+	$('#goFollowingList').click(function(){
 		location.href="/relationFollowingSearch.hang";
-	}
+	});
 	function deleteFollowing(){
 		var f = document.deleteFollowing;
 		
@@ -78,19 +78,19 @@ $(function(){
 		
 		f.submit();
 	}
-	$('#insertSearch').click(function(){
+	$('.insertSearch').click(function(){
 		var f = document.insertSearch;
 		
-		var s = $('input:text[name=qt]').val();
-		var i = $('input:hidden[name=insertQt]').val(s);
+		var s = $(this).attr("qt");
+		$("input:hidden[name=insertQt]").attr("value", s);
 		
 		f.submit();
 	});
-	$('#deleteSearch').click(function(){
+	$('.deleteSearch').click(function(){
 		var f = document.deleteSearch;
 		
-		var s = $('input:text[name=qt]').val();
-		var i = $('input:hidden[name=deleteQt]').val(s);
+		var s = $(this).attr("qt");
+		$("input:hidden[name=deleteQt]").attr("value", s);
 		
 		f.submit();
 	});
@@ -138,8 +138,8 @@ $(function(){
          <div class="thumbnail" style = "height:80px;">
             <form class="navbar-form navbar" style="width:100%;height:40px;" action="/userSearch.hang" method="post">
                <div class="form-group" style = "display:table;margin-left:auto;margin-right:auto;margin-top:8px;width:100%">
-               <button type="button" class="btn btn-default" style = "margin-right:2%;" onclick="goFollowingList()">ÆÈ·ÎÀ×</button>
-               <button type="button" class="btn btn-default" style = "margin-right:23%;" onclick="goFollowerList()">ÆÈ·Î¿ö</button>
+               <button type="button" id="goFollowingList" class="btn btn-default" style = "margin-right:2%;">ÆÈ·ÎÀ×</button>
+               <button type="button" id="goFollowerList" class="btn btn-default" style = "margin-right:23%;">ÆÈ·Î¿ö</button>
                   <input type="text" class="form-control" placeholder="È¸¿ø°Ë»ö" name="qt" value="<%= qt %>">
                <button type="submit" class="btn btn-default" style = "margin-left:10px;">Submit</button>
                </div>
@@ -192,6 +192,10 @@ $(function(){
             </div>
 <%
 		}
+	} else {
+%>
+		FollowingÀÌ ¾ø½À´Ï´Ù.
+<%
 	}
 
 	if(followerList != null){
@@ -252,6 +256,11 @@ $(function(){
 <%
 		}
 	}
+	else {
+%>
+				Follower°¡ ¾ø½À´Ï´Ù.
+<%
+			}
 	if(userList != null){
 %>
         <h4 class="titles" style = "margin-left:40px"><font size = "4"><b>ÆÈ·Î¿ö °Ë»ö</b></font></h4><br>
@@ -287,20 +296,20 @@ $(function(){
 <%
 			if(user.getRelationFollowing() != null){
 %>
-				<form name="deleteSearch" action="/relationSearchDelete.hang" method="POST">
+				<form id="deleteSearch" name="deleteSearch" action="/relationSearchDelete.hang" method="POST">
 				  	  <input type="hidden" name="userCode" value="<%= user.getUserCode() %>"/>
 				  	  <input type="hidden" name="deleteQt" />
-	                  <button class="user-follow-button followed" onClick="deleteSearch()">
+	                  <button class="user-follow-button followed deleteSearch" qt="<%= qt %>">
 	                     	ÆÈ·Î¿ì Ãë¼Ò
 	                  </button>
                 </form>
 <%
 			} else {
 %>
-				<form name="insertSearch" action="/relationSearchInsert.hang" method="POST">
+				<form id="insertSearch" name="insertSearch" action="/relationSearchInsert.hang" method="POST">
 				  	  <input type="hidden" name="userCode" value="<%= user.getUserCode() %>"/>
 				  	  <input type="hidden" name="insertQt" />
-	                  <button class="user-follow-button followed" onClick="insertSearch()">
+	                  <button class="user-follow-button followed insertSearch" qt="<%= qt %>">
 	                     	ÆÈ·Î¿ì ¸Î±â
 	                  </button>
                 </form>
@@ -311,6 +320,10 @@ $(function(){
             </div>
 <%
 		}
+	} else {
+%>
+		°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.
+<%
 	}
 %>
             </div>

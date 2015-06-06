@@ -3,13 +3,13 @@
 <sqlMap namespace="Data">
 	<typeAlias alias="user" type="com.hanger.user.vo.UserVo"/>
 	
-	<select id="getUser" parameterClass="user" resultClass="user">
+	<select id="loginUser" parameterClass="user" resultClass="user">
 		SELECT
 			USER_NAME as userName, USER_CODE as userCode
 		FROM
 			USER
 		WHERE
-			USER_ID = #userId# AND USER_PWD = #userPwd#
+			USER_ID = #userId# AND USER_PWD = #userPwd# AND USER_USE_YN = 'Y'
 	</select>
 	
 	<insert id="insertUser" parameterClass="user">
@@ -23,7 +23,7 @@
 	</update>
 	
 	<update id="deleteUser" parameterClass="user">
-		UPDATE USER SET USER_USE_YN = 'N' WHERE USER_ID = #userCode#	
+		UPDATE USER SET USER_USE_YN = 'N' WHERE USER_ID = #userCode#
 	</update>
 	
 	<select id="searchUser" parameterClass="HashMap" resultClass="user">
@@ -43,7 +43,7 @@
 	
 	<select id="selectPassword" parameterClass="user">
 		SELECT 
-			MEMBER_PWD 
+			USER_PWD 
 		FROM 
 			USER 
 		WHERE 

@@ -17,7 +17,6 @@ public class UserJoinZipCodeDao {
 	@SuppressWarnings("unchecked")
 	public ArrayList<ZipCodeVo> searchZipCode(String qt)
 	{
-		System.out.println("qt   :   " + qt);
 		return (ArrayList<ZipCodeVo>)smct.queryForList("searchZipCode", qt);
 	}
 }
