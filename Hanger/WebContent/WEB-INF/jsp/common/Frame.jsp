@@ -41,7 +41,12 @@
 			<div id="header"> 
 				<jsp:include page ="Top.jsp"/>
 			</div>
-			<div id="middle"> 
+			<div id="middle">
+				<!-- ¶ç¾î¾²±â -->
+				<p><br><p><br>
+				<p><br><p><br>
+				<p><br><p><br>
+				<p>
 				<div id="content">
 					<jsp:include page="<%= mainUrl %>" flush="true" />
 				</div>

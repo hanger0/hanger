@@ -81,6 +81,12 @@
 		<property name="cartDao" ref="cartDao"></property>
 	</bean>
 	
+	<!-- Item 요청 url과 Controller 매핑 -->
+	<bean id="itemSearchController" class ="com.hanger.item.controller.ItemSearchController">
+		<property name="itemSearchDao" ref="itemSearchDao"></property>
+		<property name="itemSearchInfoDao" ref="itemSearchInfoDao"></property>
+	</bean>
+	
 	<!-- User Dao beans  -->
 	<bean id="userJoinDao" class="com.hanger.user.dao.UserJoinDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
@@ -137,6 +143,14 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="cartDao" class="com.hanger.order.dao.CartDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	
+	<!-- Item Dao beans -->
+	<bean id="itemSearchDao" class="com.hanger.item.dao.ItemSearchDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="itemSearchInfoDao" class="com.hanger.item.dao.ItemSearchInfoDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 

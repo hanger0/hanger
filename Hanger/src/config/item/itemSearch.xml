@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	
+	<select id="getItemSearchInfo" resultClass="String" parameterClass="HashMap">
+		SELECT 
+			COUNT(item.ITEM_CODE) AS articleTotalNum
+		FROM 
+			ITEM item, BRAND brand 
+		WHERE 
+			item.ITEM_USE_YN='Y'
+		<dynamic>
+			<isNotEmpty property="keyWord">
+				 	AND item.BRAND_CODE=brand.BRAND_CODE AND (item.ITEM_NAME LIKE '%$keyWord$%' OR brand.BRAND_NAME LIKE '%$keyWord$%')
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<typeAlias alias="itemSearch" type="com.hanger.item.vo.ItemSearchVo"/>
+	
+	<select id="getItemSearch" resultClass="itemSearch" parameterClass="HashMap">
+		SELECT 
+		  item.ITEM_CODE AS itemCode, item.ITEM_STATUS AS itemStatus, item.ITEM_SCORE AS itemScore, 
+		  item.ITEM_MARKET_PRICE AS itemMarketPrice, item.ITEM_SELL_PRICE AS itemSellPrice, 
+		  item.ITEM_PIC_PATH as itemPicPath, item.ITEM_PIC_SAVENAME as itemPicSavename,
+		  (item.ITEM_SELL_PRICE/item.ITEM_MARKET_PRICE*100) as itemDicount, item.ITEM_NAME AS itemName, 
+		  brand.BRAND_NAME as brandName, COUNT(review.POSTING_CODE) AS reviewCnt
+		FROM 
+		  BRAND brand, ITEM item left join 
+		  (SELECT POSTING_CODE, ITEM_CODE FROM REVIEW WHERE REVIEW_USE_YN='Y') review on item.ITEM_CODE=review.ITEM_CODE
+		WHERE 
+		  item.BRAND_CODE = brand.BRAND_CODE
+		<dynamic>
+			<isNotEmpty property="keyWord">  
+		  AND (item.ITEM_NAME LIKE '%$keyWord$%' OR brand.BRAND_NAME LIKE '%$keyWord$%')
+		  </isNotEmpty>
+		</dynamic>
+		GROUP BY 
+		   item.ITEM_CODE, item.ITEM_STATUS, item.ITEM_SCORE, item.ITEM_MARKET_PRICE, item.ITEM_SELL_PRICE, 
+		  (item.ITEM_SELL_PRICE/item.ITEM_MARKET_PRICE*100), item.ITEM_NAME, brand.BRAND_NAME;
+	</select>
+</sqlMap>
+

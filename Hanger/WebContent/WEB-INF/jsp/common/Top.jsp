@@ -24,11 +24,20 @@ $(document).ready(function($){
 <link href="css/skins/grey.css" rel="stylesheet" type="text/css" />
 <link href="css/skins/white.css" rel="stylesheet" type="text/css" />
 <script type='text/javascript' src='js/jquery.dcmegamenu.1.2.js'></script>
+<script type='text/javascript' src='js/jquery.hoverIntent.minified.js'></script>
+
 <style>
 .headli
 {
 	width:50px;
 	height:40px;
+}
+.shadow{
+	padding: 12px 38px 12px 25px;
+	text-shadow: 1px 1px 1px #000;
+	text-decoration: none;
+	background: url(images/bg_grey.png);
+	margin-left:23%
 }
 </style>
 <header id ="header">
@@ -39,9 +48,9 @@ $(document).ready(function($){
             <img style="height: 32px; padding: 3px 0;" src="/assets/images/hanger.png" id="brand-icon" alt="Hanger" />
          </a>
       </div>
-      <form class="navbar-form navbar-left" role="search">
+      <form class="navbar-form navbar-left" role="search" method="get" action="/itemSearch.hang">
          <div class="form-group" style = "margin-left:65%;width:100%">
-            <input type="text" class="form-control" placeholder="Search" style = "width:300px">
+            <input type="text" name="keyWord" class="form-control" placeholder="Search" style = "width:300px">
          <button type="submit" class="btn btn-default">검색</button>
          </div>
       </form>
@@ -74,8 +83,8 @@ $(document).ready(function($){
        <div class="demo-container" style = "margin-top:-1%;float:left;width:50%">
       <div class="grey">
       <ul id="mega-menu-3" class="mega-menu">
-         <li style = "margin-left:23%">
-            <a href="#">&nbsp;</a>
+         <li class="shadow">
+            <p>&nbsp;</p>
          </li>
          <li><a href="ItemList.jsp">SHOP</a>
             <ul>
@@ -233,28 +242,23 @@ $(document).ready(function($){
       </ul>
    </div>
 </div>
-<!-- 우측 메뉴 바 -->
 <div class="demo-container" style = "margin-top:-1%;float:right;width:50%">
-<div class="white">  
-<ul id="mega-menu-9" class="mega-menu">
-      <li style = "margin-left:12%">
-            <a href="#">&nbsp;</a>
-      </li>
-   <li><a href="MainReview.jsp">REVIEW</a>
-   </li>
-   <li><a href="TipPage.jsp">TIPS</a>
-   
-   </li>
-   <li><a href="#">HANG OUT</a>
-
-   </li>
-</ul>
+	<div class="white">  
+		<ul id="mega-menu-9" class="mega-menu">
+			<li style = "margin-left:12%">
+				<a>&nbsp;</a>
+			</li>
+			<li>
+				<a href="MainReview.jsp">REVIEW</a>
+			</li>
+			<li><a href="TipPage.jsp">TIPS</a>
+			
+			</li>
+			<li><a href="#">HANG OUT</a>
+			
+			</li>
+		</ul>
+	</div>
 </div>
-</div>
-</div>
-      <!-- 실험 -->
-   <!-- 기본페이지 END -->
-</div>
-   <!-- 기본페이지 END -->
-   
+</div>   
 </header>

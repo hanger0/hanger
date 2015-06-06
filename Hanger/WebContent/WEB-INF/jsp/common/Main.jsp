@@ -103,12 +103,6 @@ body
 </STYLE>
 <body>
 
-<!-- ¶ç¾î¾²±â -->
-<p><br><p><br>
-<p><br><p><br>
-<p><br><p><br>
-<p>
-
 <!-- ±¤°í -->
       <div class="advertise" style = "display:table;margin-left:auto;margin-right:auto;width:78%;">
          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -167,7 +161,7 @@ for(int i=0; i<4; i++)
 {
 %>
                <div class="col-sm-6 col-md-3">
-                  <div class="thumbnail" style = "width:100%;height:53%">
+                  <div class="thumbnail" style = "width:100%">
                      <div class="image">
                         <img src="images/omnia.jpg" class="hotimages" onClick = "productBuy()">
                      </div>
@@ -203,7 +197,7 @@ for(int i=0; i<2; i++)
 {
 %>
                      <div class="col-md-6 rat">
-                        <div class="thumbnail rats" style = "height:43%">
+                        <div class="thumbnail">
                            <div class="image">
                               <img src="images/cristalyn.jpg" class="hotimages" onClick = "review()">
                            </div>
@@ -238,7 +232,7 @@ for(int i=0; i<2; i++)
 {
 %>
                      <div class="col-md-6 rat">
-                        <div class="thumbnail rats" style = "height:43%">
+                        <div class="thumbnail">
                            <div class="image">
                               <img src="images/hommesun.jpg" class="hotimages" onClick = "tip()">
                            </div>

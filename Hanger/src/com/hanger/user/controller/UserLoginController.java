@@ -56,7 +56,7 @@ public class UserLoginController extends BaseController {
 			session.setAttribute("myUserName", myName);
 			session.setAttribute("myUserCode", myCode);
 			
-			message = "¹Ý°©½À´Ï´Ù. " + myName + " ´Ô";
+			message = null;
 			moveUrl = "common/Frame";
 		}
 		else {
