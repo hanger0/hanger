@@ -15,8 +15,7 @@
 	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<!-- User 요청 url과 Controller 매핑 -->
-	<bean id="userJoinController" class ="com.hanger.user.controller.UserJoinController" />
-	<bean id="userJoinResultController" class ="com.hanger.user.controller.UserJoinResultController">
+	<bean id="userJoinController" class ="com.hanger.user.controller.UserJoinController">
 		<property name="userJoinDao" ref="userJoinDao"></property>
 	</bean>
 	<bean id="userJoinZipCodeSearchController" class ="com.hanger.user.controller.UserJoinZipCodeSearchController">
@@ -40,6 +39,9 @@
 	</bean>
 	<bean id="userFindPasswordController" class ="com.hanger.user.controller.UserFindPasswordController">
 		<property name="userFindPasswordDao" ref="userFindPasswordDao"></property>
+	</bean>
+	<bean id="userSelectController" class ="com.hanger.user.controller.UserSelectController">
+		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 	
 	<!-- Relation 요청 url과 Controller 매핑 -->
@@ -102,6 +104,9 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="userFindPasswordDao" class="com.hanger.user.dao.UserFindPasswordDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="userSelectDao" class="com.hanger.user.dao.UserSelectDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	
