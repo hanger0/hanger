@@ -36,6 +36,8 @@ public class RelationDeleteController extends BaseController {
 	@RequestMapping("/relationFollowerDelete.hang")
 	public String relationFollowerDelete(HttpServletRequest req){
 		//
+		log("relationFollowerDelete 컨트롤러");
+		
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String userCode = req.getParameter("userCode");
@@ -59,6 +61,8 @@ public class RelationDeleteController extends BaseController {
 	@RequestMapping("/relationFollowingDelete.hang")
 	public String relationFollowingDelete(HttpServletRequest req){
 		//
+		log("relationFollowingDelete 컨트롤러");
+		
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String userCode = req.getParameter("userCode");
@@ -81,6 +85,8 @@ public class RelationDeleteController extends BaseController {
 	@RequestMapping("/relationSearchDelete.hang")
 	public String relationSearchDelete(HttpServletRequest req){
 		//
+		log("relationSearchDelete 컨트롤러");
+		
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String userCode = req.getParameter("userCode");

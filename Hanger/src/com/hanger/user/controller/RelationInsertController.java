@@ -36,6 +36,8 @@ public class RelationInsertController extends BaseController {
 	@RequestMapping("/relationFollowerInsert.hang")
 	public String insertFollowerRelation(HttpServletRequest req){
 		//
+		log("relationFollowerInsert 컨트롤러");
+		
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		RelationVo relation = new RelationVo();
@@ -58,6 +60,8 @@ public class RelationInsertController extends BaseController {
 	@RequestMapping("/relationSearchInsert.hang")
 	public String insertSearchRelation(HttpServletRequest req){
 		//
+		log("relationSearchInsert 컨트롤러");
+		
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String userCode = req.getParameter("userCode");

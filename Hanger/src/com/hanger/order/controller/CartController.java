@@ -22,6 +22,9 @@ public class CartController extends BaseController {
 	
 	@RequestMapping(value = "/cart.hang", method = RequestMethod.POST)
 	public String addCart(HttpServletRequest req){
+		//
+		log("cart 컨트롤러");
+		
 		HttpSession session = req.getSession();
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");

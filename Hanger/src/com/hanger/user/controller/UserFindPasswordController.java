@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.user.dao.UserFindPasswordDao;
@@ -18,7 +19,11 @@ public class UserFindPasswordController extends BaseController {
 		this.userFindPasswordDao = userFindPasswordDao;
 	}
 	
+	@RequestMapping("/findPassword.hang")
 	public String findPassword(HttpServletRequest req){
+		//
+		log("findPassword 컨트롤러");
+		
 		HttpSession session = req.getSession();
 		String myUserId = (String)session.getAttribute("myUserId");
 		String userAnswer = req.getParameter("userAnswer");
