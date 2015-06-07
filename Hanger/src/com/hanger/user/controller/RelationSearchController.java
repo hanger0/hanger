@@ -24,8 +24,6 @@ public class RelationSearchController extends BaseController {
 	@RequestMapping("/relationFollowerSearch.hang")
 	public String relationFollowerSearch(HttpServletRequest req){
 		//
-		log("relationFollowerSearch 컨트롤러");
-		
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		ArrayList<UserVo> followerList = relationSearchDao.searchFollowerRelation(myUserCode);
@@ -40,8 +38,6 @@ public class RelationSearchController extends BaseController {
 	
 	@RequestMapping("/relationFollowingSearch.hang")
 	public String relationFollowingSearch(HttpServletRequest req){
-		log("relationFollowingSearch 컨트롤러");
-		
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		ArrayList<UserVo> followingList = relationSearchDao.searchFollowingRelation(myUserCode);

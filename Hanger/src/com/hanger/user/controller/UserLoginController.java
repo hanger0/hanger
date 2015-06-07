@@ -33,8 +33,6 @@ public class UserLoginController extends BaseController {
 	public ModelAndView submit(
 			HttpServletRequest req){
 		//
-		log("로그인 컨트롤러");
-		
 		HttpSession session = req.getSession();
 		session = req.getSession(false);
 		String userId = req.getParameter("userId");

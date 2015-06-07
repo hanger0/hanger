@@ -9,7 +9,6 @@
 	}
 %>
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- BootStrap ½ÃÀÛ -->
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

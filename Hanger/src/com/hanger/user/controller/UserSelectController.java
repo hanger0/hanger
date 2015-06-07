@@ -21,8 +21,6 @@ public class UserSelectController extends BaseController {
 	@RequestMapping("/selectUser.hang")
 	public String selectUser(HttpServletRequest req){
 		//
-		log("selectUser 컨트롤러");
-		
 		String userCode = req.getParameter("userCode");
 		
 		UserVo user = userSelectDao.selectUser(userCode);

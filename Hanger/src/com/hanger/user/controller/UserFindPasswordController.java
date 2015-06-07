@@ -22,8 +22,6 @@ public class UserFindPasswordController extends BaseController {
 	@RequestMapping("/findPassword.hang")
 	public String findPassword(HttpServletRequest req){
 		//
-		log("findPassword 컨트롤러");
-		
 		HttpSession session = req.getSession();
 		String myUserId = (String)session.getAttribute("myUserId");
 		String userAnswer = req.getParameter("userAnswer");

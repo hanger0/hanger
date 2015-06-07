@@ -1,6 +1,5 @@
 package com.hanger.item.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.item.dao.ItemSearchDao;
@@ -173,19 +171,5 @@ public class ItemSearchController extends BaseController {
 			pageEndNum = pageTotalNum;
 		}
 		return pageEndNum;
-	}
-		
-	protected String entoKo(String en)
-	{
-		String enKo = null;
-		try
-		{
-			enKo = new String(en.getBytes("8859_1"),"KSC5601");
-		}
-		catch(UnsupportedEncodingException e)
-		{
-			System.out.println(e);
-		}
-		return enKo;
 	}
 }

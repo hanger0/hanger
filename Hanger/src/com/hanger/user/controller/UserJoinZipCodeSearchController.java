@@ -24,16 +24,12 @@ public class UserJoinZipCodeSearchController extends BaseController {
 	@RequestMapping("/zipCode.hang")
 	public String goZipCodeSearch(){
 		//
-		log("zipCode 컨트롤러");
-		
 		return "user/ZipCodeSearch";
 	}
 
 	@RequestMapping("/zipCodeSearch.hang")
 	public ModelAndView search(HttpServletRequest req){
 		//
-		log("zipCodeSearch 컨트롤러");
-		
 		String qt = req.getParameter("qt");
 		List<ZipCodeVo> zipCodeList = userJoinZipCodeDao.searchZipCode(qt);
 		

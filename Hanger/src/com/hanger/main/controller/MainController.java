@@ -14,8 +14,6 @@ public class MainController extends BaseController {
 	
 	@RequestMapping("/main.hang")
 	public ModelAndView mainPage(HttpServletRequest request, HttpSession session) {		
-		log("main 컨트롤러");
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(moveUrl);
 		mav.addObject("mainUrl", mainUrl);

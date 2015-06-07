@@ -22,8 +22,6 @@ public class OrderBuyController extends BaseController {
 	@RequestMapping("/buyOrder.hang")
 	public String buyOrder(HttpServletRequest req){
 		//
-		log("buyOrder 컨트롤러");
-		
 		HttpSession session = req.getSession();
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");

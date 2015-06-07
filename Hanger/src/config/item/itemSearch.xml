@@ -23,7 +23,7 @@
 		  item.ITEM_CODE AS itemCode, item.ITEM_STATUS AS itemStatus, item.ITEM_SCORE AS itemScore, 
 		  item.ITEM_MARKET_PRICE AS itemMarketPrice, item.ITEM_SELL_PRICE AS itemSellPrice, 
 		  item.ITEM_PIC_PATH as itemPicPath, item.ITEM_PIC_SAVENAME as itemPicSavename,
-		  (item.ITEM_SELL_PRICE/item.ITEM_MARKET_PRICE*100) as itemDicount, item.ITEM_NAME AS itemName, 
+		  (item.ITEM_SELL_PRICE/item.ITEM_MARKET_PRICE*100) as itemDiscount, item.ITEM_NAME AS itemName, 
 		  brand.BRAND_NAME as brandName, COUNT(review.POSTING_CODE) AS reviewCnt
 		FROM 
 		  BRAND brand, ITEM item left join 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="EUC-KR"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:p="http://www.springframework.org/schema/p"
@@ -14,7 +14,7 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<!-- User ìš”ì²­ urlê³¼ Controller ë§¤í•‘ -->
+	<!-- User ¿äÃ» url°ú Controller ¸ÅÇÎ -->
 	<bean id="userJoinController" class ="com.hanger.user.controller.UserJoinController">
 		<property name="userJoinDao" ref="userJoinDao"></property>
 	</bean>
@@ -44,7 +44,7 @@
 		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 	
-	<!-- Relation ìš”ì²­ urlê³¼ Controller ë§¤í•‘ -->
+	<!-- Relation ¿äÃ» url°ú Controller ¸ÅÇÎ -->
 	<bean id="relationInsertController" class ="com.hanger.user.controller.RelationInsertController">
 		<property name="relationInsertDao" ref="relationInsertDao"></property>
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
@@ -59,7 +59,7 @@
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
 	</bean>
 	
-	<!-- Manager/Item ìš”ì²­ urlê³¼ Controller ë§¤í•‘ -->
+	<!-- Manager/Item ¿äÃ» url°ú Controller ¸ÅÇÎ -->
 	<bean id="managerAddItemController" class="com.hanger.manager.item.controller.ManagerAddItemController"/>
 	<bean id="managerAddItemFormController" class="com.hanger.manager.item.controller.ManagerAddItemFormController">
 		<property name="managerAddItemDao" ref="managerAddItemDao"></property>
@@ -73,7 +73,7 @@
 		<property name="managerSearchBrandDao" ref="managerSearchBrandDao"></property>
 	</bean>
 
-	<!-- Order ìš”ì²­ urlê³¼ Controller ë§¤í•‘ -->
+	<!-- Order ¿äÃ» url°ú Controller ¸ÅÇÎ -->
 	<bean id="orderBuyController" class="com.hanger.order.controller.OrderBuyController">
 		<property name="orderBuyDao" ref="orderBuyDao"></property>
 	</bean>
@@ -81,7 +81,7 @@
 		<property name="cartDao" ref="cartDao"></property>
 	</bean>
 	
-	<!-- Item ìš”ì²­ urlê³¼ Controller ë§¤í•‘ -->
+	<!-- Item ¿äÃ» url°ú Controller ¸ÅÇÎ -->
 	<bean id="itemSearchController" class ="com.hanger.item.controller.ItemSearchController">
 		<property name="itemSearchDao" ref="itemSearchDao"></property>
 		<property name="itemSearchInfoDao" ref="itemSearchInfoDao"></property>
@@ -154,16 +154,16 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 
-	<!-- ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ì²˜ë¦¬ ê²°ê³¼ë¥¼ ë³´ì—¬ì¤„ ë·°ë¥¼ ì„ íƒí•˜ëŠ” ë°©ì‹ -->
+	<!-- ÄÁÆ®·Ñ·¯ÀÇ Ã³¸® °á°ú¸¦ º¸¿©ÁÙ ºä¸¦ ¼±ÅÃÇÏ´Â ¹æ½Ä -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
-	<!--com.cookpon2 í•˜ìœ„ ëª¨ë“  íŒ¨í‚¤ì§€ì— ìžˆëŠ” íŒŒì¼ì˜ ì–´ë…¸í…Œì´ì…˜ì„ ìŠ¤ìº”í•´ì„œ ë¹ˆìœ¼ë¡œ ë“±ë¡ -->
+	<!--com.cookpon2 ÇÏÀ§ ¸ðµç ÆÐÅ°Áö¿¡ ÀÖ´Â ÆÄÀÏÀÇ ¾î³ëÅ×ÀÌ¼ÇÀ» ½ºÄµÇØ¼­ ºóÀ¸·Î µî·Ï -->
 	<context:component-scan base-package="com.hanger" />
 	
-	<!-- annotationì„ ì“°ê² ë‹¤ -->
+	<!-- annotationÀ» ¾²°Ú´Ù -->
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<context:property-placeholder location="classpath:config/db.properties" />

@@ -31,8 +31,6 @@ public class UserUpdateController extends BaseController {
 			HttpServletRequest request
 			) throws IOException{
 		//
-		log("updateUser 컨트롤러");
-		
 		HttpSession session = request.getSession(false);
 		File dayFile = new File("F:\\hanger");
 		if(!dayFile.exists())

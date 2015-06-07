@@ -25,8 +25,6 @@ public class UserSearchController extends BaseController {
 	@RequestMapping("/userSearch.hang")
 	public String userSearch(HttpServletRequest req){
 		//
-		log("userSearch 컨트롤러");
-		
 		HttpSession session = req.getSession(false);
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");

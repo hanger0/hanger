@@ -30,8 +30,6 @@ private UserJoinDao userJoinDao;
 	@RequestMapping(value="/join.hang", method=RequestMethod.GET)
 	protected ModelAndView memberJoin(HttpServletRequest request) {
 		//
-		log("join 컨트롤러");
-		
 		HttpSession session = request.getSession(false);
 		
 		ModelAndView mav = new ModelAndView() ;
@@ -52,8 +50,6 @@ private UserJoinDao userJoinDao;
 			HttpServletRequest req
 			) throws IOException {
 		//
-		log("joinResult 컨트롤러");
-		
 		String path = "C:\\hanger\\upfile\\user\\profile";
 		File dayFile = new File(path);
 		if(!dayFile.exists())

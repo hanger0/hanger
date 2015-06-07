@@ -21,8 +21,6 @@ public class UserDeleteController extends BaseController {
 	@RequestMapping(value = "deleteUser.hang")
 	public String deleteUser(HttpServletRequest req){
 		//
-		log("deleteUser 컨트롤러");
-		
 		String userCode = req.getParameter("uesrCode");
 		String message = "";
 		

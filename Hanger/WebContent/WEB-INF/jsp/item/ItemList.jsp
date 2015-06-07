@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=euc-kr" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.hanger.item.vo.ItemSearchVo" %>
 <%
@@ -6,14 +6,14 @@
 	String itemSort = (String)request.getAttribute("itemSort");
 	String cateCode = (String)request.getAttribute("cateCode");
 	String keyWord = (String)request.getAttribute("keyWord");
-	int pageNum = (Integer)request.getAttribute("pageNum");//ì‚¬ìš©ìê°€ ì„ íƒí•œ í˜ì´ì§€ ë²ˆí˜¸
+	int pageNum = (Integer)request.getAttribute("pageNum");//»ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÆäÀÌÁö ¹øÈ£
 	
 	int articleTotalNum = (Integer)request.getAttribute("articleTotalNum");
 	int articleStartNum = (Integer)request.getAttribute("articleStartNum");
 	int articleEndNum = (Integer)request.getAttribute("articleEndNum");
-	int pageTotalNum = (Integer)request.getAttribute("pageTotalNum");// ì „ì²´ í˜ì´ì§€ ë²ˆí˜¸
-	int pageStartNum = (Integer)request.getAttribute("pageStartNum");// ì‹œì‘í˜ì´ì§€ ë²ˆí˜¸
-	int pageEndNum = (Integer)request.getAttribute("pageEndNum");// ëí˜ì´ì§€ ë²ˆí˜¸	
+	int pageTotalNum = (Integer)request.getAttribute("pageTotalNum");// ÀüÃ¼ ÆäÀÌÁö ¹øÈ£
+	int pageStartNum = (Integer)request.getAttribute("pageStartNum");// ½ÃÀÛÆäÀÌÁö ¹øÈ£
+	int pageEndNum = (Integer)request.getAttribute("pageEndNum");// ³¡ÆäÀÌÁö ¹øÈ£	
 	
 	String message = "";
 	if(request.getAttribute("message")!=null && ((String)request.getAttribute("message")).length()>0)
@@ -54,7 +54,7 @@
 		var itemPageNum = itemForm.find('input:hidden[name=pageNum]');
 		var itemWordCountYn = itemForm.find('input:hidden[name=wordCountYn]');
 
-		// ê¸€ë³´ê¸°
+		// ±Ûº¸±â
 		$('.itemView').click(function(){
 			var itemArticle = $(this);
 			itemHit.val(itemArticle.attr('hit'));
@@ -62,14 +62,13 @@
 			itemFunc.val('item_004');
 			itemForm.submit();
 		});
-
-		// ê¸€ì“°ê¸° ê°€ê¸°
+// ±Û¾²±â °¡±â
 		$('#goWriteBtn').click(function(){
 			itemFunc.val('item_002');
 			itemForm.submit();
 		});
 
-		// ê²€ìƒ‰
+		// °Ë»ö
 		$('#searchBtn').click(function (){
 			searchAction();
 		});
@@ -83,7 +82,7 @@
 		function searchAction(){
 			if(trim($('#searchWord').val()) === "")
 			{
-				window.alert("ê²€ìƒ‰ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
+				window.alert("°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
 				$('#searchWord').select();
 				return false;
 			}
@@ -95,8 +94,7 @@
 			itemWord.val(trim($('#searchWord').val()));
 			itemForm.submit();
 		}
-
-		// ì „ì²´ë³´ê¸°
+		// ÀüÃ¼º¸±â
 		$('#totalSearch').click(function(){
 			itemFunc.val("item_001");
 			itemPageNum.val("1");
@@ -106,75 +104,69 @@
 		});
 	});
 </SCRIPT>
-
-  
 	<link rel="stylesheet" href="css/LeftMenu/style.css" type="text/css" /><style type="text/css">._css3m{display:none}</style>
-	
-	
-   <!-- í˜ì´ì§€ ì‹œì‘ -->
+   <!-- ÆäÀÌÁö ½ÃÀÛ -->
         <div class="container" style = "width:100%;height:100%">
     <!-- left menu -->
 	<div class ="leftmenu" style = "margin-left:50px;width:200px;height:200px;float:left">
 	<input type="checkbox" id="css3menu-switcher" class="c3m-switch-input">
 		<ul id="css3menu1" class="topmenu">
 			<li class="switch"><label onclick="" for="css3menu-switcher"></label></li>
-			<li class="topfirst"><a href="#" style="width:120px;"><span>ì „ì²´ë³´ê¸°</span></a>
+			<li class="topfirst"><a href="#" style="width:120px;"><span>ÀüÃ¼º¸±â</span></a>
 			<hr>
-			<li class="topfirst"><a href="#" style="width:120px;"><span>ìŠ¤í‚¨ì¼€ì–´</span></a>
+			<li class="topfirst"><a href="#" style="width:120px;"><span>½ºÅ²ÄÉ¾î</span></a>
 		<ul>
-		<li class="subfirst"><a href="#">í´ë Œì§•</a></li>
-		<li><a href="#">í† ë„ˆ&ë¡œì…˜&ë¯¸ìŠ¤íŠ¸</a></li>
-		<li><a href="#">ì—ì„¼ìŠ¤&ì„¸ëŸ¼</a></li>
-		<li><a href="#">í¬ë¦¼&ì˜¤ì¼</a></li>
-		<li><a href="#">íŒ©&íŒ¨ì¹˜Â˜</a></li>
-		<li><a href="#">ì„ ì¼€ì–´</a></li>
-		<li><a href="#">íŠ¸ëŸ¬ë¸”ì¼€ì–´</a></li>
-		<li><a href="#">í™”ì´íŠ¸ë‹</a></li>
-		<li><a href="#">ë‚¨ì„±ìŠ¤í‚¨ì¼€ì–´</a></li>
+		<li class="subfirst"><a href="#">Å¬·»Â¡</a></li>
+		<li><a href="#">Åä³Ê&·Î¼Ç&¹Ì½ºÆ®</a></li>
+		<li><a href="#">¿¡¼¾½º&¼¼·³</a></li>
+		<li><a href="#">Å©¸²&¿ÀÀÏ</a></li>
+		<li><a href="#">ÆÑ&ÆĞÄ¡</a></li>
+		<li><a href="#">¼±ÄÉ¾î</a></li>
+		<li><a href="#">Æ®·¯ºíÄÉ¾î</a></li>
+		<li><a href="#">È­ÀÌÆ®´×</a></li>
+		<li><a href="#">³²¼º½ºÅ²ÄÉ¾î</a></li>
 	</ul></li>
-	<li class="topmenu"><a href="#" style="width:120px;"><span>ë©”ì´í¬ì—…Â—Â…</span></a>
+	<li class="topmenu"><a href="#" style="width:120px;"><span>¸ŞÀÌÅ©¾÷</span></a>
 	<ul>
-		<li class="subfirst"><a href="#">ë¦½ ë©”ì´í¬ì—…</a></li>
-		<li><a href="#">ì•„ì´ ë©”ì´í¬ì—…</a></li>
-		<li><a href="#">í˜ì´ìŠ¤ ë©”ì´í¬ì—…</a></li>
+		<li class="subfirst"><a href="#">¸³ ¸ŞÀÌÅ©¾÷</a></li>
+		<li><a href="#">¾ÆÀÌ ¸ŞÀÌÅ©¾÷</a></li>
+		<li><a href="#">ÆäÀÌ½º ¸ŞÀÌÅ©¾÷</a></li>
 	</ul></li>
-	<li class="topmenu"><a href="#" style="width:120px;"><span>í—¤ì–´&ë°”ë””Â”Â”</span></a>
+	<li class="topmenu"><a href="#" style="width:120px;"><span>Çì¾î&¹Ùµğ</span></a>
 	<ul>
-		<li class="subfirst"><a href="#">í—¤ì–´</a></li>
-		<li><a href="#">ë°”ë””</a></li>
-		<li><a href="#">í•¸ë“œ&í’‹Â’Â‹</a></li>
-		<li><a href="#">ë‹¤ì´ì–´íŠ¸</a></li>
-		<li><a href="#">ìƒí™œë·°í‹°</a></li>
+		<li class="subfirst"><a href="#">Çì¾î</a></li>
+		<li><a href="#">¹Ùµğ</a></li>
+		<li><a href="#">ÇÚµå&Ç²</a></li>
+		<li><a href="#">´ÙÀÌ¾îÆ®</a></li>
+		<li><a href="#">»ıÈ°ºäÆ¼</a></li>
 	</ul></li>
-	<li class="topmenu"><a href="#" style="width:120px;"><span>í–¥ìˆ˜ÂˆÂ˜</span></a>
+	<li class="topmenu"><a href="#" style="width:120px;"><span>Çâ¼ö</span></a>
 	<ul>
-		<li class="subfirst"><a href="#">ì—¬ì„±í–¥ìˆ˜</a></li>
-		<li><a href="#">ë“œë ˆìŠ¤ í¼í“¸</a></li>
-		<li><a href="#">ìº”ë“¤&ë””í“¨ì €Â€</a></li>
-		<li><a href="#">ë‚¨ì„±í–¥ìˆ˜Â˜</a></li>
+		<li class="subfirst"><a href="#">¿©¼ºÇâ¼ö</a></li>
+		<li><a href="#">µå·¹½º ÆÛÇ¾</a></li>
+		<li><a href="#">Äµµé&µğÇ»Àú</a></li>
+		<li><a href="#">³²¼ºÇâ¼ö</a></li>
 	</ul></li>
-	<li class="topmenu"><a href="#" style="width:120px;"><span>ë„êµ¬&ê¸°ê¸°</span></a>
+	<li class="topmenu"><a href="#" style="width:120px;"><span>µµ±¸&±â±â</span></a>
 	<ul>
-		<li class="subfirst"><a href="#">ë·°í‹°ê¸°ê¸°</a></li>
-		<li><a href="#">ë°”ë””ê¸°ê¸°</a></li>
-		<li><a href="#">ë„êµ¬</a></li>
+		<li class="subfirst"><a href="#">ºäÆ¼±â±â</a></li>
+		<li><a href="#">¹Ùµğ±â±â</a></li>
+		<li><a href="#">µµ±¸</a></li>
 	</ul></li>
 </ul>
 	</div>
-
-    <!-- ë¦¬ë·° ì‘ì„± ì‹œì‘ -->
-        <div class="thumbnail" style = "width:980px;height:1000px;float:right;margin-right:80px;">
+	<!-- ¸®ºä ÀÛ¼º ½ÃÀÛ -->
+		<div class="thumbnail" style = "width:980px;height:1000px;float:right;margin-right:80px;">
         	<div class = "select" style = "margin-left:32px;margin-top:10px"><p>
         		<select>
-        			<option value = "ìµœì‹ ìˆœ">ìµœì‹ ìˆœ</option><option value = "ì¸ê¸°ìˆœ">ì¸ê¸°ìˆœ</option><option value = "ë‚®ì€ê°€ê²©ìˆœ">ë‚®ì€ê°€ê²©ìˆœ</option>
-        			<option value = "ë†’ì€ê°€ê²©ìˆœ">ë†’ì€ê°€ê²©ìˆœ</option><option value = "íŒ”ë¡œì‰ì´ˆì´ìŠ¤">íŒ”ë¡œì‰ì´ˆì´ìŠ¤</option>
-        			<option value = "í• ì¸ìœ¨">í• ì¸ìœ¨</option><option value = "ë¦¬ë·°ê°œìˆ˜">ë¦¬ë·°ê°œìˆ˜</option><option value = "í‰ì ìˆœ">í‰ì ìˆœ</option>
+        			<option value = "ÃÖ½Å¼ø">ÃÖ½Å¼ø</option><option value = "ÀÎ±â¼ø">ÀÎ±â¼ø</option><option value = "³·Àº°¡°İ¼ø">³·Àº°¡°İ¼ø</option>
+        			<option value = "³ôÀº°¡°İ¼ø">³ôÀº°¡°İ¼ø</option><option value = "ÆÈ·ÎÀ×ÃÊÀÌ½º">ÆÈ·ÎÀ×ÃÊÀÌ½º</option>
+        			<option value = "ÇÒÀÎÀ²">ÇÒÀÎÀ²</option><option value = "¸®ºä°³¼ö">¸®ºä°³¼ö</option><option value = "ÆòÁ¡¼ø">ÆòÁ¡¼ø</option>
         		</select>
         	</div>
-				
-			<!-- ì¸ê¸°ìƒí’ˆ -->
+        	<!-- ÀÎ±â»óÇ° -->
 				<div class="row hotitem" style = "margin-left:7px">
-					<h4 class="titles" style = "margin-left:25px"><font size = "4"><b>ìµœì‹ ìƒí’ˆ</b></font></h4>
+					<h4 class="titles" style = "margin-left:25px"><font size = "4"><b>ÃÖ½Å»óÇ°</b></font></h4>
 				<%
 					for (int i = 0; i < itemList.size(); i++) {
 						ItemSearchVo isv =(ItemSearchVo)itemList.get(i);
@@ -198,12 +190,12 @@
 					<div class="thumbnail" style = " width:205px">
 						<img src="images/wonbin.PNG">
 						<div class="caption">
-							<font size = "2"><b><%=brandName%>></b></font>
+							<font size = "2"><b><%=brandName%></b></font>
 							<p>
 							
 							<A itemCode="<%=itemCode%>" class="itemView" style="cursor:pointer"><p><font size = "3"><font color = "orange"><b><%=itemName%></b></font></font></p></A>
 							<p><%=itemScore%>
-							<p>ê°€ê²©	&nbsp;&nbsp;<%=itemMarketPrice %>â–¶<%=itemSellPrice%>(<%=itemDiscount%>%)
+							<p>°¡°İ	&nbsp;&nbsp;<%=itemMarketPrice %><%=itemSellPrice%>(<%=itemDiscount%>%)
 							<hr style="margin-bottom: 3px">
 							<div style="display: table; margin-left: auto; margin-right: auto;">
 							
@@ -216,9 +208,8 @@
 				<%
 					}
 				%>
-				</div>	
-				
-    <!--  ë¦¬ë·° ì‘ì„± ë -->
+				</div>
+				 <!--  ¸®ºä ÀÛ¼º ³¡ -->
 		
         </div>
         </div>
@@ -228,7 +219,7 @@
 	if(itemList.size()==0)
 	{
 %>
-		<B>ë“±ë¡ëœ ìƒí’ˆì´ ì—†ìŠµë‹ˆë‹¤.</B>
+		<B>µî·ÏµÈ »óÇ°ÀÌ ¾ø½À´Ï´Ù.</B>
 <%
 	}
 %>

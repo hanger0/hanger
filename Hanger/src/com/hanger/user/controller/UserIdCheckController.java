@@ -25,8 +25,6 @@ public class UserIdCheckController extends BaseController {
 			@RequestParam("joinId") String joinId
 			){
 		//
-		log("idCheck 컨트롤러");
-		
 		moveUrl = "user/IdCheck";
 		System.out.println("아이디 체크 controller");
 		
