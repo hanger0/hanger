@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=euc-kr"%>
-<HTML>
+<HTML style = "height:100%">
 	<HEAD>
 		<TITLE>hanger</TITLE>
-		<META http-equiv="Content-Type" content="text/html; charset=euc-kr">
 	</HEAD>
 		<BODY>
 			<jsp:include page ="/main.hang"/>

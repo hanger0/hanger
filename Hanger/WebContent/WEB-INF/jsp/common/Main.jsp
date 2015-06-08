@@ -1,9 +1,5 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
  
-<script type='text/javascript' src='js/jquery.dcmegamenu.1.2.js'></script>
-<link href="css/dcmegamenu.css" rel="stylesheet" type="text/css" />
-<link href="css/skins/grey.css" rel="stylesheet" type="text/css" />
-<link href="css/skins/white.css" rel="stylesheet" type="text/css" />
 <link href="css/Follow/follow.css" rel="stylesheet" />
 <script type="text/javascript">
 $(document).ready(function($){
@@ -104,6 +100,7 @@ body
 <body>
 
 <!-- ±¤°í -->
+<br><BR>
       <div class="advertise" style = "display:table;margin-left:auto;margin-right:auto;width:78%;">
          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->

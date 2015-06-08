@@ -1,15 +1,5 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 
-<Style>
-.row {
-	background-color: #EBEBEB;
-}
-
-.container {
-	background-color: #EBEBEB;
-}
-</Style>
-
 <body style="background-color: #EBEBEB">
 	<div class="container" style="width: 80%; background-color: #EBEBEB;">
 		<!-- ÆÁ ÀÛ¼º ½ÃÀÛ -->
