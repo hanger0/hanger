@@ -12,4 +12,5 @@
 	<sqlMap resource="config/order/buy.xml"/>
 	<sqlMap resource="config/order/cart.xml"/>
 	<sqlMap resource="config/item/itemSearch.xml"/>
+	<sqlMap resource="config/posting/review/review.xml"/>
 </sqlMapConfig>

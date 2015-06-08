@@ -4,25 +4,30 @@
 	<typeAlias alias="managerItem" type="com.hanger.manager.item.vo.ManagerItemVo"/>
 	
 	<insert id="insertItem" parameterClass="managerItem">
-		INSERT INTO ITEM(ITEM_GROUP_CODE, ITEM_CODE, BRAND_CODE, ITEM_NAME, ITEM_VOLUME, 
+		INSERT INTO ITEM(ITEM_GROUP_CODE, ITEM_CODE, BRAND_CODE, ITEM_NAME, ITEM_SIZE, 
 		ITEM_MARKET_PRICE, ITEM_SELL_PRICE, ITEM_PURCHASE_PRICE, 
-		ITEM_SUMMARY, ITEM_SELL_MAXNUM, 
+		ITEM_SUMMARY_INFO, ITEM_DETAIL_INFO, ITEM_INGREDIENT, ITEM_HOW_TO_USE, ITEM_SELL_MAXNUM, 
 		ITEM_MANUFACTURE_DATE, ITEM_EXPIRE_DATE, ITEM_RELEASE_DATE, ITEM_FEATURE, 
 		ITEM_PIC_PATH, ITEM_PIC_ORGNAME, ITEM_PIC_SAVENAME, ITEM_PIC_SIZE, ITEM_STOCK_AMOUNT, 
 		REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
 		VALUES(CONCAT("IG",LPAD((SELECT GET_SEQ('ITEM_GROUP_CODE')), 10, '0')), 
 		CONCAT("IT",LPAD((SELECT GET_SEQ('ITEM_CODE')), 10, '0')), 
-		#brandCode#, #itemName#, #itemVolume#, 
+		#brandCode#, #itemName#, #itemSize#, 
 		#itemMarketPrice#, #itemSellPrice#, #itemPurchasePrice#, 
-		#itemSummary#, #itemSellMaxNum#, 
+		#itemSummaryInfo#, #itemDetailInfo#, #itemIngredient#, #itemHowToUse#, #itemSellMaxNum#, 
 		#itemManufactureDate#, #itemExpireDate#, #itemReleaseDate#, #itemFeature#, 
 		#itemMainPicPath#, #itemMainPicOrgName#, #itemMainPicSaveName#, #itemMainPicSize#, #itemStockAmount#, 
 		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>
 	
 	<insert id="insertItemCategory" parameterClass="String">
-		INSERT INTO ITEM_CATEGORY(ITEM_CODE, CATEGORY3_CODE)
-		VALUES(CONCAT("IT", LPAD((SELECT ID as seq FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_CODE'), 10, '0')), #itemCategoryValue#)
+		INSERT INTO ITEM_CATEGORY(ITEM_GROUP_CODE, CATEGORY3_CODE)
+		VALUES(CONCAT("IG", LPAD((SELECT ID as seq FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_GROUP_CODE'), 10, '0')), #itemCategoryValue#)
+	</insert>
+	
+	<insert id="insertItemFeature" parameterClass="String">
+		INSERT INTO ITEM_FEATURE(ITEM_GROUP_CODE, FEATURE_CODE)
+		VALUES(CONCAT("IG", LPAD((SELECT ID as seq FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_GROUP_CODE'), 10, '0')), #itemFeatureValue#)
 	</insert>
 	
 	<select id="addItemPicCode" parameterClass="String" resultClass="String">
@@ -30,11 +35,11 @@
 	</select>
 	
 	<insert id="insertItemPic" parameterClass="managerItem">
-		INSERT INTO ITEM_PIC(ITEM_PIC_CODE, ITEM_CODE,
+		INSERT INTO ITEM_PIC(ITEM_PIC_CODE, ITEM_GROUP_CODE,
 		ITEM_PIC_PATH, ITEM_PIC_ORGNAME, ITEM_PIC_SAVENAME, ITEM_PIC_SIZE,
 		REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
 		VALUES(CONCAT("IP", LPAD((SELECT ID as seq FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_PIC_CODE'), 10, '0')),
-		CONCAT("IT", LPAD((SELECT ID as seq FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_CODE'), 10, '0')),
+		CONCAT("IG", LPAD((SELECT ID as seq FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_GROUP_CODE'), 10, '0')),
 		#itemDetailPicPath#, #itemDetailPicOrgName#, #itemDetailPicSaveName#, #itemDetailPicSize#, 
 		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>

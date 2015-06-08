@@ -5,7 +5,8 @@ public class ManagerItemVo {
 	private String itemCode;
 	private String brandCode;
 	private String itemName;
-	private String itemVolume;
+	private String itemSize;
+	private String itemSizeYn;
 	private int itemMarketPrice;
 	private int itemSellPrice;
 	private int itemPurchasePrice;
@@ -14,7 +15,10 @@ public class ManagerItemVo {
 	private String itemMainPicSaveName;
 	private int itemMainPicSize;
 	private float itemScore;
-	private String itemSummary;
+	private String itemSummaryInfo;
+	private String itemDetailInfo;
+	private String itemIngredient;
+	private String itemHowToUse;
 	private int itemSellCnt;
 	private int itemSellMaxNum;
 	private String itemManufactureDate;
@@ -58,11 +62,17 @@ public class ManagerItemVo {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public String getItemVolume() {
-		return itemVolume;
+	public String getItemSize() {
+		return itemSize;
 	}
-	public void setItemVolume(String itemVolume) {
-		this.itemVolume = itemVolume;
+	public void setItemSize(String itemSize) {
+		this.itemSize = itemSize;
+	}
+	public String getItemSizeYn() {
+		return itemSizeYn;
+	}
+	public void setItemSizeYn(String itemSizeYn) {
+		this.itemSizeYn = itemSizeYn;
 	}
 	public int getItemMarketPrice() {
 		return itemMarketPrice;
@@ -112,11 +122,29 @@ public class ManagerItemVo {
 	public void setItemScore(float itemScore) {
 		this.itemScore = itemScore;
 	}
-	public String getItemSummary() {
-		return itemSummary;
+	public String getItemSummaryInfo() {
+		return itemSummaryInfo;
 	}
-	public void setItemSummary(String itemSummary) {
-		this.itemSummary = itemSummary;
+	public void setItemSummaryInfo(String itemSummaryInfo) {
+		this.itemSummaryInfo = itemSummaryInfo;
+	}
+	public String getItemDetailInfo() {
+		return itemDetailInfo;
+	}
+	public void setItemDetailInfo(String itemDetailInfo) {
+		this.itemDetailInfo = itemDetailInfo;
+	}
+	public String getItemIngredient() {
+		return itemIngredient;
+	}
+	public void setItemIngredient(String itemIngredient) {
+		this.itemIngredient = itemIngredient;
+	}
+	public String getItemHowToUse() {
+		return itemHowToUse;
+	}
+	public void setItemHowToUse(String itemHowToUse) {
+		this.itemHowToUse = itemHowToUse;
 	}
 	public int getItemSellCnt() {
 		return itemSellCnt;
@@ -232,7 +260,6 @@ public class ManagerItemVo {
 	public void setUpdIp(String updIp) {
 		this.updIp = updIp;
 	}
-	
 	
 }
 

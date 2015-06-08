@@ -1,9 +1,12 @@
 <%@ page contentType="text/html;charset=euc-kr"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.util.Calendar"%>
 
 <jsp:useBean id="inputTable" scope="request" class="java.util.Hashtable" />
 
 <%
+	Calendar cal = Calendar.getInstance();
+
 	if (inputTable != null && inputTable.size() != 0) {
 		ArrayList uploadFileList = (ArrayList) inputTable
 				.get("uploadFile");
@@ -16,11 +19,11 @@
 <html>
 <SCRIPT src="/js/jquery-2.1.3.min.js"></SCRIPT>
 <SCRIPT src="/js/common/common.js"></SCRIPT>
-<script src="/js/manager/item/managerItem.js" type="text/javascript"></script>
+<script src="/js/manager/item/managerItems.js" type="text/javascript"></script>
+
 
 <head>
 <title>Manager Add Item</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <link rel="stylesheet" type="text/css" media="all"
 	href="/css/niceforms-default.css">
@@ -118,10 +121,10 @@
 				
 				<dl>
 					<dt>
-						<label for="volume">용량:</label>
+						<label for="size">용량:</label>
 					</dt>
 					<dd>
-						<INPUT class="text" type="text" name="volume" maxlength="10">
+						<INPUT class="text" type="text" name="size" maxlength="10">
 						(null값 허용, ml인지 g인지 등등 적어야함)
 					</dd>
 				</dl>
@@ -158,11 +161,55 @@
 				<dl>
 					<dt>
 						<label for="manufactureDate">제조일자:</label>
+						(null허용 ex-20150607)
 					</dt>
 					<dd>
-						<INPUT class="text" type="text" name="manufactureDate"
-							maxlength="8">
-						(null허용 ex-20150607)
+						<INPUT type="hidden" name="manufactureDate" id="manufactureDate"/>
+						<SELECT id="manufactureYear" name="manufactureYear">
+							<option value="0000" selected="1">YEAR</option>
+							<% 
+								for(int i = cal.get(Calendar.YEAR); i > 1949; i--){
+							%>
+								<option value="<%=i%>"><%=i %>년</option>
+							<%
+								}
+							%>
+						</SELECT>
+						<SELECT id="manufactureMonth" name="manufactureMonth">
+							<option value="00" selected="1">MONTH</option>
+							<% 
+								for(int i = 1; i < 13; i++){
+									if(i < 10){
+							%>
+										<option value="0<%=i%>"><%=i %>월</option>
+							<%
+									}
+									else{
+							%>
+										<option value="<%=i%>"><%=i %>월</option>
+							<%
+									}
+								}
+							%>
+						</SELECT>
+						<SELECT id="manufactureDay" name="manufactureDay">
+							<option value="00" selected="1">DAY</option>
+							<% 
+								for(int i = 1; i < 32; i++){
+									if(i < 10){
+							%>
+										<option value="0<%=i%>"><%=i %>일</option>
+							<%
+									} 
+									else {
+							%>
+										<option value="<%=i%>"><%=i %>일</option>
+							<%
+									}
+								}
+							%>
+						</SELECT>
+						
 					</dd>
 				</dl>
 				
@@ -172,33 +219,103 @@
 					</dt>
 					<dd>
 						<INPUT class="text" type="text" name="expireDate"
-							maxlength="20"> (int형입니다)
+							maxlength="20"> 
 					</dd>
 				</dl>
 				
 				<dl>
 					<dt>
-						<label for="releaseDate">발매일자:</label>
+						<label for="releaseDate">발매일자:</label> (null허용 ex-19920707)
 					</dt>
 					<dd>
-						<INPUT class="text" type="text" name="releaseDate"
-							maxlength="8">
-						(null허용 ex-19920707)
+						<INPUT type="hidden" name="releaseDate" id="releaseDate"/>
+						<SELECT id="manufactureYear" name="releaseYear">
+							<option value="0000" selected="1">YEAR</option>
+							<% 
+								for(int i = cal.get(Calendar.YEAR); i > 1949; i--){
+							%>
+								<option value="<%=i%>"><%=i %>년</option>
+							<%
+								}
+							%>
+						</SELECT>
+						<SELECT id="releaseMonth" name="releaseMonth">
+							<option value="0" selected="1">MONTH</option>
+							<% 
+								for(int i = 1; i < 13; i++){
+									if(i < 10){
+							%>
+										<option value="0<%=i%>"><%=i %>월</option>
+							<%
+									}
+									else{
+							%>
+										<option value="<%=i%>"><%=i %>월</option>
+							<%
+									}
+								}
+							%>
+						</SELECT>
+						<SELECT id="releaseDay" name="releaseDay">
+							<option value="0" selected="1">DAY</option>
+							<% 
+								for(int i = 1; i < 32; i++){
+									if(i < 10){
+							%>
+										<option value="0<%=i%>"><%=i %>일</option>
+							<%
+									} 
+									else {
+							%>
+										<option value="<%=i%>"><%=i %>일</option>
+							<%
+									}
+								}
+							%>
+						</SELECT>
+						
 					</dd>
 				</dl>
 
 				<dl>
 					<dt>
-						<label for="summary">간단한설명(메인사진옆에붙을? 필요없으면빼고):</label>
+						<label for="summaryInfo">간단한설명(null허용):</label>
 					</dt>
 					<dd>
-						<INPUT class="text" type="text" name="summary" maxlength="500">
+						<INPUT class="text" type="text" name="summaryInfo">
+					</dd>
+				</dl>
+				
+				<dl>
+					<dt>
+						<label for="detailInfo">상세한 설명 (null허용):</label>
+					</dt>
+					<dd>
+						<INPUT class="text" type="text" name="detailInfo">
+					</dd>
+				</dl>
+				
+				<dl>
+					<dt>
+						<label for="ingredient">성분 (null허용):</label>
+					</dt>
+					<dd>
+						<INPUT class="text" type="text" name="ingredient">
+					</dd>
+				</dl>
+				
+				<dl>
+					<dt>
+						<label for="howToUse">사용법 (null허용):</label>
+					</dt>
+					<dd>
+						<INPUT class="text" type="text" name="howToUse">
 					</dd>
 				</dl>
 
 				<dl>
 					<dt>
-						<label for="sellMaxNum">최대판매가능개수:</label>
+						<label for="sellMaxNum">최대판매가능개수(default 999999):</label>
 					</dt>
 					<dd>
 						<INPUT class="text" type="text" name="sellMaxNum" maxlength="20"> 개

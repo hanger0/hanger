@@ -40,11 +40,14 @@ public class ManagerAddItemFormController extends BaseController{
 		
 		String brandCode = mul.getParameter("brandCode");
 		String itemName = mul.getParameter("name");
-		String itemVolume = mul.getParameter("volume");
+		String itemSize = mul.getParameter("size");
 		int itemMarketPrice = Integer.parseInt(mul.getParameter("marketPrice"));
 		int itemSellPrice = Integer.parseInt(mul.getParameter("sellPrice"));
 		int itemPurchasePrice = Integer.parseInt(mul.getParameter("purchasePrice"));
-		String itemSummary = mul.getParameter("summary");
+		String itemSummaryInfo = mul.getParameter("summaryInfo");
+		String itemDetailInfo = mul.getParameter("detailInfo");
+		String itemIngredient = mul.getParameter("ingredient");
+		String itemHowToUse = mul.getParameter("howToUse");
 		int itemSellMaxNum = Integer.parseInt(mul.getParameter("sellMaxNum"));
 		String itemManufactureDate = mul.getParameter("manufactureDate");
 		String itemExpireDate = mul.getParameter("expireDate");
@@ -71,11 +74,14 @@ public class ManagerAddItemFormController extends BaseController{
 		
 		item.setBrandCode(brandCode);
 		item.setItemName(itemName);
-		item.setItemVolume(itemVolume);
+		item.setItemSize(itemSize);
 		item.setItemMarketPrice(itemMarketPrice);
 		item.setItemSellPrice(itemSellPrice);
 		item.setItemPurchasePrice(itemPurchasePrice);
-		item.setItemSummary(itemSummary);
+		item.setItemSummaryInfo(itemSummaryInfo);
+		item.setItemDetailInfo(itemDetailInfo);
+		item.setItemIngredient(itemIngredient);
+		item.setItemHowToUse(itemHowToUse);
 		item.setItemSellMaxNum(itemSellMaxNum);
 		item.setItemManufactureDate(itemManufactureDate);
 		item.setItemExpireDate(itemExpireDate);
@@ -104,6 +110,12 @@ public class ManagerAddItemFormController extends BaseController{
 		for(int i = 0; i < itemCategoryArr.length; i++){
 			String itemCategoryValue = itemCategoryArr[i];
 			managerAddItemDao.insertItemCategory(itemCategoryValue);
+		}
+		
+		String[] itemFeatureArr = itemFeature.split("/");
+		for(int i = 0; i < itemFeatureArr.length; i++){
+			String itemFeatureValue = itemFeatureArr[i];
+			managerAddItemDao.insertItemFeature(itemFeatureValue);
 		}
 		
 		for(int i = 1; i < 6; i++){
