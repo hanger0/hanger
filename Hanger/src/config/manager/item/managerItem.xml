@@ -7,7 +7,7 @@
 		INSERT INTO ITEM(ITEM_GROUP_CODE, ITEM_CODE, BRAND_CODE, ITEM_NAME, ITEM_SIZE, 
 		ITEM_MARKET_PRICE, ITEM_SELL_PRICE, ITEM_PURCHASE_PRICE, 
 		ITEM_SUMMARY_INFO, ITEM_DETAIL_INFO, ITEM_INGREDIENT, ITEM_HOW_TO_USE, ITEM_SELL_MAXNUM, 
-		ITEM_MANUFACTURE_DATE, ITEM_EXPIRE_DATE, ITEM_RELEASE_DATE, ITEM_FEATURE, 
+		ITEM_MANUFACTURE_DATE, ITEM_EXPIRE_DATE, ITEM_RELEASE_DATE, 
 		ITEM_PIC_PATH, ITEM_PIC_ORGNAME, ITEM_PIC_SAVENAME, ITEM_PIC_SIZE, ITEM_STOCK_AMOUNT, 
 		REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
 		VALUES(CONCAT("IG",LPAD((SELECT GET_SEQ('ITEM_GROUP_CODE')), 10, '0')), 
@@ -15,7 +15,7 @@
 		#brandCode#, #itemName#, #itemSize#, 
 		#itemMarketPrice#, #itemSellPrice#, #itemPurchasePrice#, 
 		#itemSummaryInfo#, #itemDetailInfo#, #itemIngredient#, #itemHowToUse#, #itemSellMaxNum#, 
-		#itemManufactureDate#, #itemExpireDate#, #itemReleaseDate#, #itemFeature#, 
+		#itemManufactureDate#, #itemExpireDate#, #itemReleaseDate#, 
 		#itemMainPicPath#, #itemMainPicOrgName#, #itemMainPicSaveName#, #itemMainPicSize#, #itemStockAmount#, 
 		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>

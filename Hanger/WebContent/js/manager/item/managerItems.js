@@ -21,7 +21,7 @@ var InputMainPic = (function loadImageFile() {
 			var img = document.getElementById("mainPic").files;
 
 			if (!fileType.test(img[0].type)) {
-				alert("ÀÌ¹ÌÁö ÆÄÀÏÀ» ¾÷·Îµå ÇÏ¼¼¿ä");
+				alert("ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½");
 				return;
 			}
 			ImgReader.readAsDataURL(img[0]);
@@ -54,7 +54,7 @@ var InputDetailPic1 = (function loadImageFile() {
 			var img = document.getElementById("detailPic1").files;
 
 			if (!fileType.test(img[0].type)) {
-				alert("ÀÌ¹ÌÁö ÆÄÀÏÀ» ¾÷·Îµå ÇÏ¼¼¿ä");
+				alert("ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½");
 				return;
 			}
 			ImgReader.readAsDataURL(img[0]);
@@ -87,7 +87,7 @@ var InputDetailPic2 = (function loadImageFile() {
 			var img = document.getElementById("detailPic2").files;
 
 			if (!fileType.test(img[0].type)) {
-				alert("ÀÌ¹ÌÁö ÆÄÀÏÀ» ¾÷·Îµå ÇÏ¼¼¿ä");
+				alert("ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½");
 				return;
 			}
 			ImgReader.readAsDataURL(img[0]);
@@ -120,7 +120,7 @@ var InputDetailPic3 = (function loadImageFile() {
 			var img = document.getElementById("detailPic3").files;
 
 			if (!fileType.test(img[0].type)) {
-				alert("ÀÌ¹ÌÁö ÆÄÀÏÀ» ¾÷·Îµå ÇÏ¼¼¿ä");
+				alert("ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½");
 				return;
 			}
 			ImgReader.readAsDataURL(img[0]);
@@ -153,7 +153,7 @@ var InputDetailPic4 = (function loadImageFile() {
 			var img = document.getElementById("detailPic4").files;
 
 			if (!fileType.test(img[0].type)) {
-				alert("ÀÌ¹ÌÁö ÆÄÀÏÀ» ¾÷·Îµå ÇÏ¼¼¿ä");
+				alert("ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½");
 				return;
 			}
 			ImgReader.readAsDataURL(img[0]);
@@ -185,7 +185,7 @@ var InputDetailPic5 = (function loadImageFile() {
 			var img = document.getElementById("detailPic5").files;
 
 			if (!fileType.test(img[0].type)) {
-				alert("ÀÌ¹ÌÁö ÆÄÀÏÀ» ¾÷·Îµå ÇÏ¼¼¿ä");
+				alert("ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½");
 				return;
 			}
 			ImgReader.readAsDataURL(img[0]);
@@ -203,7 +203,7 @@ function searchBrand() {
 	window
 			.open(
 					"/managerBrand.hang",
-					"ºê·£µå µî·Ï",
+					"ï¿½ê·£ï¿½ï¿½ ï¿½ï¿½ï¿½",
 					"toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=420, height=500");
 }
 
@@ -214,76 +214,76 @@ function addItemAction() {
 	f.releaseDate.value = f.releaseYear.value + f.releaseMonth.value + f.releaseDay.value;
 	
 	if (f.brandCode.value == ""){
-		window.alert("ºê·£µå¸¦ ¹Ýµå½Ã ¼±ÅÃÇØ¾ß ÇÕ´Ï´Ù.");
+		window.alert("ï¿½ê·£ï¿½å¸¦ ï¿½Ýµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.");
 		return false;
 	}
 	
 	if (f.name.value == "") {
-		window.alert("»óÇ°¸íÀ» ¹Ýµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
+		window.alert("ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.");
 		f.name.focus();
 		return false;
 	}
 	
 	if (f.marketPrice.value == ""){
-		window.alert("½ÃÀå°¡¸¦ ¹Ýµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
+		window.alert("ï¿½ï¿½ï¿½å°¡ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.");
 		f.marketPrice.focus();
 		return false;
 	}
 	
 	if ((f.marketPrice.value * 0) != 0){
-		window.alert("½ÃÀå°¡´Â ¼ýÀÚ¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+		window.alert("ï¿½ï¿½ï¿½å°¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
 		f.marketPrice.focus();
 		f.marketPrice.select();
 		return false;
 	}
 	
 	if (f.sellPrice.value == "") {
-		window.alert("ÆÇ¸Å°¡¸¦ ¹Ýµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
+		window.alert("ï¿½Ç¸Å°ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.");
 		f.sellPrice.focus();
 		return false;
 	}
 	
 	if ((f.sellPrice.value * 0) != 0){
-		window.alert("ÆÇ¸Å°¡´Â ¼ýÀÚ¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+		window.alert("ï¿½Ç¸Å°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
 		f.sellPrice.focus();
 		f.sellPrice.select();
 		return false;
 	}
 	
 	if (f.purchasePrice.value == "") {
-		window.alert("¸ÅÀÔ°¡¸¦ ¹Ýµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
+		window.alert("ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.");
 		f.purchasePrice.focus();
 		return false;
 	}
 	
 	if ((f.purchasePrice.value * 0) != 0){
-		window.alert("¸ÅÀÔ°¡´Â ¼ýÀÚ¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+		window.alert("ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
 		f.purchasePrice.focus();
 		f.purchasePrice.select();
 		return false;
 	}
 
 	if ((f.sellMaxNum.value * 0) != 0){
-		window.alert("ÃÖ´ëÆÇ¸Å°¡´É°³¼ö´Â ¼ýÀÚ¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+		window.alert("ï¿½Ö´ï¿½ï¿½Ç¸Å°ï¿½ï¿½É°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
 		f.sellMaxNum.focus();
 		f.sellMaxNum.select();
 		return false;
 	}
 	
 	if (f.stockAmount.value == "") {
-		window.alert("¸ÅÀÔ°¡¸¦ ¹Ýµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
+		window.alert("ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.");
 		f.stockAmount.focus();
 		return false;
 	}
 	
 	if ((f.stockAmount.value * 0) != 0){
-		window.alert("¸ÅÀÔ°¡´Â ¼ýÀÚ¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+		window.alert("ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
 		f.stockAmount.focus();
 		f.stockAmount.select();
 		return false;
 	}
-	
-	window.alert("»óÇ°ÀÌ Á¤»óÀûÀ¸·Î µî·ÏµÇ¾ú½À´Ï´Ù");
+
+	window.alert("ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ÏµÇ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
 
 	f.submit();
 }

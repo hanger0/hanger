@@ -229,7 +229,7 @@
 					</dt>
 					<dd>
 						<INPUT type="hidden" name="releaseDate" id="releaseDate"/>
-						<SELECT id="manufactureYear" name="releaseYear">
+						<SELECT id="releaseYear" name="releaseYear">
 							<option value="0000" selected="1">YEAR</option>
 							<% 
 								for(int i = cal.get(Calendar.YEAR); i > 1949; i--){
