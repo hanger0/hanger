@@ -48,11 +48,13 @@ public class UserLoginController extends BaseController {
 		if(uvList != null && uvList.size()>0) {
 			String myName = (String)uvList.get(0).getUserName();
 			String myCode = (String)uvList.get(0).getUserCode();
+			String adminYn = (String)uvList.get(0).getUserAdminYn();
 			System.out.println("로그인 성공");
 			session.setAttribute("loginYn", "Y");
 			session.setAttribute("myUserId", userId);
 			session.setAttribute("myUserName", myName);
 			session.setAttribute("myUserCode", myCode);
+			session.setAttribute("adminYn", adminYn);
 			
 			message = null;
 			moveUrl = "common/Frame";

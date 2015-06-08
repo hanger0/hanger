@@ -22,6 +22,8 @@
 <!-- JQuery 시작 -->
 <script src="/js/jquery-2.1.3.min.js" type="text/javascript"></script>
 <!-- JQuery 종료 -->
+<link rel="stylesheet"
+   href="/css/main.css">
 
 <HTML>
 	<HEAD>
@@ -44,7 +46,6 @@
 				<!-- 띄어쓰기 -->
 				<p><br><p><br>
 				<p><br><p><br>
-				<p><br><p><br>
 				<p>
 				<div id="content">
 					<jsp:include page="<%= mainUrl %>" flush="true" />
@@ -61,4 +62,3 @@
 		</div>
 	</BODY>
 <HTML>
-

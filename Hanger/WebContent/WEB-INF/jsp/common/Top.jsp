@@ -7,19 +7,19 @@
 	}
 %>
 <script type="text/javascript">
-$(document).ready(function($) {
+	$(document).ready(function($) {
 
-	$('#mega-menu-3').dcMegaMenu({
-		rowItems : '7',
-		speed : 'fast',
-		effect : 'fade'
+		$('#mega-menu-3').dcMegaMenu({
+			rowItems : '7',
+			speed : 'fast',
+			effect : 'fade'
+		});
+		$('#mega-menu-9').dcMegaMenu({
+			rowItems : '3',
+			speed : 'fast',
+			effect : 'fade'
+		});
 	});
-	$('#mega-menu-9').dcMegaMenu({
-		rowItems : '3',
-		speed : 'fast',
-		effect : 'fade'
-	});
-});
 </script>
 
 <link href="css/skins/grey.css" rel="stylesheet" type="text/css" />
@@ -32,15 +32,14 @@ $(document).ready(function($) {
 	width: 50px;
 	height: 40px;
 }
-
 .shadow {
 	padding: 12px 38px 12px 25px;
 	text-shadow: 1px 1px 1px #000;
 	text-decoration: none;
 	background: url(images/bg_grey.png);
-	margin-left: 23%
 }
 </style>
+
 <header id="header">
 	<!--기본페이지에는 이거보임-->
 	<div style="width: 100%;"
@@ -49,7 +48,7 @@ $(document).ready(function($) {
 		<div class="navbar-header" style="margin-left: 160px">
 			<a class="navbar-brand" href="/"> <img
 				style="height: 32px; padding: 3px 0;"
-				src="/assets/images/hanger.png" id="brand-icon" alt="Hanger" />
+				src="/images/juven.png" id="brand-icon" alt="Hanger" />
 			</a>
 		</div>
 		<form class="navbar-form navbar-left" role="search" method="get"
@@ -66,9 +65,11 @@ $(document).ready(function($) {
 				<li></li>
 				<%
 					if (session != null && session.getAttribute("loginYn") != null
-							&& ((String) session.getAttribute("loginYn")).equals("Y")) {
+							&& ((String) session.getAttribute("loginYn")).equals("Y")
+							&& session.getAttribute("adminYn") != null
+							&& ((String) session.getAttribute("adminYn")).equals("N")) {
 				%>
-				<li class="headli"><a href="/relationFollowingSearch.hang"><img
+				<li class="headli"><a href="/userMainPage.hang"><img
 						src="images/icons/top/mypage.jpg" /></a></li>
 				<li class="headli"><a href="#"><img
 						src="images/icons/top/friend.jpg" /></a></li>
@@ -76,6 +77,14 @@ $(document).ready(function($) {
 						src="images/icons/top/cart.jpg" /></a></li>
 				<li class="headli"><a href="#"><img
 						src="images/icons/top/ball.jpg" /></a></li>
+				<li class="headli"><a href="/logout.hang"><img
+						src="images/icons/top/option.jpg" /></a></li>
+				<%
+					} else if (session.getAttribute("adminYn") != null
+							&& ((String) session.getAttribute("adminYn")).equals("Y")) {
+				%>
+				<li class="headli"><a href="/goManagerMainPage.hang"><img
+						src="images/icons/top/mypage.jpg" /></a></li>
 				<li class="headli"><a href="/logout.hang"><img
 						src="images/icons/top/option.jpg" /></a></li>
 				<%
@@ -103,9 +112,7 @@ $(document).ready(function($) {
 			style="margin-top: -1%; float: left; width: 50%">
 			<div class="grey">
 				<ul id="mega-menu-3" class="mega-menu">
-					<li class="shadow">
-						<A>&nbsp;</A>
-					</li>
+					<li class="shadow" style="margin-left: 23%"><A>&nbsp;</A></li>
 					<li><a href="ItemList.jsp">SHOP</a>
 						<ul>
 							<li style="margin-left: 10%"><a href="#"><font size="4"><b>메이크업</b></font></a>
@@ -172,8 +179,7 @@ $(document).ready(function($) {
 								</ul>
 								<ul>
 									<br>
-									<li><a href="#"><font size="2"><b> 캔들 &
-													디퓨저</b></font></a></li>
+									<li><a href="#"><font size="2"><b> 캔들 & 디퓨저</b></font></a></li>
 								</ul>
 							<li><a href="#"><font size="4"><b>도구 & 기기</b></font></a>
 								<ul>
@@ -189,7 +195,7 @@ $(document).ready(function($) {
 									<li><a href="#"><font size="2"><b> 도구</b></font></a></li>
 								</ul>
 						</ul></li>
-					<li><a href="Brand.jsp">BRAND</a>
+					<li><a href="/brand.hang">BRAND</a>
 						<ul>
 							<li style="margin-left: 10%"><a href="#"><font size="4"><b>알파벳
 											순</b></font></a>
@@ -304,18 +310,18 @@ $(document).ready(function($) {
 									<li><a href="#"><font size="2"><b>Z</b></font></a>
 								</ul>
 						</ul></li>
-					<li><a href="Sale.jsp">SALE</a></li>
+					<li><a href="/sale.hang">SALE</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="demo-container"
 			style="margin-top: -1%; float: right; width: 50%">
 			<div class="white">
-				<ul id="mega-menu-9" class="mega-menu">
+				<ul id="mega-menu-3" class="mega-menu">
 					<li style="margin-left: 12%"><a>&nbsp;</a></li>
-					<li><a href="MainReview.jsp">REVIEW</a></li>
-					<li><a href="TipPage.jsp">TIPS</a></li>
-					<li><a href="#">HANG OUT</a></li>
+					<li><a href="/reviewList.hang">REVIEW</a></li>
+					<li><a href="/tipList.hang">TIPS</a></li>
+					<li><a href="/hangOutList.hang">HANG OUT</a></li>
 				</ul>
 			</div>
 		</div>

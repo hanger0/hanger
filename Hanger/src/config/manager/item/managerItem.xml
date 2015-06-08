@@ -4,13 +4,17 @@
 	<typeAlias alias="managerItem" type="com.hanger.manager.item.vo.ManagerItemVo"/>
 	
 	<insert id="insertItem" parameterClass="managerItem">
-		INSERT INTO ITEM(ITEM_CODE, BRAND_CODE, ITEM_NAME, ITEM_MARKET_PRICE, ITEM_SELL_PRICE, ITEM_PURCHASE_PRICE, 
-		ITEM_SUMMARY, ITEM_SELL_MAXNUM, ITEM_OPTION1_TITLE, ITEM_OPTION1_CONTENT, ITEM_OPTION2_TITLE, ITEM_OPTION2_CONTENT, ITEM_OPTION3_TITLE, ITEM_OPTION3_CONTENT, 
+		INSERT INTO ITEM(ITEM_GROUP_CODE, ITEM_CODE, BRAND_CODE, ITEM_NAME, ITEM_VOLUME, 
+		ITEM_MARKET_PRICE, ITEM_SELL_PRICE, ITEM_PURCHASE_PRICE, 
+		ITEM_SUMMARY, ITEM_SELL_MAXNUM, 
 		ITEM_MANUFACTURE_DATE, ITEM_EXPIRE_DATE, ITEM_RELEASE_DATE, ITEM_FEATURE, 
-		ITEM_PIC_PATH, ITEM_PIC_ORGNAME, ITEM_PIC_SAVENAME, ITEM_PIC_SIZE, ITEM_STOCK_AMOUNT, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
-		VALUES(CONCAT("IT",LPAD((SELECT GET_SEQ('ITEM_CODE')), 10, '0')), 
-		#brandCode#, #itemName#, #itemMarketPrice#, #itemSellPrice#, #itemPurchasePrice#, 
-		#itemSummary#, #itemSellMaxNum#, #itemOption1Title#, #itemOption1Content#, #itemOption2Title#, #itemOption2Content#, #itemOption3Title#, #itemOption3Content#, 
+		ITEM_PIC_PATH, ITEM_PIC_ORGNAME, ITEM_PIC_SAVENAME, ITEM_PIC_SIZE, ITEM_STOCK_AMOUNT, 
+		REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
+		VALUES(CONCAT("IG",LPAD((SELECT GET_SEQ('ITEM_GROUP_CODE')), 10, '0')), 
+		CONCAT("IT",LPAD((SELECT GET_SEQ('ITEM_CODE')), 10, '0')), 
+		#brandCode#, #itemName#, #itemVolume#, 
+		#itemMarketPrice#, #itemSellPrice#, #itemPurchasePrice#, 
+		#itemSummary#, #itemSellMaxNum#, 
 		#itemManufactureDate#, #itemExpireDate#, #itemReleaseDate#, #itemFeature#, 
 		#itemMainPicPath#, #itemMainPicOrgName#, #itemMainPicSaveName#, #itemMainPicSize#, #itemStockAmount#, 
 		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)

@@ -5,7 +5,7 @@
 	
 	<select id="loginUser" parameterClass="user" resultClass="user">
 		SELECT
-			USER_NAME as userName, USER_CODE as userCode
+			USER_NAME as userName, USER_CODE as userCode, USER_ADMIN_YN as userAdminYn
 		FROM
 			USER
 		WHERE

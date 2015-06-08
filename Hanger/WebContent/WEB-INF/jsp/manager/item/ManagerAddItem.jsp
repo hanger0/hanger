@@ -115,6 +115,16 @@
 						<INPUT class="text" type="text" name="name" maxlength="50">
 					</dd>
 				</dl>
+				
+				<dl>
+					<dt>
+						<label for="volume">용량:</label>
+					</dt>
+					<dd>
+						<INPUT class="text" type="text" name="volume" maxlength="10">
+						(null값 허용, ml인지 g인지 등등 적어야함)
+					</dd>
+				</dl>
 
 				<dl>
 					<dt>
@@ -152,6 +162,7 @@
 					<dd>
 						<INPUT class="text" type="text" name="manufactureDate"
 							maxlength="8">
+						(null허용 ex-20150607)
 					</dd>
 				</dl>
 				
@@ -161,7 +172,7 @@
 					</dt>
 					<dd>
 						<INPUT class="text" type="text" name="expireDate"
-							maxlength="20">
+							maxlength="20"> (int형입니다)
 					</dd>
 				</dl>
 				
@@ -172,12 +183,13 @@
 					<dd>
 						<INPUT class="text" type="text" name="releaseDate"
 							maxlength="8">
+						(null허용 ex-19920707)
 					</dd>
 				</dl>
 
 				<dl>
 					<dt>
-						<label for="summary">간단한설명(메인사진옆에붙을):</label>
+						<label for="summary">간단한설명(메인사진옆에붙을? 필요없으면빼고):</label>
 					</dt>
 					<dd>
 						<INPUT class="text" type="text" name="summary" maxlength="500">
@@ -189,65 +201,7 @@
 						<label for="sellMaxNum">최대판매가능개수:</label>
 					</dt>
 					<dd>
-						<INPUT class="text" type="text" name="sellMaxNum" maxlength="20">
-					</dd>
-				</dl>
-
-				<dl>
-					<dt>
-						<label for="option1Title">옵션1제목:</label>
-					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="option1Title" maxlength="20">
-					</dd>
-				</dl>
-
-				<dl>
-					<dt>
-						<label for="option1Content">옵션1내용:</label>
-					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="option1Content"
-							maxlength="20">
-					</dd>
-				</dl>
-
-				<dl>
-					<dt>
-						<label for="option2Title">옵션2제목:</label>
-					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="option2Title" maxlength="20">
-					</dd>
-				</dl>
-
-				<dl>
-					<dt>
-						<label for="option2Content">옵션2내용:</label>
-					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="option2Content"
-							maxlength="20">
-					</dd>
-				</dl>
-
-				<dl>
-					<dt>
-						<label for="option3Title">옵션3제목:</label>
-					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="option3Title" maxlength="20">
-					</dd>
-				</dl>
-
-				<dl>
-					<dt>
-						<label for="option3Content">옵션3내용:</label>
-					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="option3Content"
-							maxlength="20">
-
+						<INPUT class="text" type="text" name="sellMaxNum" maxlength="20"> 개
 					</dd>
 				</dl>
 
@@ -257,6 +211,7 @@
 					</dt>
 					<dd>
 						<INPUT class="text" type="text" name="category" maxlength="20">
+						(슬래시 / 로 구분. ITEM_CATEGORY TABLE에 따로 들어감)
 					</dd>
 				</dl>
 				
@@ -266,6 +221,7 @@
 					</dt>
 					<dd>
 						<INPUT class="text" type="text" name="feature" maxlength="20">
+						(슬래시 / 로 구분)
 					</dd>
 				</dl>
 				

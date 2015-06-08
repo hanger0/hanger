@@ -21,6 +21,7 @@ public class UserVo {
 	private String userSkinTone;
 	private String userSkinProblem;
 	private String userRank;
+	private String userAdminYn;
 	private String regId;
 	private String regDate;
 	private String regIp;
@@ -149,6 +150,12 @@ public class UserVo {
 	}
 	public void setUserRank(String userRank) {
 		this.userRank = userRank;
+	}
+	public String getUserAdminYn() {
+		return userAdminYn;
+	}
+	public void setUserAdminYn(String userAdminYn) {
+		this.userAdminYn = userAdminYn;
 	}
 	public String getRegId() {
 		return regId;

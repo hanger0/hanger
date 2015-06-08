@@ -40,6 +40,7 @@ public class ManagerAddItemFormController extends BaseController{
 		
 		String brandCode = mul.getParameter("brandCode");
 		String itemName = mul.getParameter("name");
+		String itemVolume = mul.getParameter("volume");
 		int itemMarketPrice = Integer.parseInt(mul.getParameter("marketPrice"));
 		int itemSellPrice = Integer.parseInt(mul.getParameter("sellPrice"));
 		int itemPurchasePrice = Integer.parseInt(mul.getParameter("purchasePrice"));
@@ -48,31 +49,6 @@ public class ManagerAddItemFormController extends BaseController{
 		String itemManufactureDate = mul.getParameter("manufactureDate");
 		String itemExpireDate = mul.getParameter("expireDate");
 		String itemReleaseDate = mul.getParameter("releaseDate");
-		String itemOption1Title = null;
-		if(mul.getParameter("option1Title") != ""){
-			itemOption1Title = mul.getParameter("option1Title");
-		}
-		String itemOption1Content = null;
-		if(mul.getParameter("option1Content") != ""){
-			itemOption1Content = mul.getParameter("option1Content");
-		}
-		String itemOption2Title = null;
-		if(mul.getParameter("option2Title") != ""){
-			itemOption2Title = mul.getParameter("option2Title");
-		}
-		String itemOption2Content = null;
-		if(mul.getParameter("option2Content") != ""){
-			itemOption2Content = mul.getParameter("option2Content");
-		}
-		String itemOption3Title = null;
-		if(mul.getParameter("option3Title") != ""){
-			itemOption3Title = mul.getParameter("option3Title");
-		}
-		String itemOption3Content = null;
-		if(mul.getParameter("option3Content") != ""){
-			itemOption3Content = mul.getParameter("option3Content");
-		}
-		
 		String itemCategory = mul.getParameter("category");
 		String itemFeature = mul.getParameter("feature");
 		int itemStockAmount = Integer.parseInt(mul.getParameter("stockAmount"));
@@ -95,6 +71,7 @@ public class ManagerAddItemFormController extends BaseController{
 		
 		item.setBrandCode(brandCode);
 		item.setItemName(itemName);
+		item.setItemVolume(itemVolume);
 		item.setItemMarketPrice(itemMarketPrice);
 		item.setItemSellPrice(itemSellPrice);
 		item.setItemPurchasePrice(itemPurchasePrice);
@@ -103,12 +80,6 @@ public class ManagerAddItemFormController extends BaseController{
 		item.setItemManufactureDate(itemManufactureDate);
 		item.setItemExpireDate(itemExpireDate);
 		item.setItemReleaseDate(itemReleaseDate);
-		item.setItemOption1Title(itemOption1Title);
-		item.setItemOption1Content(itemOption1Content);
-		item.setItemOption2Title(itemOption2Title);
-		item.setItemOption2Content(itemOption2Content);
-		item.setItemOption3Title(itemOption3Title);
-		item.setItemOption3Content(itemOption3Content);
 		item.setItemCategory(itemCategory);
 		item.setItemFeature(itemFeature);
 		item.setItemStockAmount(itemStockAmount);
@@ -135,13 +106,10 @@ public class ManagerAddItemFormController extends BaseController{
 			managerAddItemDao.insertItemCategory(itemCategoryValue);
 		}
 		
-		
-		
 		for(int i = 1; i < 6; i++){
 //			fileFormName = (String)formNames.nextElement();
 //			System.out.println(fileFormName);
 			if(mul.getOriginalFileName("detailPic" + i) != null){
-				System.out.println("im in!!!");
 
 				itemDetailPicPath = savePath;
 				itemDetailPicOrgName = mul.getOriginalFileName("detailPic" + i);

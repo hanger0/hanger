@@ -16,6 +16,7 @@ public class UserLogoutController extends BaseController {
 		//
 		HttpSession session = req.getSession(false);
 		session.setAttribute("loginYn", "N");
+		session.setAttribute("adminYn", "N");
 		session.removeAttribute("name");
 		
 		moveUrl = "common/Frame";

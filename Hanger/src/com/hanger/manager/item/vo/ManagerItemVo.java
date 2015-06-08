@@ -1,9 +1,11 @@
 package com.hanger.manager.item.vo;
 
 public class ManagerItemVo {
+	private String itemGroupCode;
 	private String itemCode;
 	private String brandCode;
 	private String itemName;
+	private String itemVolume;
 	private int itemMarketPrice;
 	private int itemSellPrice;
 	private int itemPurchasePrice;
@@ -18,12 +20,6 @@ public class ManagerItemVo {
 	private String itemManufactureDate;
 	private String itemExpireDate;
 	private String itemReleaseDate;
-	private String itemOption1Title;
-	private String itemOption1Content;
-	private String itemOption2Title;
-	private String itemOption2Content;
-	private String itemOption3Title;
-	private String itemOption3Content;
 	private String itemCategory;
 	private String itemFeature;
 	private int itemStockAmount;
@@ -38,7 +34,12 @@ public class ManagerItemVo {
 	private String updId;
 	private String updDate;
 	private String updIp;
-	
+	public String getItemGroupCode() {
+		return itemGroupCode;
+	}
+	public void setItemGroupCode(String itemGroupCode) {
+		this.itemGroupCode = itemGroupCode;
+	}
 	public String getItemCode() {
 		return itemCode;
 	}
@@ -56,6 +57,12 @@ public class ManagerItemVo {
 	}
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
+	}
+	public String getItemVolume() {
+		return itemVolume;
+	}
+	public void setItemVolume(String itemVolume) {
+		this.itemVolume = itemVolume;
 	}
 	public int getItemMarketPrice() {
 		return itemMarketPrice;
@@ -75,7 +82,30 @@ public class ManagerItemVo {
 	public void setItemPurchasePrice(int itemPurchasePrice) {
 		this.itemPurchasePrice = itemPurchasePrice;
 	}
-	
+	public String getItemMainPicPath() {
+		return itemMainPicPath;
+	}
+	public void setItemMainPicPath(String itemMainPicPath) {
+		this.itemMainPicPath = itemMainPicPath;
+	}
+	public String getItemMainPicOrgName() {
+		return itemMainPicOrgName;
+	}
+	public void setItemMainPicOrgName(String itemMainPicOrgName) {
+		this.itemMainPicOrgName = itemMainPicOrgName;
+	}
+	public String getItemMainPicSaveName() {
+		return itemMainPicSaveName;
+	}
+	public void setItemMainPicSaveName(String itemMainPicSaveName) {
+		this.itemMainPicSaveName = itemMainPicSaveName;
+	}
+	public int getItemMainPicSize() {
+		return itemMainPicSize;
+	}
+	public void setItemMainPicSize(int itemMainPicSize) {
+		this.itemMainPicSize = itemMainPicSize;
+	}
 	public float getItemScore() {
 		return itemScore;
 	}
@@ -100,41 +130,23 @@ public class ManagerItemVo {
 	public void setItemSellMaxNum(int itemSellMaxNum) {
 		this.itemSellMaxNum = itemSellMaxNum;
 	}
-	public String getItemOption1Title() {
-		return itemOption1Title;
+	public String getItemManufactureDate() {
+		return itemManufactureDate;
 	}
-	public void setItemOption1Title(String itemOption1Title) {
-		this.itemOption1Title = itemOption1Title;
+	public void setItemManufactureDate(String itemManufactureDate) {
+		this.itemManufactureDate = itemManufactureDate;
 	}
-	public String getItemOption1Content() {
-		return itemOption1Content;
+	public String getItemExpireDate() {
+		return itemExpireDate;
 	}
-	public void setItemOption1Content(String itemOption1Content) {
-		this.itemOption1Content = itemOption1Content;
+	public void setItemExpireDate(String itemExpireDate) {
+		this.itemExpireDate = itemExpireDate;
 	}
-	public String getItemOption2Title() {
-		return itemOption2Title;
+	public String getItemReleaseDate() {
+		return itemReleaseDate;
 	}
-	public void setItemOption2Title(String itemOption2Title) {
-		this.itemOption2Title = itemOption2Title;
-	}
-	public String getItemOption2Content() {
-		return itemOption2Content;
-	}
-	public void setItemOption2Content(String itemOption2Content) {
-		this.itemOption2Content = itemOption2Content;
-	}
-	public String getItemOption3Title() {
-		return itemOption3Title;
-	}
-	public void setItemOption3Title(String itemOption3Title) {
-		this.itemOption3Title = itemOption3Title;
-	}
-	public String getItemOption3Content() {
-		return itemOption3Content;
-	}
-	public void setItemOption3Content(String itemOption3Content) {
-		this.itemOption3Content = itemOption3Content;
+	public void setItemReleaseDate(String itemReleaseDate) {
+		this.itemReleaseDate = itemReleaseDate;
 	}
 	public String getItemCategory() {
 		return itemCategory;
@@ -142,11 +154,47 @@ public class ManagerItemVo {
 	public void setItemCategory(String itemCategory) {
 		this.itemCategory = itemCategory;
 	}
+	public String getItemFeature() {
+		return itemFeature;
+	}
+	public void setItemFeature(String itemFeature) {
+		this.itemFeature = itemFeature;
+	}
 	public int getItemStockAmount() {
 		return itemStockAmount;
 	}
 	public void setItemStockAmount(int itemStockAmount) {
 		this.itemStockAmount = itemStockAmount;
+	}
+	public String getItemDetailPicPath() {
+		return itemDetailPicPath;
+	}
+	public void setItemDetailPicPath(String itemDetailPicPath) {
+		this.itemDetailPicPath = itemDetailPicPath;
+	}
+	public String getItemDetailPicOrgName() {
+		return itemDetailPicOrgName;
+	}
+	public void setItemDetailPicOrgName(String itemDetailPicOrgName) {
+		this.itemDetailPicOrgName = itemDetailPicOrgName;
+	}
+	public String getItemDetailPicSaveName() {
+		return itemDetailPicSaveName;
+	}
+	public void setItemDetailPicSaveName(String itemDetailPicSaveName) {
+		this.itemDetailPicSaveName = itemDetailPicSaveName;
+	}
+	public int getItemDetailPicSize() {
+		return itemDetailPicSize;
+	}
+	public void setItemDetailPicSize(int itemDetailPicSize) {
+		this.itemDetailPicSize = itemDetailPicSize;
+	}
+	public String getItemUseYn() {
+		return itemUseYn;
+	}
+	public void setItemUseYn(String itemUseYn) {
+		this.itemUseYn = itemUseYn;
 	}
 	public String getRegId() {
 		return regId;
@@ -184,83 +232,7 @@ public class ManagerItemVo {
 	public void setUpdIp(String updIp) {
 		this.updIp = updIp;
 	}
-	public String getItemUseYn() {
-		return itemUseYn;
-	}
-	public void setItemUseYn(String itemUseYn) {
-		this.itemUseYn = itemUseYn;
-	}
-	public String getItemMainPicPath() {
-		return itemMainPicPath;
-	}
-	public void setItemMainPicPath(String itemMainPicPath) {
-		this.itemMainPicPath = itemMainPicPath;
-	}
-	public String getItemMainPicOrgName() {
-		return itemMainPicOrgName;
-	}
-	public void setItemMainPicOrgName(String itemMainPicOrgName) {
-		this.itemMainPicOrgName = itemMainPicOrgName;
-	}
-	public String getItemMainPicSaveName() {
-		return itemMainPicSaveName;
-	}
-	public void setItemMainPicSaveName(String itemMainPicSaveName) {
-		this.itemMainPicSaveName = itemMainPicSaveName;
-	}
-	public int getItemMainPicSize() {
-		return itemMainPicSize;
-	}
-	public void setItemMainPicSize(int itemMainPicSize) {
-		this.itemMainPicSize = itemMainPicSize;
-	}
-	public String getItemDetailPicPath() {
-		return itemDetailPicPath;
-	}
-	public void setItemDetailPicPath(String itemDetailPicPath) {
-		this.itemDetailPicPath = itemDetailPicPath;
-	}
-	public String getItemDetailPicOrgName() {
-		return itemDetailPicOrgName;
-	}
-	public void setItemDetailPicOrgName(String itemDetailPicOrgName) {
-		this.itemDetailPicOrgName = itemDetailPicOrgName;
-	}
-	public String getItemDetailPicSaveName() {
-		return itemDetailPicSaveName;
-	}
-	public void setItemDetailPicSaveName(String itemDetailPicSaveName) {
-		this.itemDetailPicSaveName = itemDetailPicSaveName;
-	}
-	public int getItemDetailPicSize() {
-		return itemDetailPicSize;
-	}
-	public void setItemDetailPicSize(int itemDetailPicSize) {
-		this.itemDetailPicSize = itemDetailPicSize;
-	}
-	public String getItemManufactureDate() {
-		return itemManufactureDate;
-	}
-	public void setItemManufactureDate(String itemManufactureDate) {
-		this.itemManufactureDate = itemManufactureDate;
-	}
-	public String getItemExpireDate() {
-		return itemExpireDate;
-	}
-	public void setItemExpireDate(String itemExpireDate) {
-		this.itemExpireDate = itemExpireDate;
-	}
-	public String getItemReleaseDate() {
-		return itemReleaseDate;
-	}
-	public void setItemReleaseDate(String itemReleaseDate) {
-		this.itemReleaseDate = itemReleaseDate;
-	}
-	public String getItemFeature() {
-		return itemFeature;
-	}
-	public void setItemFeature(String itemFeature) {
-		this.itemFeature = itemFeature;
-	}
+	
+	
 }
 

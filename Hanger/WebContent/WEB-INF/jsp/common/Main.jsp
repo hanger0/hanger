@@ -153,7 +153,7 @@ body
             <form class = "navbar-form">
                <div class = "row" style = "width:100%;margin-left:0%;">
                   <font size = "4" style="float:left;"><b>인기상품</b>Popluar</font>
-                  <div class = "more"><a>더 보기</a></div>
+                  <div class = "more"><a href="/reviewList.hang">더 보기</a></div>
                </div>
             </form>
 <%
@@ -185,7 +185,7 @@ for(int i=0; i<4; i++)
                   <div class="row">
                      <div class = "row" style = "width:94%;margin-left:3%;">
 	                     <font size = "4"><b>인기리뷰</b>&nbsp;&nbsp;Review</font>
-	                     <div class = "more"><a>더 보기</a></div>
+	                     <div class = "more"><a href="/reviewList.hang">더 보기</a></div>
                      </div>
 <script>
    function review() {
@@ -220,7 +220,7 @@ for(int i=0; i<2; i++)
                   <div class="row">
                      <div class = "row" style = "width:94%;margin-left:3%">
                         <font size = "4"><b>인기 팁</b>&nbsp;&nbsp;Tip</font>
-                        <div class = "more"><a>더 보기</a></div>
+                        <div class = "more"><a href="/tipList.hang">더 보기</a></div>
                      </div>
                      <script>
                         function tip() {
