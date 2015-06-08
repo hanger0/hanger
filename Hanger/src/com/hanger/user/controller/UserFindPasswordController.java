@@ -1,10 +1,10 @@
 package com.hanger.user.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.user.dao.UserFindPasswordDao;
@@ -19,24 +19,33 @@ public class UserFindPasswordController extends BaseController {
 		this.userFindPasswordDao = userFindPasswordDao;
 	}
 	
-	@RequestMapping("/findPassword.hang")
+	@RequestMapping(value="/findPassword.hang", method=RequestMethod.GET)
+	public String goFindPage(){
+		moveUrl = "user/PasswordSearch";
+		return moveUrl;
+	}
+	
+	@RequestMapping(value="/findPassword.hang", method=RequestMethod.POST)
 	public String findPassword(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
-		String myUserId = (String)session.getAttribute("myUserId");
+		String myUserId = req.getParameter("myUserId");
 		String userAnswer = req.getParameter("userAnswer");
-		String uesrQusetion = req.getParameter("uesrQusetion");
-		
+		String userQusetion = req.getParameter("userQusetion");
 		UserVo user = new UserVo();
 		user.setUserId(myUserId);
 		user.setUserAnswer(userAnswer);
-		user.setUserQuestion(uesrQusetion);
+		user.setUserQuestion(userQusetion);
+		
+		String message = "";
 		
 		String userPwd = userFindPasswordDao.selectPassword(user);
 		if(userPwd != null && userPwd.length() > 0){
 			req.setAttribute("userPwd", userPwd);
+		} else {
+			message = "다시 입력해주세요.";
+			req.setAttribute("message", message);
 		}
-		
+		moveUrl = "user/PasswordSearch";
 		return moveUrl;
 	}
 }

@@ -20,6 +20,13 @@ public class CartController extends BaseController {
 		this.cartDao = cartDao;
 	}
 	
+	@RequestMapping(value="/cart.hang", method=RequestMethod.GET)
+	public String goCart(HttpServletRequest req){
+		req.setAttribute("mainUrl", root + "buy/CartList.jsp");
+		
+		return moveUrl;
+	}
+	
 	@RequestMapping(value = "/cart.hang", method = RequestMethod.POST)
 	public String addCart(HttpServletRequest req){
 		//

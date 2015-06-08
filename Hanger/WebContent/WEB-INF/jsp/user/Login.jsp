@@ -59,7 +59,7 @@ body
 		        <label for="login-password"><i class="icon-lock"></i> <b>Password</b></label>
 				<input class="form-control" id="login-password" name="userPass" type="password" placeholder="">
 				
-				<a href="#" class="forgot-password">Forgot password?</a>
+				<a href="/findPassword.hang" class="forgot-password">Forgot password?</a>
 				<div class="not-member">
 					<p>Not a member? <a href="/join.hang">Register here</a></p>
 				</div>

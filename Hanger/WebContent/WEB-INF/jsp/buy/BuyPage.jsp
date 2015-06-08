@@ -11,12 +11,7 @@
 		</div>
 
 		<div class="thumbnail" style="width: 1150px; height: 1800px;">
-			<p>
-				<br>
-			<p>
-				<br>
-			<p>
-				<br>
+			<p><br><p><br><p><br>
 			<div class="post-table" align="center">
 				<table style="width: 900px; table-layout: fixed">
 					<tr align="center"
@@ -69,7 +64,6 @@
 
 			<!--띄어쓰기-->
 			<br>
-
 			<div class="card-table" align="center">
 				<table style="width: 900px; table-layout: fixed">
 					<tr
@@ -93,10 +87,7 @@
 			</div>
 
 			<!--띄어쓰기-->
-			<p>
-				<br>
-			<p>
-				<br>
+			<p><br><p><br>
 			<div class="product-info" style="margin-left: 120px">
 				<font size="4"><b>01. 구매자 정보</b></font>
 			</div>

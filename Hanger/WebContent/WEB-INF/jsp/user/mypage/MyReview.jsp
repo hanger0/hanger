@@ -1,51 +1,95 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<STYLE>
+.nav {
+	text-align: center;
+}
+
+.circle {
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 50%;
+}
+
+.circle-border {
+	border: 5px solid white;
+	background-color: white;
+	width: 120px;
+	height: 120px;
+}
+
+.circle-solid {
+	background-color: whitesmoke;
+}
+
+.circle:before {
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
+
+.circle-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+}
+
+.circle-img {
+	width: 120px;
+	height: 120px;
+	background: url("images/yebin.jpg") no-repeat center;
+	background-size: 100%;
+	margin-top: 10px;
+}
+
+.score-text {
+	margin: 50px;;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	height: 1em;
+	line-height: 1em;
+	font-size: 1em;
+}
+
+.headnav {
+	background-color: white;
+}
+
+.head-cricle {
+	width: 20px;
+	height: 20px;
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: red;
+}
+
+.headtext {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100px;
+	height: 125px;
+	text-align: center;
+	color: black;
+	font-weight: bolder;
+}
+</STYLE>
+
 <body style="background-color: #EBEBEB">
-	<div class="container" style="width: 80%; height: 100%">
-		<div class="thumbnail"
-			style="width: 100%; background-color: white; display: table; margin-left: auto; margin-right: auto">
-			<div class="col-sm-4 infos" style="width: 15%; margin-left: 5%">
-				<img src="images/yebin.jpg" alt="예빈짜응" class="img-circle"
-					style="width: 100px; height: 100px;">
-			</div>
-			<div class="col-sm-4 infos"
-				style="width: 13%; height: 100px; background-color: yellow">
-				이름 : 예빈이 <BR>날짜 : 2015.6.3 <BR>피부타입 : 건성
-			</div>
-			<div class="col-sm-4 infos"
-				style="width: 50%; background-color: orange">
-				<div style="width: 100%;">
-					<h5>
-						네이처리퍼블릭
-						</h3>
-						<h3>존나 좋은 모공제거 코팩이다 헤헤헤헤</h3>
-				</div>
-			</div>
-		</div>
-
-		<!-- 팔로우 리뷰 작성 시작 -->
-		<div class="thumbnail">
-			<div class="menubar" style="width: 100%; height: 40px;">
-				<ul class="nav nav-pills"
-					style="display: table; margin-left: auto; margin-right: auto"
-					align="center">
-					<li role="presentation" class=""
-						style="width: 120px; height: 100px;"><a href="MyReview.jsp">리뷰</a></li>
-					<li role="presentation" class=""
-						style="width: 120px; height: 100px"><a href="MyWrite.jsp">팁</a></li>
-					<li role="presentation" class=""
-						style="width: 120px; height: 100px"><a href="#">게시물</a></li>
-					<li role="presentation" class=""
-						style="width: 120px; height: 100px"><a href="Flow.jsp">팔로우</a></li>
-					<li role="presentation" class=""
-						style="width: 120px; height: 100px"><a href="OrderPage.jsp">오더</a></li>
-					<li role="presentation" class=""
-						style="width: 120px; height: 100px"><a href="#">마일리지</a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- 팔로우 리뷰 작성 끝 -->
-
+	<div class="container" style="width: 100%; height: 100%">
 		<!-- 팁 작성 시작 -->
 		<div class="row hotitem">
 			<h4>
@@ -53,10 +97,11 @@
 			</h4>
 
 			<%
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < 7; i++) {
 			%>
 			<div class="col-sm-6 col-md-3">
-				<div class="thumbnail" height="200px">
+				<div class="thumbnail"
+					style="height: 50%; width: 98%; display: table; margin-left: auto; margin-right: auto">
 					<div class="image">
 						<img src="images/test.png" width="200px" height="150px"
 							style="display: table; margin-left: auto; margin-right: auto;"
@@ -84,9 +129,11 @@
 			<%
 				}
 			%>
-			<br> <br> <br>
+		</div>
+			<br>
+		<div class="row hotitem">
 			<h4>
-				<b><p style="display: table;">MyReview</p></b>
+				<b><p style="display: table; margin: 15px 0 0 12px;">MyReview</p></b>
 			</h4>
 			<!--  팁 작성 끝 -->
 

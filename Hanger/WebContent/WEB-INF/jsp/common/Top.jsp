@@ -69,11 +69,11 @@
 							&& session.getAttribute("adminYn") != null
 							&& ((String) session.getAttribute("adminYn")).equals("N")) {
 				%>
-				<li class="headli"><a href="/userMainPage.hang"><img
+				<li class="headli"><a href="/myPage.hang"><img
 						src="images/icons/top/mypage.jpg" /></a></li>
 				<li class="headli"><a href="#"><img
 						src="images/icons/top/friend.jpg" /></a></li>
-				<li class="headli"><a href="#"><img
+				<li class="headli"><a href="/cart.hang"><img
 						src="images/icons/top/cart.jpg" /></a></li>
 				<li class="headli"><a href="#"><img
 						src="images/icons/top/ball.jpg" /></a></li>

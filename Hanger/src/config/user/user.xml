@@ -41,7 +41,7 @@
 			a.USER_CODE, a.USER_SKINTYPE, a.USER_SKINTONE, a.USER_SKINPROBLEM
 	</select>
 	
-	<select id="selectPassword" parameterClass="user">
+	<select id="selectPassword" parameterClass="user" resultClass="String">
 		SELECT 
 			USER_PWD 
 		FROM 

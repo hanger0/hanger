@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.order.dao.OrderBuyDao;
@@ -19,7 +20,14 @@ public class OrderBuyController extends BaseController {
 		this.orderBuyDao = orderBuyDao;
 	}
 	
-	@RequestMapping("/buyOrder.hang")
+	@RequestMapping(value="/buyOrder.hang", method=RequestMethod.GET)
+	public String goOrder(HttpServletRequest req){
+		req.setAttribute("mainUrl", "buy/BuyPage.jsp");
+		
+		return moveUrl;
+	}
+	
+	@RequestMapping(value="/buyOrder.hang", method=RequestMethod.POST)
 	public String buyOrder(HttpServletRequest req){
 		//
 		HttpSession session = req.getSession();

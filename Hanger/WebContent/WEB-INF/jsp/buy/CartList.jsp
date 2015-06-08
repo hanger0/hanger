@@ -131,7 +131,7 @@
 						location.href = "index.jsp"
 					}
 					function BuyPage() {
-						location.href = "BuyPage.jsp"
+						location.href = "/buyOrder.hang"
 					}
 				</script>
 				<div class="button" align="center">
