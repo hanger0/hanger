@@ -28,7 +28,7 @@
 			<div id="header"> 
 				<jsp:include page ="Top.jsp"/>
 			</div>
-			<div id="middle">
+			<div id="middle" style="background-color: #EBEBEB">
 				<!-- ¶ç¾î¾²±â -->
 				<p><br><p><br>
 				<p><br>

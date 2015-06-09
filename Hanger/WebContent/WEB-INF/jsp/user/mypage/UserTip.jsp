@@ -1,18 +1,22 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 
 <body>
-	<div class="container" style="width: 97.7%">
-		<!-- ½ºÅ©·¦ -->
-		<div class="row hotitem">
-			<div class="title">
-				<font size="3"><b><p
-							style="display: table; margin-left: 1.8%;">½ºÅ©·¦</p></b></font>
-			</div>
+	<!-- íŒ ìž‘ì„± ì‹œìž‘ -->
+	<div class="container" style="width:100%">
+		<div class="row hotitem"
+			style="width: 100%; display: table; margin-left: auto; margin-right: auto">
+			<font size = "3">
+				<b><p style="display: table; margin-left: 14px;">My Tip</p></b>
+			</font>
+			<!--  íŒ ìž‘ì„± ë -->
 			<%
 				for (int i = 0; i < 6; i++) {
 			%>
-			<div class="col-md-3">
-				<div class="thumbnail">
+			<div class="col-sm-6 col-md-3">
+				<div class="thumbnail"
+					style="margin-left: -5%; display: table; margin-left: auto; margin-right: auto">
 					<div class="image">
 						<img src="images/test.png" width="200px" height="150px"
 							style="display: table; margin-left: auto; margin-right: auto;"
@@ -21,17 +25,14 @@
 					<div class="caption">
 						<P>
 						<font size = "2">
-							ºÒ°¡¸®
+							ë¶ˆê°€ë¦¬
 						</font>
 						</P>
 						<P>
 						<font size = "3">
-							<B>¿È´Ï¾Æ ¾Æ¸Þ½Ã½ºÆ®</B>
+							<B>ì˜´ë‹ˆì•„ ì•„ë©”ì‹œìŠ¤íŠ¸</B>
 						</font>
 						</P>
-						<h6>
-							<span><font color="gray">2015-06-03 07:30</font></span>
-						</h6>
 
 						<hr style="margin-bottom: 3px">
 						<div class="Container-fluid" align="center">
@@ -46,7 +47,6 @@
 				}
 			%>
 		</div>
-
-		<!-- ½ºÅ©·¦ ³¡ -->
 	</div>
 </body>
+</html>

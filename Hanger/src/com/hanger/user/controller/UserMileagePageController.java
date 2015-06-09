@@ -12,7 +12,8 @@ public class UserMileagePageController extends BaseController {
 	//
 	@RequestMapping("/userMileagePage.hang")
 	public String userTipPage(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "user/mypage/Mileage.jsp");
+		req.setAttribute("mainUrl", myPageUrl);
+		req.setAttribute("myPageUrl", root + "user/mypage/Mileage.jsp");
 		
 		return moveUrl;
 	}

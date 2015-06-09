@@ -1,35 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<title>WisiList</title>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-</head>
 <div class="container">
 	<CENTER>
-		<span><h1>ê²Œì‹œíŒëª©ë¡</h1></span> <br> <br>
-
-
-		<br> <br>
+		<span><h1>°Ô½ÃÆÇ¸ñ·Ï</h1></span> <br> <br> <br> <br>
 		<TABLE class="table table-hover table-bordered">
 			<TR bgcolor="#CFDDFA" align="center">
 				<TD width="40"><B>No.</B></TD>
 				<TD width="150"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=ID">ê²Œì‹œíŒì´ë¦„</A></B></TD>
+						href="/managerUserServlet.mo?func=managerUser_001&sort=ID">°Ô½ÃÆÇÀÌ¸§</A></B></TD>
 				<TD width="60"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=JUMIN">ê²Œì‹œíŒ ì‚¬ìš© ê¶Œí•œ</A></B></TD>
+						href="/managerUserServlet.mo?func=managerUser_001&sort=JUMIN">°Ô½ÃÆÇ
+							»ç¿ë ±ÇÇÑ</A></B></TD>
 				<TD width="100"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=USEYN">ì‚¬ìš©ì—¬ë¶€</A></B></TD>
+						href="/managerUserServlet.mo?func=managerUser_001&sort=USEYN">»ç¿ë¿©ºÎ</A></B></TD>
 			</TR>
 
 			<!--  	for(int i=0; i<userList.size(); i++)
@@ -44,39 +27,37 @@
 		String adminYn = (String)userTable.get("ADMINYN");
 
 		String bgcolor = "#FFFFFF";
-		String useKor = "ì‚¬ìš©ì¤‘";
+		String useKor = "»ç¿ëÁß";
 		if(useYn.equals("N"))
 		{
 			bgcolor = "#E0E0E0";
-			useKor = "ì¤‘ì§€";
+			useKor = "ÁßÁö";
 		}
 
-		String userType = "ì¼ë°˜íšŒì›";
+		String userType = "ÀÏ¹ÝÈ¸¿ø";
 		if(adminYn.equals("Y"))
 		{
 			bgcolor = "#C9E7F8";
-			userType = "ê´€ë¦¬ìž";
+			userType = "°ü¸®ÀÚ";
 		} 
 -->
-		<% for(int i=1; i<5; i++) 
-		{
+			<%
+				for (int i = 1; i < 5; i++) {
 			%>
-		
+
 			<TR align="center">
 				<TD>i+1</TD>
 				<TD><A href="javascript:goDetailInfo('asdf')">id</A></TD>
-				<TD>
-					<SELECT>
-						<option value = "ì†ë‹˜">ì†ë‹˜</option>
-						<option value = "ì¤€íšŒì›">ì¤€íšŒì›</option>
-						<option value = "ì •íšŒì›">ì •íšŒì›</option>
-					</SELECT>
-				</TD>
-				
-				<TD>ìˆ˜ì •,ì‚­ì œ</TD>
-		<%
-		}
-		 %>
+				<TD><SELECT>
+						<option value="¼Õ´Ô">¼Õ´Ô</option>
+						<option value="ÁØÈ¸¿ø">ÁØÈ¸¿ø</option>
+						<option value="Á¤È¸¿ø">Á¤È¸¿ø</option>
+				</SELECT></TD>
+
+				<TD>¼öÁ¤,»èÁ¦</TD>
+				<%
+					}
+				%>
 				<!-- 
 			<TD>
 				<IMG src="/images/button/sbut_update.gif" class="userUpdateClass" align="absmiddle" border="0" style="cursor:pointer" alt="">

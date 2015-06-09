@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 
-<body style="background-color: #EBEBEB">
-	<div class="container" style="width: 80%; background-color: #EBEBEB;">
+<body>
+	<div class="container" style="width: 80%">
 		<!-- ÆÁ ÀÛ¼º ½ÃÀÛ -->
-		<div class="row" style="background-color: #EBEBEB;">
+		<div class="row">
 			<h2>
 				<b><p style="display: table; margin: 15px 0 0 12px;">HangOut!!</p></b>
 			</h2>

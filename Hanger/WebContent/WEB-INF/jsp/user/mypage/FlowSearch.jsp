@@ -11,50 +11,8 @@
 		qt = (String)request.getAttribute("qt");
 	}
 %>
-<html>
-<head>
-<title>Insert title here</title>
-
 <link rel="stylesheet" href="css/Follow/follow.css" />
 
-<STYLE>
-.reviewhead2
-{
-   margin-top:3px;
-}
-.infos
-{
-   width:150px;
-   margin:3px 0px 3px;
-}
-.img-circle
-{
-   width:100%;
-   height:80%;
-}
-.row
-{
-   width:100%;
-   background-color:white;
-   display:table;
-   margin-left:auto;
-   margin-right:auto;
-   margin-top:3px;
-   
-}
-.follows
-{
-   margin-left:3px;
-   margin-right:3px;
-}
-.title
-{
-   display:table;
-   margin-left:auto;
-   margin-right:auto;
-   background-color:yellow;
-}
-</STYLE>
 <script>
 $(function(){
 	$('#goFollowerList').click(function(){
@@ -96,45 +54,9 @@ $(function(){
 	});
 });
 </script>
-</head>
-<body style="background-color: #EBEBEB">
-   <div class="container" style="width:80%;margin-top:100px;">
-      <!-- 팔로우 리뷰 작성 시작 -->
-       <div class="thumbnail" style="width:100%;background-color:white;display:table;margin-left:auto;margin-right:auto">      
-         <div class="col-sm-4 infos" style="width:15%;margin-left:5%">
-            <img src="images/yebin.jpg" alt="예빈짜응" class="img-circle" style = "width:100px;height:100px;">
-         </div>
-         <div class="col-sm-4 infos" style="width:13%;height:100px;background-color:yellow">
-            이름 : 예빈이
-            <BR>날짜 : 2015.6.3
-            <BR>피부타입 : 건성
-         </div>
-         <div class="col-sm-4 infos" style="width:50%;background-color:orange">
-            <div style="width:100%;">
-               <h5>네이처리퍼블릭</h5>
-               <h3>존나 좋은 모공제거 코팩이다 헤헤헤헤</h3>
-            </div>
-         </div>
-   </div>
-         <div class="thumbnail" >
-            <div class = "menubar" style = "width:100%;height:40px;">
-            <ul class="nav nav-pills" style="display:table;margin-left:auto;margin-right:auto" align="center">
-               <li role="presentation" class="" style="width: 120px; height: 100px;">
-                  <a href="MyReview.jsp">리뷰</a></li>
-               <li role="presentation" class="" style="width: 120px; height: 100px">
-                  <a href="MyWrite.jsp">팁</a></li>
-               <li role="presentation" class="" style="width: 120px; height: 100px">
-                  <a href="#">게시물</a></li>
-               <li role="presentation" class="" style="width: 120px; height: 100px">
-                  <a href="Flow.jsp">팔로우</a></li>
-               <li role="presentation" class="" style="width: 120px; height: 100px">
-                  <a href="OrderPage.jsp">모더</a></li>
-               <li role="presentation" class="" style="width: 120px; height: 100px">
-                  <a href="#">마일리지</a></li>
-            </ul>
-            </div>
-         </div>
 
+<body>
+   <div class="container" style="width:97.7%;">
          <div class="thumbnail" style = "height:80px;">
             <form class="navbar-form navbar" style="width:100%;height:40px;" action="/userSearch.hang" method="post">
                <div class="form-group" style = "display:table;margin-left:auto;margin-right:auto;margin-top:8px;width:100%">
@@ -147,18 +69,20 @@ $(function(){
             <p><br>
          </div>
          
-       <div class = "thumbnail" style = "display:table;margin-left:auto;margin-right:auto;width:100%">
-       <div class="row row-flex-height-md" style = "width:100%;height:20%">
+       <div class="row row-flex-height-md" style = "width:100%">
 <%
 	if(followingList != null){
 %>
-           <h4 class="titles" style = "margin-left:40px"><font size = "4"><b>마이 팔로잉</b></font></h4><br>
+           <div class="title">
+	           <font size = "4" style = "margin-left:1.5%"><b>마이 팔로잉</b></font>
+	           <br><BR>
+           </div>
 <%
 		for (int i = 0; i < followingList.size(); i++) {
 			UserVo user = followingList.get(i);
 %>
-            <div class="col-sm-3" style="display:table;">
-               <div class="user-card followable  followed" style = " width:170px;display:table;margin-left:auto;margin-right:auto;">
+            <div class="col-sm-2" style = "width:20%" align = "center">
+               <div class="unpa-card user-card followable  followed">
                   <!-- 클릭시 사용자 정보로 이동 -->
                   <a href="#">
                      <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
@@ -172,11 +96,11 @@ $(function(){
                      <div class="user-count-info">
                         <div>
                            <!--  팔로우 수 -->
-                           <i class="ion-person"></i>팔로우 수 : <%= user.getFollowerCount() %>
+                           <span class="glyphicon glyphicon-user"></span>(<%= user.getFollowerCount() %>)
                         </div>
                         <!--  글쓴 수 -->
                         <div>
-                           <i class="ion-edit"></i>글쓴 수 : <%= user.getPotingCount() %>
+                           <span class="glyphicon glyphicon-pencil"></span>(<%= user.getPotingCount() %>)
                         </div>
                      </div>
                   </a>
@@ -194,13 +118,16 @@ $(function(){
 
 	if(followerList != null){
 %>
-        <h4 class="titles" style = "margin-left:40px"><font size = "4"><b>마이 팔로워</b></font></h4><br>
+        <div class="title">
+	           <font size = "4" style = "margin-left:1.5%"><b>마이 팔로워</b></font>
+	           <br><BR>
+           </div>
 <%
 		for (int i = 0; i < followerList.size(); i++) {
 			UserVo user = followerList.get(i);
 %>
-            <div class="col-sm-3" style="display:table;">
-               <div class="user-card followable  followed" style = " width:170px;display:table;margin-left:auto;margin-right:auto;">
+            <div class="col-sm-2" align = "center" style = "width:20%">
+               <div class="unpa-card user-card followable  followed">
                   <!-- 클릭시 사용자 정보로 이동 -->
                   <a href="#">
                      <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
@@ -215,11 +142,11 @@ $(function(){
                      <div class="user-count-info">
                         <div>
                            <!--  팔로우 수 -->
-                           <i class="ion-person"></i>팔로우 수 : <%= user.getFollowerCount() %>
+                           <span class="glyphicon glyphicon-user"></span>(<%= user.getFollowerCount() %>)
                         </div>
                         <!--  글쓴 수 -->
                         <div>
-                           <i class="ion-edit"></i>글쓴 수 : <%= user.getPotingCount() %>
+                           <span class="glyphicon glyphicon-pencil"></span>(<%= user.getPotingCount() %>)
                         </div>
                      </div>
                   </a>
@@ -252,13 +179,16 @@ $(function(){
 	
 	if(userList != null){
 %>
-        <h4 class="titles" style = "margin-left:40px"><font size = "4"><b>팔로워 검색</b></font></h4><br>
+        <div class="title">
+	           <font size = "4" style = "margin-left:1.5%"><b>팔로워 검색</b></font>
+	           <br><BR>
+           </div>
 <%
 		for (int i = 0; i < userList.size(); i++) {
 			UserVo user = userList.get(i);
 %>
-            <div class="col-sm-3" style="display:table;">
-               <div class="user-card followable  followed" style = " width:170px;display:table;margin-left:auto;margin-right:auto;">
+            <div class="col-sm-2" align = "center" style = "width:20%">
+               <div class="unpa-card user-card followable  followed">
                   <!-- 클릭시 사용자 정보로 이동 -->
                   <a href="#">
                      <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
@@ -273,11 +203,11 @@ $(function(){
                      <div class="user-count-info">
                         <div>
                            <!--  팔로우 수 -->
-                           <i class="ion-person"></i>팔로우 수 : <%= user.getFollowerCount() %>
+                           <span class="glyphicon glyphicon-user"></span>(<%= user.getFollowerCount() %>)
                         </div>
                         <!--  글쓴 수 -->
                         <div>
-                           <i class="ion-edit"></i>글쓴 수 : <%= user.getPotingCount() %>
+                           <span class="glyphicon glyphicon-pencil"></span>(<%= user.getPotingCount() %>)
                         </div>
                      </div>
                   </a>
@@ -311,19 +241,19 @@ $(function(){
 	}
 	if(followerList != null && followerList.size() == 0 && followingList == null && userList == null){
 %>
-		팔로워가 없습니다.
+		<font size = "3" style = "margin-left:4%">팔로워가 없습니다.</font>
 		<BR><br><BR>
 <%
 	}
 	if(followerList == null && followingList != null && followingList.size() == 0 && userList == null){
 %>
-		팔로잉이 없습니다.
+		<font size = "3" style = "margin-left:4%">팔로잉이 없습니다.</font>
 		<BR><br><BR>
 <%
 	}
 	if(followerList == null && followingList == null && userList != null && userList.size() == 0){
 %>
-		검색 결과가 없습니다.
+		<font size = "3" style = "margin-left:4%">검색 결과가 없습니다.</font>
 		<BR><br><BR>
 <%
 	}
@@ -334,4 +264,3 @@ $(function(){
       <!-- 팔로우 리뷰 작성 끝 -->
 </CENTER>
 </body>
-</html>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=euc-kr"%>
 
-<body style="background-color: #EBEBEB">
+<body>
 	<div class="container">
 		<div class="thumbnail" style="height: 90px">
 			<BR>

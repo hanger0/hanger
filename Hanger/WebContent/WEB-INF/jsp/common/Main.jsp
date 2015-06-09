@@ -259,8 +259,8 @@ for(int i=0; i<2; i++)
 for(int i=0; i<6; i++)
 {
 %>   
-               <div class="col-md-2">            
-                     <div class="unpa-card user-card followable  followed">
+               <div class="col-md-2" align = "center">            
+                     <div class="unpa-card user-card followable  followed" >
 
                      <!-- 클릭시 사용자 정보로 이동 -->
                      <a href="#">
@@ -291,7 +291,7 @@ for(int i=0; i<6; i++)
                         </div>
                      </a>
                      <button class="user-follow-button followed">
-                        <i class="ion-checkmark-round"></i> 팔로우 중
+                        <span class="glyphicon glyphicon-user"></span> 팔로우 중
                      </button>
                      <button class="user-follow-button">
                         <i class="unpacon-user"></i> 팔로우

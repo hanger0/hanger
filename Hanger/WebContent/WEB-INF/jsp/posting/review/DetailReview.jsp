@@ -1,13 +1,8 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 
 <STYLE>
-body {
-	background-color: #EBEBEB;
-}
-
 .container {
 	width: 100%;
-	background-color: #EBEBEB;
 }
 
 .row {

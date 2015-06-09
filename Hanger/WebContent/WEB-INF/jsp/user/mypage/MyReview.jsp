@@ -1,107 +1,19 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-</head>
-<STYLE>
-.nav {
-	text-align: center;
-}
-
-.circle {
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 50%;
-}
-
-.circle-border {
-	border: 5px solid white;
-	background-color: white;
-	width: 120px;
-	height: 120px;
-}
-
-.circle-solid {
-	background-color: whitesmoke;
-}
-
-.circle:before {
-	content: "";
-	display: block;
-	padding-top: 100%;
-}
-
-.circle-inner {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	text-align: center;
-}
-
-.circle-img {
-	width: 120px;
-	height: 120px;
-	background: url("images/yebin.jpg") no-repeat center;
-	background-size: 100%;
-	margin-top: 10px;
-}
-
-.score-text {
-	margin: 50px;;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	height: 1em;
-	line-height: 1em;
-	font-size: 1em;
-}
-
-.headnav {
-	background-color: white;
-}
-
-.head-cricle {
-	width: 20px;
-	height: 20px;
-	display: table;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: red;
-}
-
-.headtext {
-	margin-left: auto;
-	margin-right: auto;
-	width: 100px;
-	height: 125px;
-	text-align: center;
-	color: black;
-	font-weight: bolder;
-}
-</STYLE>
-
-<body style="background-color: #EBEBEB">
-	<div class="container" style="width: 100%; height: 100%">
-		<!-- 팁 작성 시작 -->
-		<div class="row hotitem">
-			<h4>
+<body>
+	<div class="container" style="width:100%">
+		<!-- 리뷰 작성 시작 -->
+		<div class="row hotitem" style = "display:table;margin-left:auto;margin-right:auto">
+			<font size = "2">
 				<b><p style="display: table; margin-left: 12px;">구매 상품</p></b>
-			</h4>
+			</font>
 
 			<%
-				for (int i = 0; i < 7; i++) {
+				for (int i = 0; i < 8; i++) {
 			%>
-			<div class="col-sm-6 col-md-3">
+			<div class="col-md-3">
 				<div class="thumbnail"
-					style="height: 50%; width: 98%; display: table; margin-left: auto; margin-right: auto">
+					style="margin-left:-5%;display: table; margin-left: auto; margin-right: auto">
 					<div class="image">
 						<img src="images/test.png" width="200px" height="150px"
 							style="display: table; margin-left: auto; margin-right: auto;"
@@ -113,9 +25,9 @@
 							<B>미샤</B>
 						</h6>
 						<p>
-						<h4>
+						<font size = "3">
 							<B>[M] 매직 쿠션 모이스처 SPF50+ PA+++ [21호]</B>
-						</h4>
+						</font>
 						<p>
 							<font size="2"><b>가격</b>&nbsp;&nbsp;&nbsp;</font><font
 								color="gray">16,000원</font>
@@ -131,17 +43,17 @@
 			%>
 		</div>
 			<br>
-		<div class="row hotitem">
-			<h4>
+		<div class="row hotitem" style = "width:100%;display:table;margin-left:auto;margin-right:auto">
+			<font size="4">
 				<b><p style="display: table; margin: 15px 0 0 12px;">MyReview</p></b>
-			</h4>
+			</font>
 			<!--  팁 작성 끝 -->
 
 			<%
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < 6; i++) {
 			%>
 			<div class="col-sm-6 col-md-3">
-				<div class="thumbnail">
+				<div class="thumbnail" style="margin-left:-5%;display:table;margin-left:auto;margin-right:auto">
 					<div class="image">
 						<img src="images/test.png" width="200px" height="150px"
 							style="display: table; margin-left: auto; margin-right: auto;"
@@ -149,25 +61,24 @@
 					</div>
 					<div class="caption">
 						<P>
-						<h5>
-							<B>브랜드 : 불가리 ★★★★★</B>
-						</h5>
+						<font size = "2">
+							불가리
+						</font>
 						</P>
 						<P>
-						<h4>
-							<B>제목 : 옴니아 아메시스트</B>
-						</h4>
+						<font size = "3">
+							<B>옴니아 아메시스트</B>
+						</font>
 						</P>
-						</h5>
+						<font size = "2">
+							<b>별점</b>&nbsp;&nbsp;&nbsp;★★★★★
+						</font>
 
 						<hr style="margin-bottom: 3px">
 						<div class="Container-fluid" align="center">
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span><span
-								class="badge">87</span>&nbsp;&nbsp;&nbsp;&nbsp; <span
-								class="glyphicon glyphicon-pencil" aria-hidden="true"></span><span
-								class="badge">20</span>&nbsp;&nbsp;&nbsp;&nbsp; <span
-								class="glyphicon glyphicon-tag" aria-hidden="true"></span><span
-								class="badge">30</span>
+							<span class="glyphicon glyphicon-heart">(20)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-pencil">(5)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-tag">(12)</span>
 						</div>
 					</div>
 				</div>

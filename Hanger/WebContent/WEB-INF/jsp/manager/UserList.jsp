@@ -1,35 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<title>WisiList</title>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-</head>
 <div class="container">
 	<CENTER>
-		<span><h1>íšŒì›ëª©ë¡</h1></span> <br> <br>
+		<span><h1>È¸¿ø¸ñ·Ï</h1></span> <br> <br>
 
 		<center>
 			<form class="navbar-form" role="search">
 				<div class="form-group">
 					<select >
-					<option value = "ì•„ì´ë””">ì•„ì´ë””</option>
-					<option value = "ì´ë¦„">ì´ë¦„</option>
+					<option value = "¾ÆÀÌµð">¾ÆÀÌµð</option>
+					<option value = "ÀÌ¸§">ÀÌ¸§</option>
 					</select>
-					<input type="text" class="form-control" placeholder="íšŒì›ê²€ìƒ‰"
+					<input type="text" class="form-control" placeholder="È¸¿ø°Ë»ö"
 						style="width: 300px">
 
-					<button type="submit" class="btn btn-default">ê²€ìƒ‰</button>
+					<button type="submit" class="btn btn-default">°Ë»ö</button>
 				</div>
 			</form>
 		</center>
@@ -42,16 +27,16 @@
 						href="/managerUserServlet.mo?func=managerUser_001&sort=ID">ID</A></B></TD>
 				<TD width="85"><B>Pass</B></TD>
 				<TD width="100"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=JUMIN">ì£¼ë¯¼ë²ˆí˜¸</A></B></TD>
+						href="/managerUserServlet.mo?func=managerUser_001&sort=JUMIN">ÁÖ¹Î¹øÈ£</A></B></TD>
 				<TD width="70"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=NAME">ì´ë¦„</A></B></TD>
+						href="/managerUserServlet.mo?func=managerUser_001&sort=NAME">ÀÌ¸§</A></B></TD>
 				<TD width="80"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=REG_DATE">ê°€ìž…ì¼</A></B></TD>
+						href="/managerUserServlet.mo?func=managerUser_001&sort=REG_DATE">°¡ÀÔÀÏ</A></B></TD>
 				<TD width="70"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=USEYN">ì‚¬ìš©ì—¬ë¶€</A></B></TD>
+						href="/managerUserServlet.mo?func=managerUser_001&sort=USEYN">»ç¿ë¿©ºÎ</A></B></TD>
 				<TD width="75"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=ADMINYN">íšŒì›êµ¬ë¶„</A></B></TD>
-				<TD width="100"><B>ê¸°ëŠ¥</B></TD>
+						href="/managerUserServlet.mo?func=managerUser_001&sort=ADMINYN">È¸¿ø±¸ºÐ</A></B></TD>
+				<TD width="100"><B>±â´É</B></TD>
 			</TR>
 
 			<!--  	for(int i=0; i<userList.size(); i++)
@@ -66,18 +51,18 @@
 		String adminYn = (String)userTable.get("ADMINYN");
 
 		String bgcolor = "#FFFFFF";
-		String useKor = "ì‚¬ìš©ì¤‘";
+		String useKor = "»ç¿ëÁß";
 		if(useYn.equals("N"))
 		{
 			bgcolor = "#E0E0E0";
-			useKor = "ì¤‘ì§€";
+			useKor = "ÁßÁö";
 		}
 
-		String userType = "ì¼ë°˜íšŒì›";
+		String userType = "ÀÏ¹ÝÈ¸¿ø";
 		if(adminYn.equals("Y"))
 		{
 			bgcolor = "#C9E7F8";
-			userType = "ê´€ë¦¬ìž";
+			userType = "°ü¸®ÀÚ";
 		} 
 -->
 		<% for(int i=1; i<5; i++) 
@@ -93,7 +78,7 @@
 				<TD>regDate</TD>
 				<TD>useKor</TD>
 				<TD>userType</TD>
-				<TD>ìˆ˜ì •,ì‚­ì œ</TD>
+				<TD>¼öÁ¤,»èÁ¦</TD>
 		<%
 		}
 		 %>

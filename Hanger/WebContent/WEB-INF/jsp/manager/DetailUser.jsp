@@ -1,20 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<title>WisiList</title>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-</head>
 <script type="text/javascript">
 	var InputImage = (function loadImageFile() {
 		if (window.FileReader) {
@@ -39,7 +24,7 @@
 				var img = document.getElementById("image").files;
 
 				if (!fileType.test(img[0].type)) {
-					alert("ì´ë¯¸ì§€ íŒŒì¼ì„ ì—…ë¡œë“œ í•˜ì„¸ìš”");
+					alert("ÀÌ¹ÌÁö ÆÄÀÏÀ» ¾÷·Îµå ÇÏ¼¼¿ä");
 					return;
 				}
 
@@ -54,10 +39,10 @@
 </script>
 <div class="container">
 	<CENTER>
-		<span><h1>íšŒì›ìƒì„¸ ì •ë³´</h1></span> <br> <br> <br> <br>
+		<span><h1>È¸¿ø»ó¼¼ Á¤º¸</h1></span> <br> <br> <br> <br>
 		<TABLE class="table table-hover table-bordered">
 			<TR>
-				<TD width="100" bgcolor="#CFDDFA"><B>íšŒì›ë²ˆí˜¸</B></TD>
+				<TD width="100" bgcolor="#CFDDFA"><B>È¸¿ø¹øÈ£</B></TD>
 				<TD width="50">027A</TD>
 			<TR>
 				<TD width="85"><B><A
@@ -65,26 +50,26 @@
 				<TD width="85"><B>aaaa@naver.com</B></TD>
 			</TR>
 			<TR>
-				<TD width="100"><B>íšŒì›ë“±ê¸‰</B></TD>
-				<TD width="70"><B> ì¤€íšŒì›</B></TD>
+				<TD width="100"><B>È¸¿øµî±Ş</B></TD>
+				<TD width="70"><B> ÁØÈ¸¿ø</B></TD>
 			</TR>
 			<TR>
-				<TD width="100"><B>ì „í™”ë²ˆí˜¸</B></TD>
+				<TD width="100"><B>ÀüÈ­¹øÈ£</B></TD>
 				<TD width="70"><B> <input type="text" value=""></B></TD>
 			</TR>
 			<TR>
-				<TD width="100"><B>ìš°í¸ë²ˆí˜¸</B></TD>
+				<TD width="100"><B>¿ìÆí¹øÈ£</B></TD>
 				<TD width="70"><B> <input type="text" maxlength="3"></B>
 					<input type="text" maxlength="3"></B> <input type="button"
-					value="ìš°í¸ë²ˆí˜¸ ì°¾ê¸°"></B></TD>
+					value="¿ìÆí¹øÈ£ Ã£±â"></B></TD>
 			</TR>
 			<TR>
-				<TD width="100"><B>ì£¼ì†Œ</B></TD>
+				<TD width="100"><B>ÁÖ¼Ò</B></TD>
 				<TD width="70"><B> <input type="text" value="" size="50"></B></TD>
 			</TR>
 
 			<TR>
-				<TD width="100"><B>í”„ë¡œí•„ì‚¬ì§„</B></TD>
+				<TD width="100"><B>ÇÁ·ÎÇÊ»çÁø</B></TD>
 
 				<TD><label for="image" class="col-sm-4 control-label">Image
 						: </label> <input id="image" type="file" class="input_file" name="image"
@@ -92,11 +77,11 @@
 					<div id="imagePreview"></div></TD>
 			</TR>
 			<TR>
-				<TD width="100"><B>ì§ˆë¬¸</B></TD>
+				<TD width="100"><B>Áú¹®</B></TD>
 				<TD width="70"><B> <input type="text" value=""></B></TD>
 			</TR>
 			<TR>
-				<TD width="100"><B>ë‹µë³€</B></TD>
+				<TD width="100"><B>´äº¯</B></TD>
 				<TD width="70"><B> <input type="text" value=""></B></TD>
 			</TR>
 			<TR>
@@ -106,23 +91,23 @@
 			<TR>
 				<TD width="100"><B>Skin Trouble</B></TD>
 				<TD><label class="checkbox-inline"> <input
-						type="checkbox" name="skinProblem" value="001"> í”¼ì§€
+						type="checkbox" name="skinProblem" value="001"> ÇÇÁö
 				</label> <label class="checkbox-inline"> <input type="checkbox"
-						name="skinProblem" value="002"> ê°ì§ˆì œê±°
+						name="skinProblem" value="002"> °¢ÁúÁ¦°Å
 				</label> <label class="checkbox-inline"> <input type="checkbox"
-						name="skinProblem" value="003"> ì£¼ë¦„ê°œì„ 
+						name="skinProblem" value="003"> ÁÖ¸§°³¼±
 				</label> <label class="checkbox-inline"> <input type="checkbox"
-						name="skinProblem" value="004"> í”¼ë¶€ë¯¸ë°±
+						name="skinProblem" value="004"> ÇÇºÎ¹Ì¹é
 				</label> <label class="checkbox-inline"> <input type="checkbox"
-						name="skinProblem" value="005"> í”¼ë¶€ë³´ìŠµ
+						name="skinProblem" value="005"> ÇÇºÎº¸½À
 				</label> <label class="checkbox-inline"> <input type="checkbox"
-						name="skinProblem" value="006"> ë³´ìŠµ
+						name="skinProblem" value="006"> º¸½À
 				</label></TD>
 			</TR>
 		</TABLE>
 		<div class="form-group">
-			<button type="button" class="btn pull-right" onclick="cancelBtn()">ì·¨ì†Œ</button>
-			<INPUT type="button" value="ìˆ˜ì •ì™„ë£Œ" id="joinButton"
+			<button type="button" class="btn pull-right" onclick="cancelBtn()">Ãë¼Ò</button>
+			<INPUT type="button" value="¼öÁ¤¿Ï·á" id="joinButton"
 				style="cursor: pointer" class="btn pull-right" onclick="joinBtn()">
 		</div>
 	</CENTER>

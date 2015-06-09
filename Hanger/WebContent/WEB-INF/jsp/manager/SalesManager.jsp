@@ -1,20 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<title>WisiList</title>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<!-- ë‚ ì§œ ìž…ë ¥ ê´€ë ¨ START -->
+<!-- ³¯Â¥ ÀÔ·Â °ü·Ã START -->
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
 	type="text/css" media="all" />
@@ -28,24 +14,23 @@
 		$("#datepicker1, #datepicker2").datepicker(
 				{
 					dateFormat : 'yy-mm-dd',
-					prevText : 'ì´ì „ ë‹¬',
-					nextText : 'ë‹¤ìŒ ë‹¬',
-					monthNames : [ '1ì›”', '2ì›”', '3ì›”', '4ì›”', '5ì›”', '6ì›”', '7ì›”',
-							'8ì›”', '9ì›”', '10ì›”', '11ì›”', '12ì›”' ],
-					monthNamesShort : [ '1ì›”', '2ì›”', '3ì›”', '4ì›”', '5ì›”', '6ì›”',
-							'7ì›”', '8ì›”', '9ì›”', '10ì›”', '11ì›”', '12ì›”' ],
-					dayNames : [ 'ì¼', 'ì›”', 'í™”', 'ìˆ˜', 'ëª©', 'ê¸ˆ', 'í† ' ],
-					dayNamesShort : [ 'ì¼', 'ì›”', 'í™”', 'ìˆ˜', 'ëª©', 'ê¸ˆ', 'í† ' ],
-					dayNamesMin : [ 'ì¼', 'ì›”', 'í™”', 'ìˆ˜', 'ëª©', 'ê¸ˆ', 'í† ' ],
+					prevText : 'ÀÌÀü ´Þ',
+					nextText : '´ÙÀ½ ´Þ',
+					monthNames : [ '1¿ù', '2¿ù', '3¿ù', '4¿ù', '5¿ù', '6¿ù', '7¿ù',
+							'8¿ù', '9¿ù', '10¿ù', '11¿ù', '12¿ù' ],
+					monthNamesShort : [ '1¿ù', '2¿ù', '3¿ù', '4¿ù', '5¿ù', '6¿ù',
+							'7¿ù', '8¿ù', '9¿ù', '10¿ù', '11¿ù', '12¿ù' ],
+					dayNames : [ 'ÀÏ', '¿ù', 'È­', '¼ö', '¸ñ', '±Ý', 'Åä' ],
+					dayNamesShort : [ 'ÀÏ', '¿ù', 'È­', '¼ö', '¸ñ', '±Ý', 'Åä' ],
+					dayNamesMin : [ 'ÀÏ', '¿ù', 'È­', '¼ö', '¸ñ', '±Ý', 'Åä' ],
 					showMonthAfterYear : true,
-					yearSuffix : 'ë…„'
+					yearSuffix : '³â'
 				});
 	});
 </script>
-<!-- ë‚ ì§œ ìž…ë ¥ ê´€ë ¨ END -->
-</head>
+<!-- ³¯Â¥ ÀÔ·Â °ü·Ã END -->
 
-<body style="background-color: #EBEBEB">
+<body>
 	<!-- 
 	<div class="container">
 		<BR>
@@ -58,8 +43,8 @@
 				<BR>
 				<BR>
 				<p>
-					ì¡°íšŒê¸°ê°„: <input type="text" id="datepicker1"> ~ <input type="text" id="datepicker2">
-					<input type="button" value="í™•ì¸"/>
+					Á¶È¸±â°£: <input type="text" id="datepicker1"> ~ <input type="text" id="datepicker2">
+					<input type="button" value="È®ÀÎ"/>
 				</p>
 				
 				
@@ -72,17 +57,17 @@
 						style="background-color: #EAEAEA; border-top: 2px solid gray;">
 						<!-- <td align = "center" style = "border-right:1px solid gray;border-bottom:2px solid gray;width:30px"><input type = "checkbox"></td> -->
 	<!-- 		<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray; width: 100px"><B>ë‚ ì§œ</B></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray; width: 100px"><B>³¯Â¥</B></td>
 						<td colspan="4" align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>ìƒí’ˆëª…</B></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>»óÇ°¸í</B></td>
 						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>ìƒí’ˆê¸ˆì•¡</B></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>»óÇ°±Ý¾×</B></td>
 						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><b>ìˆ˜ëŸ‰</b></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><b>¼ö·®</b></td>
 						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>í•©ê³„</B></td>
-						<td align="center" style="border-bottom: 2px solid gray"><B>ë¹„
-								ê³ </B></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>ÇÕ°è</B></td>
+						<td align="center" style="border-bottom: 2px solid gray"><B>ºñ
+								°í</B></td>
 					</tr>
 					<%for (int i = 1; i < 20; i++) {%>
 					<tr align="center">
@@ -94,28 +79,28 @@
 							width="120px"><img src="/images/14.jpg" width="80px"
 							height="80px" style="margin-left: -20px"></td>
 						<td colspan="3" style="border-right: 1px solid gray;"><font
-							size="3"><b>ì˜¬ë¦¬ë¸Œ ì˜ ì•„ì¿ ì•„ ìˆ˜ë¶„ í¬ë¦¼</b></font></td>
+							size="3"><b>¿Ã¸®ºê ¿µ ¾ÆÄí¾Æ ¼öºÐ Å©¸²</b></font></td>
 						<td
 							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2">19,000ì›</td>
+							rowspan="2">19,000¿ø</td>
 						<td
 							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2">20</td>
 						<td
 							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2">380,000 ì›</td>
+							rowspan="2">380,000 ¿ø</td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2">
 					</tr>
 					<tr>
 						<td style="border-bottom: 2px solid gray;" colspan="3"><font
-							size="2">1. Aíƒ€ìž…(ë¡œë ˆì•ŒíŒŒë¦¬ ë£¨ì„¼íŠ¸ ë§¤ì§ ë¹„ë¹„ì—ì„¼ìŠ¤ 01í˜¸ ë‚´ì¸„ëŸ´ ë² ì´ì§€+ì›Œí„°í”„ë£¨í”„ ì ¤íŽœìŠ¬
-								ì•„ì´ë¼ì´ë„ˆ+ë¦½ ì»¬ëŸ¬ ìŠ¤í‹±)</font></td>
+							size="2">1. AÅ¸ÀÔ(·Î·¹¾ËÆÄ¸® ·ç¼¾Æ® ¸ÅÁ÷ ºñºñ¿¡¼¾½º 01È£ ³»Ãò·² º£ÀÌÁö+¿öÅÍÇÁ·çÇÁ Á©Ææ½½
+								¾ÆÀÌ¶óÀÌ³Ê+¸³ ÄÃ·¯ ½ºÆ½)</font></td>
 					</tr>
 					<%}%>
 					<tr>
 						<td style="background-color: #747474"></td>
 						<td colspan="8" style="background-color: #747474"><font
-							color="white"> <b>ì¼ê³„:2015-05-05 ì´ íŒë§¤ê¸ˆì•¡ : 201,504,402ì›</b>
+							color="white"> <b>ÀÏ°è:2015-05-05 ÃÑ ÆÇ¸Å±Ý¾× : 201,504,402¿ø</b>
 						</font></td>
 					</tr>
 
@@ -134,9 +119,9 @@
 				style="width: 900px; height: auto; margin-left: 45px; margin-top: 45px">
 				<BR> <BR>
 				<p>
-					ì¡°íšŒê¸°ê°„: <input type="text" id="datepicker1"> ~ <input
+					Á¶È¸±â°£: <input type="text" id="datepicker1"> ~ <input
 						type="text" id="datepicker2"> <input type="button"
-						value="í™•ì¸" />
+						value="È®ÀÎ" />
 				</p>
 
 				<P>
@@ -148,17 +133,17 @@
 						style="background-color: #EAEAEA; border-top: 2px solid gray;">
 						<!-- <td align = "center" style = "border-right:1px solid gray;border-bottom:2px solid gray;width:30px"><input type = "checkbox"></td> -->
 						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray; width: 100px"><B>ë‚ ì§œ</B></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray; width: 100px"><B>³¯Â¥</B></td>
 						<td colspan="4" align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>ìƒí’ˆëª…</B></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>»óÇ°¸í</B></td>
 						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>ìƒí’ˆê¸ˆì•¡</B></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>»óÇ°±Ý¾×</B></td>
 						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><b>ìˆ˜ëŸ‰</b></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><b>¼ö·®</b></td>
 						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>í•©ê³„</B></td>
-						<td align="center" style="border-bottom: 2px solid gray"><B>ë¹„
-								ê³ </B></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>ÇÕ°è</B></td>
+						<td align="center" style="border-bottom: 2px solid gray"><B>ºñ
+								°í</B></td>
 					</tr>
 					<%
 						for (int i = 1; i < 20; i++) {
@@ -172,22 +157,22 @@
 							width="120px"><img src="/images/14.jpg" width="80px"
 							height="80px" style="margin-left: -20px"></td>
 						<td colspan="3" style="border-right: 1px solid gray;"><font
-							size="3"><b>ì˜¬ë¦¬ë¸Œ ì˜ ì•„ì¿ ì•„ ìˆ˜ë¶„ í¬ë¦¼</b></font></td>
+							size="3"><b>¿Ã¸®ºê ¿µ ¾ÆÄí¾Æ ¼öºÐ Å©¸²</b></font></td>
 						<td
 							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2">19,000ì›</td>
+							rowspan="2">19,000¿ø</td>
 						<td
 							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2">20</td>
 						<td
 							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2">380,000 ì›</td>
+							rowspan="2">380,000 ¿ø</td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2">
 					</tr>
 					<tr>
 						<td style="border-bottom: 2px solid gray;" colspan="3"><font
-							size="2">1. Aíƒ€ìž…(ë¡œë ˆì•ŒíŒŒë¦¬ ë£¨ì„¼íŠ¸ ë§¤ì§ ë¹„ë¹„ì—ì„¼ìŠ¤ 01í˜¸ ë‚´ì¸„ëŸ´ ë² ì´ì§€+ì›Œí„°í”„ë£¨í”„ ì ¤íŽœìŠ¬
-								ì•„ì´ë¼ì´ë„ˆ+ë¦½ ì»¬ëŸ¬ ìŠ¤í‹±)</font></td>
+							size="2">1. AÅ¸ÀÔ(·Î·¹¾ËÆÄ¸® ·ç¼¾Æ® ¸ÅÁ÷ ºñºñ¿¡¼¾½º 01È£ ³»Ãò·² º£ÀÌÁö+¿öÅÍÇÁ·çÇÁ Á©Ææ½½
+								¾ÆÀÌ¶óÀÌ³Ê+¸³ ÄÃ·¯ ½ºÆ½)</font></td>
 					</tr>
 					<%
 						}
@@ -195,7 +180,7 @@
 					<tr>
 						<td style="background-color: #747474"></td>
 						<td colspan="8" style="background-color: #747474"><font
-							color="white"> <b>ì¼ê³„:2015-05-05 ì´ íŒë§¤ê¸ˆì•¡ : 201,504,402ì›</b>
+							color="white"> <b>ÀÏ°è:2015-05-05 ÃÑ ÆÇ¸Å±Ý¾× : 201,504,402¿ø</b>
 						</font></td>
 					</tr>
 				</table>
@@ -203,4 +188,3 @@
 		</div>
 	</div>
 </body>
-</html>

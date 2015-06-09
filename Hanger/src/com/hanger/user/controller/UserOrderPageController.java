@@ -12,7 +12,8 @@ public class UserOrderPageController extends BaseController {
 	//
 	@RequestMapping("/userOrderPage.hang")
 	public String userTipPage(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "user/mypage/OrderPage.jsp");
+		req.setAttribute("mainUrl", myPageUrl);
+		req.setAttribute("myPageUrl", root + "user/mypage/OrderPage.jsp");
 		
 		return moveUrl;
 	}

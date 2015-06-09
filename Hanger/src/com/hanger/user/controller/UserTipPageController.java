@@ -12,7 +12,8 @@ public class UserTipPageController extends BaseController {
 	//
 	@RequestMapping("/userTipPage.hang")
 	public String userTipPage(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "sns/tip/TipList.jsp");
+		req.setAttribute("mainUrl", myPageUrl);
+		req.setAttribute("myPageUrl", root + "user/mypage/UserTip.jsp");
 		
 		return moveUrl;
 	}

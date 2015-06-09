@@ -1,4 +1,4 @@
-package com.hanger.review.controller;
+package com.hanger.posting.review.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hanger.common.controller.BaseController;
 
 @Controller
-public class DetailReviewController extends BaseController {
+public class ReviewController extends BaseController {
 	//
-	@RequestMapping("/detailReviewList.hang")
+	@RequestMapping("/reviewList.hang")
 	public String review(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "sns/review/DetailReviewList.jsp");
+		req.setAttribute("mainUrl", root + "posting/review/ReviewList.jsp");
 		return moveUrl;
 	}
 }

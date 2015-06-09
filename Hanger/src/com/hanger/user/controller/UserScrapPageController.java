@@ -12,7 +12,8 @@ public class UserScrapPageController extends BaseController {
 	//
 	@RequestMapping("/userScrapPage.hang")
 	public String userTipPage(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "user/mypage/Scrap.jsp");
+		req.setAttribute("mainUrl", myPageUrl);
+		req.setAttribute("myPageUrl", root + "user/mypage/Scrap.jsp");
 		
 		return moveUrl;
 	}

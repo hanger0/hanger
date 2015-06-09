@@ -45,6 +45,9 @@
 	<bean id="userSelectController" class ="com.hanger.user.controller.UserSelectController">
 		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
+	<bean id="userMyPageController" class="com.hanger.user.controller.UserMyPageController">
+		<property name="userSelectDao" ref="userSelectDao"></property>
+	</bean>
 	
 	<!-- Relation 요청 url과 Controller 매핑 -->
 	<bean id="relationInsertController" class ="com.hanger.user.controller.RelationInsertController">

@@ -1,4 +1,4 @@
-package com.hanger.sale.controller;
+package com.hanger.posting.tip.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hanger.common.controller.BaseController;
 
 @Controller
-public class SaleController extends BaseController {
+public class DetailTipController extends BaseController {
 	//
-	@RequestMapping("/sale.hang")
-	public String brand(HttpServletRequest req){
-		req.setAttribute("mainUrl", root+"item/sale/Sale.jsp");
+	@RequestMapping("/detailTipList.hang")
+	public String review(HttpServletRequest req){
+		req.setAttribute("mainUrl", root + "posting/tip/DetailTipList.jsp");
 		return moveUrl;
 	}
 }

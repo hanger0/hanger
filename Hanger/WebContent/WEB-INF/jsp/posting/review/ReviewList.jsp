@@ -1,11 +1,11 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 
-<body style="background-color: #EBEBEB">
-	<div class="container" style = "width:80%; background-color: #EBEBEB;display:table;margin-left:auto;margin-right:auto">
+<body>
+	<div class="container" style = "width:80%;display:table;margin-left:auto;margin-right:auto">
 		<!-- ÆÁ ÀÛ¼º ½ÃÀÛ -->
-		<div class="row" style = "background-color: #EBEBEB;">
+		<div class="row">
 			<h2>
-				<b><p style="display: table; margin: 15px 0 0 12px;">My Tip</p></b>
+				<b><p style="display: table; margin: 15px 0 0 12px;">My Review</p></b>
 			</h2>
 			<!--  ÆÁ ÀÛ¼º ³¡ -->
 
@@ -44,7 +44,7 @@
 				role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
-						<jsp:include page="DetailTip.jsp" flush="true"> 
+						<jsp:include page="/WEB-INF/jsp/posting/hangOut/HangOutList.jsp" flush="true"> 
      						<jsp:param name="param_name" value="param_value"/> 
 						</jsp:include>
 					</div>

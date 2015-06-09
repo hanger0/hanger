@@ -35,10 +35,9 @@ public class UserSearchController extends BaseController {
 		map.put("qt", qt);
 		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
 
-		mainUrl = "/WEB-INF/jsp/user/mypage/FlowSearch.jsp";
-		
 		req.setAttribute("userList", userList);
-		req.setAttribute("mainUrl", mainUrl);
+		req.setAttribute("mainUrl", myPageUrl);
+		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
 		req.setAttribute("qt",qt);
 		
 		return moveUrl;
