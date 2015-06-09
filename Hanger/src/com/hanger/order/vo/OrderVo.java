@@ -12,6 +12,10 @@ public class OrderVo {
 	private String orderPostCode1;
 	private String orderPostCode2;
 	private String orderMemo;
+	private String orderItemMarketPrice;
+	private String orderItemSellPrice;
+	private String orderItemPurchasePrice;
+	private String discountReasonCode;
 	private String orderItemAmount;
 	private String orderItemVerify;
 	private String orderItemRecom;
@@ -89,6 +93,30 @@ public class OrderVo {
 	}
 	public void setOrderMemo(String orderMemo) {
 		this.orderMemo = orderMemo;
+	}
+	public String getOrderItemMarketPrice() {
+		return orderItemMarketPrice;
+	}
+	public void setOrderItemMarketPrice(String orderItemMarketPrice) {
+		this.orderItemMarketPrice = orderItemMarketPrice;
+	}
+	public String getOrderItemSellPrice() {
+		return orderItemSellPrice;
+	}
+	public void setOrderItemSellPrice(String orderItemSellPrice) {
+		this.orderItemSellPrice = orderItemSellPrice;
+	}
+	public String getOrderItemPurchasePrice() {
+		return orderItemPurchasePrice;
+	}
+	public void setOrderItemPurchasePrice(String orderItemPurchasePrice) {
+		this.orderItemPurchasePrice = orderItemPurchasePrice;
+	}
+	public String getDiscountReasonCode() {
+		return discountReasonCode;
+	}
+	public void setDiscountReasonCode(String discountReasonCode) {
+		this.discountReasonCode = discountReasonCode;
 	}
 	public String getOrderItemAmount() {
 		return orderItemAmount;

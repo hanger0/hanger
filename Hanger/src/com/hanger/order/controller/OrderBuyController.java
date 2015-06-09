@@ -22,7 +22,7 @@ public class OrderBuyController extends BaseController {
 	
 	@RequestMapping(value="/buyOrder.hang", method=RequestMethod.GET)
 	public String goOrder(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "order/BuyPage.jsp");
+		req.setAttribute("mainUrl", "buy/BuyPage.jsp");
 		
 		return moveUrl;
 	}
@@ -44,6 +44,10 @@ public class OrderBuyController extends BaseController {
 		String orderPostCode1 = req.getParameter("orderPostCode1");
 		String orderPostCode2 = req.getParameter("orderPostCode2");
 		String orderMemo = req.getParameter("orderMemo");
+		String orderItemMarketPrice = req.getParameter("orderItemMarketPrice");
+		String orderItemSellPrice = req.getParameter("orderItemSellPrice");
+		String orderItemPurchasePrice = req.getParameter("orderItemPurchasePrice");
+		String discountReasonCode = req.getParameter("discountReasonCode");
 		String orderItemAmount = req.getParameter("orderItemAmount");
 		String orderItemVerify = req.getParameter("orderItemVerify");
 		String orderItemRecom = req.getParameter("orderItemRecom");
@@ -61,6 +65,10 @@ public class OrderBuyController extends BaseController {
 		order.setOrderPostCode1(orderPostCode1);
 		order.setOrderPostCode2(orderPostCode2);
 		order.setOrderMemo(orderMemo);
+		order.setOrderItemMarketPrice(orderItemMarketPrice);
+		order.setOrderItemSellPrice(orderItemSellPrice);
+		order.setOrderItemPurchasePrice(orderItemPurchasePrice);
+		order.setDiscountReasonCode(discountReasonCode);
 		order.setOrderItemAmount(orderItemAmount);
 		order.setOrderItemVerify(orderItemVerify);
 		order.setOrderItemRecom(orderItemRecom);

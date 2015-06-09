@@ -9,8 +9,8 @@
 	</insert>
 	
 	<insert id="insertOrderInfo" parameterClass="order">
-		insert into order_info(order_info_code, order_code, item_code, order_item_amount, order_item_verify, order_item_recom)
-		values(CONCAT("OI",LPAD((SELECT GET_SEQ('ORDER_CODE')), 10, '0')), #orderCode#, #itemCode#, #orderItemAmount#, #orderItemVerify#, #orderItemRecom#)
+		insert into order_info(order_info_code, order_code, item_code, order_item_amount, order_item_verify, order_item_recom, order_item_market_price, order_item_sell_price, order_item_purchase_price, discount_reason_code)
+		values(CONCAT("OI",LPAD((SELECT GET_SEQ('ORDER_CODE')), 10, '0')), #orderCode#, #itemCode#, #orderItemAmount#, #orderItemVerify#, #orderItemRecom#, #orderItemMarketPrice#, #orderItemSellPrice#, #orderItemPurchasePrice#, #discountReasonCode#)
 	</insert>
 	
 	<select id="selectSeq" resultClass="String">
