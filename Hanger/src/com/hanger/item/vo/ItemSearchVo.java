@@ -2,35 +2,37 @@ package com.hanger.item.vo;
 
 public class ItemSearchVo {
 	  
-	String itemCode;
-	String itemStatus;
-	String itemScore;
-	String itemMarketPrice;
-	String itemSellPrice;
-	String itemDiscount;
-	String itemName;
-	String brandName;
-	String reviewCnt;
-	String itemPicPath;
-	String itemPicSavename;
-	
-	public String getItemPicPath() {
-		return itemPicPath;
-	}
-	public void setItemPicPath(String itemPicPath) {
-		this.itemPicPath = itemPicPath;
-	}
-	public String getItemPicSavename() {
-		return itemPicSavename;
-	}
-	public void setItemPicSavename(String itemPicSavename) {
-		this.itemPicSavename = itemPicSavename;
-	}
+	 String itemCode;
+	 String itemGroupCode;
+	 String itemSizeYn;
+	 String itemStatus;
+	 String itemScore;
+	 String itemMarketPrice;
+	 String itemSellPrice;
+	 String itemPicPath;
+	 String itemPicSavename;
+	 String itemDiscount;
+	 String itemName;
+	 String brandName;
+	 String reviewCnt;
+	 
 	public String getItemCode() {
 		return itemCode;
 	}
 	public void setItemCode(String itemCode) {
 		this.itemCode = itemCode;
+	}
+	public String getItemGroupCode() {
+		return itemGroupCode;
+	}
+	public void setItemGroupCode(String itemGroupCode) {
+		this.itemGroupCode = itemGroupCode;
+	}
+	public String getItemSizeYn() {
+		return itemSizeYn;
+	}
+	public void setItemSizeYn(String itemSizeYn) {
+		this.itemSizeYn = itemSizeYn;
 	}
 	public String getItemStatus() {
 		return itemStatus;
@@ -56,7 +58,18 @@ public class ItemSearchVo {
 	public void setItemSellPrice(String itemSellPrice) {
 		this.itemSellPrice = itemSellPrice;
 	}
-	
+	public String getItemPicPath() {
+		return itemPicPath;
+	}
+	public void setItemPicPath(String itemPicPath) {
+		this.itemPicPath = itemPicPath;
+	}
+	public String getItemPicSavename() {
+		return itemPicSavename;
+	}
+	public void setItemPicSavename(String itemPicSavename) {
+		this.itemPicSavename = itemPicSavename;
+	}
 	public String getItemDiscount() {
 		return itemDiscount;
 	}

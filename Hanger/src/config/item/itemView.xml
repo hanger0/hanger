@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="itemView" type="com.hanger.item.vo.ItemViewVo" />
+	<select id="getItemView" resultClass="itemView" parameterClass="HashMap">
+		SELECT
+			item.ITEM_CODE AS itemCode, item.ITEM_GROUP_CODE AS itemGroupCode,
+			item.ITEM_NAME AS itemName, item.ITEM_SIZE AS itemSize, item.ITEM_SIZE_YN AS
+			itemSizeYn,
+			stock.STOCK_MARKET_PRICE AS itemMarketPrice, stock.STOCK_SELL_PRICE AS itemSellPrice, stock.STOCK_PURCHASE_PRICE AS itemPurchasePrice,
+			item.ITEM_PIC_PATH AS itemPicPath, item.ITEM_PIC_SAVENAME AS
+			itemPicSavename, item.ITEM_SCORE AS itemScore,
+			item.ITEM_SUMMARY_INFO AS itemSummaryInfo, item.ITEM_DETAIL_INFO AS itemDetailInfo,
+			item.ITEM_INGREDIENT AS itemIngredient,
+			item.ITEM_HOW_TO_USE AS itemHowToUse, item.ITEM_SELL_MAXNUM AS itemSellMaxnum,
+			stock.STOCK_AMOUNT AS itemStockAmount,
+			item.ITEM_STATUS AS itemStatus, brand.BRAND_NAME AS brandName,
+			stock.STOCK_CODE AS stockCode
+		FROM
+			ITEM item, BRAND brand, ITEM_STOCK stock
+		WHERE
+			item.BRAND_CODE = brand.BRAND_CODE AND item.ITEM_CODE = stock.ITEM_CODE
+			AND item.ITEM_GROUP_CODE=#itemGroupCode#
+	</select>
+</sqlMap>
+
