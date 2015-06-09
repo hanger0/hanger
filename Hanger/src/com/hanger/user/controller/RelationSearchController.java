@@ -28,10 +28,9 @@ public class RelationSearchController extends BaseController {
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		ArrayList<UserVo> followerList = relationSearchDao.searchFollowerRelation(myUserCode);
 		
-		mainUrl = "/WEB-INF/jsp/user/mypage/FlowSearch.jsp";
-		
 		req.setAttribute("followerList", followerList);
-		req.setAttribute("mainUrl", mainUrl);
+		req.setAttribute("mainUrl", myPageUrl);
+		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
 		
 		return moveUrl;
 	}
@@ -42,9 +41,9 @@ public class RelationSearchController extends BaseController {
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		ArrayList<UserVo> followingList = relationSearchDao.searchFollowingRelation(myUserCode);
 		
-		mainUrl = "/WEB-INF/jsp/user/mypage/FlowSearch.jsp";
 		req.setAttribute("followingList", followingList);
-		req.setAttribute("mainUrl", mainUrl);
+		req.setAttribute("mainUrl", myPageUrl);
+		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
 		
 		return moveUrl;
 	}

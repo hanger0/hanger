@@ -150,7 +150,7 @@ body
             <form class = "navbar-form">
                <div class = "row" style = "width:100%;margin-left:0%;">
                   <font size = "4" style="float:left;"><b>인기상품</b>Popluar</font>
-                  <div class = "more"><a href="/reviewList.hang">더 보기</a></div>
+                  <div class = "more"><a href="/shopList.hang">더 보기</a></div>
                </div>
             </form>
 <%

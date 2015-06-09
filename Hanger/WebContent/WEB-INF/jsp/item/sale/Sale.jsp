@@ -3,7 +3,6 @@
 <script>
 	//# 남은 시간(초) 구하기
 	function showCountdown(TimeSecond) {
-
 		day = Math.floor(TimeSecond / (3600 * 24));
 		mod = TimeSecond % (24 * 3600);
 		hour = Math.floor(mod / 3600);

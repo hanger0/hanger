@@ -12,7 +12,7 @@ public class UserMyPageController extends BaseController {
 	//
 	@RequestMapping("/myPage.hang")
 	public String userMainPage(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "user/mypage/MyTop.jsp");
+		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/MyReview.jsp");
 		
 		return moveUrl;

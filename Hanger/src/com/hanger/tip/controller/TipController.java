@@ -13,6 +13,7 @@ public class TipController extends BaseController {
 	@RequestMapping("/tipList.hang")
 	public String review(HttpServletRequest req){
 		req.setAttribute("mainUrl", root + "sns/tip/TipList.jsp");
+		
 		return moveUrl;
 	}
 }

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 
 <body style="background-color: #EBEBEB">
-	<div class="container" style = "width:83%; background-color: #EBEBEB;display:table;margin-left:auto;margin-right:auto">
+	<div class="container" style = "width:80%; background-color: #EBEBEB;display:table;margin-left:auto;margin-right:auto">
 		<!-- ÆÁ ÀÛ¼º ½ÃÀÛ -->
 		<div class="row" style = "background-color: #EBEBEB;">
 			<h2>

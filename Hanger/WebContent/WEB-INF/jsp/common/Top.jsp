@@ -19,6 +19,9 @@
 			speed : 'fast',
 			effect : 'fade'
 		});
+		$(".clickdrop").click(function() {
+
+		});
 	});
 </script>
 
@@ -32,6 +35,7 @@
 	width: 50px;
 	height: 40px;
 }
+
 .shadow {
 	padding: 12px 38px 12px 25px;
 	text-shadow: 1px 1px 1px #000;
@@ -47,8 +51,8 @@
 		role="navigation">
 		<div class="navbar-header" style="margin-left: 160px">
 			<a class="navbar-brand" href="/"> <img
-				style="height: 32px; padding: 3px 0;"
-				src="/images/juven.png" id="brand-icon" alt="Hanger" />
+				style="height: 32px; padding: 3px 0;" src="/images/juven.png"
+				id="brand-icon" alt="Hanger" />
 			</a>
 		</div>
 		<form class="navbar-form navbar-left" role="search" method="get"
@@ -71,7 +75,7 @@
 				%>
 				<li class="headli"><a href="/myPage.hang"><img
 						src="images/icons/top/mypage.jpg" /></a></li>
-				<li class="headli"><a href="#"><img
+				<li class="headli clickdrop"><a href="#"><img
 						src="images/icons/top/friend.jpg" /></a></li>
 				<li class="headli"><a href="/cart.hang"><img
 						src="images/icons/top/cart.jpg" /></a></li>
@@ -113,7 +117,7 @@
 			<div class="grey">
 				<ul id="mega-menu-3" class="mega-menu">
 					<li class="shadow" style="margin-left: 23%"><A>&nbsp;</A></li>
-					<li><a href="ItemList.jsp">SHOP</a>
+					<li><a href="/shopList.hang">SHOP</a>
 						<ul>
 							<li style="margin-left: 10%"><a href="#"><font size="4"><b>메이크업</b></font></a>
 								<ul style="background-color: white">
@@ -326,4 +330,35 @@
 			</div>
 		</div>
 	</div>
+	<ul class="nav navbar-right ">
+		<li class="dropdown open">
+			<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+				<img src="images/test.png" /> <span class="count"></span>
+			</a>
+		</li>
+		<li>
+			<ul class="dropdown-menu" role="menu">
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Search" />
+					</div>
+					<button type="submit" class="btn btn-default">검색</button>
+				</form>
+				<%
+					for (int i = 1; i < 4; i++) {
+				%>
+				<li><a href="#"> <img src="images/test.png" />
+						<div class="message-and-time" style="float: right;" >
+							<div class="message">
+								<span class="user">로리콘박상욱</span>님이 회원님을 팔로우 했습니다.
+							</div>
+							<div class="time">2015년 5월 27일</div>
+						</div>
+				</a></li>
+				<%
+					}
+				%>
+			</ul>
+		</li>
+	</ul>
 </header>

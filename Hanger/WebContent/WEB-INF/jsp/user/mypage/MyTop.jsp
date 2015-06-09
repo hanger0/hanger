@@ -91,7 +91,7 @@
 					<div class="score-text">
 						<BR>
 					</div>
-					<br><br><br><br><br><br>
+					<p><br><p><br><br><br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;<a href="#"><span
 						class="glyphicon glyphicon-cog"></span></a>
@@ -111,21 +111,22 @@
 				<ul class="nav nav-pills"
 					style="display: table; margin-left: auto; margin-right: auto"
 					align="center">
-					<li role="presentation" class=""
-						style="width: 120px; height: 40px;"><a href="MyReview.jsp">¸®ºä</a></li>
-					<li role="presentation" class="" style="width: 120px; height: 40px">
-						<a href="MyWrite.jsp">ÆÁ</a>
+					<li role="presentation" style="width: 120px; height: 40px;">
+						<a href="/myPage.hang">¸®ºä</a>
 					</li>
-					<li role="presentation" class="" style="width: 120px; height: 40px">
+					<li role="presentation" style="width: 120px; height: 40px">
+						<a href="/tipList.hang">ÆÁ</a>
+					</li>
+					<li role="presentation" style="width: 120px; height: 40px">
 						<a href="#">°Ô½Ã¹°</a>
 					</li>
-					<li role="presentation" class="" style="width: 120px; height: 40px">
-						<a href="Flow.jsp">ÆÈ·Î¿ì</a>
+					<li role="presentation" style="width: 120px; height: 40px">
+						<a href="/relationFollowingSearch.hang">ÆÈ·Î¿ì</a>
 					</li>
-					<li role="presentation" class="" style="width: 120px; height: 40px">
-						<a href="OrderPage.jsp">¸ð´õ</a>
+					<li role="presentation" style="width: 120px; height: 40px">
+						<a href="OrderPage.jsp">¿À´õ</a>
 					</li>
-					<li role="presentation" class="" style="width: 120px; height: 40px">
+					<li role="presentation" style="width: 120px; height: 40px">
 						<a href="#">¸¶ÀÏ¸®Áö</a>
 					</li>
 				</ul>

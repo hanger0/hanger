@@ -1,14 +1,9 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 
 <STYLE>
-a {
-	text-decoration: none;
-}
-
 body {
 	background-color: #EBEBEB;
 }
-
 .container {
 	width: 100%;
 	background-color: #EBEBEB;
@@ -16,6 +11,8 @@ body {
 
 .row {
 	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .reviewhead2 {
@@ -37,11 +34,6 @@ body {
 
 .infos {
 	margin: 3px 5px 3px;
-}
-
-.row {
-	margin-top: 5px;
-	margin-bottom: 5px;
 }
 
 .menus {
