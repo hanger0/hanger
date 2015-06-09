@@ -106,7 +106,7 @@ public class ManagerAddItemFormController extends BaseController{
 		System.out.println("manager add item form ½ÇÇà");
 		
 		managerAddItemDao.insertItem(item);
-		//managerAddItemDao.insertItemStock(item);
+		managerAddItemDao.insertItemStock(item);
 		
 		for(int i = 0; i < itemCategory.length; i++){
 			String itemCategoryValue = itemCategory[i];
