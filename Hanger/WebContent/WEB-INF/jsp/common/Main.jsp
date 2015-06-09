@@ -53,7 +53,7 @@ body
 }
 .thumbnail
 {
-   height:350px;
+   height:auto;
 }
 .hotimages
 {
@@ -97,6 +97,16 @@ body
 	cursor:pointer;
 }
 </STYLE>
+<SCRIPT>
+
+$(document).ready(function(){
+	$("#tipmodal").click(function(){
+		$("#tip").modal('show');
+	});
+});
+
+
+</SCRIPT>
 <body>
 
 <!-- 광고 -->
@@ -141,7 +151,7 @@ body
 <!-- 광고 끝 -->
 <script>
    function productBuy() {
-      location.href = "ProductBuy.jsp"
+      location.href = "/ItemBuy.hang"
    }
 </script>
    <div class="container" style = "width:80%;">
@@ -184,22 +194,19 @@ for(int i=0; i<4; i++)
 	                     <font size = "4"><b>인기리뷰</b>&nbsp;&nbsp;Review</font>
 	                     <div class = "more"><a href="/reviewList.hang">더 보기</a></div>
                      </div>
-<script>
-   function review() {
-      location.href = "DetailReview.jsp";
-   }
-</script>
+
 <% 
 for(int i=0; i<2; i++)
 {
 %>
                      <div class="col-md-6 rat">
                         <div class="thumbnail">
+                        <a href="#review" data-toggle="modal">
                            <div class="image">
-                              <img src="images/cristalyn.jpg" class="hotimages" onClick = "review()">
+                              <img src="images/cristalyn.jpg" class="hotimages">
                            </div>
                            <div class="caption">
-                              <P><h5><B>합리적인 가격에 강력한 워터프루프 아이라이너!</B></h5>
+                              <P><h5><B>합리적인 가격에 강력한 워터프루프 아이라이너!</B></h5></a>
                               <br>
                               <font size = "2"><font color = "gray"><b>아이 메이크업 &nbsp;|&nbsp; 등록리뷰(20)</b></font></font>
                            </div>
@@ -219,23 +226,20 @@ for(int i=0; i<2; i++)
                         <font size = "4"><b>인기 팁</b>&nbsp;&nbsp;Tip</font>
                         <div class = "more"><a href="/tipList.hang">더 보기</a></div>
                      </div>
-                     <script>
-                        function tip() {
-                           location.href = "TipPage.jsp"
-                        }
-                     </script>
+                     
 <% 
 for(int i=0; i<2; i++)
 {
 %>
                      <div class="col-md-6 rat">
                         <div class="thumbnail">
+                        <a href="s" data-toggle="modal" href="/DetailTip.hang" id="tipmodal">
                            <div class="image">
-                              <img src="images/hommesun.jpg" class="hotimages" onClick = "tip()">
+                              <img src="images/hommesun.jpg" class="hotimages" >
                            </div>
                            <div class="caption">
                               <P>
-                              <h5><B>청순하게 때론 섹시하게 그라데이션 하는 법!</B></h5>
+                              <h5><B>청순하게 때론 섹시하게 그라데이션 하는 법!</B></h5></a>
                               <br>
                                  <font size = "2"><font color = "gray"><b>아이 메이크업 &nbsp;|&nbsp; 등록리뷰(10)</b></font></font>
                            </div>
@@ -301,6 +305,32 @@ for(int i=0; i<6; i++)
 <%
 }
 %>
+<!-- 모달 시작 -->
+	<!-- Review 모달 시작-->
+			<div class="modal fade" tabindex="-1" id="review" role="dialog"
+			aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<jsp:include page="/DetailReview.hang" flush="true"> 
+     						<jsp:param name="param_name" value="param_value"/> 
+						</jsp:include>
+					</div>
+				</div>
+			</div>-->
+		<!-- Review 모달 종료-->
+	<!-- Tip 모달 시작-->
+			<div class="modal fade" tabindex="-1" id="tip" role="dialog"
+			aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<jsp:include page="/DetailTip.hang" flush="true"> 
+     						<jsp:param name="param_name" value="param_value"/> 
+						</jsp:include>
+					</div>
+				</div>
+			</div>
+	<!-- Tip 모달 종료-->
+<!-- 모달 종료 -->
             </div>
          </div>
       </body>

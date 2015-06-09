@@ -10,9 +10,9 @@ import com.hanger.common.controller.BaseController;
 @Controller
 public class DetailTipController extends BaseController {
 	//
-	@RequestMapping("/detailTipList.hang")
+	@RequestMapping("/DetailTip.hang")
 	public String review(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "posting/tip/DetailTipList.jsp");
-		return moveUrl;
+		
+		return "posting/tip/DetailTip";
 	}
 }

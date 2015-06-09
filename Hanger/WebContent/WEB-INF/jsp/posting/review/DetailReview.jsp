@@ -5,10 +5,6 @@
 	width: 100%;
 }
 
-.row {
-	background-color: white;
-}
-
 .reviewhead2 {
 	margin-top: 3px;
 }
@@ -113,6 +109,59 @@
 				</h5>
 			</div>
 		</div>
+		<div class="row">
+			<div class="replyhead">
+				<div class="reheadcon" style="margin: auto; padding: 1px;">
+					<BR> <span class="glyphicon glyphicon-comment"
+						aria-hidden="true" style="font-size: 20px;"><B><font
+							size="5">댓글(4)</font></B></span>
+					<HR>
+				</div>
+			</div>
+			<%
+				for (int i = 0; i < 4; i++) {
+			%>
+			<div class="replylist">
+				<div class="replyimg col-sm-1">
+
+					<img src="images/yebin.jpg" alt="예빈짜응" class="img-circle reimgs">
+
+				</div>
+				<div class="replymain col-sm-10">
+					<div class="reheadname">
+						<B>박상욱</B> <font size="1">2015년 6월 3일</font>
+					</div>
+					<div class="recomment">저도 이 제품 평이 좋아서 써봤는데 한 통 거의 다 쓸 때까지도 그닥
+						큰 효과는 보지 못했어요.. 재구입은 안 할 생각이에요! ㅇ러ㅏ노마ㅓ로저도 이 제품 평이 좋아서 써봤는데 한 통 거의
+						다 쓸 때까지도 그닥 큰 효과는 보지 못했어요.. 재구입은 안 할 생각이에요!
+						ㅇㄴ라ㅓㅇㄴㅁ로dsfdsfdsafdsfadsdfsakkkkkkkkkkkkkkkkkkasddddddddddddddd</div>
+				</div>
+				<div class="col-sm-1"></div>
+			</div>
+
+			<%
+				}
+			%>
+		</div>
+
+		<div class="row">
+			<div class="replywrite">
+				<div class="replyimg col-sm-1">
+					<CENTER>
+						<img src="images/wonbin.PNG" alt="예빈짜응"
+							class="img-circle rewriteimg">
+					</CENTER>
+				</div>
+				<div class="replyinsert col-sm-10">
+					<textarea class="insert" rows="2"
+						style="resize: none;"></textarea>
+				</div>
+				<div class="replybtn col-sm-1">
+					<button type="button" class="btn btn-default replybutton">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+					</button>
+				</div>
+			</div>
 		<!-- container 종료 시점-->
 	</div>
 </body>

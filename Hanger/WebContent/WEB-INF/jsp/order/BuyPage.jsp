@@ -10,7 +10,7 @@
 			</H5>
 		</div>
 
-		<div class="thumbnail" style="width: 1150px; height: 1800px;">
+		<div class="thumbnail" style="width: 97.7%;height:auto;display:table;margin-left:auto;margin-right:auto">
 			<p><br><p><br><p><br>
 			<div class="post-table" align="center">
 				<table style="width: 900px; table-layout: fixed">
@@ -88,7 +88,7 @@
 
 			<!--띄어쓰기-->
 			<p><br><p><br>
-			<div class="product-info" style="margin-left: 120px">
+			<div class="product-info" style="margin-left: 100px">
 				<font size="4"><b>01. 구매자 정보</b></font>
 			</div>
 			<p>
@@ -122,7 +122,7 @@
 				<br>
 			<p>
 				<br>
-			<div class="send-info" style="margin-left: 120px">
+			<div class="send-info" style="margin-left: 100px">
 				<font size="4"><b>02. 배송지 정보</b></font>
 				<p>
 			</div>
@@ -172,7 +172,7 @@
 							<table>
 								<tr>
 									<td><input type="text"> - <input type="text">
-										<input type="button" class="btn btn-default" value="우편번호 찾기">&nbsp;&nbsp;
+										<input type="button" class="btn btn-default" value="우편번호 찾기">
 										<input type="checkbox">이 주소를 회원정보를 저장</td>
 								</tr>
 								<tr height="5">
@@ -196,7 +196,7 @@
 			</div>
 
 			<p>
-			<div class="poster" style="margin-left: 120px">
+			<div class="poster" style="margin-left: 100px">
 				<p>
 					<font size="2"><font color="red"><b>· 정확한 주소를
 								기재해주세요.</b></font></font>
@@ -211,11 +211,11 @@
 				<br>
 			<p>
 				<br>
-			<div class="card-info" style="margin-left: 120px">
+			<div class="card-info" style="margin-left: 100px">
 				<font size="4"><b>03. 결제 정보</b></font>
 			</div>
 			<p>
-			<div class="poster" style="margin-left: 120px">
+			<div class="poster" style="margin-left: 100px">
 				<p>
 					<font size="2"><b>· 포인트는 최소 0P~최대 5000P까지 사용가능 또는 구매금액의
 							20%까지 사용 가능합니다. (두 가지 방법 중 택1)</b></font>
@@ -228,7 +228,7 @@
 					<font size="2"><b>· 미미포인트와 할인쿠폰은 중복사용이 불가능합니다.</b></font>
 				<p>
 			</div>
-			<div class="card-infotable" style="margin-left: 120px">
+			<div class="card-infotable" style="margin-left: 100px">
 				<table style="width: 900px; height: 40px">
 					<tr>
 						<td
@@ -279,11 +279,11 @@
 				<br>
 			<p>
 				<br>
-			<div class="card-infomation" style="margin-left: 120px">
+			<div class="card-infomation" style="margin-left: 100px">
 				<font size="4"><b>04. 카드 정보 입력</b></font>
 			</div>
 			<p>
-			<div class="poster" style="margin-left: 120px">
+			<div class="poster" style="margin-left: 100px">
 				<p>
 					<font size="2"><b>· 오후 2시 이전에 결제시 당일배송이 가능합니다.</b></font>
 				<p>
@@ -337,6 +337,7 @@
 				<input type="button" class="btn btn-default" value="결제하기"
 					style="width: 220px; height: 80px" onClick="index()">
 			</div>
+			<br><br>
 		</div>
 	</div>
 </body>

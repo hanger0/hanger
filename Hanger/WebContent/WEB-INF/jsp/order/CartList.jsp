@@ -128,7 +128,7 @@
 				</p>
 				<script>
 					function home() {
-						location.href = "index.jsp"
+						location.href = "/main.hang";
 					}
 					function BuyPage() {
 						location.href = "/buyOrder.hang"

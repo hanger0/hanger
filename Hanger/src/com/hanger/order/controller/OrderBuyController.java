@@ -22,7 +22,7 @@ public class OrderBuyController extends BaseController {
 	
 	@RequestMapping(value="/buyOrder.hang", method=RequestMethod.GET)
 	public String goOrder(HttpServletRequest req){
-		req.setAttribute("mainUrl", "buy/BuyPage.jsp");
+		req.setAttribute("mainUrl", root + "order/BuyPage.jsp");
 		
 		return moveUrl;
 	}

@@ -22,7 +22,7 @@ public class CartController extends BaseController {
 	
 	@RequestMapping(value="/cart.hang", method=RequestMethod.GET)
 	public String goCart(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "buy/CartList.jsp");
+		req.setAttribute("mainUrl", root + "order/CartList.jsp");
 		
 		return moveUrl;
 	}
