@@ -53,7 +53,7 @@ body
 }
 .thumbnail
 {
-   height:280px;
+   height:350px;
 }
 .hotimages
 {
@@ -157,7 +157,7 @@ body
 for(int i=0; i<4; i++)
 {
 %>
-               <div class="col-sm-6 col-md-3">
+               <div class="col-md-3">
                   <div class="thumbnail" style = "width:100%">
                      <div class="image">
                         <img src="images/omnia.jpg" class="hotimages" onClick = "productBuy()">
