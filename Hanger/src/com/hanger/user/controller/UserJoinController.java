@@ -79,7 +79,9 @@ private UserJoinDao userJoinDao;
 		String userId = mul.getParameter("joinId");
 		String name = mul.getParameter("name");
 		String pw = mul.getParameter("pass1");
-		String birth = mul.getParameter("year");
+		String year = mul.getParameter("year");
+		String month = mul.getParameter("month");
+		String day = mul.getParameter("day");
 		String phone = mul.getParameter("mobile");
 		String question = mul.getParameter("question");
 		String answer = mul.getParameter("answer");
@@ -100,6 +102,8 @@ private UserJoinDao userJoinDao;
 				skinProblem += "^" + skinProblems[i];
 			}
 		}
+		String birth = "";
+		birth = year + "^" + month +"^" + day;
 		
 		user.setUserId(userId);
 		user.setUserName(name);

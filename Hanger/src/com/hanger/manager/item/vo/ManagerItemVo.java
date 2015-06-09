@@ -24,8 +24,8 @@ public class ManagerItemVo {
 	private String itemManufactureDate;
 	private String itemExpireDate;
 	private String itemReleaseDate;
-	private String itemCategory;
-	private String itemFeature;
+	private String[] itemCategory;
+	private String[] itemFeature;
 	private int itemStockAmount;
 	private String itemDetailPicPath;
 	private String itemDetailPicOrgName;
@@ -38,6 +38,7 @@ public class ManagerItemVo {
 	private String updId;
 	private String updDate;
 	private String updIp;
+	
 	public String getItemGroupCode() {
 		return itemGroupCode;
 	}
@@ -176,16 +177,16 @@ public class ManagerItemVo {
 	public void setItemReleaseDate(String itemReleaseDate) {
 		this.itemReleaseDate = itemReleaseDate;
 	}
-	public String getItemCategory() {
+	public String[] getItemCategory() {
 		return itemCategory;
 	}
-	public void setItemCategory(String itemCategory) {
+	public void setItemCategory(String[] itemCategory) {
 		this.itemCategory = itemCategory;
 	}
-	public String getItemFeature() {
+	public String[] getItemFeature() {
 		return itemFeature;
 	}
-	public void setItemFeature(String itemFeature) {
+	public void setItemFeature(String[] itemFeature) {
 		this.itemFeature = itemFeature;
 	}
 	public int getItemStockAmount() {

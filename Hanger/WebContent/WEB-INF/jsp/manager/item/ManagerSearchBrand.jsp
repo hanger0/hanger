@@ -11,7 +11,7 @@
 
 <html>
 <head>
-<title>ë¸Œëžœë“œ ë“±ë¡</title>
+<title>ºê·£µå µî·Ï</title>
 
 <%
 	if(message.length()>0) {

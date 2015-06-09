@@ -52,8 +52,8 @@ public class ManagerAddItemFormController extends BaseController{
 		String itemManufactureDate = mul.getParameter("manufactureDate");
 		String itemExpireDate = mul.getParameter("expireDate");
 		String itemReleaseDate = mul.getParameter("releaseDate");
-		String itemCategory = mul.getParameter("category");
-		String itemFeature = mul.getParameter("feature");
+		String[] itemCategory = mul.getParameterValues("category");
+		String[] itemFeature = mul.getParameterValues("feature");
 		int itemStockAmount = Integer.parseInt(mul.getParameter("stockAmount"));
 		
 		Enumeration formNames = mul.getFileNames();
@@ -75,20 +75,14 @@ public class ManagerAddItemFormController extends BaseController{
 		item.setBrandCode(brandCode);
 		item.setItemName(itemName);
 		item.setItemSize(itemSize);
-		item.setItemMarketPrice(itemMarketPrice);
-		item.setItemSellPrice(itemSellPrice);
-		item.setItemPurchasePrice(itemPurchasePrice);
 		item.setItemSummaryInfo(itemSummaryInfo);
 		item.setItemDetailInfo(itemDetailInfo);
 		item.setItemIngredient(itemIngredient);
 		item.setItemHowToUse(itemHowToUse);
 		item.setItemSellMaxNum(itemSellMaxNum);
-		item.setItemManufactureDate(itemManufactureDate);
-		item.setItemExpireDate(itemExpireDate);
 		item.setItemReleaseDate(itemReleaseDate);
 		item.setItemCategory(itemCategory);
 		item.setItemFeature(itemFeature);
-		item.setItemStockAmount(itemStockAmount);
 		item.setItemMainPicPath(itemMainPicPath);
 		item.setItemMainPicOrgName(itemMainPicOrgName);
 		item.setItemMainPicSaveName(itemMainPicSaveName);
@@ -102,19 +96,25 @@ public class ManagerAddItemFormController extends BaseController{
 		item.setUpdId("admin");
 		item.setUpdIp(ip);
 		
-		managerAddItemDao.insertItem(item);
+		item.setItemMarketPrice(itemMarketPrice);
+		item.setItemSellPrice(itemSellPrice);
+		item.setItemPurchasePrice(itemPurchasePrice);
+		item.setItemManufactureDate(itemManufactureDate);
+		item.setItemExpireDate(itemExpireDate);
+		item.setItemStockAmount(itemStockAmount);		
 		
 		System.out.println("manager add item form ½ÇÇà");
 		
-		String[] itemCategoryArr = itemCategory.split("/");
-		for(int i = 0; i < itemCategoryArr.length; i++){
-			String itemCategoryValue = itemCategoryArr[i];
+		managerAddItemDao.insertItem(item);
+		//managerAddItemDao.insertItemStock(item);
+		
+		for(int i = 0; i < itemCategory.length; i++){
+			String itemCategoryValue = itemCategory[i];
 			managerAddItemDao.insertItemCategory(itemCategoryValue);
 		}
 		
-		String[] itemFeatureArr = itemFeature.split("/");
-		for(int i = 0; i < itemFeatureArr.length; i++){
-			String itemFeatureValue = itemFeatureArr[i];
+		for(int i = 0; i < itemFeature.length; i++){
+			String itemFeatureValue = itemFeature[i];
 			managerAddItemDao.insertItemFeature(itemFeatureValue);
 		}
 		

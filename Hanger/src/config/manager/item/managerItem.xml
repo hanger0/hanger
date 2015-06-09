@@ -2,32 +2,42 @@
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="Data">
 	<typeAlias alias="managerItem" type="com.hanger.manager.item.vo.ManagerItemVo"/>
+	<typeAlias alias="managerCategory" type="com.hanger.manager.item.vo.ManagerCategoryVo"/>
+	<typeAlias alias="managerFeature" type="com.hanger.manager.item.vo.ManagerFeatureVo"/>
 	
 	<insert id="insertItem" parameterClass="managerItem">
 		INSERT INTO ITEM(ITEM_GROUP_CODE, ITEM_CODE, BRAND_CODE, ITEM_NAME, ITEM_SIZE, 
-		ITEM_MARKET_PRICE, ITEM_SELL_PRICE, ITEM_PURCHASE_PRICE, 
 		ITEM_SUMMARY_INFO, ITEM_DETAIL_INFO, ITEM_INGREDIENT, ITEM_HOW_TO_USE, ITEM_SELL_MAXNUM, 
-		ITEM_MANUFACTURE_DATE, ITEM_EXPIRE_DATE, ITEM_RELEASE_DATE, 
-		ITEM_PIC_PATH, ITEM_PIC_ORGNAME, ITEM_PIC_SAVENAME, ITEM_PIC_SIZE, ITEM_STOCK_AMOUNT, 
+		ITEM_RELEASE_DATE,
+		ITEM_PIC_PATH, ITEM_PIC_ORGNAME, ITEM_PIC_SAVENAME, ITEM_PIC_SIZE,
 		REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
 		VALUES(CONCAT("IG",LPAD((SELECT GET_SEQ('ITEM_GROUP_CODE')), 10, '0')), 
 		CONCAT("IT",LPAD((SELECT GET_SEQ('ITEM_CODE')), 10, '0')), 
 		#brandCode#, #itemName#, #itemSize#, 
-		#itemMarketPrice#, #itemSellPrice#, #itemPurchasePrice#, 
 		#itemSummaryInfo#, #itemDetailInfo#, #itemIngredient#, #itemHowToUse#, #itemSellMaxNum#, 
-		#itemManufactureDate#, #itemExpireDate#, #itemReleaseDate#, 
-		#itemMainPicPath#, #itemMainPicOrgName#, #itemMainPicSaveName#, #itemMainPicSize#, #itemStockAmount#, 
+		#itemReleaseDate#, 
+		#itemMainPicPath#, #itemMainPicOrgName#, #itemMainPicSaveName#, #itemMainPicSize#,
 		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
+	</insert>
+	
+	<insert id="insertItemStock" parameterClass="managerItem">
+		INSERT INTO ITEM_STOCK(STOCK_CODE, ITEM_CODE, 
+		STOCK_MARKET_PRICE, STOCK_SELL_PRICE, STOCK_PURCHASE_PRICE,
+		STOCK_MANUFACTURE_DATE, STOCK_EXPIRE_DATE, STOCK_AMOUNT)
+		VALUSE(CONCAT("ST", LPAD((SELECT GET_SEQ('STOCK_CODE')), 10, '10)),
+		CONCAT("IT", LPAD((SELECT ID FROM SEQUENCE WHERE SEQ_NAME='ITEM_CODE'), 10, '0')),
+		#itemMarketPrice#, #itemSellPrice#, #itemPurchasePrice#, 
+		#itemManufactureDate#, #itemExpireDate#, #itemStockAmount#)
 	</insert>
 	
 	<insert id="insertItemCategory" parameterClass="String">
 		INSERT INTO ITEM_CATEGORY(ITEM_GROUP_CODE, CATEGORY3_CODE)
-		VALUES(CONCAT("IG", LPAD((SELECT ID as seq FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_GROUP_CODE'), 10, '0')), #itemCategoryValue#)
+		VALUES(CONCAT("IG", LPAD((SELECT ID FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_GROUP_CODE'), 10, '0')), #itemCategoryValue#)
 	</insert>
 	
 	<insert id="insertItemFeature" parameterClass="String">
-		INSERT INTO ITEM_FEATURE(ITEM_GROUP_CODE, FEATURE_CODE)
-		VALUES(CONCAT("IG", LPAD((SELECT ID as seq FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_GROUP_CODE'), 10, '0')), #itemFeatureValue#)
+		INSERT INTO ITEM_FEATURE(ITEM_GROUP_CODE, FEATURE2_CODE)
+		VALUES(CONCAT("IG", LPAD((SELECT ID FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_GROUP_CODE'), 10, '0')), #itemFeatureValue#)
 	</insert>
 	
 	<select id="addItemPicCode" parameterClass="String" resultClass="String">
@@ -44,5 +54,36 @@
 		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>
 	
+	<select id="selectCategory1" resultClass="managerCategory">
+		SELECT CATEGORY1_CODE as category1Code, CATEGORY1_NAME as category1Name 
+		FROM CATEGORY1
+	</select>
 	
+	<select id="selectCategory2" resultClass="managerCategory">
+		SELECT CATEGORY1.CATEGORY1_CODE as category1Code, CATEGORY1.CATEGORY1_NAME as category1Name, 
+		CATEGORY2.CATEGORY2_CODE as category2Code, CATEGORY2.CATEGORY2_NAME as category2Name 
+		FROM CATEGORY2, CATEGORY1 
+		WHERE CATEGORY2.CATEGORY1_CODE = CATEGORY1.CATEGORY1_CODE
+	</select>
+	
+	<select id="selectCategory3" resultClass="managerCategory">
+		SELECT CATEGORY1.CATEGORY1_CODE as category1Code, CATEGORY1.CATEGORY1_NAME as category1Name, 
+		CATEGORY2.CATEGORY2_CODE as category2Code, CATEGORY2.CATEGORY2_NAME as category2Name, 
+		CATEGORY3.CATEGORY3_CODE as category3Code, CATEGORY3.CATEGORY3_NAME as category3Name 
+		FROM CATEGORY3, CATEGORY2, CATEGORY1 
+		WHERE CATEGORY3.CATEGORY2_CODE = CATEGORY2.CATEGORY2_CODE AND 
+		CATEGORY2.CATEGORY1_CODE = CATEGORY1.CATEGORY1_CODE;
+	</select>
+	
+	<select id="selectFeature1" resultClass="managerFeature">
+		SELECT FEATURE1_CODE as feature1Code, FEATURE1_NAME as feature1Name 
+		FROM FEATURE1
+	</select>
+	
+	<select id="selectFeature2" resultClass="managerFeature">
+		SELECT FEATURE1.FEATURE1_CODE as feature1Code, FEATURE1.FEATURE1_NAME as feature1Name, 
+		FEATURE2.FEATURE2_CODE as feature2Code, FEATURE2.FEATURE2_NAME as feature2Name 
+		FROM FEATURE2, FEATURE1 
+		WHERE FEATURE2.FEATURE1_CODE = FEATURE1.FEATURE1_CODE
+	</select>
 </sqlMap>
