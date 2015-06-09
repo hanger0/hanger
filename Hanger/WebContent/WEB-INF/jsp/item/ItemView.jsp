@@ -33,7 +33,14 @@
 	<INPUT type="hidden" name="itemMarketPrice" value="<%=ivv.getItemMarketPrice()%>">
 	<INPUT type="hidden" name="itemPurchasePrice" value="<%=ivv.getItemMarketPrice()%>">
 </FORM>
-
+<Script>
+   $(function(){
+         var cartForm = $('#cartForm');
+      $('#goCartBtn').click(function(){
+         cartForm.submit();
+      });
+   });
+</Script>
     <body class="ourBody" style = "background-color:#EBEBEB">
         <div class="container">
           <BR><BR><BR>
@@ -84,7 +91,7 @@
             <div class = "buy" align = "center">
             
             <ul class="nav nav-pills">
-              <li role="presentation" class="butn btn-default" style = "width:228px;height:40px;align:center;margin-left:120px"><a href="/cart.hang"><B>구매하기 / 담기</B></a></li>
+              <li role="presentation" class="butn btn-default" style = "width:228px;height:40px;align:center;margin-left:120px"><a id='goCartBtn'><B>구매하기 / 담기</B></a></li>
             </ul>
             </div>
          </div>
