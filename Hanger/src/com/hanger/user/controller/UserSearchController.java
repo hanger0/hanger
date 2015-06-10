@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.user.dao.UserSearchDao;
+import com.hanger.user.dao.UserSelectDao;
 import com.hanger.user.vo.UserVo;
 
 @Controller
 public class UserSearchController extends BaseController {
 	//
 	private UserSearchDao userSearchDao;
-
+	private UserSelectDao userSelectDao;
+	
+	public void setUserSelectDao(UserSelectDao userSelectDao) {
+		this.userSelectDao = userSelectDao;
+	}
 	public void setUserSearchDao(UserSearchDao userSearchDao) {
 		this.userSearchDao = userSearchDao;
 	}
@@ -35,6 +40,9 @@ public class UserSearchController extends BaseController {
 		map.put("qt", qt);
 		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
 
+		UserVo user = userSelectDao.selectUser(myUserCode);
+		
+		req.setAttribute("user", user);
 		req.setAttribute("userList", userList);
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");

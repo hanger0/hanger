@@ -1,4 +1,4 @@
-package com.hanger.posting.sale.controller;
+package com.hanger.sale.controller;
 
 import javax.servlet.http.HttpServletRequest;
 

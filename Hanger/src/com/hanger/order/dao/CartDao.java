@@ -23,4 +23,8 @@ public class CartDao {
 	public ArrayList<CartVo> selectCart(String myUserCode){
 		return (ArrayList<CartVo>)smct.queryForList("selectCart", myUserCode);
 	}
+	
+	public int deleteCart(HashMap<String, String> map){
+		return smct.delete("deleteCart", map);
+	}
 }

@@ -13,6 +13,7 @@ import com.hanger.common.controller.BaseController;
 import com.hanger.user.dao.RelationDeleteDao;
 import com.hanger.user.dao.RelationSearchDao;
 import com.hanger.user.dao.UserSearchDao;
+import com.hanger.user.dao.UserSelectDao;
 import com.hanger.user.vo.RelationVo;
 import com.hanger.user.vo.UserVo;
 
@@ -22,7 +23,11 @@ public class RelationDeleteController extends BaseController {
 	private RelationDeleteDao relationDeleteDao;
 	private RelationSearchDao relationSearchDao;
 	private UserSearchDao userSearchDao;
-
+	private UserSelectDao userSelectDao;
+	
+	public void setUserSelectDao(UserSelectDao userSelectDao) {
+		this.userSelectDao = userSelectDao;
+	}
 	public void setRelationDeleteDao(RelationDeleteDao relationDeleteDao) {
 		this.relationDeleteDao = relationDeleteDao;
 	}
@@ -48,6 +53,9 @@ public class RelationDeleteController extends BaseController {
 		
 		ArrayList<UserVo> followerList = relationSearchDao.searchFollowerRelation(myUserCode);
 		
+		UserVo user = userSelectDao.selectUser(userCode);
+		
+		req.setAttribute("user", user);
 		req.setAttribute("followerList", followerList);
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
@@ -69,6 +77,9 @@ public class RelationDeleteController extends BaseController {
 		relationDeleteDao.deleteRelation(relation);
 		ArrayList<UserVo> followingList = relationSearchDao.searchFollowingRelation(myUserCode);
 		
+		UserVo user = userSelectDao.selectUser(userCode);
+		
+		req.setAttribute("user", user);
 		req.setAttribute("followingList", followingList);
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
@@ -96,6 +107,9 @@ public class RelationDeleteController extends BaseController {
 		
 		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
 		
+		UserVo user = userSelectDao.selectUser(userCode);
+		
+		req.setAttribute("user", user);
 		req.setAttribute("userList", userList);
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");

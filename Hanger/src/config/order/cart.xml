@@ -20,4 +20,8 @@
 		where
 			cart.item_code = item.item_code AND cart.user_code = #myUserCode# 
 	</select>
+	
+	<delete id="deleteCart" parameterClass="HashMap">
+		delete from cart where USER_CODE = #userCode# and ITEM_CODE = #itemCode#
+	</delete>
 </sqlMap>

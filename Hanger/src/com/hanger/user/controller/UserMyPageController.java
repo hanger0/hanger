@@ -27,9 +27,9 @@ public class UserMyPageController extends BaseController {
 		
 		UserVo user = userSelectDao.selectUser(userCode);
 		
+		req.setAttribute("user", user);
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/MyReview.jsp");
-		req.setAttribute("user", user);
 		
 		return moveUrl;
 	}

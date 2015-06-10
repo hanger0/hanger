@@ -38,6 +38,7 @@
 	<bean id="userLogoutController" class ="com.hanger.user.controller.UserLogoutController" />
 	<bean id="userSearchController" class ="com.hanger.user.controller.UserSearchController">
 		<property name="userSearchDao" ref="userSearchDao"></property>
+		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 	<bean id="userFindPasswordController" class ="com.hanger.user.controller.UserFindPasswordController">
 		<property name="userFindPasswordDao" ref="userFindPasswordDao"></property>
@@ -48,20 +49,38 @@
 	<bean id="userMyPageController" class="com.hanger.user.controller.UserMyPageController">
 		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
+	<bean id="userTipPageController" class="com.hanger.user.controller.UserTipPageController">
+		<property name="userSelectDao" ref="userSelectDao"></property>
+	</bean>
+	<bean id="userHangOutPageController" class="com.hanger.user.controller.UserHangOutPageController">
+		<property name="userSelectDao" ref="userSelectDao"></property>
+	</bean>
+	<bean id="userMileagePageController" class="com.hanger.user.controller.UserMileagePageController">
+		<property name="userSelectDao" ref="userSelectDao"></property>
+	</bean>
+	<bean id="userOrderPageController" class="com.hanger.user.controller.UserOrderPageController">
+		<property name="userSelectDao" ref="userSelectDao"></property>
+	</bean>
+	<bean id="userScrapPageController" class="com.hanger.user.controller.UserScrapPageController">
+		<property name="userSelectDao" ref="userSelectDao"></property>
+	</bean>
 	
 	<!-- Relation 요청 url과 Controller 매핑 -->
 	<bean id="relationInsertController" class ="com.hanger.user.controller.RelationInsertController">
 		<property name="relationInsertDao" ref="relationInsertDao"></property>
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
 		<property name="userSearchDao" ref="userSearchDao"></property>
+		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 	<bean id="relationDeleteController" class ="com.hanger.user.controller.RelationDeleteController">
 		<property name="relationDeleteDao" ref="relationDeleteDao"></property>
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
 		<property name="userSearchDao" ref="userSearchDao"></property>
+		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 	<bean id="relationSearchController" class ="com.hanger.user.controller.RelationSearchController">
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
+		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 	
 	<!-- Manager/Item 요청 url과 Controller 매핑 -->
@@ -84,6 +103,9 @@
 		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 	<bean id="cartController" class="com.hanger.order.controller.CartController">
+		<property name="cartDao" ref="cartDao"></property>
+	</bean>
+	<bean id="deleteCartController" class="com.hanger.order.controller.DeleteCartController">
 		<property name="cartDao" ref="cartDao"></property>
 	</bean>
 	

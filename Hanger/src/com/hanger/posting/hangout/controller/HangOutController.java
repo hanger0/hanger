@@ -1,4 +1,4 @@
-package com.hanger.hangout.controller;
+package com.hanger.posting.hangout.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +12,7 @@ public class HangOutController extends BaseController {
 	//
 	@RequestMapping("/hangOutList.hang")
 	public String userTipPage(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "sns/hangOut/HangOutList.jsp");
+		req.setAttribute("mainUrl", root + "posting/hangOut/HangOutList.jsp");
 		
 		return moveUrl;
 	}

@@ -35,9 +35,18 @@ $(function(){
     	
     	orderBuyForm.submit();
     });
+    $(".deleteCartBtn").click(function(){
+    	var itemCode = $(this).attr("itemCode");
+    	$('input:hidden[name=deleteItemCode]').val(itemCode);
+    	var deleteCartForm = $("#deleteCartForm");
+    	deleteCartForm.submit();
+    });
 });
 </script>
 <body style="background-color: #EBEBEB">
+<form name="deleteCartForm" id="deleteCartForm" action="/deleteCart.hang" method="post">
+	<input type="hidden" name="deleteItemCode">
+</form>
 <FORM name="orderBuyForm" id="orderBuyForm" action="/goOrderBuyPage.hang" method="post">	
 	<INPUT type="hidden" name="itemCode" value="">
 	<INPUT type="hidden" name="itemGroupCode" value="">
@@ -89,6 +98,7 @@ $(function(){
 						<td align="center" style="border-bottom: 2px solid gray"><B>주문하기</B></td>
 					</tr>
 <%
+if(cartList != null){
 	int sumPrice = 0;
 	for(int i = 0; i < cartList.size(); i++){
 		CartVo cart = cartList.get(0);
@@ -154,9 +164,9 @@ $(function(){
 						<td
 							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2">무료배송</td>
-						<td style="border-bottom: 2px solid gray;" rowspan="2"><input
-							type="button" value="삭제하기" class="btn btn-default"
-							style="width: 80px; height: 30px"></td>
+						<td style="border-bottom: 2px solid gray;" rowspan="2">
+							<input type="button" value="삭제하기" class="btn btn-default deleteCartBtn" style="width: 80px; height: 30px" itemCode='<%= itemCode %>'>
+						</td>
 					</tr>
 					<tr>
 						<td style="border-bottom: 2px solid gray;" colspan="3"><font
@@ -164,6 +174,7 @@ $(function(){
 					</tr>
 <%
 	}
+}
 %>
 				</table>
 				<div class="button" align="center">
