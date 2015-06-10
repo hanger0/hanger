@@ -79,9 +79,9 @@ public class OrderBuyController extends BaseController {
 		String orderPostCode1 = req.getParameter("orderPostCode1");
 		String orderPostCode2 = req.getParameter("orderPostCode2");
 		String orderMemo = req.getParameter("orderMemo");
-		String orderItemMarketPrice = req.getParameter("orderItemMarketPrice");
+		String orderItemMarketPrice = req.getParameter("itemMarketPrice");
 		String orderItemSellPrice = req.getParameter("itemSellPrice");
-		String orderItemPurchasePrice = req.getParameter("orderItemPurchasePrice");
+		String orderItemPurchasePrice = req.getParameter("itemPurchasePrice");
 		String discountReasonCode = req.getParameter("discountReasonCode");
 		String orderItemAmount = req.getParameter("orderItemAmount");
 		String orderItemRecom = req.getParameter("orderItemRecom");

@@ -25,8 +25,8 @@ $(function(){
 <form name="buyForm" id="buyForm" action="/orderBuy.hang" method="POST">
 	<input type="hidden" name="itemCode" value="<%= itemCode %>"/>
 	<input type="hidden" name="itemSellPrice" value="<%= itemSellPrice %>"/>
-	<input type="hidden" name="itemSellPrice" value="<%= itemMarketPrice %>"/>
-	<input type="hidden" name="itemSellPrice" value="<%= itemPurchasePrice %>"/>
+	<input type="hidden" name="itemMarketPrice" value="<%= itemMarketPrice %>"/>
+	<input type="hidden" name="itemPurchasePrice" value="<%= itemPurchasePrice %>"/>
 	<input type="hidden" name="orderUsedMileage" value=""/>
 	<input type="hidden" name="orderItemRecom" value=""/>
 	<input type="hidden" name="orderItemAmount" value="<%= itemAmount %>"/>
@@ -196,7 +196,7 @@ $(function(){
 									<td><input type="text" name="orderAddr1" style="width: 347px" value="<%= user.getUserAddr1() %>"></td><BR>
 								</tr>
 								<tr>
-									<td><input type="text" name="orderAddr1" style="width: 347px" value="<%= user.getUserAddr2() %>"></td>
+									<td><input type="text" name="orderAddr2" style="width: 347px" value="<%= user.getUserAddr2() %>"></td>
 								</tr>
 							</table>
 

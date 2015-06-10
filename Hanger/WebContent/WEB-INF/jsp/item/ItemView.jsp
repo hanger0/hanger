@@ -56,12 +56,13 @@
 	   var index = $('.itemSize option:selected').val();
 	   if(index==0)
 		{
-		   $('#marketPrice1').text(<%=marketPrice[0]%>);
-		   $('#sellPrice1').text(<%=sellPrice[0]%>);
-		   $('#marketPrice').val(<%=marketPrice[0]%>);
-		   $('#sellPrice').val(<%=sellPrice[0]%>);
-		   $('#orderViewitemCode').val(<%=itemCode[0]%>);
-		   $('#stockCode').val(<%=stockCode[0]%>);
+		   $('#marketPrice1').text('<%=marketPrice[0]%>');
+		   $('#sellPrice1').text('<%=sellPrice[0]%>');
+		   $('#marketPrice').val('<%=marketPrice[0]%>');
+		   $('#sellPrice').val('<%=sellPrice[0]%>');
+		   $('#itemCode').val('<%=itemCode[0]%>');
+		   $('#itemPurchasePrice').val('<%=purchasePrice[0]%>');
+		   $('#stockCode').val('<%=stockCode[0]%>');
 		}
    }
 </Script>
@@ -71,7 +72,7 @@
           <BR><BR><BR>
           <FORM name="cartForm" id="cartForm" action="/cart.hang" method="post">          	
 			<INPUT type="hidden" name="itemGroupCode" id="itemGroupCode" value="<%=itemGroupCode%>">
-			<INPUT type="hidden" name="orderViewitemCode" id="orderViewitemCode">
+			<INPUT type="hidden" name="itemCode" id="itemCode">
 			<INPUT type="hidden" name="stockCode" id="stockCode">
 			<INPUT type="hidden" name="itemPurchasePrice" id="itemPurchasePrice">
 			<INPUT type="hidden" name="marketPrice" id="marketPrice">
