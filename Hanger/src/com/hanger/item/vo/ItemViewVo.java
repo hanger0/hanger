@@ -13,7 +13,7 @@ public class ItemViewVo {
 	String itemScore;
 	String itemSummaryInfo;
 	String itemDetailInfo;
-	String iitemIngredient;
+	String itemIngredient;
 	String itemHowToUse;
 	String itemSellMaxnum;
 	String itemStockAmount;
@@ -99,11 +99,11 @@ public class ItemViewVo {
 	public void setItemDetailInfo(String itemDetailInfo) {
 		this.itemDetailInfo = itemDetailInfo;
 	}
-	public String getIitemIngredient() {
-		return iitemIngredient;
+	public String getItemIngredient() {
+		return itemIngredient;
 	}
-	public void setIitemIngredient(String iitemIngredient) {
-		this.iitemIngredient = iitemIngredient;
+	public void setItemIngredient(String itemIngredient) {
+		this.itemIngredient = itemIngredient;
 	}
 	public String getItemHowToUse() {
 		return itemHowToUse;

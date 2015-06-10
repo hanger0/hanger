@@ -1,6 +1,37 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
-
+<%@ page import="com.hanger.user.vo.UserVo" %>
+<%
+	String itemCode = (String)request.getAttribute("itemCode");
+	String itemMarketPrice = (String)request.getAttribute("itemMarketPrice");
+	String itemPurchasePrice = (String)request.getAttribute("itemPurchasePrice");
+	String itemName = (String)request.getAttribute("itemName");
+	String itemPicPath = (String)request.getAttribute("itemPicPath");
+	String itemPicSaveName = (String)request.getAttribute("itemPicSaveName");
+	String itemSellPrice = (String)request.getAttribute("itemSellPrice");
+	String itemAmount = (String)request.getAttribute("itemAmount");
+	String cartItemRecom = (String)request.getAttribute("cartItemRecom");
+	String itemDetailInfo = (String)request.getAttribute("itemDetailInfo");
+	UserVo user = (UserVo)request.getAttribute("user");
+%>
+<script>
+$(function(){
+	var buyForm = $('#buyForm');
+	$(".buyBtn").click(function(){
+		buyForm.submit();
+	});
+});
+</script>
 <body style="background-color: #EBEBEB">
+<form name="buyForm" id="buyForm" action="/orderBuy.hang" method="POST">
+	<input type="hidden" name="itemCode" value="<%= itemCode %>"/>
+	<input type="hidden" name="itemSellPrice" value="<%= itemSellPrice %>"/>
+	<input type="hidden" name="itemSellPrice" value="<%= itemMarketPrice %>"/>
+	<input type="hidden" name="itemSellPrice" value="<%= itemPurchasePrice %>"/>
+	<input type="hidden" name="orderUsedMileage" value=""/>
+	<input type="hidden" name="orderItemRecom" value=""/>
+	<input type="hidden" name="orderItemAmount" value="<%= itemAmount %>"/>
+	<input type="hidden" name="orderState" value="입금대기중"/>
+	<input type="hidden" name="discountreasoncode" value="001"/>
 	<div class="container">
 		<BR>
 		<div class="brand">
@@ -28,36 +59,39 @@
 						<td align="center"><b>수량</b></td>
 
 					</tr>
+<%
+		if(cartItemRecom != null){
+%>
 					<tr>
 						<td style="background-color: #747474"></td>
-						<td colspan="7" style="background-color: #747474;"><font
-							color="white"> <b>"동작구사랑방"</b>님을 통하여 구매하였습니다.
-						</font></td>
+						<td colspan="8" style="background-color: #747474">
+							<font color="white"> 
+								<b><%= cartItemRecom %></b>님을 통하여 구매하였습니다.
+							</font>
+						</td>
 					</tr>
-
+<%
+		}
+%>
 					<tr align="center">
-						<td
-							style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px"
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px"
 							rowspan="2"><input type="checkbox"></td>
-						<td style="border-bottom: 2px solid gray;" rowspan="2"
-							width="120px"><img src="/images/14.jpg" width="80px"
-							height="80px" style="margin-left: -20px"></td>
-						<td colspan="3" style="border-right: 1px solid gray;"><font
-							size="3"><b>올리브 영 아쿠아 수분 크림</b></font></td>
-						<td
-							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2">19,000원</td>
-						<td
-							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
+						<td style="border-bottom: 2px solid gray;" rowspan="2" width="120px">
+							<img src="<%= itemPicPath %>/<%= itemPicSaveName %>" width="80px" height="80px" style="margin-left: -20px">
+						</td>
+						<td colspan="3" style="border-right: 1px solid gray;">
+							<font size="3"><b><%= itemName %></b></font>
+						</td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
+							rowspan="2"><%= itemSellPrice %>원</td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2">무료배송</td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2"><font
-							size="3"><b>1</b></font></td>
-
+							size="3"><b><%= itemAmount %></b></font></td>
 					</tr>
 					<tr>
 						<td style="border-bottom: 2px solid gray;" colspan="3"><font
-							size="2">1. A타입(로레알파리 루센트 매직 비비에센스 01호 내츄럴 베이지+워터프루프 젤펜슬
-								아이라이너+립 컬러 스틱)</font></td>
+							size="2"><%= itemDetailInfo %></font></td>
 					</tr>
 				</table>
 			</div>
@@ -77,11 +111,9 @@
 					</tr>
 
 					<tr style="height: 60px; background-color: #F6F6F6" align="center">
-						<td
-							style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
-						<td
-							style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
-						<td style="border-bottom: 3px solid gray;">0원</td>
+						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center"><%= itemSellPrice %>원</td>
+						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
+						<td style="border-bottom: 3px solid gray;"><%= itemSellPrice %>원</td>
 					</tr>
 				</table>
 			</div>
@@ -95,33 +127,24 @@
 			<div class="product-infotable" align="center">
 				<table style="width: 900px; height: 100px">
 					<tr>
-						<td width="140px"
-							style="background-color: #EAEAEA; padding-left: 20px; border-bottom: 1px solid gray; border-top: 3px solid gray;">
+						<td width="140px" style="background-color: #EAEAEA; padding-left: 20px; border-bottom: 1px solid gray; border-top: 3px solid gray;">
 							<font size="3"><b>이름</b></font>
 						</td>
-						<td
-							style="padding-left: 20px; border-bottom: 1px solid gray; border-top: 3px solid gray;">박상욱</td>
+						<td style="padding-left: 20px; border-bottom: 1px solid gray; border-top: 3px solid gray;"><%= user.getUserName() %></td>
 					</tr>
 					<tr>
-						<td
-							style="background-color: #EAEAEA; padding-left: 20px; border-bottom: 1px solid gray"><font
-							size="3"><b>휴대폰 번호</b></font></td>
-						<td style="padding-left: 20px; border-bottom: 1px solid gray">010-2415-7860</td>
+						<td style="background-color: #EAEAEA; padding-left: 20px; border-bottom: 1px solid gray"><font size="3"><b>휴대폰 번호</b></font></td>
+						<td style="padding-left: 20px; border-bottom: 1px solid gray"><%= user.getUserPhone() %></td>
 					</tr>
 					<tr>
-						<td
-							style="background-color: #EAEAEA; padding-left: 20px; border-bottom: 1px solid gray"><font
-							size="3"><b>이메일</b></font></td>
-						<td style="padding-left: 20px; border-bottom: 1px solid gray">dofwk2@naver.com</td>
+						<td style="background-color: #EAEAEA; padding-left: 20px; border-bottom: 1px solid gray"><font size="3"><b>이메일</b></font></td>
+						<td style="padding-left: 20px; border-bottom: 1px solid gray"><%= user.getUserId() %></td>
 					</tr>
 				</table>
 			</div>
 
 			<!--띄어쓰기-->
-			<p>
-				<br>
-			<p>
-				<br>
+			<p><br><p><br>
 			<div class="send-info" style="margin-left: 100px">
 				<font size="4"><b>02. 배송지 정보</b></font>
 				<p>
@@ -135,62 +158,57 @@
 						</td>
 						<td
 							style="padding-left: 20px; border-top: 3px solid gray; border-bottom: 1px solid gray">
-							<input type="radio" checked>기본 배송지&nbsp;&nbsp;&nbsp; <input
-							type="radio">새로운 배송지&nbsp;&nbsp;&nbsp; <input
-							type="radio">최근 배송지
+							<input type="radio" name="tagbe" checked>기본 배송지&nbsp;&nbsp;&nbsp; <input
+							type="radio" name="tagbe">새로운 배송지&nbsp;&nbsp;&nbsp; <input
+							type="radio" name="tagbe">최근 배송지
 						</td>
 					</tr>
 					<tr>
-						<td
-							style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray"><font
+						<td style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray"><font
 							size="3"><b>이름</b></font></td>
-						<td style="padding-left: 20px; border-bottom: 1px solid gray"><input
-							type="text" value="박상욱"></td>
+						<td style="padding-left: 20px; border-bottom: 1px solid gray">
+						<input type="text" name="orderName" value="<%= user.getUserName() %>"></td>
 					</tr>
 					<tr>
 						<td
 							style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray"><font
 							size="3"><b>연락처</b></font></td>
 						<td style="padding-left: 20px; border-bottom: 1px solid gray">
-							<input type="text" style="width: 60px"> - <input
-							type="text" style="width: 60px"> - <input type="text"
-							style="width: 60px">
+							<input type="text" name="orderPhone" size="20" value="<%= user.getUserPhone() %>">
 						</td>
 					</tr>
 					<tr>
-						<td
-							style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray"><font
-							size="3"><b>이메일</b></font></td>
-						<td style="padding-left: 20px; border-bottom: 1px solid gray"><input
-							type="text" style="width: 210px"></td>
-					</tr>
-					<tr>
-						<td
-							style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray"><font
-							size="3"><b>주소</b></font></td>
+						<td style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray">
+							<font size="3"><b>주소</b></font></td>
 						<td style="padding-left: 20px; border-bottom: 1px solid gray">
 							<table>
 								<tr>
-									<td><input type="text"> - <input type="text">
+									<td>
+										<input type="text" name="orderPostCode1" value="<%= user.getUserPostCode1() %>"> - <input type="text" name="orderPostCode2" value="<%= user.getUserPostCode2() %>">
 										<input type="button" class="btn btn-default" value="우편번호 찾기">
-										<input type="checkbox">이 주소를 회원정보를 저장</td>
+										<input type="checkbox">이 주소를 회원정보를 저장
+									</td>
 								</tr>
 								<tr height="5">
 									<td></td>
 								</tr>
 								<tr>
-									<td><input type="text" style="width: 347px"></td>
+									<td><input type="text" name="orderAddr1" style="width: 347px" value="<%= user.getUserAddr1() %>"></td><BR>
+								</tr>
+								<tr>
+									<td><input type="text" name="orderAddr1" style="width: 347px" value="<%= user.getUserAddr2() %>"></td>
 								</tr>
 							</table>
 
 						</td>
 					</tr>
 					<tr>
-						<td
-							style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray"><font
-							size="3"><b>배송메모</b></font></td>
-						<td style="padding-left: 20px; border-bottom: 1px solid gray"><input
-							type="text" style="width: 680px"></td>
+						<td style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray">
+							<font size="3"><b>배송메모</b></font>
+						</td>
+						<td style="padding-left: 20px; border-bottom: 1px solid gray">
+							<input type="text" name="orderMemo" style="width: 680px">
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -198,19 +216,16 @@
 			<p>
 			<div class="poster" style="margin-left: 100px">
 				<p>
-					<font size="2"><font color="red"><b>· 정확한 주소를
-								기재해주세요.</b></font></font>
+					<font size="2" color="red"><b>
+						· 정확한 주소를기재해주세요.
+					</b></font>
 				<p>
-					<font size="2"><font color="red"><b>· 부정확한 정보 및
-								분실로 인한 재발송은 불가능하며, 상품이 반송될 경우 왕복배송비(5,000원) 고객부담입니다.</b></font></font>
+					<font size="2" color="red"><b>
+						· 부정확한 정보 및 분실로 인한 재발송은 불가능하며, 상품이 반송될 경우 왕복배송비(5,000원) 고객부담입니다.
+					</b></font>
 			</div>
-
-
 			<!--띄어쓰기-->
-			<p>
-				<br>
-			<p>
-				<br>
+			<p><br><p><br>
 			<div class="card-info" style="margin-left: 100px">
 				<font size="4"><b>03. 결제 정보</b></font>
 			</div>
@@ -224,8 +239,6 @@
 				<p>
 					<font size="2"><b>· 할인쿠폰 사용시 할인쿠폰 금액 이하 상품 적용 불가 / 각 쿠폰의
 							최소 결제금액 확인 후 사용 부탁드립니다.</b></font>
-				<p>
-					<font size="2"><b>· 미미포인트와 할인쿠폰은 중복사용이 불가능합니다.</b></font>
 				<p>
 			</div>
 			<div class="card-infotable" style="margin-left: 100px">
@@ -328,16 +341,12 @@
 			<!--띄어쓰기-->
 			<p>
 				<br> <br>
-				<script>
-					function index() {
-						location.href = "index.jsp"
-					}
-				</script>
 			<div class="buy-button" align="center">
-				<input type="button" class="btn btn-default" value="결제하기"
-					style="width: 220px; height: 80px" onClick="index()">
+				<input type="button" class="btn btn-default buyBtn" value="결제하기"
+					style="width: 220px; height: 80px">
 			</div>
 			<br><br>
 		</div>
 	</div>
+</form>
 </body>

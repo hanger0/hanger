@@ -54,7 +54,8 @@
 		select 
 			USER_CODE as userCode, USER_ID as userId, USER_NAME as userName, USER_GENDER as userGender, USER_BIRTH as userBirth, 
 			USER_PHONE as userPhone, USER_PIC_PATH as userPicPath, USER_PIC_ORG_NAME as userPicOrgName, USER_PIC_SAVE_NAME as userPicSaveName, 
-			USER_SKINTYPE as userSkinType, USER_SKINTONE as userSkinTone, USER_SKINPROBLEM as userSkinProblem, USER_RANK as userRank
+			USER_SKINTYPE as userSkinType, USER_SKINTONE as userSkinTone, USER_SKINPROBLEM as userSkinProblem, USER_RANK as userRank,
+			USER_ADDR1 as userAddr1, USER_ADDR2 as userAddr2, USER_POSTCODE1 as userPostCode1, USER_POSTCODE2 as userPostCode2
 		from 
 			user 
 		where 

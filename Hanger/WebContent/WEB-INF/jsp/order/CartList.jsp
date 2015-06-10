@@ -1,5 +1,57 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page import="com.hanger.order.vo.CartVo" %>
+<%@ page import="java.util.*" %>
+<%
+	ArrayList<CartVo> cartList = (ArrayList<CartVo>)request.getAttribute("cartList");
+%>
+<script>
+$(function(){
+	function home() {
+		location.href = "/main.hang";
+	}
+    var orderBuyForm = $('#orderBuyForm');
+    $('.goOrderBuyBtn').click(function(){
+    	var itemCode = $(".checkbox").attr("itemCode");
+    	var itemMarketPrice = $(".checkbox").attr("itemMarketPrice");
+    	var itemPurchasePrice = $(".checkbox").attr("itemPurchasePrice");
+    	var itemName = $(".checkbox").attr("itemName");
+    	var itemPicPath = $(".checkbox").attr("itemPicPath");
+    	var itemPicSaveName = $(".checkbox").attr("itemPicSaveName");
+    	var itemSellPrice = $(".checkbox").attr("itemSellPrice");
+    	var itemAmount = $(".checkbox").attr("itemAmount");
+    	var cartItemRecom = $(".checkbox").attr("cartItemRecom");
+    	var itemDetailInfo = $(".checkbox").attr("itemDetailInfo");
+    	
+    	$('input:hidden[name=itemCode]').val(itemCode);
+    	$('input:hidden[name=itemMarketPrice]').val(itemMarketPrice);
+    	$('input:hidden[name=itemPurchasePrice]').val(itemPurchasePrice);
+    	$('input:hidden[name=itemName]').val(itemName);
+    	$('input:hidden[name=itemPicPath]').val(itemPicPath);
+    	$('input:hidden[name=itemPicSaveName]').val(itemPicSaveName);
+    	$('input:hidden[name=itemSellPrice]').val(itemSellPrice);
+    	$('input:hidden[name=itemAmount]').val(itemAmount);
+    	$('input:hidden[name=cartItemRecom]').val(cartItemRecom);
+    	$('input:hidden[name=itemDetailInfo]').val(itemDetailInfo);
+    	
+    	orderBuyForm.submit();
+    });
+});
+</script>
 <body style="background-color: #EBEBEB">
+<FORM name="orderBuyForm" id="orderBuyForm" action="/goOrderBuyPage.hang" method="post">	
+	<INPUT type="hidden" name="itemCode" value="">
+	<INPUT type="hidden" name="itemGroupCode" value="">
+	<INPUT type="hidden" name="stockCode" value="">
+	<INPUT type="hidden" name="itemName" value="">
+	<INPUT type="hidden" name="itemPicPath" value="">
+	<INPUT type="hidden" name="itemPicSaveName" value="">
+	<INPUT type="hidden" name="itemSellPrice" value="">
+	<INPUT type="hidden" name="itemMarketPrice" value="">
+	<INPUT type="hidden" name="itemPurchasePrice" value="">
+	<INPUT type="hidden" name="itemAmount" value="">
+	<INPUT type="hidden" name="cartItemRecom" value="">
+	<INPUT type="hidden" name="itemDetailInfo" value="">
+</FORM>
 	<div class="container">
 		<BR>
 		<div class="brand" style="margin-left: 90px">
@@ -36,48 +88,68 @@
 							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>배송비</B></td>
 						<td align="center" style="border-bottom: 2px solid gray"><B>주문하기</B></td>
 					</tr>
+<%
+	int sumPrice = 0;
+	for(int i = 0; i < cartList.size(); i++){
+		CartVo cart = cartList.get(0);
+		String userCode = cart.getUserCode();
+		String itemCode = cart.getItemCode();
+		String cartItemAmount = cart.getCartItemAmount();
+		String cartItemRecom = cart.getCartItemRecom();
+		int itemSellPrice = Integer.parseInt(cart.getItemSellPrice());
+		String itemName = cart.getItemName();
+		String itemPicPath = cart.getItemPicPath();
+		String itemPicSaveName = cart.getItemPicSaveName();
+		String itemDetailInfo = cart.getItemDetailInfo();
+		String itemPurchasePrice = cart.getItemPurchasePrice();
+		String itemMarketPrice = cart.getItemMarketPrice();
+
+		sumPrice += itemSellPrice;
+		
+		if(cartItemRecom != null){
+%>
 					<tr>
 						<td style="background-color: #747474"></td>
 						<td colspan="8" style="background-color: #747474"><font
-							color="white"> <b>"동작구사랑방"</b>님을 통하여 구매하였습니다.
+							color="white"> <b><%= cartItemRecom %></b>님을 통하여 구매하였습니다.
 						</font></td>
 					</tr>
-
+<%
+		}
+%>
 					<tr align="center">
-						<td
-							style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px"
-							rowspan="2"><input type="checkbox"></td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px"
+							rowspan="2"><input class="checkbox" type="checkbox" itemName="<%= itemName %>" itemCode="<%=itemCode%>" cartItemRecom="<%= cartItemRecom %>" itemPicPath="<%=itemPicPath%>" itemPicSaveName="<%=itemPicSaveName%>" itemSellPrice="<%=itemSellPrice%>" itemMarketPrice="<%=itemMarketPrice%>" itemPurchasePrice="<%=itemPurchasePrice%>" itemAmount="<%=cartItemAmount%>" itemDetailInfo="<%= itemDetailInfo %>"></td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2"
-							width="120px"><img src="/images/14.jpg" width="80px"
+							width="120px"><img src="<%= itemPicPath %>/<%= itemPicSaveName %>" width="80px"
 							height="80px" style="margin-left: -20px"></td>
 						<td colspan="3" style="border-right: 1px solid gray;"><font
-							size="3"><b>올리브 영 아쿠아 수분 크림</b></font></td>
-						<td
-							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2">19,000원</td>
+							size="3"><b><%= itemName %></b></font></td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
+							rowspan="2"><%= itemSellPrice %>원</td>
 						<td
 							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2"><select>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-								<option value="13">13</option>
-								<option value="14">14</option>
-								<option value="15">15</option>
-								<option value="16">16</option>
-								<option value="17">17</option>
-								<option value="18">18</option>
-								<option value="19">19</option>
-								<option value="20">20</option>
+								<option value="1" <% if(cartItemAmount.equals("1")){%>selected<%}%>>1</option>
+								<option value="2" <% if(cartItemAmount.equals("2")){%>selected<%}%>>2</option>
+								<option value="3" <% if(cartItemAmount.equals("3")){%>selected<%}%>>3</option>
+								<option value="4" <% if(cartItemAmount.equals("4")){%>selected<%}%>>4</option>
+								<option value="5" <% if(cartItemAmount.equals("5")){%>selected<%}%>>5</option>
+								<option value="6" <% if(cartItemAmount.equals("6")){%>selected<%}%>>6</option>
+								<option value="7" <% if(cartItemAmount.equals("7")){%>selected<%}%>>7</option>
+								<option value="8" <% if(cartItemAmount.equals("8")){%>selected<%}%>>8</option>
+								<option value="9" <% if(cartItemAmount.equals("9")){%>selected<%}%>>9</option>
+								<option value="10" <% if(cartItemAmount.equals("10")){%>selected<%}%>>10</option>
+								<option value="11" <% if(cartItemAmount.equals("11")){%>selected<%}%>>11</option>
+								<option value="12" <% if(cartItemAmount.equals("12")){%>selected<%}%>>12</option>
+								<option value="13" <% if(cartItemAmount.equals("13")){%>selected<%}%>>13</option>
+								<option value="14" <% if(cartItemAmount.equals("14")){%>selected<%}%>>14</option>
+								<option value="15" <% if(cartItemAmount.equals("15")){%>selected<%}%>>15</option>
+								<option value="16" <% if(cartItemAmount.equals("16")){%>selected<%}%>>16</option>
+								<option value="17" <% if(cartItemAmount.equals("17")){%>selected<%}%>>17</option>
+								<option value="18" <% if(cartItemAmount.equals("18")){%>selected<%}%>>18</option>
+								<option value="19" <% if(cartItemAmount.equals("19")){%>selected<%}%>>19</option>
+								<option value="20" <% if(cartItemAmount.equals("20")){%>selected<%}%>>20</option>
 						</select></td>
 						<td
 							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
@@ -88,10 +160,11 @@
 					</tr>
 					<tr>
 						<td style="border-bottom: 2px solid gray;" colspan="3"><font
-							size="2">1. A타입(로레알파리 루센트 매직 비비에센스 01호 내츄럴 베이지+워터프루프 젤펜슬
-								아이라이너+립 컬러 스틱)</font></td>
+							size="2"><%= itemDetailInfo %></font></td>
 					</tr>
-
+<%
+	}
+%>
 				</table>
 				<!-- 띄어쓰기 -->
 				<P>
@@ -110,10 +183,10 @@
 
 					<tr style="height: 60px; background-color: #F6F6F6" align="center">
 						<td
-							style="border-right: 1px solid white; border-bottom: 2px solid gray; text-align: center">0원</td>
+							style="border-right: 1px solid white; border-bottom: 2px solid gray; text-align: center"><%= sumPrice %>원</td>
 						<td
 							style="border-right: 1px solid white; border-bottom: 2px solid gray; text-align: center"">0원</td>
-						<td style="border-bottom: 2px solid gray;">0원</td>
+						<td style="border-bottom: 2px solid gray;"><%= sumPrice %>원</td>
 					</tr>
 				</table>
 
@@ -126,18 +199,11 @@
 				<P>
 				<h6>· 판매종료, 품절 상품은 자동 삭제됩니다.</h6>
 				</p>
-				<script>
-					function home() {
-						location.href = "/main.hang";
-					}
-					function BuyPage() {
-						location.href = "/buyOrder.hang"
-					}
-				</script>
+				
 				<div class="button" align="center">
 					<input type="button" value="계속 쇼핑" class="btn btn-default"
 						onClick="home()"> <input type="button" value="즉시 구매"
-						class="btn btn-default" onClick="BuyPage()">
+						class="btn btn-default goOrderBuyBtn">
 				</div>
 			</div>
 		</div>

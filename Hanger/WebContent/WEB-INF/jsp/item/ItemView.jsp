@@ -3,36 +3,47 @@
 <%@ page import="com.hanger.item.vo.ItemViewVo" %>
 <%
 	ArrayList itemViewList = (ArrayList)request.getAttribute("itemViewList");
-	ItemViewVo ivv = (ItemViewVo)itemViewList.get(0);
-	System.out.println("ItemView.jsp  : "+ivv.getBrandName());
-	System.out.println("ItemView.jsp  : "+ivv.getIitemIngredient());
-	System.out.println("ItemView.jsp  : "+ivv.getItemCode());
-	System.out.println("ItemView.jsp  : "+ivv.getItemDetailInfo());
-	System.out.println("ItemView.jsp  : "+ivv.getItemGroupCode());
-	System.out.println("ItemView.jsp  : "+ivv.getItemHowToUse());
-	System.out.println("ItemView.jsp  : "+ivv.getItemMarketPrice());
-	System.out.println("ItemView.jsp  : "+ivv.getItemName());
-	System.out.println("ItemView.jsp  : "+ivv.getItemPicPath());
-	System.out.println("ItemView.jsp  : "+ivv.getItemPicSavename());
-	System.out.println("ItemView.jsp  : "+ivv.getItemScore());
-	System.out.println("ItemView.jsp  : "+ivv.getItemSellMaxnum());
-	System.out.println("ItemView.jsp  : "+ivv.getItemSellPrice());
-	System.out.println("ItemView.jsp  : "+ivv.getItemSize());
-	System.out.println("ItemView.jsp  : "+ivv.getItemSizeYn());
-	System.out.println("ItemView.jsp  : "+ivv.getItemStatus());
-	System.out.println("ItemView.jsp  : "+ivv.getItemStockAmount());
-	System.out.println("ItemView.jsp  : "+ivv.getItemSummaryInfo());
-	System.out.println("ItemView.jsp  : "+ivv.getStockCode());
-	System.out.println("ItemView.jsp itemViewList : "+itemViewList);
+	
+	int listSize = itemViewList.size();
+	
+	String itemGroupCode = ((ItemViewVo)itemViewList.get(0)).getItemGroupCode();
+	String itemName = ((ItemViewVo)itemViewList.get(0)).getItemName();
+	String itemSizeYn = ((ItemViewVo)itemViewList.get(0)).getItemSizeYn();
+	String itemScore = ((ItemViewVo)itemViewList.get(0)).getItemScore();
+	String itemSummaryInfo = ((ItemViewVo)itemViewList.get(0)).getItemSummaryInfo();
+	String itemDetailInfo = ((ItemViewVo)itemViewList.get(0)).getItemDetailInfo();
+	String itemIngredient = ((ItemViewVo)itemViewList.get(0)).getItemIngredient();
+	String itemHowToUse = ((ItemViewVo)itemViewList.get(0)).getItemHowToUse();
+	String brandName = ((ItemViewVo)itemViewList.get(0)).getBrandName();
+	
+	String[] marketPrice=new String[listSize];
+	String[] sellPrice=new String[listSize];
+	String[] purchasePrice=new String[listSize];
+	String[] itemSize=new String[listSize];
+	String[] itemCode = new String[listSize];
+	String[] itemStockAmount = new String[listSize];
+	String[] stockCode = new String[listSize];
+	String[] itemSellMaxnum = new String[listSize];
+	String[] itemStatus = new String[listSize];
+	String[] itemPicPath = new String[listSize];
+	String[] itemPicSavename = new String[listSize];
+	
+	for(int i=0; i<listSize; i++)
+	{
+		itemCode[i] = ((ItemViewVo)itemViewList.get(i)).getItemCode();
+		marketPrice[i]=((ItemViewVo)itemViewList.get(i)).getItemMarketPrice();
+		purchasePrice[i]=((ItemViewVo)itemViewList.get(i)).getItemPurchasePrice();
+		sellPrice[i]=((ItemViewVo)itemViewList.get(i)).getItemSellPrice();
+		itemSize[i]=((ItemViewVo)itemViewList.get(i)).getItemSize();
+		itemStockAmount[i] = ((ItemViewVo)itemViewList.get(i)).getItemStockAmount();
+		stockCode[i] = ((ItemViewVo)itemViewList.get(i)).getStockCode();
+		itemSellMaxnum[i] = ((ItemViewVo)itemViewList.get(i)).getItemSellMaxnum();
+		itemStatus[i] = ((ItemViewVo)itemViewList.get(i)).getItemStatus();
+		itemPicPath[i] = ((ItemViewVo)itemViewList.get(i)).getItemPicPath();
+		itemPicSavename[i] = ((ItemViewVo)itemViewList.get(i)).getItemPicSavename();
+	}
 %>
-<FORM name="cartForm" id="cartForm" action="/cart.hang" method="post">	
-	<INPUT type="hidden" name="itemCode" value="<%=ivv.getItemCode()%>">
-	<INPUT type="hidden" name="itemGroupCode" value="<%=ivv.getItemGroupCode()%>">
-	<INPUT type="hidden" name="stockCode" value="<%=ivv.getStockCode()%>">
-	<INPUT type="hidden" name="itemSellPrice" value="<%=ivv.getItemSellPrice()%>">
-	<INPUT type="hidden" name="itemMarketPrice" value="<%=ivv.getItemMarketPrice()%>">
-	<INPUT type="hidden" name="itemPurchasePrice" value="<%=ivv.getItemMarketPrice()%>">
-</FORM>
+
 <Script>
    $(function(){
          var cartForm = $('#cartForm');
@@ -40,10 +51,31 @@
          cartForm.submit();
       });
    });
+   function selectSize()
+   {
+	   var index = $('.itemSize option:selected').val();
+	   if(index==0)
+		{
+		   $('#marketPrice1').text(<%=marketPrice[0]%>);
+		   $('#sellPrice1').text(<%=sellPrice[0]%>);
+		   $('#marketPrice').val(<%=marketPrice[0]%>);
+		   $('#sellPrice').val(<%=sellPrice[0]%>);
+		   $('#itemCode').val(<%=itemCode[0]%>);
+		   $('#stockCode').val(<%=stockCode[0]%>);
+		}
+   }
 </Script>
     <body class="ourBody" style = "background-color:#EBEBEB">
+    
         <div class="container">
           <BR><BR><BR>
+          <FORM name="cartForm" id="cartForm" action="/cart.hang" method="post">          	
+			<INPUT type="hidden" name="itemGroupCode" id="itemGroupCode" value="<%=itemGroupCode%>">
+			<INPUT type="hidden" name="itemCode" id="itemCode">
+			<INPUT type="hidden" name="stockCode" id="stockCode">
+			<INPUT type="hidden" name="itemPurchasePrice" id="itemPurchasePrice">
+			<INPUT type="hidden" name="marketPrice" id="marketPrice">
+			<INPUT type="hidden" name="sellPrice" id="sellPrice">
           <div class="thumbnail">
           <div class="header" style = "width:980px;height:500px;margin-left:80px">
               <div class="product-info" style = "background-color:white;width:980px;height:500px;border:1px gray">
@@ -51,9 +83,9 @@
                style = "width:460px;height:460px;background-image:url(/assets/images/hanger.png);float:left;margin-left:20px;margin-top:20px">
                </div>
                <div class = "product-subject" style = "width:447px;height:460px;float:right">
-                  <div class = "subTitle"><p><h5>2015 S/S 아방가르드 디자인의 수분 크림 팩트</h5></p>
+                  <div class = "subTitle"><p><h5><%=brandName %></h5></p>
                   </div>
-               <div class = "titleFW"><p><h3>[루나] 아방가르드 파운팩트</h3></p>
+               <div class = "titleFW"><p><h3><%=itemName %></h3></p>
                </div>
                
                <ul class="nav nav-pills">
@@ -63,13 +95,29 @@
                
                <HR style="border: 1px solid gray">
                <TABLE>
+               	  <TR>
+                     <TD style = "width:108px;height:30px">사이즈 선택</TD>
+                     <TD>
+                     	<SELECT name="itemSize" id="itemSize" class="itemSize" onChange="selectSize()">
+                     	<option selected>사이즈 선택</option>
+                     	<%
+                     		for(int j=0; j<listSize; j++)
+                     		{
+                     	%>
+                     	<option value="<%=j%>"><%=itemSize[j] %></option>
+                     	<%
+                     		}
+                     	%>
+                     	</SELECT>
+                     </TD>
+                  </TR>
                   <TR>
                      <TD style = "width:108px;height:30px">정상가</TD>
-                     <TD><STRIKE>28,000원</STRIKE><font color = "red">&nbsp;&nbsp;&nbsp;29%</font></TD>
+                     <TD id="marketPrice1"><STRIKE></STRIKE><font color = "red">&nbsp;&nbsp;&nbsp;29%</font></TD>
                   </TR>
                   <TR>
                      <TD style = "width:108px;height:30px">할인 판매가</TD>
-                     <TD>19,800원</TD>
+                     <TD id="sellPrice1"></TD>
                   </TR>
                   <TR>
                      <TD style = "width:108px;height:30px">배송비</TD>
@@ -80,14 +128,14 @@
                          <TD><a href = "#">4개의 리뷰</a></TD>
                   </TR>
                   <TR>
-                     <TD style = "width:108px;height:30px">옵션 선택</TD>
+                     <TD style = "width:108px;height:30px">개수 선택</TD>
                      <TD>
-                        옵션 선택 기입 해야 함                  
+                        <input type="text" name="itemAmount" id="itemAmount">개                
                      </TD>
                   </TR>
                </TABLE>
             <HR style="border: 1px solid gray">
-            <div class = "productPrice" style = "width:200px;height:50px;align:right">총 상품 금액 :<font size = "5" ><font color = "red">19,800</font></font> 원</div>
+            <div class = "totallPrice" style = "width:200px;height:50px;align:right">총 상품 금액 :<font size = "5" ><font color = "red"></font></font> 원</div>
             <div class = "buy" align = "center">
             
             <ul class="nav nav-pills">
@@ -98,9 +146,10 @@
          </div>
     </div>
     </div>
+    </form>
    <BR>
    <BR>
-
+	
    <script>
    $('#myTab a').click(function (e) {
         e.preventDefault()
@@ -117,19 +166,18 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist" style = "margin-left:-5px">
-          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-          <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-          <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-          <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">상세정보</a></li>
+          <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">사용법</a></li>
+          <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">성분</a></li>
+          <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">배송정보</a></li>
         </ul>
-      
         <!-- Tab panes -->
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="home">이곳은 화장품의 설명이 들어가는 곳 입니다.</div>
-          <div role="tabpanel" class="tab-pane" id="profile">제품명 : 에뛰드 하우스 진주 광채 오로라 에센스 로션</div>
-          <div role="tabpanel" class="tab-pane" id="messages">테이블을 써서 표 형식으로 작성해도 됩니다..</div>
-          <div role="tabpanel" class="tab-pane" id="settings">줄여도 됩니다.</div>
-        </div>
+          <div role="tabpanel" class="tab-pane active" id="home"><%=itemDetailInfo %></div>
+          <div role="tabpanel" class="tab-pane" id="profile"><%=itemHowToUse %></div>
+          <div role="tabpanel" class="tab-pane" id="messages"><%=itemIngredient %></div>
+          <div role="tabpanel" class="tab-pane" id="settings">빠름빠름빠름</div>
+        </div>    
       
    </div>
    </div>

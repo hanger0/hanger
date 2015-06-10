@@ -1,5 +1,8 @@
 package com.hanger.order.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.hanger.order.vo.CartVo;
@@ -12,7 +15,12 @@ public class CartDao {
 		this.smct = smct;
 	}
 	
-	public void insertCart(CartVo cart){
+	public void insertCart(HashMap<String, String> cart){
 		smct.insert("insertCart", cart);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<CartVo> selectCart(String myUserCode){
+		return (ArrayList<CartVo>)smct.queryForList("selectCart", myUserCode);
 	}
 }

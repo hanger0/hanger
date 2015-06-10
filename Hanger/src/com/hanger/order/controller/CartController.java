@@ -1,5 +1,8 @@
 package com.hanger.order.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,42 +23,43 @@ public class CartController extends BaseController {
 		this.cartDao = cartDao;
 	}
 	
-	@RequestMapping(value="/cart.hang", method=RequestMethod.GET)
+	@RequestMapping(value="/cart.hang", method=RequestMethod.POST)
 	public String goCart(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "order/CartList.jsp");
-		
-		return moveUrl;
-	}
-	
-	@RequestMapping(value = "/cart.hang", method = RequestMethod.POST)
-	public String addCart(HttpServletRequest req){
 		//
 		HttpSession session = req.getSession();
+		
+		HashMap<String, String> cartMap = new HashMap<String, String>();
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String myUserId = (String)session.getAttribute("myUserId");
 		String itemCode = req.getParameter("itemCode");
-		String cartItemOption1 = req.getParameter("cartItemOption1");
-		String cartItemOption2 = req.getParameter("cartItemOption2");
-		String cartItemOption3 = req.getParameter("cartItemOption3");
-		String cartItemAmount = req.getParameter("cartItemAmount");
+		//String itemGroupCode = req.getParameter("itemGroupCode");
+		//String stockCode = req.getParameter("stockCode");
+		String itemAmount = req.getParameter("itemAmount");
 		String cartItemRecom = req.getParameter("cartItemRecom");
+		String itemSellPrice = req.getParameter("sellPrice");
+		String itemMarketPrice = req.getParameter("marketPrice");
+		String itemPurchasePrice = "1000";
 		String ip = req.getRemoteAddr();
 		
-		CartVo cart = new CartVo();
-		cart.setUserCode(myUserCode);
-		cart.setItemCode(itemCode);
-		cart.setCartItemOption1(cartItemOption1);
-		cart.setCartItemOption2(cartItemOption2);
-		cart.setCartItemOption3(cartItemOption3);
-		cart.setCartItemAmount(cartItemAmount);
-		cart.setCartItemRecom(cartItemRecom);
-		cart.setRegId(myUserId);
-		cart.setRegIp(ip);
-		cart.setUpdId(myUserId);
-		cart.setUpdIp(ip);
+		cartMap.put("userCode", myUserCode);
+		cartMap.put("itemCode", itemCode);
+		cartMap.put("itemAmount", itemAmount);
+		cartMap.put("cartItemRecom", cartItemRecom);
+		cartMap.put("itemSellPrice", itemSellPrice);
+		cartMap.put("itemMarketPrice", itemMarketPrice);
+		cartMap.put("itemPurchasePrice", itemPurchasePrice);
+		cartMap.put("regId", myUserId);
+		cartMap.put("regIp", ip);
+		cartMap.put("updId", myUserId);
+		cartMap.put("updIp", ip);
 		
-		cartDao.insertCart(cart);
+		cartDao.insertCart(cartMap);
+		
+		ArrayList<CartVo> cartList = cartDao.selectCart(myUserCode);
+		
+		req.setAttribute("mainUrl", root + "order/CartList.jsp");
+		req.setAttribute("cartList", cartList);
 		
 		return moveUrl;
 	}

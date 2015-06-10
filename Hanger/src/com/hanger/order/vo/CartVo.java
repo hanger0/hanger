@@ -3,17 +3,21 @@ package com.hanger.order.vo;
 public class CartVo {
 	private String userCode;
 	private String itemCode;
-	private String cartItemOption1;
-	private String cartItemOption2;
-	private String cartItemOption3;
 	private String cartItemAmount;
 	private String cartItemRecom;
+	private String itemMarketPrice;
+	private String itemSellPrice;
+	private String itemPurchasePrice;
 	private String regId;
 	private String regDate;
 	private String regIp;
 	private String updId;
 	private String updDate;
 	private String updIp;
+	private String itemName;
+	private String itemPicPath;
+	private String itemPicSaveName;
+	private String itemDetailInfo;
 	public String getUserCode() {
 		return userCode;
 	}
@@ -26,24 +30,6 @@ public class CartVo {
 	public void setItemCode(String itemCode) {
 		this.itemCode = itemCode;
 	}
-	public String getCartItemOption1() {
-		return cartItemOption1;
-	}
-	public void setCartItemOption1(String cartItemOption1) {
-		this.cartItemOption1 = cartItemOption1;
-	}
-	public String getCartItemOption2() {
-		return cartItemOption2;
-	}
-	public void setCartItemOption2(String cartItemOption2) {
-		this.cartItemOption2 = cartItemOption2;
-	}
-	public String getCartItemOption3() {
-		return cartItemOption3;
-	}
-	public void setCartItemOption3(String cartItemOption3) {
-		this.cartItemOption3 = cartItemOption3;
-	}
 	public String getCartItemAmount() {
 		return cartItemAmount;
 	}
@@ -55,6 +41,24 @@ public class CartVo {
 	}
 	public void setCartItemRecom(String cartItemRecom) {
 		this.cartItemRecom = cartItemRecom;
+	}
+	public String getItemMarketPrice() {
+		return itemMarketPrice;
+	}
+	public void setItemMarketPrice(String itemMarketPrice) {
+		this.itemMarketPrice = itemMarketPrice;
+	}
+	public String getItemSellPrice() {
+		return itemSellPrice;
+	}
+	public void setItemSellPrice(String itemSellPrice) {
+		this.itemSellPrice = itemSellPrice;
+	}
+	public String getItemPurchasePrice() {
+		return itemPurchasePrice;
+	}
+	public void setItemPurchasePrice(String itemPurchasePrice) {
+		this.itemPurchasePrice = itemPurchasePrice;
 	}
 	public String getRegId() {
 		return regId;
@@ -91,5 +95,29 @@ public class CartVo {
 	}
 	public void setUpdIp(String updIp) {
 		this.updIp = updIp;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public String getItemPicPath() {
+		return itemPicPath;
+	}
+	public void setItemPicPath(String itemPicPath) {
+		this.itemPicPath = itemPicPath;
+	}
+	public String getItemPicSaveName() {
+		return itemPicSaveName;
+	}
+	public void setItemPicSaveName(String itemPicSaveName) {
+		this.itemPicSaveName = itemPicSaveName;
+	}
+	public String getItemDetailInfo() {
+		return itemDetailInfo;
+	}
+	public void setItemDetailInfo(String itemDetailInfo) {
+		this.itemDetailInfo = itemDetailInfo;
 	}
 }

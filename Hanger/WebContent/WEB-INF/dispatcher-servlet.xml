@@ -81,6 +81,7 @@
 	<!-- Order 요청 url과 Controller 매핑 -->
 	<bean id="orderBuyController" class="com.hanger.order.controller.OrderBuyController">
 		<property name="orderBuyDao" ref="orderBuyDao"></property>
+		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 	<bean id="cartController" class="com.hanger.order.controller.CartController">
 		<property name="cartDao" ref="cartDao"></property>
@@ -166,14 +167,14 @@
 	<bean id="itemViewDao" class="com.hanger.item.dao.ItemViewDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
+	
+	<!-- ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ -->
 
 	<!-- 컨트롤러의 처리 결과를 보여줄 뷰를 선택하는 방식 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-	
-<!-- ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ -->
 	
 	<!--com.cookpon2 하위 모든 패키지에 있는 파일의 어노테이션을 스캔해서 빈으로 등록 -->
 	<context:component-scan base-package="com.hanger" />
