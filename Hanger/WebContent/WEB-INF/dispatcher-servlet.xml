@@ -81,6 +81,7 @@
 	<!-- Order 요청 url과 Controller 매핑 -->
 	<bean id="orderBuyController" class="com.hanger.order.controller.OrderBuyController">
 		<property name="orderBuyDao" ref="orderBuyDao"></property>
+		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 	<bean id="cartController" class="com.hanger.order.controller.CartController">
 		<property name="cartDao" ref="cartDao"></property>
@@ -92,6 +93,9 @@
 	<bean id="itemSearchController" class ="com.hanger.item.controller.ItemSearchController">
 		<property name="itemSearchDao" ref="itemSearchDao"></property>
 		<property name="itemSearchInfoDao" ref="itemSearchInfoDao"></property>
+	</bean>
+	<bean id="itemViewController" class ="com.hanger.item.controller.ItemViewController">
+		<property name="itemViewDao" ref="itemViewDao"></property>
 	</bean>
 	
 	<!-- ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ -->
@@ -155,12 +159,14 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	
-	
 	<!-- Item Dao beans -->
 	<bean id="itemSearchDao" class="com.hanger.item.dao.ItemSearchDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="itemSearchInfoDao" class="com.hanger.item.dao.ItemSearchInfoDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="itemViewDao" class="com.hanger.item.dao.ItemViewDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 

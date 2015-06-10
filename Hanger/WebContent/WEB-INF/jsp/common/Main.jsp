@@ -201,7 +201,7 @@ for(int i=0; i<2; i++)
 %>
                      <div class="col-md-6 rat">
                         <div class="thumbnail">
-                        <a href="#review" data-toggle="modal">
+                        <a href="/mainReview.hang">
                            <div class="image">
                               <img src="images/cristalyn.jpg" class="hotimages">
                            </div>
@@ -305,32 +305,6 @@ for(int i=0; i<6; i++)
 <%
 }
 %>
-<!-- 모달 시작 -->
-	<!-- Review 모달 시작-->
-			<div class="modal fade" tabindex="-1" id="review" role="dialog"
-			aria-labelledby="gridSystemModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<jsp:include page="/DetailReview.hang" flush="true"> 
-     						<jsp:param name="param_name" value="param_value"/> 
-						</jsp:include>
-					</div>
-				</div>
-			</div>-->
-		<!-- Review 모달 종료-->
-	<!-- Tip 모달 시작-->
-			<div class="modal fade" tabindex="-1" id="tip" role="dialog"
-			aria-labelledby="gridSystemModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<jsp:include page="/DetailTip.hang" flush="true"> 
-     						<jsp:param name="param_name" value="param_value"/> 
-						</jsp:include>
-					</div>
-				</div>
-			</div>
-	<!-- Tip 모달 종료-->
-<!-- 모달 종료 -->
             </div>
          </div>
       </body>

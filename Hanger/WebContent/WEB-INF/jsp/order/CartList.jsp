@@ -166,40 +166,6 @@ $(function(){
 	}
 %>
 				</table>
-				<!-- 띄어쓰기 -->
-				<P>
-				<P>
-					<BR>
-				<table style="width: 900px; table-layout: fixed"">
-					<tr
-						style="height: 30px; background-color: #EAEAEA; border-top: 2px solid gray;"
-						align="center">
-						<td style="border-right: 1px solid white; text-align: center"><font
-							size="3"><b>총 상품 금액</b></font></td>
-						<td style="border-right: 1px solid white; text-align: center"><font
-							size="3"><b>배송비</b></font></td>
-						<td><font size="3"><b>결제 예정금액</b></font></td>
-					</tr>
-
-					<tr style="height: 60px; background-color: #F6F6F6" align="center">
-						<td
-							style="border-right: 1px solid white; border-bottom: 2px solid gray; text-align: center"><%= sumPrice %>원</td>
-						<td
-							style="border-right: 1px solid white; border-bottom: 2px solid gray; text-align: center"">0원</td>
-						<td style="border-bottom: 2px solid gray;"><%= sumPrice %>원</td>
-					</tr>
-				</table>
-
-				<P>
-				<h6>· 같은 브랜드 제품을 1개 이상 구매 시 배송료는 한 번만 결제됩니다.</h6>
-				</p>
-				<P>
-				<h6>· [업체배송] 상품 구매 시 각각 업체에서 따로 배송됩니다.</h6>
-				</p>
-				<P>
-				<h6>· 판매종료, 품절 상품은 자동 삭제됩니다.</h6>
-				</p>
-				
 				<div class="button" align="center">
 					<input type="button" value="계속 쇼핑" class="btn btn-default"
 						onClick="home()"> <input type="button" value="즉시 구매"

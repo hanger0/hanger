@@ -64,7 +64,7 @@ $(function(){
 %>
 					<tr>
 						<td style="background-color: #747474"></td>
-						<td colspan="8" style="background-color: #747474">
+						<td colspan="7" style="background-color: #747474">
 							<font color="white"> 
 								<b><%= cartItemRecom %></b>님을 통하여 구매하였습니다.
 							</font>
