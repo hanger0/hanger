@@ -27,7 +27,7 @@ $(function(){
 	<input type="hidden" name="itemSellPrice" value="<%= itemSellPrice %>"/>
 	<input type="hidden" name="itemMarketPrice" value="<%= itemMarketPrice %>"/>
 	<input type="hidden" name="itemPurchasePrice" value="<%= itemPurchasePrice %>"/>
-	<input type="hidden" name="orderUsedMileage" value=""/>
+	<input type="hidden" name="orderUsedMileage" value="0"/>
 	<input type="hidden" name="orderItemRecom" value=""/>
 	<input type="hidden" name="orderItemAmount" value="<%= itemAmount %>"/>
 	<input type="hidden" name="orderState" value="입금대기중"/>
