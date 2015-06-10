@@ -103,7 +103,7 @@ private UserJoinDao userJoinDao;
 			}
 		}
 		String birth = "";
-		birth = year + "^" + month +"^" + day;
+		birth = year + month + day;
 		
 		user.setUserId(userId);
 		user.setUserName(name);

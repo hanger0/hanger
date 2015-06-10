@@ -32,7 +32,7 @@ public class CartController extends BaseController {
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String myUserId = (String)session.getAttribute("myUserId");
-		String itemCode = req.getParameter("itemCode");
+		String itemCode = req.getParameter("orderViewitemCode");
 		//String itemGroupCode = req.getParameter("itemGroupCode");
 		//String stockCode = req.getParameter("stockCode");
 		String itemAmount = req.getParameter("itemAmount");
@@ -41,6 +41,8 @@ public class CartController extends BaseController {
 		String itemMarketPrice = req.getParameter("marketPrice");
 		String itemPurchasePrice = "1000";
 		String ip = req.getRemoteAddr();
+		
+		System.out.println(itemCode);
 		
 		cartMap.put("userCode", myUserCode);
 		cartMap.put("itemCode", itemCode);
