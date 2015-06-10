@@ -101,6 +101,7 @@
 	<bean id="orderBuyController" class="com.hanger.order.controller.OrderBuyController">
 		<property name="orderBuyDao" ref="orderBuyDao"></property>
 		<property name="userSelectDao" ref="userSelectDao"></property>
+		<property name="cartDao" ref="cartDao"></property>
 	</bean>
 	<bean id="cartController" class="com.hanger.order.controller.CartController">
 		<property name="cartDao" ref="cartDao"></property>

@@ -1,5 +1,7 @@
 package com.hanger.order.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.order.dao.CartDao;
 import com.hanger.order.dao.OrderBuyDao;
 import com.hanger.order.vo.OrderVo;
 import com.hanger.user.dao.UserSelectDao;
@@ -18,7 +21,11 @@ public class OrderBuyController extends BaseController {
 	//
 	private OrderBuyDao orderBuyDao;
 	private UserSelectDao userSelectDao;
+	private CartDao cartDao;
 
+	public void setCartDao(CartDao cartDao) {
+		this.cartDao = cartDao;
+	}
 	public void setOrderBuyDao(OrderBuyDao orderBuyDao) {
 		this.orderBuyDao = orderBuyDao;
 	}
@@ -111,9 +118,15 @@ public class OrderBuyController extends BaseController {
 		order.setRegIp(ip);
 		order.setUpdId(myUserId);
 		order.setUpdIp(ip);
-
+		
 		orderBuyDao.insertOrderInfo(order);
 		orderBuyDao.insertOrdering(order);
+
+		HashMap<String, String> deleteCartMap = new HashMap<String, String>();
+		deleteCartMap.put("userCode", myUserCode);
+		deleteCartMap.put("itemCode", itemCode);
+		
+		cartDao.deleteCart(deleteCartMap);
 		
 		req.setAttribute("mainUrl", mainUrl);
 		
