@@ -61,7 +61,7 @@ public class CartController extends BaseController {
 		
 		cartDao.insertCart(cartMap);
 		
-		req.setAttribute("mainUrl", root + "order/CartList.jsp");
+		req.setAttribute("message", "성공했습니다.");
 		
 		return moveUrl;
 	}
