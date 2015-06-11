@@ -3,6 +3,7 @@ package com.hanger.manager.item.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,23 +39,47 @@ public class ManagerAddItemFormController extends BaseController{
 		
 		ManagerItemVo item = new ManagerItemVo();
 		
+		List<ManagerItemVo> itemList;
+
+		int sizeCnt = Integer.parseInt(mul.getParameter("sizeCnt"));
 		String brandCode = mul.getParameter("brandCode");
 		String itemName = mul.getParameter("name");
-		String itemSize = mul.getParameter("size");
-		int itemMarketPrice = Integer.parseInt(mul.getParameter("marketPrice"));
-		int itemSellPrice = Integer.parseInt(mul.getParameter("sellPrice"));
-		int itemPurchasePrice = Integer.parseInt(mul.getParameter("purchasePrice"));
 		String itemSummaryInfo = mul.getParameter("summaryInfo");
 		String itemDetailInfo = mul.getParameter("detailInfo");
 		String itemIngredient = mul.getParameter("ingredient");
 		String itemHowToUse = mul.getParameter("howToUse");
-		int itemSellMaxNum = Integer.parseInt(mul.getParameter("sellMaxNum"));
-		String itemManufactureDate = mul.getParameter("manufactureDate");
-		String itemExpireDate = mul.getParameter("expireDate");
-		String itemReleaseDate = mul.getParameter("releaseDate");
+		String itemReleaseDate = mul.getParameter("releaseYear") + mul.getParameter("releaseMonth") + mul.getParameter("releaseDay");
 		String[] itemCategory = mul.getParameterValues("category");
 		String[] itemFeature = mul.getParameterValues("feature");
-		int itemStockAmount = Integer.parseInt(mul.getParameter("stockAmount"));
+
+//		String itemSize = mul.getParameter("size");
+//		int itemMarketPrice = Integer.parseInt(mul.getParameter("marketPrice"));
+//		int itemSellPrice = Integer.parseInt(mul.getParameter("sellPrice"));
+//		int itemPurchasePrice = Integer.parseInt(mul.getParameter("purchasePrice"));
+//		String itemManufactureDate = mul.getParameter("manufactureDate");
+//		String itemExpireDate = mul.getParameter("expireDate");
+//		int itemSellMaxNum = Integer.parseInt(mul.getParameter("sellMaxNum"));
+//		int itemStockAmount = Integer.parseInt(mul.getParameter("stockAmount"));
+
+		String [] itemSize = new String[sizeCnt];
+		int [] itemMarketPrice = new int[sizeCnt];
+		int [] itemSellPrice = new int[sizeCnt];
+		int [] itemPurchasePrice = new int[sizeCnt];
+		String [] itemManufactureDate = new String[sizeCnt];
+		String [] itemExpireDate = new String[sizeCnt];
+		int [] itemSellMaxNum = new int[sizeCnt];
+		int [] itemStockAmount = new int[sizeCnt];
+
+		for(int i = 0; i < sizeCnt; i++){
+			itemSize[i] = mul.getParameter("size" + i);
+			itemMarketPrice[i] = Integer.parseInt(mul.getParameter("marketPrice" + i));
+			itemSellPrice[i] = Integer.parseInt(mul.getParameter("sellPrice" + i));
+			itemPurchasePrice[i] = Integer.parseInt(mul.getParameter("purchasePrice" + i));
+			itemManufactureDate[i] = (mul.getParameter("manufactureYear" + i)) + (mul.getParameter("manufactureMonth" + i)) + (mul.getParameter("manufactureDay" + i));
+			itemExpireDate[i] = (mul.getParameter("expireYear" + i)) + (mul.getParameter("expireMonth" + i)) + (mul.getParameter("expireDay" + i));
+			itemSellMaxNum[i] = Integer.parseInt(mul.getParameter("sellMaxNum" + i));
+			itemStockAmount[i] = Integer.parseInt(mul.getParameter("stockAmount" + i));
+		}
 		
 		Enumeration formNames = mul.getFileNames();
 //		String fileFormName=(String)formNames.nextElement(); // 업로드 하는 파일이 많을 경우 while 을 사용
@@ -74,12 +99,10 @@ public class ManagerAddItemFormController extends BaseController{
 		
 		item.setBrandCode(brandCode);
 		item.setItemName(itemName);
-		item.setItemSize(itemSize);
 		item.setItemSummaryInfo(itemSummaryInfo);
 		item.setItemDetailInfo(itemDetailInfo);
 		item.setItemIngredient(itemIngredient);
 		item.setItemHowToUse(itemHowToUse);
-		item.setItemSellMaxNum(itemSellMaxNum);
 		item.setItemReleaseDate(itemReleaseDate);
 		item.setItemCategory(itemCategory);
 		item.setItemFeature(itemFeature);
@@ -96,17 +119,24 @@ public class ManagerAddItemFormController extends BaseController{
 		item.setUpdId("admin");
 		item.setUpdIp(ip);
 		
-		item.setItemMarketPrice(itemMarketPrice);
-		item.setItemSellPrice(itemSellPrice);
-		item.setItemPurchasePrice(itemPurchasePrice);
-		item.setItemManufactureDate(itemManufactureDate);
-		item.setItemExpireDate(itemExpireDate);
-		item.setItemStockAmount(itemStockAmount);		
+		for(int i = 0; i < sizeCnt; i++){
+			item.setItemSize(itemSize[i]);
+			item.setItemMarketPrice(itemMarketPrice[i]);
+			item.setItemSellPrice(itemSellPrice[i]);
+			item.setItemPurchasePrice(itemPurchasePrice[i]);
+			item.setItemManufactureDate(itemManufactureDate[i]);
+			item.setItemExpireDate(itemExpireDate[i]);
+			item.setItemSellMaxNum(itemSellMaxNum[i]);
+			item.setItemStockAmount(itemStockAmount[i]);
+			
+			if(i == 0){
+				managerAddItemDao.insertItem(item);
+			} else {
+				managerAddItemDao.insertOtherSizeItem(item);
+			}
+		}
 		
 		System.out.println("manager add item form 실행");
-		
-		managerAddItemDao.insertItem(item);
-		managerAddItemDao.insertItemStock(item);
 		
 		for(int i = 0; i < itemCategory.length; i++){
 			String itemCategoryValue = itemCategory[i];

@@ -45,6 +45,16 @@ public class ManagerAddItemDao {
 	public void insertItem(ManagerItemVo item)
 	{
 		smct.insert("insertItem", item);
+		((SqlMapClientOperations) smct).queryForList("addStockCode");
+		smct.insert("insertItemStock", item);
+	}
+	
+	public void insertOtherSizeItem(ManagerItemVo item)
+	{
+		((SqlMapClientOperations) smct).queryForList("addItemCode");
+		smct.insert("insertOtherSizeItem", item);
+		((SqlMapClientOperations) smct).queryForList("addStockCode");
+		smct.insert("insertItemStock", item);
 	}
 	
 	public void insertItemStock(ManagerItemVo item){
@@ -52,6 +62,7 @@ public class ManagerAddItemDao {
 	}
 	
 	public void insertItemCategory(String category){
+		
 		smct.insert("insertItemCategory", category);
 	}
 	

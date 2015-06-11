@@ -20,15 +20,38 @@
 		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>
 	
+	<insert id="insertOtherSizeItem" parameterClass="managerItem">
+		INSERT INTO ITEM(ITEM_GROUP_CODE, ITEM_CODE, BRAND_CODE, ITEM_NAME, ITEM_SIZE, 
+		ITEM_SUMMARY_INFO, ITEM_DETAIL_INFO, ITEM_INGREDIENT, ITEM_HOW_TO_USE, ITEM_SELL_MAXNUM, 
+		ITEM_RELEASE_DATE,
+		ITEM_PIC_PATH, ITEM_PIC_ORGNAME, ITEM_PIC_SAVENAME, ITEM_PIC_SIZE,
+		REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
+		VALUES(CONCAT("IG", LPAD((SELECT ID FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_GROUP_CODE'), 10, '0')),
+		CONCAT("IT", LPAD((SELECT ID FROM SEQUENCE WHERE SEQ_NAME = 'ITEM_CODE'), 10, '0')),
+		#brandCode#, #itemName#, #itemSize#, 
+		#itemSummaryInfo#, #itemDetailInfo#, #itemIngredient#, #itemHowToUse#, #itemSellMaxNum#, 
+		#itemReleaseDate#, 
+		#itemMainPicPath#, #itemMainPicOrgName#, #itemMainPicSaveName#, #itemMainPicSize#,
+		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
+	</insert>
+	
+	<select id="addItemCode" resultClass="String">
+		SELECT GET_SEQ('ITEM_CODE');
+	</select>
+	
 	<insert id="insertItemStock" parameterClass="managerItem">
 		INSERT INTO ITEM_STOCK(STOCK_CODE, ITEM_CODE, 
 		STOCK_MARKET_PRICE, STOCK_SELL_PRICE, STOCK_PURCHASE_PRICE,
 		STOCK_MANUFACTURE_DATE, STOCK_EXPIRE_DATE, STOCK_AMOUNT)
-		VALUES(CONCAT("ST", LPAD((SELECT GET_SEQ('STOCK_CODE')), 10, '10')),
+		VALUES(CONCAT("ST", LPAD((SELECT ID FROM SEQUENCE WHERE SEQ_NAME='STOCK_CODE'), 10, '0')),
 		CONCAT("IT", LPAD((SELECT ID FROM SEQUENCE WHERE SEQ_NAME='ITEM_CODE'), 10, '0')),
 		#itemMarketPrice#, #itemSellPrice#, #itemPurchasePrice#, 
 		#itemManufactureDate#, #itemExpireDate#, #itemStockAmount#)
 	</insert>
+	
+	<select id="addStockCode" resultClass="String">
+		SELECT GET_SEQ('STOCK_CODE');
+	</select>
 	
 	<insert id="insertItemCategory" parameterClass="String">
 		INSERT INTO ITEM_CATEGORY(ITEM_GROUP_CODE, CATEGORY3_CODE)

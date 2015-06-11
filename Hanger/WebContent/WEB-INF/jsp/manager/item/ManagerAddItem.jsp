@@ -22,6 +22,8 @@
 	List<ManagerCategoryVo> category3List = (List<ManagerCategoryVo>)request.getAttribute("category3List");
 	List<ManagerFeatureVo> feature1List = (List<ManagerFeatureVo>)request.getAttribute("feature1List");
 	List<ManagerFeatureVo> feature2List = (List<ManagerFeatureVo>)request.getAttribute("feature2List");
+	
+	int sizeNum = 1;
 %>
 
 <html>
@@ -123,17 +125,22 @@
 						<label for="name">상품 이름:</label>
 					</dt>
 					<dd>
-						<INPUT class="text" type="text" name="name" maxlength="50">
+						<INPUT class="text" type="text" name="name" size="60">
 					</dd>
 				</dl>
 				
 				<dl>
 					<dt>
 						<label for="size">용량:</label>
-					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="size" maxlength="10">
 						(null값 허용, ml인지 g인지 등등 적어야함)
+					</dt>
+					<dd id="sizeForm">
+						<INPUT class="text" type="text" id="size0" name="size0" maxlength="10">
+					</dd>
+					<dd>
+						<INPUT type="button" id="sizeAddBtn" value="사이즈 추가">
+						<INPUT type="hidden" id="sizeCnt" name="sizeCnt" value="1">
+						<INPUT type="button" id="sizeDeleteBtn" value="사이즈 제거">
 					</dd>
 				</dl>
 
@@ -141,8 +148,8 @@
 					<dt>
 						<label for="marketPrice">시장가:</label>
 					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="marketPrice" maxlength="20">원
+					<dd id="marketPriceForm">
+						<INPUT class="text" type="text" id="marketPrice0" name="marketPrice0" maxlength="20">
 					</dd>
 				</dl>
 
@@ -150,8 +157,8 @@
 					<dt>
 						<label for="sellPrice">판매가:</label>
 					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="sellPrice" maxlength="20">원
+					<dd id="sellPriceForm">
+						<INPUT class="text" type="text" id="sellPrice0" name="sellPrice0" maxlength="20">
 					</dd>
 				</dl>
 
@@ -159,9 +166,9 @@
 					<dt>
 						<label for="purchasePrice">매입가:</label>
 					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="purchasePrice"
-							maxlength="20">원
+					<dd id="purchasePriceForm">
+						<INPUT class="text" type="text" id="purchasePrice0" 
+						name="purchasePrice0" maxlength="20">
 					</dd>
 					
 				</dl>
@@ -171,9 +178,8 @@
 						<label for="manufactureDate">제조일자:</label>
 						(null허용 ex-20150607)
 					</dt>
-					<dd>
-						<INPUT type="hidden" name="manufactureDate" id="manufactureDate"/>
-						<SELECT id="manufactureYear" name="manufactureYear">
+					<dd id="manufactureDateForm">
+						<SELECT id="manufactureYear0" name="manufactureYear0">
 							<option value="0000" selected="1">YEAR</option>
 							<% 
 								for(int i = cal.get(Calendar.YEAR); i > 1999; i--){
@@ -183,7 +189,7 @@
 								}
 							%>
 						</SELECT>
-						<SELECT id="manufactureMonth" name="manufactureMonth">
+						<SELECT id="manufactureMonth0" name="manufactureMonth0">
 							<option value="00" selected="1">MONTH</option>
 							<% 
 								for(int i = 1; i < 13; i++){
@@ -200,7 +206,7 @@
 								}
 							%>
 						</SELECT>
-						<SELECT id="manufactureDay" name="manufactureDay">
+						<SELECT id="manufactureDay0" name="manufactureDay0">
 							<option value="00" selected="1">DAY</option>
 							<% 
 								for(int i = 1; i < 32; i++){
@@ -226,10 +232,8 @@
 						<label for="expireDate">유효기한:</label>
 						(null허용 ex-20150607)
 					</dt>
-					<dd>
-						
-						<INPUT type="hidden" name="expireDate" id="expireDate"/>
-						<SELECT id="expireYear" name="expireYear">
+					<dd id="expireDateForm">
+						<SELECT id="expireYear0" name="expireYear0">
 							<option value="0000" selected="1">YEAR</option>
 							<% 
 								for(int i = cal.get(Calendar.YEAR); i < 2025; i++){
@@ -239,7 +243,7 @@
 								}
 							%>
 						</SELECT>
-						<SELECT id="expireMonth" name="expireMonth">
+						<SELECT id="expireMonth0" name="expireMonth0">
 							<option value="00" selected="1">MONTH</option>
 							<% 
 								for(int i = 1; i < 13; i++){
@@ -256,7 +260,7 @@
 								}
 							%>
 						</SELECT>
-						<SELECT id="expireDay" name="expireDay">
+						<SELECT id="expireDay0" name="expireDay0">
 							<option value="00" selected="1">DAY</option>
 							<% 
 								for(int i = 1; i < 32; i++){
@@ -281,8 +285,7 @@
 					<dt>
 						<label for="releaseDate">발매일자:</label> (null허용 ex-19920707)
 					</dt>
-					<dd>
-					 	<INPUT type="hidden" name="releaseDate" id="releaseDate"/>
+					<dd id="releaseDateForm">
 						<SELECT id="manufactureYear" name="releaseYear">
 							<option value="0000" selected="1">YEAR</option>
 							<% 
@@ -371,8 +374,17 @@
 					<dt>
 						<label for="sellMaxNum">최대판매가능개수(default 999999):</label>
 					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="sellMaxNum" maxlength="20"> 개
+					<dd id="sellMaxNumForm">
+						<INPUT class="text" type="text" id="sellMaxNum0" name="sellMaxNum0" maxlength="20"> 
+					</dd>
+				</dl>
+				
+				<dl>
+					<dt>
+						<label for="stockAmount">재고</label>
+					</dt>
+					<dd id="stockAmountForm">
+						<INPUT class="text" type="text" id="stockAmount0" name="stockAmount0" maxlength="20">
 					</dd>
 				</dl>
 
@@ -495,14 +507,7 @@
 				</dl>
 				
 
-				<dl>
-					<dt>
-						<label for="stockAmount">재고</label>
-					</dt>
-					<dd>
-						<INPUT class="text" type="text" name="stockAmount" maxlength="20">
-					</dd>
-				</dl>
+				
 			</fieldset>
 
 			<fieldset>
