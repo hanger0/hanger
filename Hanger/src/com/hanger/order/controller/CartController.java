@@ -62,7 +62,7 @@ public class CartController extends BaseController {
 		cartDao.insertCart(cartMap);
 		
 		req.setAttribute("message", "성공했습니다.");
-		
+		moveUrl = "order/CartMessage";
 		return moveUrl;
 	}
 }

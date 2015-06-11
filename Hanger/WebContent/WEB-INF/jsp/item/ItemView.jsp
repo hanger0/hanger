@@ -66,7 +66,7 @@
 	  			+"&sellPrice="+sellPrice+"&itemSellMaxnum="+itemSellMaxnum
 	  			+"&itemStockAmount="+itemStockAmount+"&itemAmount="+itemAmount,
 	  			success: function(text){
-	  				alert(text);
+	  				alert(trim(text));
 	  			}
 	  		});
 		});
