@@ -45,10 +45,15 @@ public class OrderBuyController extends BaseController {
 		String itemPicPath = req.getParameter("itemPicPath");
 		String itemPicSaveName = req.getParameter("itemPicSaveName");
 		String itemSellPrice = req.getParameter("itemSellPrice");
-    	String itemAmount = req.getParameter("itemAmount");
     	String cartItemRecom = req.getParameter("cartItemRecom");
     	String itemDetailInfo = req.getParameter("itemDetailInfo");
     	
+    	HashMap<String, String> map = new HashMap<String, String>();
+    	map.put("itemCode", itemCode);
+    	map.put("userCode", userCode);
+    	
+    	String itemAmount = cartDao.selectAmount(map);
+
     	UserVo user = userSelectDao.selectUser(userCode);
     	
     	req.setAttribute("itemCode", itemCode);

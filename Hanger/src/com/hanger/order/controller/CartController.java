@@ -23,6 +23,19 @@ public class CartController extends BaseController {
 		this.cartDao = cartDao;
 	}
 	
+	@RequestMapping(value="/cart.hang", method=RequestMethod.GET)
+	public String myCart(HttpServletRequest req){
+		//
+		HttpSession session = req.getSession();
+		String myUserCode = (String)session.getAttribute("myUserCode");
+		ArrayList<CartVo> cartList = cartDao.selectCart(myUserCode);
+		
+		req.setAttribute("mainUrl", root + "order/CartList.jsp");
+		req.setAttribute("cartList", cartList);
+		
+		return moveUrl;
+	}
+	
 	@RequestMapping(value="/cart.hang", method=RequestMethod.POST)
 	public String goCart(HttpServletRequest req){
 		//
@@ -33,22 +46,14 @@ public class CartController extends BaseController {
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String myUserId = (String)session.getAttribute("myUserId");
 		String itemCode = req.getParameter("itemCode");
-		//String itemGroupCode = req.getParameter("itemGroupCode");
-		//String stockCode = req.getParameter("stockCode");
 		String itemAmount = req.getParameter("itemAmount");
 		String cartItemRecom = req.getParameter("cartItemRecom");
-		String itemSellPrice = req.getParameter("sellPrice");
-		String itemMarketPrice = req.getParameter("marketPrice");
-		String itemPurchasePrice = req.getParameter("itemPurchasePrice");
 		String ip = req.getRemoteAddr();
 		
 		cartMap.put("userCode", myUserCode);
 		cartMap.put("itemCode", itemCode);
 		cartMap.put("itemAmount", itemAmount);
 		cartMap.put("cartItemRecom", cartItemRecom);
-		cartMap.put("itemSellPrice", itemSellPrice);
-		cartMap.put("itemMarketPrice", itemMarketPrice);
-		cartMap.put("itemPurchasePrice", itemPurchasePrice);
 		cartMap.put("regId", myUserId);
 		cartMap.put("regIp", ip);
 		cartMap.put("updId", myUserId);
@@ -56,10 +61,7 @@ public class CartController extends BaseController {
 		
 		cartDao.insertCart(cartMap);
 		
-		ArrayList<CartVo> cartList = cartDao.selectCart(myUserCode);
-		
 		req.setAttribute("mainUrl", root + "order/CartList.jsp");
-		req.setAttribute("cartList", cartList);
 		
 		return moveUrl;
 	}

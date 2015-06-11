@@ -27,7 +27,7 @@ public class ManagerAddItemController extends BaseController {
 			HttpServletResponse response) {
 		List<ManagerCategoryVo> category1List = managerAddItemDao.selectCategory1();
 		List<ManagerCategoryVo> category2List = managerAddItemDao.selectCategory2();
-		List<ManagerCategoryVo> category3List = managerAddItemDao.selectCategory3();;
+		List<ManagerCategoryVo> category3List = managerAddItemDao.selectCategory3();
 		List<ManagerFeatureVo> feature1List = managerAddItemDao.selectFeature1();
 		List<ManagerFeatureVo> feature2List = managerAddItemDao.selectFeature2();
 		

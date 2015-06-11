@@ -18,6 +18,9 @@ public class CartVo {
 	private String itemPicPath;
 	private String itemPicSaveName;
 	private String itemDetailInfo;
+	private String itemSellMaxNum;
+	private String stockAmount;
+	private String itemGroupCode;
 	public String getUserCode() {
 		return userCode;
 	}
@@ -120,4 +123,23 @@ public class CartVo {
 	public void setItemDetailInfo(String itemDetailInfo) {
 		this.itemDetailInfo = itemDetailInfo;
 	}
+	public String getItemSellMaxNum() {
+		return itemSellMaxNum;
+	}
+	public void setItemSellMaxNum(String itemSellMaxNum) {
+		this.itemSellMaxNum = itemSellMaxNum;
+	}
+	public String getStockAmount() {
+		return stockAmount;
+	}
+	public void setStockAmount(String stockAmount) {
+		this.stockAmount = stockAmount;
+	}
+	public String getItemGroupCode() {
+		return itemGroupCode;
+	}
+	public void setItemGroupCode(String itemGroupCode) {
+		this.itemGroupCode = itemGroupCode;
+	}
+	
 }

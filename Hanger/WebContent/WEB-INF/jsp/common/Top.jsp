@@ -72,7 +72,7 @@
                   <span class="glyphicon glyphicon-user" style = "font-size:24px"></span>
                </a>
             </li>
-            <!-- 알람시작 -->
+<!--                   알람  시작                          -->
             <ul class="nav navbar-right ">
                <li class="dropdown open"></li>
                <li>
@@ -134,7 +134,7 @@
                   </li>
                </ul>
             </li>
-            <!-- 알람 끝 -->
+<!--                            알람  끝                                      -->
             <li class="headli">
                <a href="/cart.hang">
                   <span class = "glyphicon glyphicon-shopping-cart" style = "font-size:24px"></span>

@@ -84,7 +84,9 @@
 	</bean>
 	
 	<!-- Manager/Item 요청 url과 Controller 매핑 -->
-	<bean id="managerAddItemController" class="com.hanger.manager.item.controller.ManagerAddItemController"/>
+	<bean id="managerAddItemController" class="com.hanger.manager.item.controller.ManagerAddItemController">
+		<property name="managerAddItemDao" ref="managerAddItemDao"></property>
+	</bean>
 	<bean id="managerAddItemFormController" class="com.hanger.manager.item.controller.ManagerAddItemFormController">
 		<property name="managerAddItemDao" ref="managerAddItemDao"></property>
 	</bean>
@@ -105,6 +107,9 @@
 	</bean>
 	<bean id="cartController" class="com.hanger.order.controller.CartController">
 		<property name="cartDao" ref="cartDao"></property>
+	</bean>
+	<bean id="cartUpdateAmountController" class="com.hanger.order.controller.CartUpdateAmountController">
+		<property name="cartUpdateAmountDao" ref="cartUpdateAmountDao"></property>
 	</bean>
 	<bean id="deleteCartController" class="com.hanger.order.controller.DeleteCartController">
 		<property name="cartDao" ref="cartDao"></property>
@@ -179,6 +184,9 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="cartDao" class="com.hanger.order.dao.CartDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="cartUpdateAmountDao" class="com.hanger.order.dao.CartUpdateAmountDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	

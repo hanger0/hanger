@@ -7,8 +7,8 @@
 	String itemName = (String)request.getAttribute("itemName");
 	String itemPicPath = (String)request.getAttribute("itemPicPath");
 	String itemPicSaveName = (String)request.getAttribute("itemPicSaveName");
-	String itemSellPrice = (String)request.getAttribute("itemSellPrice");
-	String itemAmount = (String)request.getAttribute("itemAmount");
+	int itemSellPrice = Integer.parseInt((String)request.getAttribute("itemSellPrice"));
+	int itemAmount = Integer.parseInt((String)request.getAttribute("itemAmount"));
 	String cartItemRecom = (String)request.getAttribute("cartItemRecom");
 	String itemDetailInfo = (String)request.getAttribute("itemDetailInfo");
 	UserVo user = (UserVo)request.getAttribute("user");
@@ -111,9 +111,9 @@ $(function(){
 					</tr>
 
 					<tr style="height: 60px; background-color: #F6F6F6" align="center">
-						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center"><%= itemSellPrice %>원</td>
+						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center"><%= itemSellPrice * itemAmount %>원</td>
 						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
-						<td style="border-bottom: 3px solid gray;"><%= itemSellPrice %>원</td>
+						<td style="border-bottom: 3px solid gray;"><%= itemSellPrice * itemAmount %>원</td>
 					</tr>
 				</table>
 			</div>

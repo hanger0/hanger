@@ -42,28 +42,81 @@
 		itemPicPath[i] = ((ItemViewVo)itemViewList.get(i)).getItemPicPath();
 		itemPicSavename[i] = ((ItemViewVo)itemViewList.get(i)).getItemPicSavename();
 	}
+	int maxAmount=Integer.parseInt(itemSellMaxnum[0]);
+	if(maxAmount>Integer.parseInt(itemStockAmount[0]))
+	{
+		maxAmount=Integer.parseInt(itemStockAmount[0]);
+	}
 %>
 
 <Script>
-   $(function(){
-         var cartForm = $('#cartForm');
-      $('#goCartBtn').click(function(){
-         cartForm.submit();
-      });
-   });
+	$(function(){
+		$('#goCartBtn').click(function(){
+			
+		   	var itemCode = $('#itemCode').val();
+		   	var itemAmount = $('#itemAmount').val();
+		   	
+		   	alert("장바구니 액션 아이템 코드 : "+itemCode+" 갯 수 : "+itemAmount);		   	
+	  		$.ajax({
+	  			type: "POST", 
+	  			url: "/cart.hang",
+	  			dataType: "text",
+	  			data: "itemGroupCode="+itemGroupCode+"&itemCode="+itemCode+"&stockCode="+stockCode
+	  			+"&itemPurchasePrice="+itemPurchasePrice+"&marketPrice="+marketPrice
+	  			+"&sellPrice="+sellPrice+"&itemSellMaxnum="+itemSellMaxnum
+	  			+"&itemStockAmount="+itemStockAmount+"&itemAmount="+itemAmount,
+	  			success: function(text){
+	  				alert(text);
+	  			}
+	  		});
+		});
+	});
    function selectSize()
    {
-	   var index = $('.itemSize option:selected').val();
-	   if(index==0)
+		var index = $('.itemSize option:selected').val();
+		
+		
+<%
+		for(int i=0; i<listSize; i++)
 		{
-		   $('#marketPrice1').text('<%=marketPrice[0]%>');
-		   $('#sellPrice1').text('<%=sellPrice[0]%>');
-		   $('#marketPrice').val('<%=marketPrice[0]%>');
-		   $('#sellPrice').val('<%=sellPrice[0]%>');
-		   $('#itemCode').val('<%=itemCode[0]%>');
-		   $('#itemPurchasePrice').val('<%=purchasePrice[0]%>');
-		   $('#stockCode').val('<%=stockCode[0]%>');
+%>
+			if(index=='<%=i%>')
+			{
+				$('#marketPrice1').html('<STRIKE><%=marketPrice[i]%></STRIKE>');
+				$('#sellPrice1').text('<%=sellPrice[i]%>');
+				$('#discount').html('<font color = "red"><%=100-(Integer.parseInt(sellPrice[i])*100/Integer.parseInt(marketPrice[i])) %>% off</font>');
+				
+				$('#marketPrice').val('<%=marketPrice[i]%>');
+				$('#sellPrice').val('<%=sellPrice[i]%>');
+				$('#itemCode').val('<%=itemCode[i]%>');
+				$('#itemPurchasePrice').val('<%=purchasePrice[i]%>');
+				$('#stockCode').val('<%=stockCode[i]%>');
+				$('#itemSellMaxnum').val('<%=itemSellMaxnum[i]%>');
+				$('#itemStockAmount').val('<%=itemStockAmount[i]%>');
+				
+				$('#totalPrice1').html('총 상품 금액 :<font size = "5" ><font color = "red"><%=sellPrice[i]%></font></font> 원');		
+				$('#totalPrice').val('<%=sellPrice[i]%>');
+			}
+<%
 		}
+%>	  	
+		var max =$('#itemSellMaxnum').val();
+		var stock = $('#itemStockAmount').val();
+		if(max>stock)
+		{
+			max=stock;
+		}
+		$("#itemAmount").empty();
+		for(var m=1; m<=max; m++)
+		{
+			$("#itemAmount").append("<option value='"+m+"'>"+m+"</option>개");
+		}
+   }
+   function selectAmount()
+   {
+	   var totalPrice = $('#totalPrice').val();
+	   var amount = $('.itemAmount option:selected').val();
+	   $('#totalPrice1').html("총 상품 금액 :<font size = '5' ><font color = 'red'>"+totalPrice*amount+"</font></font> 원");	   
    }
 </Script>
     <body class="ourBody" style = "background-color:#EBEBEB">
@@ -72,11 +125,14 @@
           <BR><BR><BR>
           <FORM name="cartForm" id="cartForm" action="/cart.hang" method="post">          	
 			<INPUT type="hidden" name="itemGroupCode" id="itemGroupCode" value="<%=itemGroupCode%>">
-			<INPUT type="hidden" name="itemCode" id="itemCode">
+			<INPUT type="hidden" name="itemCode" id="itemCode" value="<%=itemCode[0]%>">
 			<INPUT type="hidden" name="stockCode" id="stockCode">
 			<INPUT type="hidden" name="itemPurchasePrice" id="itemPurchasePrice">
 			<INPUT type="hidden" name="marketPrice" id="marketPrice">
 			<INPUT type="hidden" name="sellPrice" id="sellPrice">
+			<INPUT type="hidden" name="itemSellMaxnum" id="itemSellMaxnum">
+			<INPUT type="hidden" name="itemStockAmount" id="itemStockAmount" value="1">
+			<INPUT type="hidden" name="totalPrice" id="totalPrice" value="<%=sellPrice[0]%>">
           <div class="thumbnail">
           <div class="header" style = "width:980px;height:500px;margin-left:80px">
               <div class="product-info" style = "background-color:white;width:980px;height:500px;border:1px gray">
@@ -100,9 +156,9 @@
                      <TD style = "width:108px;height:30px">사이즈 선택</TD>
                      <TD>
                      	<SELECT name="itemSize" id="itemSize" class="itemSize" onChange="selectSize()">
-                     	<option selected>사이즈 선택</option>
+                     	<option value="0" selected><%=itemSize[0] %></option>
                      	<%
-                     		for(int j=0; j<listSize; j++)
+                     		for(int j=1; j<listSize; j++)
                      		{
                      	%>
                      	<option value="<%=j%>"><%=itemSize[j] %></option>
@@ -114,33 +170,44 @@
                   </TR>
                   <TR>
                      <TD style = "width:108px;height:30px">정상가</TD>
-                     <TD id="marketPrice1"><STRIKE></STRIKE><font color = "red">&nbsp;&nbsp;&nbsp;29%</font></TD>
+                     <TD><span id="marketPrice1"><STRIKE><%=marketPrice[0]%></STRIKE></span>&nbsp;&nbsp;&nbsp;<span id="discount"><font color = "red"><%=100-Integer.parseInt(sellPrice[0])*100/Integer.parseInt(marketPrice[0]) %>% off</font></span></TD>
                   </TR>
                   <TR>
                      <TD style = "width:108px;height:30px">할인 판매가</TD>
-                     <TD id="sellPrice1"></TD>
+                     <TD id="sellPrice1"><%=sellPrice[0]%></TD>
                   </TR>
                   <TR>
                      <TD style = "width:108px;height:30px">배송비</TD>
                      <TD><B>무료배송</B></TD>
                   </TR>
+                   <TR>
+                     <TD style = "width:108px;height:30px">개수 선택</TD>
+                     <TD>
+                        <SELECT name="itemAmount" id="itemAmount" class="itemAmount" onChange="selectAmount()">
+                     	<option value="1" selected>1</option>
+                     	<%
+                     		for(int q=2; q<=maxAmount; q++)
+                     		{
+                     	%>
+                     	<option value="<%=q%>"><%=q%></option>개
+                     	<%
+                     		}
+                     	%>
+                     	</SELECT>                
+                     </TD>
+                  </TR>
                   <TR>
                      <TD style = "width:108px;height:30px">고객만족도</TD>
                          <TD><a href = "#">4개의 리뷰</a></TD>
                   </TR>
-                  <TR>
-                     <TD style = "width:108px;height:30px">개수 선택</TD>
-                     <TD>
-                        <input type="text" name="itemAmount" id="itemAmount">개                
-                     </TD>
-                  </TR>
                </TABLE>
             <HR style="border: 1px solid gray">
-            <div class = "totallPrice" style = "width:200px;height:50px;align:right">총 상품 금액 :<font size = "5" ><font color = "red"></font></font> 원</div>
+            <div id="totalPrice1" class = "totallPrice" style = "width:200px;height:50px;align:right">총 상품 금액 :<font size = "5" ><font color = "red"><%=sellPrice[0]%></font></font> 원</div>
             <div class = "buy" align = "center">
             
-            <ul class="nav nav-pills">
-              <li role="presentation" class="butn btn-default" style = "width:228px;height:40px;align:center;margin-left:120px"><a id='goCartBtn'><B>구매하기 / 담기</B></a></li>
+            <ul class="nav nav-pills" style = "display:table;margin-left:auto;margin-right:auto">
+              <li role="presentation" class="butn btn-default" style = "width:180px;height:40px;align:center;"><a id='goCartBtn'><B>장바구니 담기</B></a></li>
+              <li role="presentation" class="butn btn-default" style = "width:180px;height:40px;align:center;margin-left:50px"><a href="cart.hang"><B>장바구니 가기</B></a></li>
             </ul>
             </div>
          </div>

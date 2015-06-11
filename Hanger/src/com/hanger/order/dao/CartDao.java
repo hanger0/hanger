@@ -27,4 +27,8 @@ public class CartDao {
 	public int deleteCart(HashMap<String, String> map){
 		return smct.delete("deleteCart", map);
 	}
+	
+	public String selectAmount (HashMap<String, String> map){
+		return (String)smct.queryForObject("selectAmount", map);
+	}
 }

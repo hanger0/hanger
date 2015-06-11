@@ -23,13 +23,10 @@ public class ItemViewController extends BaseController {
 
 	@RequestMapping("/itemView.hang")
 	public String itemViewPage(HttpServletRequest request, HttpSession session) {	
-		String itemCode= request.getParameter("itemCode");
 		String itemGroupCode= request.getParameter("itemGroupCode");
 		String itemSizeYn= request.getParameter("itemSizeYn");
 		
-		System.out.println("ItemViewController itemCode : "+itemCode);
 		System.out.println("ItemViewController itemGroupCode : "+itemGroupCode);
-		System.out.println("ItemViewController itemSizeYn : "+itemSizeYn);
 		
 		//String keyWord= request.getParameter("keyWord");
 		//String pageNumInStrng= request.getParameter("pageNum");//사용자가 선택한 페이지 번호
@@ -37,9 +34,7 @@ public class ItemViewController extends BaseController {
 		//String cateCode= request.getParameter("cateCode");
 		
 		HashMap<String, String> itemViewMap=new HashMap<String, String>();
-		itemViewMap.put("itemCode", itemCode);
 		itemViewMap.put("itemGroupCode", itemGroupCode);
-		itemViewMap.put("itemSizeYn", itemSizeYn);
 		
 		ArrayList<ItemViewVo> itemViewList = (ArrayList<ItemViewVo>)itemViewDao.getItemView(itemViewMap);
 				
