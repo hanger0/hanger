@@ -18,7 +18,7 @@ $(function(){
     	var itemPicPath = $(".checkbox").attr("itemPicPath");
     	var itemPicSaveName = $(".checkbox").attr("itemPicSaveName");
     	var itemSellPrice = $(".checkbox").attr("itemSellPrice");
-    	var itemAmount = $(".checkbox").attr("itemAmount");
+    	var itemAmount = $(".amount").val();
     	var cartItemRecom = $(".checkbox").attr("cartItemRecom");
     	var itemDetailInfo = $(".checkbox").attr("itemDetailInfo");
     	
@@ -128,8 +128,9 @@ if(cartList != null){
 		}
 %>
 					<tr align="center">
-						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px"
-							rowspan="2"><input class="checkbox" type="checkbox" itemName="<%= itemName %>" itemCode="<%=itemCode%>" cartItemRecom="<%= cartItemRecom %>" itemPicPath="<%=itemPicPath%>" itemPicSaveName="<%=itemPicSaveName%>" itemSellPrice="<%=itemSellPrice%>" itemMarketPrice="<%=itemMarketPrice%>" itemPurchasePrice="<%=itemPurchasePrice%>" itemAmount="<%=cartItemAmount%>" itemDetailInfo="<%= itemDetailInfo %>"></td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px" rowspan="2">
+							<input class="checkbox" type="checkbox" itemName="<%= itemName %>" itemCode="<%=itemCode%>" cartItemRecom="<%= cartItemRecom %>" itemPicPath="<%=itemPicPath%>" itemPicSaveName="<%=itemPicSaveName%>" itemSellPrice="<%=itemSellPrice%>" itemMarketPrice="<%=itemMarketPrice%>" itemPurchasePrice="<%=itemPurchasePrice%>" itemAmount="<%=cartItemAmount%>" itemDetailInfo="<%= itemDetailInfo %>">
+						</td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2"
 							width="120px"><img src="<%= itemPicPath %>/<%= itemPicSaveName %>" width="80px"
 							height="80px" style="margin-left: -20px"></td>
@@ -137,9 +138,9 @@ if(cartList != null){
 							size="3"><b><%= itemName %></b></font></td>
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2"><%= itemSellPrice %>¿ø</td>
-						<td
-							style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2"><select>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
+							rowspan="2">
+						<select class="amount">
 								<option value="1" <% if(cartItemAmount.equals("1")){%>selected<%}%>>1</option>
 								<option value="2" <% if(cartItemAmount.equals("2")){%>selected<%}%>>2</option>
 								<option value="3" <% if(cartItemAmount.equals("3")){%>selected<%}%>>3</option>

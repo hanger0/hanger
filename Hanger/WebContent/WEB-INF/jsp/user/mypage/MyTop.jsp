@@ -50,7 +50,7 @@
 				<div class="circle-inner">
 					<p><br><p><br><p><br><br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;<a href="#"><span class="glyphicon glyphicon-cog"></span></a>
+					&nbsp;&nbsp;&nbsp;<a href="/updateUser.hang"><span class="glyphicon glyphicon-cog"></span></a>
 				</div>
 			</div>
 			<P><P><P><P><P>

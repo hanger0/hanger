@@ -21,7 +21,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @Controller
 public class UserJoinController extends BaseController {
 	//
-private UserJoinDao userJoinDao;
+	private UserJoinDao userJoinDao;
 	
 	public void setUserJoinDao(UserJoinDao userJoinDao) {
 		this.userJoinDao = userJoinDao;

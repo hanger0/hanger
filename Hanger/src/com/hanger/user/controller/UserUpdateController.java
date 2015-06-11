@@ -2,6 +2,7 @@ package com.hanger.user.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,13 +27,27 @@ public class UserUpdateController extends BaseController {
 		this.userUpdateDao = userUpdateDao;
 	}
 	
-	@RequestMapping(value="updateUser", method = RequestMethod.POST)
-	public String updateUser(
-			HttpServletRequest request
-			) throws IOException{
+	@RequestMapping(value="/updateUser.hang",method=RequestMethod.GET)
+	public String userUpdateController(HttpServletRequest request)
+	{
+		HttpSession session = request.getSession(false);
+		String userCode = (String)session.getAttribute("myUserCode");
+		
+		ArrayList<UserVo> userList = userUpdateDao.selectUserInfo(userCode);
+		UserVo user = userList.get(0);
+		
+		request.setAttribute("user", user);
+		request.setAttribute("mainUrl", root + "user/mypage/UserUpdate.jsp");
+		
+		return moveUrl;
+	}
+	
+	@RequestMapping(value="/updateUserResult.hang", method = RequestMethod.POST)
+	public String updateUser(HttpServletRequest request) throws IOException{
 		//
 		HttpSession session = request.getSession(false);
-		File dayFile = new File("F:\\hanger");
+
+		File dayFile = new File("C:\\hanger");
 		if(!dayFile.exists())
 		{
 			dayFile.mkdirs();
@@ -43,22 +58,34 @@ public class UserUpdateController extends BaseController {
 		
 		Enumeration formNames=mul.getFileNames();
 		String fileFormName=(String)formNames.nextElement(); // 업로드 하는 파일이 많을 경우 while 을 사용
-		String userPicOrgName=mul.getOriginalFileName(fileFormName); // 업로드된 파일의 이름 얻기
-		String userPicSaveName=mul.getFilesystemName(fileFormName); // 업로드되어 저장된 파일의 이름 얻기
 		
-		String userPwd = mul.getParameter("pass");
+		String userPicOrgName = mul.getParameter("picOrgName");
+		String userPicSaveName = mul.getParameter("picSaveName");
+		
+		if(mul.getOriginalFileName(fileFormName) != null){
+			userPicOrgName = mul.getOriginalFileName(fileFormName); // 업로드된 파일의 이름 얻기
+		}
+		if(mul.getFilesystemName(fileFormName) != null){
+			userPicSaveName = mul.getFilesystemName(fileFormName); // 업로드되어 저장된 파일의 이름 얻기
+		}
+		
+		String userPwd = mul.getParameter("pass1");	
+		String userId = (String)session.getAttribute("myUserId");
 		String userName = mul.getParameter("name");
-		String userPhone = mul.getParameter("phone");
+		String userPhone = mul.getParameter("mobile");
 		String uesrQusetion = mul.getParameter("question");
 		String userAnswer = mul.getParameter("answer");
 		String userAddr1 = mul.getParameter("addr1");
 		String userAddr2 = mul.getParameter("addr2");
-		String userPostCode1 = mul.getParameter("postCode1");
-		String userPostCode2 = mul.getParameter("postCode2");
-		String userSkinType = mul.getParameter("postCode2");
-		String userSkinTone = mul.getParameter("postCode2");
-		String[] userSkinProblems = mul.getParameterValues("postCode2");
-		String updId = (String)session.getAttribute("userId");
+		String userGender = mul.getParameter("gender");
+		String userPostCode1 = mul.getParameter("zipCode1");
+		String userPostCode2 = mul.getParameter("zipCode2");
+		String userSkinType = mul.getParameter("skinType");
+		String userSkinTone = mul.getParameter("skinTone");
+		String birth = mul.getParameter("year");
+		String month = mul.getParameter("month");
+		String day = mul.getParameter("day");
+		String[] userSkinProblems = mul.getParameterValues("skinProblem");
 		String updIp = request.getRemoteAddr();
 		
 		String userSkinProblem = null;
@@ -68,9 +95,12 @@ public class UserUpdateController extends BaseController {
 				userSkinProblem += "^" + userSkinProblems[i];
 			}
 		}
+		//DB User_Birth에 생년월일을 한곳에 몰아넣기위한 식
+		birth = birth+month+ day;
 		
 		UserVo user = new UserVo();
 		
+		user.setUserId(userId);
 		user.setUserPwd(userPwd);
 		user.setUserName(userName);
 		user.setUserPhone(userPhone);
@@ -81,9 +111,11 @@ public class UserUpdateController extends BaseController {
 		user.setUserPostCode1(userPostCode1);
 		user.setUserPostCode2(userPostCode2);
 		user.setUserSkinProblem(userSkinProblem);
+		user.setUserGender(userGender);
+		user.setUserBirth(birth);
 		user.setUserSkinTone(userSkinTone);
 		user.setUserSkinType(userSkinType);
-		user.setUpdId(updId);
+		user.setUpdId(userId);
 		user.setUpdIp(updIp);
 		user.setUserPicOrgName(userPicOrgName);
 		user.setUserPicPath(savePath);
