@@ -70,6 +70,7 @@ public class CartController extends BaseController {
 		}
 		
 		if(cartItemRecom != null){
+			cartDao.recomUpdate(cartMap);
 			message = "장바구니가 업데이트 되었습니다.";
 		}
 		

@@ -31,4 +31,8 @@ public class CartDao {
 	public String selectAmount (HashMap<String, String> map){
 		return (String)smct.queryForObject("selectAmount", map);
 	}
+	
+	public int recomUpdate(HashMap<String, String> map){
+		return smct.update("recomUpdate", map);
+	}
 }

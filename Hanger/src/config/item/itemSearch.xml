@@ -4,55 +4,72 @@
 	
 	<select id="getItemSearchInfo" resultClass="String" parameterClass="HashMap">
 		SELECT 
-			COUNT(item.ITEM_GROUP_CODE) AS articleTotalNum
+			COUNT(distinct item.ITEM_GROUP_CODE) AS articleTotalNum
 		FROM 
-			ITEM item, BRAND brand, ITEM_CATEGORY cate 
+			ITEM item, BRAND brand, ITEM_CATEGORY cate, CATEGORY3 cate3
 		WHERE 
 			item.ITEM_USE_YN='Y' AND item.BRAND_CODE=brand.BRAND_CODE AND cate.ITEM_GROUP_CODE = item.ITEM_GROUP_CODE
+      		AND cate.CATEGORY3_CODE = cate3.CATEGORY3_CODE AND item.ITEM_USE_YN = 'Y'
 		<dynamic>
 			<isNotEmpty property="keyWord">
-				 	AND (item.ITEM_NAME LIKE '%$keyWord$%' OR brand.BRAND_NAME LIKE '%$keyWord$%')
+			AND (item.ITEM_NAME LIKE '%$keyWord$%' OR brand.BRAND_NAME LIKE '%$keyWord$%')
 			</isNotEmpty>
 		</dynamic>
 		<dynamic>
 			<isNotEmpty property="cateCode">
-				 	AND cate.CATEGORY3_CODE=#cateCode#
+			AND (cate.CATEGORY3_CODE=#cateCode# OR cate3.CATEGORY2_CODE=#cateCode# OR cate3.CATEGORY1_CODE=#cateCode#)
 			</isNotEmpty>
 		</dynamic>
 	</select>
 	
 	<typeAlias alias="itemSearch" type="com.hanger.item.vo.ItemSearchVo"/>	
 	<select id="getItemSearch" resultClass="itemSearch" parameterClass="HashMap">
-		SELECT 
-		  item.ITEM_CODE AS itemCode, item.ITEM_GROUP_CODE AS itemGroupCode, item.ITEM_SIZE_YN AS itemSizeYn,
-		  item.ITEM_STATUS AS itemStatus, item.ITEM_SCORE AS itemScore, 
-		  stock.STOCK_MARKET_PRICE AS itemMarketPrice, stock.STOCK_SELL_PRICE AS itemSellPrice,
-		  item.ITEM_PIC_PATH as itemPicPath, item.ITEM_PIC_SAVENAME as itemPicSavename,
-		  (stock.STOCK_SELL_PRICE/stock.STOCK_MARKET_PRICE*100) as itemDiscount, item.ITEM_NAME AS itemName, 
-		  brand.BRAND_NAME as brandName, COUNT(review.POSTING_CODE) AS reviewCnt
-		FROM 
-		  BRAND brand, ITEM_CATEGORY cate, ITEM_STOCK stock,
-      	  ITEM item left join (SELECT POSTING_CODE, ITEM_CODE FROM REVIEW WHERE REVIEW_USE_YN='Y') review on item.ITEM_CODE=review.ITEM_CODE
-		WHERE 
-		  item.BRAND_CODE = brand.BRAND_CODE AND cate.ITEM_GROUP_CODE = item.ITEM_GROUP_CODE AND stock.ITEM_CODE = item.ITEM_CODE
-		<dynamic>
-			<isNotEmpty property="keyWord">  
-		  		AND (item.ITEM_NAME LIKE '%$keyWord$%' OR brand.BRAND_NAME LIKE '%$keyWord$%')
-			</isNotEmpty>
-		</dynamic>
-		<dynamic>
-			<isNotEmpty property="cateCode">
-				 AND cate.CATEGORY3_CODE=#cateCode#
-			</isNotEmpty>
-		</dynamic>
-			
-		GROUP BY 
-		   item.ITEM_CODE, item.ITEM_GROUP_CODE, item.ITEM_SIZE_YN,
-		  item.ITEM_STATUS, item.ITEM_SCORE, 
-		  stock.STOCK_MARKET_PRICE, stock.STOCK_SELL_PRICE,
-		  item.ITEM_PIC_PATH, item.ITEM_PIC_SAVENAME,
-		  (stock.STOCK_SELL_PRICE/stock.STOCK_MARKET_PRICE*100), item.ITEM_NAME, 
-		  brand.BRAND_NAME;
+		SELECT e.*, item3.ITEM_CODE itemCode, item3.ITEM_SIZE_YN AS
+			itemSizeYn,item3.ITEM_STATUS AS itemStatus,
+			item3.ITEM_PIC_PATH as itemPicPath, item3.ITEM_PIC_SAVENAME as itemPicSavename,
+			stock.STOCK_MARKET_PRICE AS itemMarketPrice, stock.STOCK_SELL_PRICE AS
+			itemSellPrice,
+			(stock.STOCK_SELL_PRICE/stock.STOCK_MARKET_PRICE*100) as itemDiscount
+		FROM ITEM_STOCK stock, (select d.*
+		FROM(SELECT @GR:=@GR+1 AS groupNum, c.*
+		FROM(select @DI:=@DI+1 AS dispNum, b.*
+		FROM(select a.*, item2.ITEM_GROUP_CODE AS itemGroupCode
+		FROM
+			(SELECT
+			item.ITEM_CODE AS tempItemCode, item.ITEM_NAME AS itemName, item.ITEM_SCORE AS
+			itemScore,
+			brand.BRAND_NAME as brandName, COUNT(review.POSTING_CODE) AS reviewCnt
+			FROM
+			BRAND brand, ITEM_CATEGORY cate, CATEGORY3 cate3,
+			ITEM item left join (SELECT POSTING_CODE, ITEM_GROUP_CODE FROM REVIEW WHERE
+			REVIEW_USE_YN='Y') review on
+			item.ITEM_GROUP_CODE=review.ITEM_GROUP_CODE
+			WHERE
+			item.BRAND_CODE = brand.BRAND_CODE AND cate.ITEM_GROUP_CODE = item.ITEM_GROUP_CODE
+			AND cate.CATEGORY3_CODE = cate3.CATEGORY3_CODE AND item.ITEM_USE_YN = 'Y'
+			<dynamic>
+				<isNotEmpty property="keyWord">  
+			  	AND (item.ITEM_NAME LIKE '%$keyWord$%' OR brand.BRAND_NAME LIKE '%$keyWord$%')
+				</isNotEmpty>
+			</dynamic>
+			<dynamic>
+				<isNotEmpty property="cateCode">
+				AND (cate.CATEGORY3_CODE=#cateCode# OR cate3.CATEGORY2_CODE=#cateCode# OR cate3.CATEGORY1_CODE=#cateCode#)
+				</isNotEmpty>
+			</dynamic>		
+			GROUP BY
+			item.ITEM_CODE, item.ITEM_NAME, item.ITEM_SCORE, brand.BRAND_NAME
+			) a, ITEM item2
+			WHERE a.tempItemCode=item2.item_code
+			GROUP BY item2.ITEM_GROUP_CODE
+			)b,(SELECT @DI:=0) AS DI
+			ORDER BY dispNum DESC
+			)c,(SELECT @GR:=0) AS GR
+			)d
+			where d.groupNum between '1' and '1'
+			)e left join ITEM item3 on e.itemGroupCode=item3.ITEM_GROUP_CODE
+		where item3.ITEM_USE_YN = 'Y' and stock.ITEM_CODE = item3.ITEM_CODE
+		order by itemSellPrice desc, e.groupNum;
 	</select>
 </sqlMap>
 

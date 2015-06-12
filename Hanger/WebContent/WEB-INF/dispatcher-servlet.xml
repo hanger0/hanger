@@ -114,6 +114,9 @@
 	<bean id="deleteCartController" class="com.hanger.order.controller.DeleteCartController">
 		<property name="cartDao" ref="cartDao"></property>
 	</bean>
+	<bean id="orderDecideController" class="com.hanger.order.controller.OrderDecideController">
+		<property name="orderDecideDao" ref="orderDecideDao"></property>
+	</bean>
 	
 	<bean id = "mainReviewController" class = "com.hanger.posting.review.controller.MainReviewController" />
 	
@@ -187,6 +190,9 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	<bean id="cartUpdateAmountDao" class="com.hanger.order.dao.CartUpdateAmountDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="orderDecideDao" class="com.hanger.order.dao.OrderDecideDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	

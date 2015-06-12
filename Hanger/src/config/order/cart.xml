@@ -33,4 +33,8 @@
 	<update id="updateAmount" parameterClass="HashMap">
 		update cart set CART_ITEM_AMOUNT = #amount# where ITEM_CODE = #itemCode# AND USER_CODE = #userCode#
 	</update>
+	
+	<update id="recomUpdate" parameterClass="HashMap">
+		update cart set CART_ITEM_RECOM = #cartItemRecom# where ITEM_CODE = #itemCode# AND USER_CODE = #userCode#
+	</update>
 </sqlMap>

@@ -121,7 +121,7 @@ public class OrderBuyController extends BaseController {
     	}
     	
         for(int i = 0; i < itemCodeList.size(); i++){
-        	String icode = (String)itemCodeList.get(0);
+        	String icode = (String)itemCodeList.get(i);
 
         	HashMap<String, String> map = new HashMap<String, String>();
         	map.put("itemCode", icode);
@@ -174,22 +174,23 @@ public class OrderBuyController extends BaseController {
 		String myUserId = (String)session.getAttribute("myUserId");
 		String ip = req.getRemoteAddr();
 		String orderCode = orderBuyDao.selectSeq();
-		String itemCode = req.getParameter("itemCode");
-		String orderName = req.getParameter("orderName");
-		String orderPhone = req.getParameter("orderPhone");
-		String orderAddr1 = req.getParameter("orderAddr1");
-		String orderAddr2 = req.getParameter("orderAddr2");
-		String orderPostCode1 = req.getParameter("orderPostCode1");
-		String orderPostCode2 = req.getParameter("orderPostCode2");
+		String orderName = req.getParameter("userName");
+		String orderPhone = req.getParameter("userPhone");
+		String orderAddr1 = req.getParameter("addr1");
+		String orderAddr2 = req.getParameter("addr2");
+		String orderPostCode1 = req.getParameter("zipCode1");
+		String orderPostCode2 = req.getParameter("zipCode2");
 		String orderMemo = req.getParameter("orderMemo");
+		String orderUsedMileage = req.getParameter("orderUsedMileage");
+		String orderState = req.getParameter("orderState");
+		
+		String itemCode = req.getParameter("itemCode");
 		String orderItemMarketPrice = req.getParameter("itemMarketPrice");
 		String orderItemSellPrice = req.getParameter("itemSellPrice");
 		String orderItemPurchasePrice = req.getParameter("itemPurchasePrice");
 		String discountReasonCode = req.getParameter("discountReasonCode");
 		String orderItemAmount = req.getParameter("orderItemAmount");
 		String orderItemRecom = req.getParameter("orderItemRecom");
-		String orderUsedMileage = req.getParameter("orderUsedMileage");
-		String orderState = req.getParameter("orderState");
 
 		OrderVo order = new OrderVo();
 		order.setUserCode(myUserCode);

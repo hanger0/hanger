@@ -146,7 +146,7 @@ H4
 <CENTER>
 	<div class="form-horizontal" role="form">
 	
-<form role="form" id="joinForm" name="joinForm" method="post" action="/joinResult.hang" enctype="multipart/form-data">
+<form role="form" id="form" name="form" method="post" action="/joinResult.hang" enctype="multipart/form-data">
     <INPUT type="hidden" name="picPath" value="" />
     <INPUT type="hidden" name="picOrgName" value="" />
     <INPUT type="hidden" name="picSaveName" value="" />

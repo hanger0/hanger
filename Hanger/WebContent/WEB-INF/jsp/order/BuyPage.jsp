@@ -12,22 +12,41 @@
 <script>
 $(function(){
 	var buyForm = $('#buyForm');
-	$(".buyBtn").click(function(){
+	$("#buyBtn").click(function(){
+		if(!$(".checkbox").is(":checked")){
+    		alert("상품을 한개 이상 골라 주세요.");
+    		return false;
+    	}
+		
 		buyForm.submit();
 	});
+	$("#checkBox").click(function(){
+    	if($("#checkBox").prop("checked")){
+    		$(".checkbox").prop("checked", true);
+    	} else {
+    		$(".checkbox").prop("checked", false);
+    	}
+    });
+	$("input:radio[name=tagbe]").click(function(){
+		if($(this).val() == 2){
+			$("input:text[name=addr1]").val("");
+		}
+	});
 });
+function zipcodeBtn(){
+	window.open("/zipCode.hang", "zipSearchOpen", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=420, height=500");
+}
 </script>
 <body style="background-color: #EBEBEB">
-<form name="buyForm" id="buyForm" action="/orderBuy.hang" method="POST">
+<form name="form" id="form" action="/orderBuy.hang" method="POST">
 	<input type="hidden" name="itemCode" value=""/>
 	<input type="hidden" name="itemSellPrice" value=""/>
 	<input type="hidden" name="itemMarketPrice" value=""/>
 	<input type="hidden" name="itemPurchasePrice" value=""/>
-	<input type="hidden" name="orderUsedMileage" value="0"/>
 	<input type="hidden" name="orderItemRecom" value=""/>
 	<input type="hidden" name="orderItemAmount" value=""/>
-	<input type="hidden" name="orderState" value="입금대기중"/>
 	<input type="hidden" name="discountreasoncode" value="001"/>
+	<input type="hidden" name="orderState" value="입금대기중"/>
 	<div class="container">
 		<BR>
 		<div class="brand">
@@ -43,16 +62,13 @@ $(function(){
 				<table style="width: 900px; table-layout: fixed">
 					<tr align="center"
 						style="background-color: #EAEAEA; border-top: 2px solid gray;">
-						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray; width: 30px"><input
-							type="checkbox"></td>
-						<td colspan="4" align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>상품명</B></td>
-						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>상품금액</B></td>
-						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>배송비</B></td>
-						<td align="center"><b>수량</b></td>
+						<td align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray; width: 30px">
+							<input id="checkBox" type="checkbox">
+						</td>
+						<td colspan="4" align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>상품명</B></td>
+						<td align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>상품금액</B></td>
+						<td align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>배송비</B></td>
+						<td align="center" style="border-bottom: 2px solid gray"><b>수량</b></td>
 
 					</tr>
 <%
@@ -86,7 +102,7 @@ if(cartList != null) {
 %>
 					<tr align="center">
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px"
-							rowspan="2"><input type="checkbox"></td>
+							rowspan="2"><input class="checkbox" type="checkbox"></td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2" width="120px">
 							<img src="<%= itemPicPath %>/<%= itemPicSaveName %>" width="80px" height="80px" style="margin-left: -20px">
 						</td>
@@ -170,25 +186,24 @@ if(cartList != null) {
 							style="padding-left: 20px; background-color: #EAEAEA; border-top: 3px solid gray; border-bottom: 1px solid gray">
 							<font size="3"><b>배송지 선택</b></font>
 						</td>
-						<td
-							style="padding-left: 20px; border-top: 3px solid gray; border-bottom: 1px solid gray">
-							<input type="radio" name="tagbe" checked>기본 배송지&nbsp;&nbsp;&nbsp; <input
-							type="radio" name="tagbe">새로운 배송지&nbsp;&nbsp;&nbsp; <input
-							type="radio" name="tagbe">최근 배송지
+						<td style="padding-left: 20px; border-top: 3px solid gray; border-bottom: 1px solid gray">
+							<input type="radio" name="tagbe" value="1" checked>기본 배송지&nbsp;&nbsp;&nbsp; 
+							<input type="radio" name="tagbe" value="2">새로운 배송지&nbsp;&nbsp;&nbsp; 
+							<input type="radio" name="tagbe" value="3">최근 배송지
 						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray"><font
 							size="3"><b>이름</b></font></td>
 						<td style="padding-left: 20px; border-bottom: 1px solid gray">
-						<input type="text" name="orderName" value="<%= user.getUserName() %>"></td>
+						<input type="text" name="userName" value="<%= user.getUserName() %>"></td>
 					</tr>
 					<tr>
-						<td
-							style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray"><font
-							size="3"><b>연락처</b></font></td>
+						<td style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray">
+							<font size="3"><b>연락처</b></font>
+						</td>
 						<td style="padding-left: 20px; border-bottom: 1px solid gray">
-							<input type="text" name="orderPhone" size="20" value="<%= user.getUserPhone() %>">
+							<input type="text" name="userPhone" size="20" value="<%= user.getUserPhone() %>">
 						</td>
 					</tr>
 					<tr>
@@ -198,19 +213,19 @@ if(cartList != null) {
 							<table>
 								<tr>
 									<td>
-										<input type="text" name="orderPostCode1" value="<%= user.getUserPostCode1() %>"> - <input type="text" name="orderPostCode2" value="<%= user.getUserPostCode2() %>">
-										<input type="button" class="btn btn-default" value="우편번호 찾기">
-										<input type="checkbox">이 주소를 회원정보를 저장
+										<input type="text" name="zipCode1" value="<%= user.getUserPostCode1() %>"> - <input type="text" name="zipCode2" value="<%= user.getUserPostCode2() %>">
+										<input type="button" class="btn btn-default" value="우편번호 찾기" onclick="zipcodeBtn()">
+										<a href="#">이 주소를 회원정보에 저장</a>
 									</td>
 								</tr>
 								<tr height="5">
 									<td></td>
 								</tr>
 								<tr>
-									<td><input type="text" name="orderAddr1" style="width: 347px" value="<%= user.getUserAddr1() %>"></td>
+									<td><input type="text" name="addr1" style="width: 347px" value="<%= user.getUserAddr1() %>"></td>
 								</tr>
 								<tr>
-									<td><input type="text" name="orderAddr2" style="width: 347px" value="<%= user.getUserAddr2() %>"></td>
+									<td><input type="text" name="addr2" style="width: 347px" value="<%= user.getUserAddr2() %>"></td>
 								</tr>
 							</table>
 
@@ -221,7 +236,7 @@ if(cartList != null) {
 							<font size="3"><b>배송메모</b></font>
 						</td>
 						<td style="padding-left: 20px; border-bottom: 1px solid gray">
-							<input type="text" name="orderMemo" style="width: 680px">
+							<input type="text" name="userMemo" style="width: 680px">
 						</td>
 					</tr>
 				</table>
@@ -258,15 +273,13 @@ if(cartList != null) {
 			<div class="card-infotable" style="margin-left: 100px">
 				<table style="width: 900px; height: 40px">
 					<tr>
-						<td
-							style="background-color: #EAEAEA; width: 140px; border-top: 3px solid gray; border-bottom: 1px solid gray"
-							align="center"><input type="checkbox"><font size="3"><b>마일리지
-									사용</b></font></td>
-						<td
-							style="border-top: 3px solid gray; border-bottom: 1px solid gray; padding-left: 10px">
-							<input type="text">&nbsp; <input type="button"
-							class="btn btn-default" value="사용하기"><b> (사용가능포인트 0P)
-								(보유포인트 0P)</b>
+						<td style="background-color: #EAEAEA; width: 140px; border-top: 3px solid gray; border-bottom: 1px solid gray" align="center">
+							<font size="3"><b>마일리지 사용</b></font>
+						</td>
+						<td style="border-top: 3px solid gray; border-bottom: 1px solid gray; padding-left: 10px">
+							<input name="orderUsedMileage" type="text" value="0">&nbsp; 
+							<input type="button" class="btn btn-default" value="사용하기">
+							<b> (사용가능포인트 0P) (보유포인트 0P)</b>
 						</td>
 					</tr>
 				</table>
@@ -356,7 +369,7 @@ if(cartList != null) {
 			<p>
 				<br> <br>
 			<div class="buy-button" align="center">
-				<input type="button" class="btn btn-default buyBtn" value="결제하기"
+				<input type="button" class="btn btn-default" id="buyBtn" value="결제하기"
 					style="width: 220px; height: 80px">
 			</div>
 			<br><br>

@@ -16,4 +16,8 @@
 	<select id="selectSeq" resultClass="String">
 		SELECT CONCAT("OR",LPAD((SELECT GET_SEQ('ORDER_CODE')), 10, '0')) as orderCode FROM DUAL
 	</select>
+	
+	<update id="orderDecide" parameterClass="HashMap">
+		update order_info set ORDER_ITEM_VERIFY = 'Y' WHERE ORDER_INFO_CODE = #orderInfoCode#	
+	</update>
 </sqlMap>

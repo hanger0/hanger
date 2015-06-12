@@ -15,10 +15,10 @@
 <SCRIPT>
 	function zipCodeSelectAction(code1, code2, addr)
 	{
-		opener.joinForm.zipCode1.value = code1;
-		opener.joinForm.zipCode2.value = code2;
-		opener.joinForm.addr1.value = addr;
-		opener.joinForm.addr2.select();
+		opener.form.zipCode1.value = code1;
+		opener.form.zipCode2.value = code2;
+		opener.form.addr1.value = addr;
+		opener.form.addr2.select();
 
 		window.self.close();
 	}
