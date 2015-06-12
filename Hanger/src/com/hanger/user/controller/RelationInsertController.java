@@ -43,12 +43,17 @@ public class RelationInsertController extends BaseController {
 		//
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
-		RelationVo relation = new RelationVo();
-		relation.setRelationFollower(myUserCode);
-		String relationFollowing = req.getParameter("userCode");
-		relation.setRelationFollowing(relationFollowing);
+		String myUserId = (String)session.getAttribute("myUserId");
+		String ip = req.getRemoteAddr();
+		String userCode = req.getParameter("userCode");
 		
-		relationInsertDao.insertRelation(relation);
+		HashMap relationMap = new HashMap();
+		relationMap.put("myUserCode", myUserCode);
+		relationMap.put("myUserId", myUserId);
+		relationMap.put("ip", ip);
+		relationMap.put("userCode", userCode);
+		
+		relationInsertDao.insertRelation(relationMap);
 		
 		ArrayList<UserVo> followerList = relationSearchDao.searchFollowerRelation(myUserCode);
 		
@@ -67,14 +72,18 @@ public class RelationInsertController extends BaseController {
 		//
 		HttpSession session = req.getSession();
 		String myUserCode = (String)session.getAttribute("myUserCode");
+		String myUserId = (String)session.getAttribute("myUserId");
+		String ip = req.getRemoteAddr();
 		String userCode = req.getParameter("userCode");
 		String qt = req.getParameter("insertQt");
 		
-		RelationVo relation = new RelationVo();
-		relation.setRelationFollower(myUserCode);
-		relation.setRelationFollowing(userCode);
+		HashMap relationMap = new HashMap();
+		relationMap.put("myUserCode", myUserCode);
+		relationMap.put("myUserId", myUserId);
+		relationMap.put("ip", ip);
+		relationMap.put("userCode", userCode);
 		
-		relationInsertDao.insertRelation(relation);
+		relationInsertDao.insertRelation(relationMap);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", myUserCode);

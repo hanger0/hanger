@@ -1,8 +1,8 @@
 package com.hanger.user.dao;
 
-import org.springframework.orm.ibatis.SqlMapClientTemplate;
+import java.util.HashMap;
 
-import com.hanger.user.vo.RelationVo;
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 public class RelationInsertDao {
 	//
@@ -12,7 +12,7 @@ public class RelationInsertDao {
 		this.stmt = stmt;
 	}
 	
-	public void insertRelation(RelationVo relation){
-		stmt.insert("insertRelation", relation);
+	public void insertRelation(HashMap map){
+		stmt.insert("insertRelation", map);
 	}
 }

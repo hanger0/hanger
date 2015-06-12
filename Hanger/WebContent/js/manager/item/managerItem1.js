@@ -27,8 +27,7 @@ var InputMainPic = (function loadImageFile() {
 			ImgReader.readAsDataURL(img[0]);
 		}
 	}
-	document.getElementById("mainPicPreview").src = document
-			.getElementById("mainPic").value;
+	document.getElementById("mainPicPreview").src = document.getElementById("mainPic").value;
 })();
 
 var InputDetailPic1 = (function loadImageFile() {
@@ -330,6 +329,8 @@ function addItemAction() {
 //	f.manufactureDate.value = f.manufactureYear.value + f.manufactureMonth.value + f.manufactureDay.value;
 //	f.releaseDate.value = f.releaseYear.value + f.releaseMonth.value + f.releaseDay.value;
 //	f.expireDate.value = f.expireYear.value + f.expireMonth.value + f.expireDay.value;
+	
+	f.totalInfo.value = $('.summernote').code();
 	
 	if (f.brandCode.value == ""){
 		window.alert("브랜드를 반드시 선택해야 합니다.");

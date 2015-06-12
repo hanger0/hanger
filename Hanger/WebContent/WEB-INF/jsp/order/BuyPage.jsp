@@ -1,17 +1,13 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 <%@ page import="com.hanger.user.vo.UserVo" %>
+<%@ page import="java.util.*" %>
 <%
-	String itemCode = (String)request.getAttribute("itemCode");
-	String itemMarketPrice = (String)request.getAttribute("itemMarketPrice");
-	String itemPurchasePrice = (String)request.getAttribute("itemPurchasePrice");
-	String itemName = (String)request.getAttribute("itemName");
-	String itemPicPath = (String)request.getAttribute("itemPicPath");
-	String itemPicSaveName = (String)request.getAttribute("itemPicSaveName");
-	int itemSellPrice = Integer.parseInt((String)request.getAttribute("itemSellPrice"));
-	int itemAmount = Integer.parseInt((String)request.getAttribute("itemAmount"));
-	String cartItemRecom = (String)request.getAttribute("cartItemRecom");
-	String itemDetailInfo = (String)request.getAttribute("itemDetailInfo");
+	ArrayList cartList = (ArrayList)request.getAttribute("cartList");
+	
 	UserVo user = (UserVo)request.getAttribute("user");
+	
+	int maxSellPrice = 0;
+	int sellPrice = 0;
 %>
 <script>
 $(function(){
@@ -23,13 +19,13 @@ $(function(){
 </script>
 <body style="background-color: #EBEBEB">
 <form name="buyForm" id="buyForm" action="/orderBuy.hang" method="POST">
-	<input type="hidden" name="itemCode" value="<%= itemCode %>"/>
-	<input type="hidden" name="itemSellPrice" value="<%= itemSellPrice %>"/>
-	<input type="hidden" name="itemMarketPrice" value="<%= itemMarketPrice %>"/>
-	<input type="hidden" name="itemPurchasePrice" value="<%= itemPurchasePrice %>"/>
+	<input type="hidden" name="itemCode" value=""/>
+	<input type="hidden" name="itemSellPrice" value=""/>
+	<input type="hidden" name="itemMarketPrice" value=""/>
+	<input type="hidden" name="itemPurchasePrice" value=""/>
 	<input type="hidden" name="orderUsedMileage" value="0"/>
 	<input type="hidden" name="orderItemRecom" value=""/>
-	<input type="hidden" name="orderItemAmount" value="<%= itemAmount %>"/>
+	<input type="hidden" name="orderItemAmount" value=""/>
 	<input type="hidden" name="orderState" value="입금대기중"/>
 	<input type="hidden" name="discountreasoncode" value="001"/>
 	<div class="container">
@@ -60,7 +56,22 @@ $(function(){
 
 					</tr>
 <%
-		if(cartItemRecom != null){
+if(cartList != null) {
+	for(int i = 0; i < cartList.size(); i++) {
+		Hashtable table = (Hashtable)cartList.get(i);
+		String itemCode = (String)table.get("itemCode");
+		String cartItemRecom = (String)table.get("cartItemRecom");
+		String itemPicPath = (String)table.get("itemPicPath");
+		String itemPicSaveName = (String)table.get("itemPicSaveName");
+		String itemName = (String)table.get("itemName");
+		int itemSellPrice = Integer.parseInt((String)table.get("itemSellPrice"));
+		int itemAmount = Integer.parseInt((String)table.get("itemAmount"));
+		String itemDetailInfo = (String)table.get("itemDetailInfo");
+		
+		sellPrice = itemAmount * itemSellPrice;
+		maxSellPrice = itemAmount * itemSellPrice;
+		
+		if(cartItemRecom != null && cartItemRecom.length() < 0){
 %>
 					<tr>
 						<td style="background-color: #747474"></td>
@@ -93,9 +104,12 @@ $(function(){
 						<td style="border-bottom: 2px solid gray;" colspan="3"><font
 							size="2"><%= itemDetailInfo %></font></td>
 					</tr>
+<%
+	}
+}
+%>
 				</table>
 			</div>
-
 			<!--띄어쓰기-->
 			<br>
 			<div class="card-table" align="center">
@@ -111,9 +125,9 @@ $(function(){
 					</tr>
 
 					<tr style="height: 60px; background-color: #F6F6F6" align="center">
-						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center"><%= itemSellPrice * itemAmount %>원</td>
+						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center"><%= maxSellPrice %>원</td>
 						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
-						<td style="border-bottom: 3px solid gray;"><%= itemSellPrice * itemAmount %>원</td>
+						<td style="border-bottom: 3px solid gray;"><%= sellPrice %>원</td>
 					</tr>
 				</table>
 			</div>
@@ -193,7 +207,7 @@ $(function(){
 									<td></td>
 								</tr>
 								<tr>
-									<td><input type="text" name="orderAddr1" style="width: 347px" value="<%= user.getUserAddr1() %>"></td><BR>
+									<td><input type="text" name="orderAddr1" style="width: 347px" value="<%= user.getUserAddr1() %>"></td>
 								</tr>
 								<tr>
 									<td><input type="text" name="orderAddr2" style="width: 347px" value="<%= user.getUserAddr2() %>"></td>

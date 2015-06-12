@@ -2,11 +2,11 @@ package com.hanger.user.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts.apps.mailreader.dao.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.user.dao.UserIdCheckDao;
@@ -21,20 +21,19 @@ public class UserIdCheckController extends BaseController {
 	}
 
 	@RequestMapping("/idCheck.hang")
-	public ModelAndView idCheck(
-			@RequestParam("joinId") String joinId
+	public String idCheck(
+			HttpServletRequest req
 			){
 		//
 		moveUrl = "user/IdCheck";
+		String joinId = req.getParameter("joinId");
 		System.out.println("아이디 체크 controller");
 		
 		ArrayList<User> idCheckList = userIdCheckDao.idCheck(joinId);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(moveUrl);
-		mav.addObject("idCheckList", idCheckList);
-		mav.addObject("userId", joinId);
+		req.setAttribute("idCheckList", idCheckList);
+		req.setAttribute("userId", joinId);
 
-		return mav;
+		return moveUrl;
 	}
 }

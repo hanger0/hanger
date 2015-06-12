@@ -4,9 +4,9 @@
 	<typeAlias alias="relation" type="com.hanger.user.vo.RelationVo"/>
 	<typeAlias alias="user" type="com.hanger.user.vo.UserVo"/>
 	
-	<insert id="insertRelation" parameterClass="relation">
-		INSERT INTO RELATION(RELATION_FOLLOWER, RELATION_FOLLOWING)
-		VALUES(#relationFollower#, #relationFollowing#);
+	<insert id="insertRelation" parameterClass="HashMap">
+		INSERT INTO RELATION(RELATION_FOLLOWER, RELATION_FOLLOWING, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
+		VALUES(#myUserCode#, #userCode#, #myUserId#, sysdate(), #ip#, #myUserId#, sysdate(), #ip#);
 	</insert>
 	
 	<delete id="deleteRelation" parameterClass="relation">

@@ -31,7 +31,26 @@
 <SCRIPT src="/js/common/common.js"></SCRIPT>
 <script src="/js/manager/item/managerItem1.js" type="text/javascript"></script>
 
+<!-- include libries(jQuery, bootstrap, fontawesome) -->
+<link
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+<link
+	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
+	rel="stylesheet">
 
+<!-- include summernote css/js-->
+<link href="/css/posting/summernote.css" rel="stylesheet">
+<script src="/js/posting/summernote.min.js"></script>
+	
+<script type="text/javascript">
+	$(function() {
+		$('.summernote').summernote({
+		});
+	});
+</script>
 <head>
 <title>Manager Add Item</title>
 
@@ -352,6 +371,15 @@
 					</dd>
 				</dl>
 				
+				<dl>
+					<dt>
+						<label for="totalInfo">설명</label>
+					</dt>
+					<dd>
+						<INPUT type="hidden" id="totalInfo" name="totalInfo" value=""/>
+						<textarea class="summernote" ></textarea>
+					</dd>
+				</dl>
 				<dl>
 					<dt>
 						<label for="ingredient">성분 (null허용):</label>

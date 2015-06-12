@@ -13,27 +13,49 @@ $(function(){
     		return false;
     	}
     	var checkList = $(":checkbox[name='checkList']:checked");
-    	var itemCode = checkList.attr("itemCode");
-    	var itemMarketPrice = checkList.attr("itemMarketPrice");
-    	var itemPurchasePrice = checkList.attr("itemPurchasePrice");
-    	var itemName = checkList.attr("itemName");
-    	var itemPicPath = checkList.attr("itemPicPath");
-    	var itemPicSaveName = checkList.attr("itemPicSaveName");
-    	var itemSellPrice = checkList.attr("itemSellPrice");
-    	var cartItemRecom = checkList.attr("cartItemRecom");
-    	var itemDetailInfo = checkList.attr("itemDetailInfo");
     	
-    	$('input:hidden[name=itemCode]').val(itemCode);
-    	$('input:hidden[name=itemMarketPrice]').val(itemMarketPrice);
-    	$('input:hidden[name=itemPurchasePrice]').val(itemPurchasePrice);
-    	$('input:hidden[name=itemName]').val(itemName);
-    	$('input:hidden[name=itemPicPath]').val(itemPicPath);
-    	$('input:hidden[name=itemPicSaveName]').val(itemPicSaveName);
-    	$('input:hidden[name=itemSellPrice]').val(itemSellPrice);
-    	$('input:hidden[name=cartItemRecom]').val(cartItemRecom);
-    	$('input:hidden[name=itemDetailInfo]').val(itemDetailInfo);
+		var itemMarketPrice = [];
+    	var itemPurchasePrice = [];
+    	var itemName = [];
+    	var itemPicPath = [];
+    	var itemPicSaveName = [];
+    	var itemSellPrice = [];
+    	var cartItemRecom = [];
+    	var itemDetailInfo = [];
+   		var itemCode = [];
     	
-    	orderBuyForm.submit();
+    	checkList.each(function(index){
+	    	itemCode[index] = $(this).attr("itemCode");
+			itemMarketPrice[index] = $(this).attr("itemMarketPrice");
+	    	itemPurchasePrice[index] = $(this).attr("itemPurchasePrice");
+	    	itemName[index] = $(this).attr("itemName");
+	    	itemPicPath[index] = $(this).attr("itemPicPath");
+	    	itemPicSaveName[index] = $(this).attr("itemPicSaveName");
+	    	itemSellPrice[index] = $(this).attr("itemSellPrice");
+	    	cartItemRecom[index] = $(this).attr("cartItemRecom");
+	    	itemDetailInfo[index] = $(this).attr("itemDetailInfo");
+    	});
+	    var inputItemCode = $("input:hidden[name=itemCode]");
+	    var inputItemMarketPrice = $('input:hidden[name=itemMarketPrice]');
+    	var inputItemPurchasePrice = $('input:hidden[name=itemPurchasePrice]');
+    	var inputItemName = $('input:hidden[name=itemNames]');
+    	var inputItemPicPath = $('input:hidden[name=itemPicPath]');
+    	var inputItemPicSaveName = $('input:hidden[name=itemPicSaveName]');
+    	var inputItemSellPrice = $('input:hidden[name=itemSellPrice]');
+    	var inputItemDetailInfo = $('input:hidden[name=itemDetailInfo]');
+    	var inputCartItemRecom = $('input:hidden[name=cartItemRecom]');
+	    
+		inputItemCode.val(itemCode);
+		inputItemMarketPrice.val(itemMarketPrice);
+		inputItemPurchasePrice.val(itemPurchasePrice);
+		inputItemName.val(itemName);
+		inputItemPicPath.val(itemPicPath);
+		inputItemPicSaveName.val(itemPicSaveName);
+		inputItemSellPrice.val(itemSellPrice);
+		inputCartItemRecom.val(cartItemRecom);
+		inputItemDetailInfo.val(itemDetailInfo);
+		
+		orderBuyForm.submit();
     });
     $(".deleteCartBtn").click(function(){
     	var itemCode = $(this).attr("itemCode");
@@ -70,7 +92,7 @@ $(function(){
 	<INPUT type="hidden" name="itemCode" value="">
 	<INPUT type="hidden" name="itemGroupCode" value="">
 	<INPUT type="hidden" name="stockCode" value="">
-	<INPUT type="hidden" name="itemName" value="">
+	<INPUT type="hidden" name="itemNames" value="">
 	<INPUT type="hidden" name="itemPicPath" value="">
 	<INPUT type="hidden" name="itemPicSaveName" value="">
 	<INPUT type="hidden" name="itemSellPrice" value="">
@@ -133,7 +155,7 @@ if(cartList != null){
 			cartItemAmount = itemSellMaxNum;
 		}
 		
-		if(cartItemRecom != null){
+		if(cartItemRecom != null && cartItemRecom.length() < 0){
 %>
 					<tr>
 						<td style="background-color: #747474"></td>
@@ -146,7 +168,7 @@ if(cartList != null){
 %>
 					<tr align="center">
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px" rowspan="2">
-							<input class="checkbox" name="checkList" <% if(stockAmount <= 0){ %> disabled <% } %> type="checkbox" itemName="<%= itemName %>" itemCode="<%=itemCode%>" cartItemRecom="<%= cartItemRecom %>" itemPicPath="<%=itemPicPath%>" itemPicSaveName="<%=itemPicSaveName%>" itemSellPrice="<%=itemSellPrice%>" itemMarketPrice="<%=itemMarketPrice%>" itemPurchasePrice="<%=itemPurchasePrice%>" itemAmount="<%=cartItemAmount%>" itemDetailInfo="<%= itemDetailInfo %>">
+							<input class="checkbox" name="checkList" <% if(stockAmount <= 0){ %> disabled <% } %> type="checkbox" index="<%= i %>" itemName="<%= itemName %>" itemCode="<%=itemCode%>" cartItemRecom="<%= cartItemRecom %>" itemPicPath="<%=itemPicPath%>" itemPicSaveName="<%=itemPicSaveName%>" itemSellPrice="<%=itemSellPrice%>" itemMarketPrice="<%=itemMarketPrice%>" itemPurchasePrice="<%=itemPurchasePrice%>" itemAmount="<%=cartItemAmount%>" itemDetailInfo="<%= itemDetailInfo %>">
 						</td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2"width="120px">
 							<img src="<%= itemPicPath %>/<%= itemPicSaveName %>" width="80px"
@@ -160,11 +182,11 @@ if(cartList != null){
 							rowspan="2">
 						<select class="amount" itemCode="<%= itemCode %>">
 <% 
-	for(int k = 1; k <= itemSellMaxNum; k++){
+		for(int k = 1; k <= itemSellMaxNum; k++){
 %>
 								<option value="<%= k %>" <% if(cartItemAmount == k){%>selected<%}%>><%= k %></option>
 <%
-	}
+		}
 %>			
 						</select></td>
 						<td

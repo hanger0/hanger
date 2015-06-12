@@ -1,6 +1,9 @@
 package com.hanger.order.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -41,31 +44,119 @@ public class OrderBuyController extends BaseController {
 		String itemCode = req.getParameter("itemCode");
 		String itemMarketPrice = req.getParameter("itemMarketPrice");
 		String itemPurchasePrice = req.getParameter("itemPurchasePrice");
-		String itemName =req.getParameter("itemName");
+		String itemName =req.getParameter("itemNames");
 		String itemPicPath = req.getParameter("itemPicPath");
 		String itemPicSaveName = req.getParameter("itemPicSaveName");
 		String itemSellPrice = req.getParameter("itemSellPrice");
     	String cartItemRecom = req.getParameter("cartItemRecom");
     	String itemDetailInfo = req.getParameter("itemDetailInfo");
-    	
-    	HashMap<String, String> map = new HashMap<String, String>();
-    	map.put("itemCode", itemCode);
-    	map.put("userCode", userCode);
-    	
-    	String itemAmount = cartDao.selectAmount(map);
 
+    	ArrayList itemCodeList = new ArrayList();
+    	ArrayList itemMarketPriceList = new ArrayList();
+    	ArrayList itemPurchasePriceList = new ArrayList();
+    	ArrayList itemNameList = new ArrayList();
+    	ArrayList itemPicPathList = new ArrayList();
+    	ArrayList itemPicSaveNameList = new ArrayList();
+    	ArrayList itemSellPriceList = new ArrayList();
+    	ArrayList cartItemRecomList = new ArrayList();
+    	ArrayList itemDetailInfoList = new ArrayList();
+    	ArrayList itemAmountList = new ArrayList();
+    	
+    	StringTokenizer st = new StringTokenizer(itemCode, ",");
+    	if(st.countTokens() > 1){
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	            String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	            itemCodeList.add(temp);
+	        }
+	        st = new StringTokenizer(itemMarketPrice, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemMarketPriceList.add(temp);
+	        }
+	        st = new StringTokenizer(itemPurchasePrice, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemPurchasePriceList.add(temp);
+	        }
+	        st = new StringTokenizer(itemName, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemNameList.add(temp);
+	        }
+	        st = new StringTokenizer(itemPicPath, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemPicPathList.add(temp);
+	        }
+	        st = new StringTokenizer(itemPicSaveName, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemPicSaveNameList.add(temp);
+	        }
+	        st = new StringTokenizer(itemSellPrice, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemSellPriceList.add(temp);
+	        }
+	        st = new StringTokenizer(cartItemRecom, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	cartItemRecomList.add(temp);
+	        }
+	        st = new StringTokenizer(itemDetailInfo, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemDetailInfoList.add(temp);
+	        }
+    	} else {
+    		itemCodeList.add(itemCode);
+        	itemMarketPriceList.add(itemMarketPrice);
+        	itemPurchasePriceList.add(itemPurchasePrice);
+        	itemNameList.add(itemName);
+        	itemPicPathList.add(itemPicPath);
+        	itemPicSaveNameList.add(itemPicSaveName);
+        	itemSellPriceList.add(itemSellPrice);
+        	cartItemRecomList.add(cartItemRecom);
+        	itemDetailInfoList.add(itemDetailInfo);
+    	}
+    	
+        for(int i = 0; i < itemCodeList.size(); i++){
+        	String icode = (String)itemCodeList.get(0);
+
+        	HashMap<String, String> map = new HashMap<String, String>();
+        	map.put("itemCode", icode);
+        	map.put("userCode", userCode);
+        	
+        	String itemAmount = cartDao.selectAmount(map);
+        	
+        	itemAmountList.add(itemAmount);
+        }
+        
+        ArrayList cartList = new ArrayList();
+        for(int i = 0; i < itemCodeList.size() ; i++){
+        	Hashtable table = new Hashtable();
+        	
+        	table.put("itemCode", itemCodeList.get(i));
+        	if(itemMarketPriceList != null && itemMarketPriceList.size() >0){
+        		table.put("itemMarketPrice", itemMarketPriceList.get(i));
+        	}
+        	if(itemPurchasePriceList != null && itemPurchasePriceList.size() > 0){
+        		table.put("itemPurchasePrice", itemPurchasePriceList.get(i));
+        	}
+			table.put("itemName", itemNameList.get(i));
+			table.put("itemPicPath", itemPicPathList.get(i));
+			table.put("itemPicSaveName", itemPicSaveNameList.get(i));
+			table.put("itemSellPrice", itemSellPriceList.get(i));
+			table.put("cartItemRecom", cartItemRecomList.get(i));
+			table.put("itemDetailInfo", itemDetailInfoList.get(i));
+			table.put("itemAmount", itemAmountList.get(i));
+        	
+			cartList.add(table);
+        }
+    	
     	UserVo user = userSelectDao.selectUser(userCode);
     	
-    	req.setAttribute("itemCode", itemCode);
-    	req.setAttribute("itemMarketPrice", itemMarketPrice);
-    	req.setAttribute("itemPurchasePrice", itemPurchasePrice);
-    	req.setAttribute("itemName", itemName);
-    	req.setAttribute("itemPicPath", itemPicPath);
-    	req.setAttribute("itemPicSaveName", itemPicSaveName);
-    	req.setAttribute("itemSellPrice", itemSellPrice);
-    	req.setAttribute("itemAmount", itemAmount);
-    	req.setAttribute("cartItemRecom", cartItemRecom);
-    	req.setAttribute("itemDetailInfo", itemDetailInfo);
+    	req.setAttribute("cartList", cartList);
     	req.setAttribute("user", user);
 		
 		req.setAttribute("mainUrl", root + "order/BuyPage.jsp");

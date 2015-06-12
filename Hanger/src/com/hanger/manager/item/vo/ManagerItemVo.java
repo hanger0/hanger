@@ -17,6 +17,7 @@ public class ManagerItemVo {
 	private float itemScore;
 	private String itemSummaryInfo;
 	private String itemDetailInfo;
+	private String itemTotalInfo;
 	private String itemIngredient;
 	private String itemHowToUse;
 	private int itemSellCnt;
@@ -134,6 +135,12 @@ public class ManagerItemVo {
 	}
 	public void setItemDetailInfo(String itemDetailInfo) {
 		this.itemDetailInfo = itemDetailInfo;
+	}
+	public String getItemTotalInfo() {
+		return itemTotalInfo;
+	}
+	public void setItemTotalInfo(String itemTotalInfo) {
+		this.itemTotalInfo = itemTotalInfo;
 	}
 	public String getItemIngredient() {
 		return itemIngredient;

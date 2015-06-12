@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,10 +60,21 @@ public class CartController extends BaseController {
 		cartMap.put("updId", myUserId);
 		cartMap.put("updIp", ip);
 		
-		cartDao.insertCart(cartMap);
+		String message = "";
 		
-		req.setAttribute("message", "성공했습니다.");
+		try{
+			cartDao.insertCart(cartMap);
+			message = "성공했습니다.";
+		} catch (DataIntegrityViolationException e){
+			message = "이미 장바구니에 담겨 있습니다.";
+		}
 		
-		return moveUrl;
+		if(cartItemRecom != null){
+			message = "장바구니가 업데이트 되었습니다.";
+		}
+		
+		req.setAttribute("message", message);
+		
+		return "order/CartMessage";
 	}
 }

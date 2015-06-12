@@ -28,14 +28,15 @@ public class ManagerAddItemFormController extends BaseController{
 	
 	@RequestMapping(value="/managerAddItemResult.hang", method=RequestMethod.POST)
 	public ModelAndView managerAddItemForm(HttpServletRequest request) throws IOException{
-		File dayFile = new File("C:\\hanger\\upfile\\manager\\item");
+		File dayFile = new File("/upfile/item/detail");
 		if(!dayFile.exists())
 		{
 			dayFile.mkdirs();
 		}
-		String savePath = dayFile.getAbsolutePath();
+//		String savePath = dayFile.getAbsolutePath();
+		String savePath = "upfile/manager/item";
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(request, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(request, "C:\\Users\\ggeunkk\\git\\hanger\\Hanger\\WebContent\\upfile\\item\\detail", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		ManagerItemVo item = new ManagerItemVo();
 		
@@ -46,21 +47,31 @@ public class ManagerAddItemFormController extends BaseController{
 		String itemName = mul.getParameter("name");
 		String itemSummaryInfo = mul.getParameter("summaryInfo");
 		String itemDetailInfo = mul.getParameter("detailInfo");
+		String itemTotalInfo = "";
 		String itemIngredient = mul.getParameter("ingredient");
 		String itemHowToUse = mul.getParameter("howToUse");
 		String itemReleaseDate = mul.getParameter("releaseYear") + mul.getParameter("releaseMonth") + mul.getParameter("releaseDay");
 		String[] itemCategory = mul.getParameterValues("category");
 		String[] itemFeature = mul.getParameterValues("feature");
 
-//		String itemSize = mul.getParameter("size");
-//		int itemMarketPrice = Integer.parseInt(mul.getParameter("marketPrice"));
-//		int itemSellPrice = Integer.parseInt(mul.getParameter("sellPrice"));
-//		int itemPurchasePrice = Integer.parseInt(mul.getParameter("purchasePrice"));
-//		String itemManufactureDate = mul.getParameter("manufactureDate");
-//		String itemExpireDate = mul.getParameter("expireDate");
-//		int itemSellMaxNum = Integer.parseInt(mul.getParameter("sellMaxNum"));
-//		int itemStockAmount = Integer.parseInt(mul.getParameter("stockAmount"));
-
+		String[] temp = (mul.getParameter("totalInfo")).split("\"");
+		//quot
+		for(int i = 0; i < (temp.length - 2); i++){
+			if((temp[i].length() >= 4) && (temp[i].substring(temp[i].length()-4).equals("src="))){
+				temp[i+1] = savePath; //path
+				itemTotalInfo += temp[i] + "\"";
+			}
+			else if(temp[i].equals(" data-filename=")){				
+				itemTotalInfo += "/";
+			} else if(temp[i].equals(savePath)){
+				itemTotalInfo += temp[i];
+			} else {
+				itemTotalInfo += temp[i] + "\"";
+			}
+			System.out.println(temp[i]);
+			System.out.println(itemTotalInfo);
+		}
+		
 		String [] itemSize = new String[sizeCnt];
 		int [] itemMarketPrice = new int[sizeCnt];
 		int [] itemSellPrice = new int[sizeCnt];
@@ -101,6 +112,7 @@ public class ManagerAddItemFormController extends BaseController{
 		item.setItemName(itemName);
 		item.setItemSummaryInfo(itemSummaryInfo);
 		item.setItemDetailInfo(itemDetailInfo);
+		item.setItemTotalInfo(itemTotalInfo);
 		item.setItemIngredient(itemIngredient);
 		item.setItemHowToUse(itemHowToUse);
 		item.setItemReleaseDate(itemReleaseDate);

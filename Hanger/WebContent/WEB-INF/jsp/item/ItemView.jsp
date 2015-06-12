@@ -56,7 +56,6 @@
 		   	var itemCode = $('#itemCode').val();
 		   	var itemAmount = $('#itemAmount').val();
 		   	
-		   	alert("장바구니 액션 아이템 코드 : "+itemCode+" 갯 수 : "+itemAmount);		   	
 	  		$.ajax({
 	  			type: "POST", 
 	  			url: "/cart.hang",
@@ -66,7 +65,7 @@
 	  			+"&sellPrice="+sellPrice+"&itemSellMaxnum="+itemSellMaxnum
 	  			+"&itemStockAmount="+itemStockAmount+"&itemAmount="+itemAmount,
 	  			success: function(text){
-	  				alert(text);
+	  				alert(trim(text));
 	  			}
 	  		});
 		});
