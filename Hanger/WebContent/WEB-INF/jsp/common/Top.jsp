@@ -5,6 +5,7 @@
          && ((String) session.getAttribute("loginYn")).equals("Y")) {
       myName = (String) session.getAttribute("myUserName");
    }
+   System.out.println(session.getAttribute("loginYn"));
 %>
 <script type="text/javascript">
    $(document).ready(function($) {
@@ -72,7 +73,7 @@
                   <span class="glyphicon glyphicon-user" style = "font-size:24px"></span>
                </a>
             </li>
-<!--                   알람  시작                          -->
+            <!-- 알람시작 -->
             <ul class="nav navbar-right ">
                <li class="dropdown open"></li>
                <li>
@@ -134,7 +135,7 @@
                   </li>
                </ul>
             </li>
-<!--                            알람  끝                                      -->
+            <!-- 알람 끝 -->
             <li class="headli">
                <a href="/cart.hang">
                   <span class = "glyphicon glyphicon-shopping-cart" style = "font-size:24px"></span>
@@ -179,90 +180,96 @@
          <br>
       <p>
       <div class="demo-container"
-         style="margin-top: -0.9%; float: left; width: 50%">
+         style="margin-top: -0.8%; float: left; width: 50%">
          <div class="grey">
             <ul id="mega-menu-3" class="mega-menu">
                <li class="shadow" style="margin-left: 23%"><A>&nbsp;</A></li>
-               <li><a href="/shopList.hang">SHOP</a>
+               <li><a href="/itemList.hang">SHOP</a>
                   <ul>
-                     <li style="margin-left: 10%"><a href="#"><font size="4"><b>메이크업</b></font></a>
+                     <li style="margin-left: 10%">
+                     	<a href="/itemSearch.hang?cateCode=C1001">
+                     		<font size="4"><b>메이크업</b></font>
+                     	</a>
                         <ul style="background-color: white">
                            <p>
                               <br>
-                           <li><a href="#"><font size="2"><b>페이스 메이크업</b></font></a></li>
+                           <li>
+                           		<a href="/itemSearch.hang?cateCode=C2001"><font size="2"><b>페이스 메이크업</b></font></a>
+                           	</li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b>아이 메이크업</b></font></a>
+                           <li>
+                           		<a href="/itemSearch.hang?cateCode=C2002"><font size="2"><b>아이 메이크업</b></font></a>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b>립 메이크업</b></font></a>
+                           <li><a href="/itemSearch.hang?cateCode=C2003"><font size="2"><b>립 메이크업</b></font></a>
                         </ul>
-                     <li><a href="#"><font size="4"><b>스킨케어</b></font></a>
+                     <li><a href="/itemSearch.hang?cateCode=C1002"><font size="4"><b>스킨케어</b></font></a>
                         <ul>
                            <p>
                               <br>
-                           <li><a href="#"><font size="2"><b>클렌징</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2004"><font size="2"><b>클렌징</b></font></a></li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 모이스쳐</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2005"><font size="2"><b> 모이스쳐</b></font></a></li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 팩 & 패치</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2006"><font size="2"><b> 팩 & 패치</b></font></a></li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 선 케어</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2007"><font size="2"><b> 선 케어</b></font></a></li>
                         </ul></li>
-                     <li><a href="#"><font size="4"><b>헤어 & 바디</b></font></a>
+                     <li><a href="/itemSearch.hang?cateCode=C1003"><font size="4"><b>헤어 & 바디</b></font></a>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 헤어</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2008"><font size="2"><b> 헤어</b></font></a></li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 바디</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2009"><font size="2"><b> 바디</b></font></a></li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 핸드 & 풋</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2010"><font size="2"><b> 핸드 & 풋</b></font></a></li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 다이어트</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2011"><font size="2"><b> 다이어트</b></font></a></li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 생활뷰티</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2012"><font size="2"><b> 생활뷰티</b></font></a></li>
                         </ul>
-                     <li><a href="#"><font size="4"><b>향수</b></font></a>
+                     <li><a href="/itemSearch.hang?cateCode=C1004"><font size="4"><b>향수</b></font></a>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 여성향수</b></font></a></li>
-                        </ul>
-                        <ul>
-                           <br>
-                           <li><a href="#"><font size="2"><b> 남성향수</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2013"><font size="2"><b> 여성향수</b></font></a></li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 캔들 & 디퓨저</b></font></a></li>
-                        </ul>
-                     <li><a href="#"><font size="4"><b>도구 & 기기</b></font></a>
-                        <ul>
-                           <br>
-                           <li><a href="#"><font size="2"><b> 뷰티기기</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2014"><font size="2"><b> 남성향수</b></font></a></li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 바디기기</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2015"><font size="2"><b> 캔들 & 디퓨저</b></font></a></li>
+                        </ul>
+                     <li><a href="/itemSearch.hang?cateCode=C1005"><font size="4"><b>도구 & 기기</b></font></a>
+                        <ul>
+                           <br>
+                           <li><a href="/itemSearch.hang?cateCode=C2016"><font size="2"><b> 뷰티기기</b></font></a></li>
                         </ul>
                         <ul>
                            <br>
-                           <li><a href="#"><font size="2"><b> 도구</b></font></a></li>
+                           <li><a href="/itemSearch.hang?cateCode=C2017"><font size="2"><b> 바디기기</b></font></a></li>
+                        </ul>
+                        <ul>
+                           <br>
+                           <li><a href="/itemSearch.hang?cateCode=C2018"><font size="2"><b> 도구</b></font></a></li>
                         </ul>
                   </ul></li>
                <li><a href="/brand.hang">BRAND</a>
@@ -385,7 +392,7 @@
          </div>
       </div>
       <div class="demo-container"
-         style="margin-top: -0.9%; float: right; width: 50%">
+         style="margin-top: -0.8%; float: right; width: 50%">
          <div class="white">
             <ul id="mega-menu-3" class="mega-menu">
                <li style="margin-left: 12%"><a>&nbsp;</a></li>
