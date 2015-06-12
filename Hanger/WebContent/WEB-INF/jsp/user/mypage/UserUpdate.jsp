@@ -132,11 +132,15 @@ var InputImage = (function loadImageFile() {
 $(function() {
 	//input type="checkbox" name="skinProblem"
 <%
-	for (int i = 0; i < userSkinTrouble.length; i++) {
+	if(userSkinTrouble != null)
+	{
+	for (int i = 0; i < userSkinTrouble.length; i++) 
+		{
 %>
 		var user = "<%=userSkinTrouble[i]%>";
 		$("input:checkbox[value="+user+"]").prop("checked", true);
 <%
+		}
 	}
 %>
 
