@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="Data">
-	<typeAlias alias="review" type="com.hanger.posting.review.vo.ReviewVo"/>
+	<typeAlias alias="reviewVo" type="com.hanger.posting.review.vo.ReviewVo"/>
 	
-	<insert id="insertReview" parameterClass="review">
+	<insert id="insertReview" parameterClass="reviewVo">
 		INSERT INTO REVIEW(POSTING_CODE, USER_CODE, ITEM_CODE, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_SCORE, 
 		REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
 		VALUES(CONCAT("RV",LPAD((SELECT GET_SEQ('REVIEW_CODE')), 10, '0')), 

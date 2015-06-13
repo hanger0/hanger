@@ -62,4 +62,21 @@
 		where 
 			user_code = #userCode#
 	</select>
+	
+	<!-- 메인화면중 작은화면으로 팔로우 된 친구만 검색 -->
+	<select id ="selectFriend" resultClass="user" parameterClass="HashMap">
+		SELECT 
+			a.USER_NAME as userName, a.USER_ID as userId, a.USER_PHONE as userPhone, a.USER_PIC_PATH as userPicPath, a.USER_PIC_SAVE_NAME as userPicSaveName, 
+			a.USER_CODE as userCode, a.USER_SKINTYPE as userSkinType, a.USER_SKINTONE as userSkinTone, a.USER_SKINPROBLEM as userSkinProblem, count(b.RELATION_FOLLOWING) as followerCount,
+      		count(c.posting_code) as postingCount, G.RELATION_FOLLOWING as relationFollowing
+		FROM 
+			USER a left join relation b on a.USER_CODE = b.RELATION_FOLLOWER left join review c on a.USER_CODE = c.USER_CODE
+      		left join (SELECT relation_following FROM relation WHERE relation_follower = #myUserCode#)G on a.USER_CODE = G.RELATION_FOLLOWING
+		WHERE 
+			(a.USER_NAME LIKE '%$qt$%' OR a.USER_PHONE = #qt# OR a.USER_ID = #qt#) AND a.USER_USE_YN = 'Y' AND NOT a.USER_CODE = #myUserCode# AND
+			g.relation_following = a.USER_CODE
+  		GROUP BY 
+  			a.USER_NAME, a.USER_ID, a.USER_PHONE, a.USER_PIC_PATH, a.USER_PIC_SAVE_NAME,  
+			a.USER_CODE, a.USER_SKINTYPE, a.USER_SKINTONE, a.USER_SKINPROBLEM
+	</select>
 </sqlMap>

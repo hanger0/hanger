@@ -264,14 +264,14 @@ H4
     
     <div class="form-group">
 		<label for="zipcode1" class="col-sm-2 control-label">Postcode :</label>
-   	    <INPUT type="text" name="zipCode1" class="form-control zip1" id="zipCode1" size="5" readonly>
-      	<INPUT type="text" name="zipCode2" class="form-control zip1" size="5" readonly>
-        <INPUT type="button" value="Search" class="form-control zip1" style="cursor:pointer" id="zipSearch" onclick="zipcodeBtn()">
+   	    <INPUT type="text" name="zipCode1" class="form-control zip1 zipcode" id="zipCode1" size="5" readonly>
+      	<INPUT type="text" name="zipCode2" class="form-control zip1 zipcode" size="5" readonly>
+        <INPUT type="button" value="Search" class="form-control zip1 zipcode" style="cursor:pointer" id="zipSearch">
     </div>
     
      <div class="form-group">
      <label for="addr1" class="col-sm-2 control-label"></label>
-         <INPUT type="text" name="addr1"  size="40" class="form-control zip2" readonly>
+         <INPUT type="text" name="addr1"  size="40" class="form-control zip2 zipcode" readonly>
      </div>
      <div class="form-group">
      <label for="addr2" class="col-sm-2 control-label"></label>

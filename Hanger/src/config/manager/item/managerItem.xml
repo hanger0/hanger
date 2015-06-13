@@ -42,11 +42,13 @@
 	<insert id="insertItemStock" parameterClass="managerItem">
 		INSERT INTO ITEM_STOCK(STOCK_CODE, ITEM_CODE, 
 		STOCK_MARKET_PRICE, STOCK_SELL_PRICE, STOCK_PURCHASE_PRICE,
-		STOCK_MANUFACTURE_DATE, STOCK_EXPIRE_DATE, STOCK_AMOUNT)
+		STOCK_MANUFACTURE_DATE, STOCK_EXPIRE_DATE, STOCK_AMOUNT, 
+		REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
 		VALUES(CONCAT("ST", LPAD((SELECT ID FROM SEQUENCE WHERE SEQ_NAME='STOCK_CODE'), 10, '0')),
 		CONCAT("IT", LPAD((SELECT ID FROM SEQUENCE WHERE SEQ_NAME='ITEM_CODE'), 10, '0')),
 		#itemMarketPrice#, #itemSellPrice#, #itemPurchasePrice#, 
-		#itemManufactureDate#, #itemExpireDate#, #itemStockAmount#)
+		#itemManufactureDate#, #itemExpireDate#, #itemStockAmount#,
+		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>
 	
 	<select id="addStockCode" resultClass="String">

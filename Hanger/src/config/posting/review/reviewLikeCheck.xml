@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="review" type="com.hanger.posting.review.vo.ReviewLikeCheckVo"/>
+	
+	<select id="selectReviewLike" parameterClass="HashMap" resultClass="review">
+		SELECT
+			USER_CODE as userCode, POSTING_CODE as postingCode
+		FROM
+			POSTING_LIKE
+		WHERE
+			USER_CODE = #userCode# AND POSTING_CODE = #postingCode#
+	</select>
+	
+	<!-- LikeCount 수 구하는 셀렉문 
+	<select id="selectLikeCount" parameterClass="HashMap" resultClass="review">
+		SELECT
+    		COUNT(POSTING_CODE) AS postingCode FROM POSTING_LIKE WHERE POSTING_CODE = #postingCode#
+	</select>
+	 -->
+	<insert id="insertReviewLike" parameterClass="HashMap">
+		INSERT INTO POSTING_LIKE(USER_CODE, POSTING_CODE, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP) value(#userCode#,#postingCode#, #userId#, sysdate(), #userIp#, #userId#, sysdate(), #userIp#)
+	</insert>
+	
+	<delete id="deleteReviewLike" parameterClass="HashMap">
+		DELETE FROM POSTING_LIKE
+		WHERE USER_CODE = #userCode# and POSTING_CODE = #postingCode# 
+	</delete>
+</sqlMap>

@@ -1,11 +1,86 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
-    
+
+<%
+	
+
+	String postingCode = "123123";
+	String userCode = "123123";
+	int cntLike = 25;
+	
+	System.out.println(postingCode);
+	System.out.println(userCode);
+	
+	
+%>   
         
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- <script src="/js/jquery-2.1.3.min.js" type="text/javascript"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/Follow/follow.css" />
+<SCRIPT>
+$().ready(function(){
+    $.ajaxSetup({
+        error:function(x,e){
+            if(x.status==0){
+            alert('You are offline!!n Please Check Your Network.');
+            }else if(x.status==404){
+            alert('Requested URL not found.');
+            }else if(x.status==500){
+            alert('Internel Server Error.');
+            }else if(e=='parsererror'){
+            alert('Error.nParsing JSON Request failed.');
+            }else if(e=='timeout'){
+            alert('Request Time out.');
+            }else {
+            alert('Unknow Error.n'+x.responseText);
+            }
+        }
+    });
+});
+
+$(function(){
+	$("#like").click(function(){
+		var like = $(this);
+		var postingCode = <%=postingCode%> 
+		var userCode = <%=userCode%>
+		var cnt = <%=cntLike%>
+		
+		if((like.attr('class').indexOf('like')) != -1){
+			//좋아요		
+			$.ajax({
+				type: "POST", 
+				url: "/reviewLikeCheck.hang",
+				dataType: "text",
+				data: "postingCode="+postingCode+"&userCode=" + userCode,
+				success: function(text){
+					like.text('좋아요 취소'+"("+(cnt+1)+")");
+					like.removeClass('like');
+				}
+			  ,error:function(request,status,error){
+				    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+			});
+			
+		} else {
+			//좋아요 취소
+			$.ajax({
+				type: "POST", 
+				url: "/reviewLikeCancel.hang",
+				dataType: "text",
+				data: "postingCode="+postingCode+"&userCode=" + userCode,
+				success: function(text){
+					like.text('좋아요' + (cnt));
+					like.removeClass('cancel');
+					like.addClass('like');
+				}
+			});
+		}
+	});
+});
+
+</SCRIPT>
+
 <style>
 .myicon
 {
@@ -71,11 +146,17 @@
 	<!-- left menu 끝 -->
 	
     <!-- 리뷰 작성 시작 -->
+    
         <div class="thumbnail" style = "width:75%;float:right;margin-right:4%;"><br>
+          <form>
+          <input type="hidden" name="postingCode" value="<%=postingCode%>" />
+          <input type="hidden" name="userCode" value="<%=userCode%>" />
         	<div class = "select" style = "margin-top:10px" align = "center"><p>
+			
 				<div class = "top" style ="width:930px;height:50px">
-					<span class = "glyphicon glyphicon-heart myicon" style = "margin-right:150px">
-						<font size = "6" color="black">좋아요(25)</font>
+				
+					<span class = "glyphicon glyphicon-heart myicon like" id="like" style = "margin-right:auto;">
+						<font size = "6" color="black">좋아요(<%=cntLike %>)</font>
 					</span>
 					<span class = "glyphicon glyphicon-pencil myicon" >
 						<font size = "6"color="black">댓글(15)</font>
@@ -86,6 +167,7 @@
 					<br>		
 				</div>
         	</div>
+        </form>
 			<!-- 간격 -->
 			<hr>
 				<div class = "info" style = "width:94%;margin-left:3%;margin-top:10px;" align = "center">
@@ -109,7 +191,7 @@
 						<font size = "4" >쇼셜커머스</font>
 					</div>
 					<hr>
-					<div class = "like" style = "width:100%;height:auto;" align = "left">
+					<div class = "" style = "width:100%;height:auto;" align = "left">
 						<font size = "4" style = "margin-left:12px">이런분께 추천해 드려요!</font><br><Br>
 						<div class = "title" style = "height:auto;width:100%;">
 							<div class= "row" style="height:auto;">

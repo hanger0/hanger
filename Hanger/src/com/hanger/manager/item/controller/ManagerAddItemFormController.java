@@ -33,10 +33,9 @@ public class ManagerAddItemFormController extends BaseController{
 		{
 			dayFile.mkdirs();
 		}
-//		String savePath = dayFile.getAbsolutePath();
-		String savePath = "upfile/manager/item";
+		String savePath = dayFile.getAbsolutePath();
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(request, "C:\\Users\\ggeunkk\\git\\hanger\\Hanger\\WebContent\\upfile\\item\\detail", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(request, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		ManagerItemVo item = new ManagerItemVo();
 		

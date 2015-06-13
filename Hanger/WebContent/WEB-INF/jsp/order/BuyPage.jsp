@@ -30,12 +30,20 @@ $(function(){
 	$("input:radio[name=tagbe]").click(function(){
 		if($(this).val() == 2){
 			$("input:text[name=addr1]").val("");
+			$("input:text[name=addr2]").val("");
+			$("input:text[name=zipCode1]").val("");
+			$("input:text[name=zipCode2]").val("");
+		} else if ($(this).val() == 1 || $(this).val() == 3){
+			$("input:text[name=addr1]").val("<%= user.getUserAddr1() %>");
+			$("input:text[name=addr2]").val("<%= user.getUserAddr2() %>");
+			$("input:text[name=zipCode1]").val("<%= user.getUserPostCode1() %>");
+			$("input:text[name=zipCode2]").val("<%= user.getUserPostCode2() %>");
 		}
 	});
+	$(".zipCode").click(function(){
+		window.open("/zipCode.hang", "zipSearchOpen", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=420, height=500");
+	});
 });
-function zipcodeBtn(){
-	window.open("/zipCode.hang", "zipSearchOpen", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=420, height=500");
-}
 </script>
 <body style="background-color: #EBEBEB">
 <form name="form" id="form" action="/orderBuy.hang" method="POST">
@@ -213,8 +221,8 @@ if(cartList != null) {
 							<table>
 								<tr>
 									<td>
-										<input type="text" name="zipCode1" value="<%= user.getUserPostCode1() %>"> - <input type="text" name="zipCode2" value="<%= user.getUserPostCode2() %>">
-										<input type="button" class="btn btn-default" value="우편번호 찾기" onclick="zipcodeBtn()">
+										<input class="zipcode" type="text" name="zipCode1" value="<%= user.getUserPostCode1() %>" readonly> - <input class="zipcode" type="text" name="zipCode2" value="<%= user.getUserPostCode2() %>" readonly>
+										<input type="button" class="btn btn-default zipcode" value="우편번호 찾기">
 										<a href="#">이 주소를 회원정보에 저장</a>
 									</td>
 								</tr>
@@ -222,7 +230,7 @@ if(cartList != null) {
 									<td></td>
 								</tr>
 								<tr>
-									<td><input type="text" name="addr1" style="width: 347px" value="<%= user.getUserAddr1() %>"></td>
+									<td><input class="zipcode" type="text" name="addr1" style="width: 347px" value="<%= user.getUserAddr1() %>" readonly></td>
 								</tr>
 								<tr>
 									<td><input type="text" name="addr2" style="width: 347px" value="<%= user.getUserAddr2() %>"></td>
