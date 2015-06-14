@@ -1,5 +1,5 @@
 $(function(){
-	var f = document.joinForm;
+	var f = document.form;
 
 	$("#cancelBtn").click(function(){
 		//location.href="/memberServlet.mo?func=member_002"; //메인으로 가짐
@@ -57,6 +57,9 @@ $(function(){
 				$('#idCheckMessage').html(resultMessage);
 			}
 		});
+	});
+	$(".zipcode").click(function(){
+		window.open("/zipCode.hang", "zipSearchOpen", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=420, height=500");
 	});
 });
 
@@ -180,8 +183,4 @@ function joinBtn(){
 	window.alert("회원가입을 축하드립니다.\n 로그인 후 이용하세요.");
 	f.addr2.value = trim(f.addr2.value);
 	f.submit();
-}
-
-function zipcodeBtn(){
-	window.open("/zipCode.hang", "zipSearchOpen", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=420, height=500");
 }
