@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="Data">
-	<typeAlias alias="reviewList" type="com.hanger.posting.review.vo.ReviewListVo" />
+	<typeAlias alias="reviewList" type="com.hanger.posting.review.vo.ReviewVo" />
+	
 	<select id="selectReview" resultClass="reviewList">
 		SELECT POSTING_CODE as postingCode, USER_CODE as userCode, ITEM_GROUP_CODE as itemGroupCode, REVIEW_USE_YN as reviewUseYn, REVIEW_SCORE as reviewScore, REVIEW_TITLE as reviewTitle, REVIEW_CONTENT as reviewContent, REG_ID as regId, REG_DATE as regDate, REG_IP as regIp, UPD_ID as updId, UPD_DATE as updDate, UPD_IP as updIp
 		FROM review
+	</select>
+	
+	<select id = "selectUserReview" parameterClass = "HashMap" resultClass = "reviewList">
+		SELECT review1.POSTING_CODE as postingCode, review1.ITEM_GROUP_CODE as itemGroupCode, 
+			review1.REVIEW_SCORE as reviewScore, review1.REVIEW_TITLE as reviewTitle, review1.REG_DATE as regDate, 
+			review1.USER_CODE as userCode,
+			item.ITEM_NAME as itemName, brand.BRAND_NAME as brandName, 
+			item.ITEM_PIC_PATH as itemPicPath, item.ITEM_PIC_SAVENAME as itemPicSaveName,
+			user.USER_NAME as userName, user.USER_PIC_PATH as userPicPath, user.USER_PIC_SAVE_NAME as userPicSaveName, 
+			user.USER_SKINTONE as userSkinTone, feature2.FEATURE2_NAME as featuer2Name,
+			COUNT(reply.USER_CODE) as replyCount, COUNT(postingLike.USER_CODE) as postingLikeCount, COUNT(scrap.USER_CODE) as scrapCount 
+		FROM REVIEW review1 left join (SELECT POSTING_CODE, USER_CODE 
+		FROM REPLY 
+		WHERE
+         	REPLY_USE_YN='Y') reply on review1.POSTING_CODE=reply.POSTING_CODE,
+         	REVIEW review2 left join POSTING_LIKE postingLike on review2.POSTING_CODE = postingLike.POSTING_CODE,
+         	REVIEW review3 left join SCRAP scrap on review3.POSTING_CODE = scrap.POSTING_CODE,
+         	USER user, FEATURE2 feature2, 
+         	(SELECT ITEM_GROUP_CODE, ITEM_CODE, ITEM_NAME, BRAND_CODE, ITEM_PIC_PATH, ITEM_PIC_SAVENAME FROM ITEM GROUP BY ITEM_GROUP_CODE) item,
+         	BRAND brand, RELATION relation
+		where review1.REVIEW_USE_YN='Y' AND review1.USER_CODE = user.USER_CODE
+			AND user.USER_SKINTYPE=feature2.FEATURE2_CODE AND review1.ITEM_GROUP_CODE = item.ITEM_GROUP_CODE
+			AND item.BRAND_CODE=brand.BRAND_CODE
+			AND relation.RELATION_FOLLOWING=review1.USER_CODE
+			AND relation.RELATION_FOLLOWER=#myUserCode#
+		group by review1.POSTING_CODE, review1.ITEM_GROUP_CODE,
+			review1.REVIEW_SCORE, review1.REVIEW_TITLE, review1.REG_DATE, 
+			item.ITEM_GROUP_CODE, item.ITEM_NAME, brand.BRAND_NAME, 
+			item.ITEM_PIC_PATH, item.ITEM_PIC_SAVENAME,
+			user.USER_NAME, user.USER_PIC_PATH, user.USER_PIC_SAVE_NAME, 
+			user.USER_SKINTONE, feature2.FEATURE2_NAME;
 	</select>
 </sqlMap>
 

@@ -2,7 +2,9 @@ package com.hanger.user.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.user.dao.RelationInsertDao;
 import com.hanger.user.dao.UserJoinDao;
+import com.hanger.user.dao.UserLoginDao;
 import com.hanger.user.vo.UserVo;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -22,7 +26,15 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class UserJoinController extends BaseController {
 	//
 	private UserJoinDao userJoinDao;
+	private UserLoginDao userLoginDao;
+	private RelationInsertDao relationInsertDao;
 	
+	public void setUserLoginDao(UserLoginDao userLoginDao) {
+		this.userLoginDao = userLoginDao;
+	}
+	public void setRelationInsertDao(RelationInsertDao relationInsertDao) {
+		this.relationInsertDao = relationInsertDao;
+	}
 	public void setUserJoinDao(UserJoinDao userJoinDao) {
 		this.userJoinDao = userJoinDao;
 	}
@@ -46,7 +58,7 @@ public class UserJoinController extends BaseController {
 	}
 
 	@RequestMapping(value="/joinResult.hang", method=RequestMethod.POST)
-	public ModelAndView memberJoinForm2(
+	public String memberJoinForm2(
 			HttpServletRequest req
 			) throws IOException {
 		//
@@ -130,12 +142,19 @@ public class UserJoinController extends BaseController {
 		
 		userJoinDao.insertUser(user);
 		
-		System.out.println("memberJoinForm2 ½ÇÇà....");
+		ArrayList<UserVo> uservoList = (ArrayList<UserVo>)userLoginDao.loginUser(user);
+		UserVo uservo = uservoList.get(0);
+		String userCode = uservo.getUserCode();
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(moveUrl);
-		mav.addObject("mainUrl", mainUrl);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", userCode);
+		map.put("userCode", userCode);
+		map.put("myUserId", userId);
+		map.put("ip", ip);
+		relationInsertDao.insertRelation(map);
 		
-		return mav;
+		req.setAttribute("mainUrl", mainUrl);
+		
+		return moveUrl;
 	}
 }

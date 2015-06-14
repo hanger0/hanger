@@ -20,4 +20,17 @@
 	<update id="orderDecide" parameterClass="HashMap">
 		update order_info set ORDER_ITEM_VERIFY = 'Y' WHERE ORDER_INFO_CODE = #orderInfoCode#	
 	</update>
+
+	<select id="selectMyOrder" parameterClass="HashMap" resultClass="order">
+		select 
+			a.REG_DATE as regDate, ORDER_STATE as orderState, b.ORDER_ITEM_SELL_PRICE as orderItemSellPrice, b.ORDER_ITEM_RECOM as orderItemRecom,
+			b.ORDER_ITEM_VERIFY as orderItemVerify, b.ORDER_ITEM_AMOUNT as orderItemAmount, c.ITEM_PIC_PATH as itemPicPath, c.ITEM_PIC_SAVENAME as itemPicSaveName,
+			c.item_name as itemName, c.ITEM_DETAIL_INFO as itemDetailInfo
+		FROM 
+			ordering a, order_info b, item c
+		WHERE 
+			a.ORDER_CODE = b.ORDER_CODE AND b.item_code = c.ITEM_CODE AND
+			a.USER_CODE = #myUserCode#
+	</select>
+
 </sqlMap>

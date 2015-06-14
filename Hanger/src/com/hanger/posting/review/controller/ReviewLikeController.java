@@ -32,7 +32,6 @@ public class ReviewLikeController extends BaseController {
 		
 		String userId = (String)session.getAttribute("myUserId");
 		String userCode = (String)session.getAttribute("myUserCode");
-		
 		String postingCode = req.getParameter("postingCode");
 		String ip = req.getRemoteAddr();
 		
@@ -48,34 +47,14 @@ public class ReviewLikeController extends BaseController {
 		
 		//조회된 값이 0이면 insert 해야함.
 		if(likeList.size() == 0 ) {
-			likeList = reviewLikeCheckDao.insertLike(map);	
+			reviewLikeCheckDao.insertLike(map);	
+		} else {
+			reviewLikeCheckDao.deleteLike(map);
 		}
 		
-		/*
 		List<ReviewLikeCheckVo> likeCnt = reviewLikeCheckDao.selectLikeCount(map);
 	
-		req.setAttribute("postingCode", postingCode);
-		req.setAttribute("likeCnt", likeCnt);
-		*/
-		return moveUrl;
-	}
-	
-	@RequestMapping(value="reviewLikeCancel.hang", method=RequestMethod.POST)
-	public String reviewLikeCancel(HttpServletRequest req)
-	{
-		System.out.println("삭제하면 여길로온다");
-		moveUrl = "posting/review/ReviewLikeCheck";
-		
-		//사용자의 아이디를 가져온다.
-		HttpSession session = req.getSession();
-		String userCode = (String)session.getAttribute("myUserCode");
-		String postingCode = req.getParameter("postingCode");
-		
-		HashMap map = new HashMap();
-		map.put("userCode", userCode);
-		map.put("postingCode", postingCode);
-		
-		int likeList = reviewLikeCheckDao.deleteLike(map);
+		req.setAttribute("likeCnt", likeCnt.size() + "");
 		return moveUrl;
 	}
 }

@@ -1,29 +1,23 @@
-package com.hanger.posting.review.vo;
+package com.hanger.scrap.vo;
 
-public class ReviewVo {
+public class UserScrapVo {
 	private String postingCode ;
-	private String itemGroupCode;
-	private String reviewScore;
-	private String reviewTitle;
-	private String regDate;
-	private String userCode;
-	private String itemName;
-	private String brandName;
-	private String itemPicPath;
-	private String itemPicSaveName;
-	private String userName;
-	private String userPicPath;
-	private String userPicSaveName;
-	private String userSkinTone;
-	private String featuer2Name;
-	private String replyCount;
-	private String postingLikeCount;
-	private String scrapCount;
-	private String regId;
-	private String regIp;
-	private String updId;
-	private String updIp;
-	private String reviewContent;
+	private String itemGroupCode ;
+	private String reviewScore ;
+	private String reviewTitle ;
+	private String regDate ;
+	private String itemName ;
+	private String brandName ;
+	private String itemPicPath ;
+	private String itemPicSaveName ;
+	private String userName ;
+	private String userPicPath ;
+	private String userPicSaveName ;
+	private String userSkinTone ;
+	private String feature2Name ;
+	private String replyCount ;
+	private String postingCount ;
+	private String scrapCount ;
 	public String getPostingCode() {
 		return postingCode;
 	}
@@ -53,12 +47,6 @@ public class ReviewVo {
 	}
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
-	}
-	public String getUserCode() {
-		return userCode;
-	}
-	public void setUserCode(String userCode) {
-		this.userCode = userCode;
 	}
 	public String getItemName() {
 		return itemName;
@@ -108,11 +96,11 @@ public class ReviewVo {
 	public void setUserSkinTone(String userSkinTone) {
 		this.userSkinTone = userSkinTone;
 	}
-	public String getFeatuer2Name() {
-		return featuer2Name;
+	public String getFeature2Name() {
+		return feature2Name;
 	}
-	public void setFeatuer2Name(String featuer2Name) {
-		this.featuer2Name = featuer2Name;
+	public void setFeature2Name(String feature2Name) {
+		this.feature2Name = feature2Name;
 	}
 	public String getReplyCount() {
 		return replyCount;
@@ -120,46 +108,16 @@ public class ReviewVo {
 	public void setReplyCount(String replyCount) {
 		this.replyCount = replyCount;
 	}
-	public String getPostingLikeCount() {
-		return postingLikeCount;
+	public String getPostingCount() {
+		return postingCount;
 	}
-	public void setPostingLikeCount(String postingLikeCount) {
-		this.postingLikeCount = postingLikeCount;
+	public void setPostingCount(String postingCount) {
+		this.postingCount = postingCount;
 	}
 	public String getScrapCount() {
 		return scrapCount;
 	}
 	public void setScrapCount(String scrapCount) {
 		this.scrapCount = scrapCount;
-	}
-	public String getRegId() {
-		return regId;
-	}
-	public void setRegId(String regId) {
-		this.regId = regId;
-	}
-	public String getRegIp() {
-		return regIp;
-	}
-	public void setRegIp(String regIp) {
-		this.regIp = regIp;
-	}
-	public String getUpdId() {
-		return updId;
-	}
-	public void setUpdId(String updId) {
-		this.updId = updId;
-	}
-	public String getUpdIp() {
-		return updIp;
-	}
-	public void setUpdIp(String updIp) {
-		this.updIp = updIp;
-	}
-	public String getReviewContent() {
-		return reviewContent;
-	}
-	public void setReviewContent(String reviewContent) {
-		this.reviewContent = reviewContent;
 	}
 }

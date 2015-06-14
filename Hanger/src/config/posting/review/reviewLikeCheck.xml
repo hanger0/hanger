@@ -12,12 +12,15 @@
 			USER_CODE = #userCode# AND POSTING_CODE = #postingCode#
 	</select>
 	
-	<!-- LikeCount 수 구하는 셀렉문 
-	<select id="selectLikeCount" parameterClass="HashMap" resultClass="review">
+	<select id="selectLikeCount" parameterClass="HashMap" resultClass="checkReview">
 		SELECT
-    		COUNT(POSTING_CODE) AS postingCode FROM POSTING_LIKE WHERE POSTING_CODE = #postingCode#
+    		POSTING_CODE AS postingCode 
+    	FROM 
+    		POSTING_LIKE 
+    	WHERE 
+    		POSTING_CODE = #postingCode#
 	</select>
-	 -->
+	
 	<insert id="insertReviewLike" parameterClass="HashMap">
 		INSERT INTO POSTING_LIKE(USER_CODE, POSTING_CODE, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP) value(#userCode#,#postingCode#, #userId#, sysdate(), #userIp#, #userId#, sysdate(), #userIp#)
 	</insert>

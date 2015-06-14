@@ -68,7 +68,7 @@ function cancelBtn(){
 }
 
 function joinBtn(){
-	var f = document.joinForm;
+	var f = document.form;
 
 	// id°ª Ã¼Å©
 	if(trim(f.joinId.value)==""){

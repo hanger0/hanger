@@ -19,4 +19,12 @@ public class UserMileageDao {
 	public ArrayList<MileageVo> selectUserMileage(HashMap<String, String> map){
 		return (ArrayList<MileageVo>)smct.queryForList("selectUserMileage", map);
 	}
+	
+	public MileageVo selectUseUserMileage(HashMap<String, String> map){
+		return (MileageVo)smct.queryForObject("selectUseUserMileage", map);
+	}
+
+	public MileageVo selectReviewMileage(HashMap<String, String> map){
+		return (MileageVo)smct.queryForObject("selectReviewMileage", map);
+	}
 }

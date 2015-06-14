@@ -12,6 +12,8 @@ public class MileageVo {
 	private String updId;
 	private String updDate;
 	private String updUp;
+	private String userName;
+	private String itemName;
 	public String getMileageOwnerCode() {
 		return mileageOwnerCode;
 	}
@@ -77,5 +79,17 @@ public class MileageVo {
 	}
 	public void setUpdUp(String updUp) {
 		this.updUp = updUp;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 }

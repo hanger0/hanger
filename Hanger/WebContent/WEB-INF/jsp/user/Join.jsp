@@ -294,6 +294,7 @@ H4
         <label for="skinType" class="col-sm-2 control-label">SkinType : </label>
         <div class="col-sm-10">
             <select name="skinType" id="skinType" class="form-control">
+                <option value="000">선택안함</option>
                 <option value="001">건성</option>
                 <option value="002">지성</option>
                 <option value="003">중성</option>
@@ -306,6 +307,7 @@ H4
         <label for="skintone" class="col-sm-2 control-label">SkinTone : </label>
         <div class="col-sm-10">
             <select name="skinTone" id="skinTone" class="form-control">
+            	<option value="00">선택안함</option>
                 <option value="13">13호</option>
                 <option value="21">21호</option>
                 <option value="23">23호</option>

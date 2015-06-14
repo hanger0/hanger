@@ -20,7 +20,7 @@ public class UserVo {
 	private String userSkinType;
 	private String userSkinTone;
 	private String userSkinProblem;
-	private String userRank;
+	private String userRankCode;
 	private String userAdminYn;
 	private String regId;
 	private String regDate;
@@ -145,11 +145,11 @@ public class UserVo {
 	public void setUserSkinProblem(String userSkinProblem) {
 		this.userSkinProblem = userSkinProblem;
 	}
-	public String getUserRank() {
-		return userRank;
+	public String getUserRankCode() {
+		return userRankCode;
 	}
-	public void setUserRank(String userRank) {
-		this.userRank = userRank;
+	public void setUserRankCode(String userRankCode) {
+		this.userRankCode = userRankCode;
 	}
 	public String getUserAdminYn() {
 		return userAdminYn;

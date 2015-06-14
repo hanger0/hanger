@@ -16,7 +16,8 @@ public class ScrapDao {
 	public void insertScrap(HashMap map) {
 		smct.insert("insertScrap", map);
 	}
-	//½ºÅ©·¦ AJAX
+	
+	@SuppressWarnings("unchecked")
 	public ArrayList<ScrapVo> selectScrap(HashMap map) {
 		return (ArrayList<ScrapVo>)smct.queryForList("selectScrap",map) ;
 	}

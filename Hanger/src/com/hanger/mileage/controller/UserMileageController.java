@@ -22,7 +22,7 @@ public class UserMileageController extends BaseController{
 	@RequestMapping("/userMileage.hang")
 	public String userMileage(HttpServletRequest req){
 		HashMap<String, String> map = new HashMap<String, String>();
-		userMileageDao.selectUserMileage(map);
+		userMileageDao.selectUseUserMileage(map);
 		
 		return moveUrl;
 	}

@@ -5,24 +5,47 @@
 	
 	<select id="selectUserMileage" parameterClass="HashMap" resultClass="mileageVo">
 		select 
-			MILEAGE_OWNER_CODE as mileageOwnerCode, MILEAGE_REASON_CODE as mileageReasonCode, 
-			MILEAGE_REASON_DETAIL_CODE as mileageReasonDetailCode, MILEAGE_AMOUNT as mileageAmount, 
-			MILEAGE_AVAILABLE_YN as mileageAvailableYn, a.UPD_DATE as updDate 
+			MILEAGE_REASON_CODE as mileageReasonCode, 
+			MILEAGE_AMOUNT as mileageAmount, a.MILEAGE_REASON_DETAIL_CODE as mileageReasonDetailCode,
+			a.REG_DATE as regDate
 		FROM 
-			mileage a, user b 
+			mileage a
 		WHERE 
-			a.MILEAGE_OWNER_CODE = b.USER_CODE AND a.MILEAGE_OWNER_CODE = #myUserCode#
+			a.MILEAGE_OWNER_CODE = #myUserCode# AND a.MILEAGE_AVAILABLE_YN = 'Y'
+	</select>
+	
+	<select id="selectUseUserMileage" parameterClass="HashMap" resultClass="mileageVo">
+		select 
+			MILEAGE_REASON_CODE as mileageReasonCode, 
+			MILEAGE_AMOUNT as mileageAmount, 
+			a.REG_DATE as regDate, d.ITEM_NAME as itemName
+		FROM 
+			mileage a, order_info c, item d 
+		WHERE 
+			a.MILEAGE_REASON_DETAIL_CODE = c.ORDER_CODE AND 
+      		c.item_code = d.ITEM_CODE AND a.MILEAGE_OWNER_CODE = #myUserCode# AND a.MILEAGE_REASON_DETAIL_CODE = #reasonDetailCode#
+	</select>
+	
+	<select id="selectReviewMileage" parameterClass="HashMap" resultClass="mileageVo">
+		select 
+			MILEAGE_REASON_CODE as mileageReasonCode, 
+			MILEAGE_AMOUNT as mileageAmount, 
+			a.REG_DATE as regDate, c.USER_NAME as userName
+		FROM 
+			mileage a, review b, user c 
+		WHERE 
+			a.MILEAGE_REASON_DETAIL_CODE = b.POSTING_CODE AND 
+      		b.user_code = c.user_CODE AND a.MILEAGE_OWNER_CODE = #myUserCode# AND a.MILEAGE_REASON_DETAIL_CODE = #reasonDetailCode#
 	</select>
 	
 	<insert id="insertUseMileage" parameterClass="HashMap">
 		insert into mileage (
 			MILEAGE_OWNER_CODE as mileageOwnerCode, MILEAGE_REASON_CODE as mileageReasonCode, 
 			MILEAGE_REASON_DETAIL_CODE as mileageReasonDetailCode, MILEAGE_AMOUNT as mileageAmount, 
-			MILEAGE_AVAILABLE_YN as mileageAvailableYn, REG_ID as regId, REG_DATE as regDate, 
-			REG_IP as regIp, UPD_ID as updId, UPD_DATE as updDate, UPD_IP as updIp) 
+			REG_ID as regId, REG_DATE as regDate, REG_IP as regIp, UPD_ID as updId, UPD_DATE as updDate, UPD_IP as updIp) 
 		VALUES (
-			#mileageOwnderCode#, #mileageReasonCode#, #mileageReasonDetailCode#, #mileageAmount#, #mileageAvailableYn#, 
-			#regId#, #regDate#, #regIp#, #updId#, #updDate#, #updIp#)
+			#mileageOwnderCode#, #mileageReasonCode#, #mileageReasonDetailCode#, #mileageAmount#, 
+			#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>
 	
 </sqlMap>

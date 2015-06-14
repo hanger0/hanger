@@ -1,3 +1,6 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
 <%@ page import="java.util.*" %>
-			<%= 1%>
+<%
+	String cnt = (String)request.getAttribute("likeCnt");
+%>
+<%= cnt %>

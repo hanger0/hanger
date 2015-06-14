@@ -1,4 +1,4 @@
-package com.hanger.posting.review.dao;
+package com.hanger.user.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,15 +7,15 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.hanger.posting.review.vo.ReviewVo;
 
-public class ReviewListDao {
-	//
+public class UserReviewDao {
 	private SqlMapClientTemplate smct ;
-	
-	public ReviewListDao(SqlMapClientTemplate smct) {
+		   
+	public UserReviewDao(SqlMapClientTemplate smct) {
 		this.smct = smct ;
 	}
+	   
 	@SuppressWarnings("unchecked")
-	public ArrayList<ReviewVo> selectReview() {
-		return (ArrayList<ReviewVo>)smct.queryForList("selectReview");
+	public ArrayList<ReviewVo> selectUserReview(HashMap map) {
+		return (ArrayList<ReviewVo>)smct.queryForList("selectUserReview", map);
 	}
 }

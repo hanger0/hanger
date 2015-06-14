@@ -21,14 +21,13 @@ public class ReviewLikeCheckDao {
 		return (ArrayList<ReviewLikeCheckVo>)smct.queryForList("selectReviewLike", map);
 	}
 	
-	//좋아요 총 count 수 구하는 select문
-	/*
+	@SuppressWarnings("unchecked")
 	public ArrayList<ReviewLikeCheckVo> selectLikeCount(HashMap map){
 		return (ArrayList<ReviewLikeCheckVo>)smct.queryForList("selectLikeCount", map);
 	}
-	*/
-	public ArrayList<ReviewLikeCheckVo> insertLike(HashMap map){
-		return (ArrayList<ReviewLikeCheckVo>)smct.insert("insertReviewLike", map);
+
+	public void insertLike(HashMap map){
+		smct.insert("insertReviewLike", map);
 	}
 	
 	public int deleteLike(HashMap map){

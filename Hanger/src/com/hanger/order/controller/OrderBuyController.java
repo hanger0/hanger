@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.mileage.dao.UseMileageDao;
 import com.hanger.mileage.dao.UserMileageDao;
 import com.hanger.mileage.vo.MileageVo;
 import com.hanger.order.dao.CartDao;
@@ -28,7 +29,11 @@ public class OrderBuyController extends BaseController {
 	private UserSelectDao userSelectDao;
 	private CartDao cartDao;
 	private UserMileageDao userMileageDao;
+	private UseMileageDao useMileageDao;
 
+	public void setUseMileageDao(UseMileageDao useMileageDao) {
+		this.useMileageDao = useMileageDao;
+	}
 	public void setUserMileageDao(UserMileageDao userMileageDao) {
 		this.userMileageDao = userMileageDao;
 	}
@@ -323,6 +328,20 @@ public class OrderBuyController extends BaseController {
 		
 		orderBuyDao.insertOrdering(ordering);
 
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("mileageOwnderCode", myUserCode);
+		map.put("mileageReasonCode", "");
+		map.put("mileageReasonDetailCode", "");
+		map.put("mileageAmount", "");
+		map.put("regId", myUserId);
+		map.put("regIp", ip);
+		map.put("updId", myUserId);
+		map.put("updIp", ip);
+		
+		if(orderUsedMileage != null && orderUsedMileage.length() >0){
+			useMileageDao.insertUseMileage(map);
+		}
+		
 		req.setAttribute("mainUrl", mainUrl);
 		
 		return moveUrl;

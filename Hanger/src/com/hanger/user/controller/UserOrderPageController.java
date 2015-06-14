@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.order.dao.OrderInfoDao;
 import com.hanger.user.dao.UserSelectDao;
 import com.hanger.user.vo.UserVo;
 
@@ -14,7 +15,11 @@ import com.hanger.user.vo.UserVo;
 public class UserOrderPageController extends BaseController {
 	//
 	private UserSelectDao userSelectDao;
+	private OrderInfoDao orderInfoDao;
 	
+	public void setOrderInfoDao(OrderInfoDao orderInfoDao) {
+		this.orderInfoDao = orderInfoDao;
+	}
 	public void setUserSelectDao(UserSelectDao userSelectDao) {
 		this.userSelectDao = userSelectDao;
 	}

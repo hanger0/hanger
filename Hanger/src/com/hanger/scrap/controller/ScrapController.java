@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.hanger.common.controller.BaseController;
 import com.hanger.scrap.dao.ScrapDao;
 
+
+//ajax 컨트롤입니다.
 @Controller
 public class ScrapController extends BaseController{
 	//

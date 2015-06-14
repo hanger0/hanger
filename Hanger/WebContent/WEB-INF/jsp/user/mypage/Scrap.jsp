@@ -1,14 +1,30 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
-
+<%@ page import = "java.util.*" %>
+<%@ page import = "com.hanger.scrap.vo.UserScrapVo" %>
+<%
+	ArrayList<UserScrapVo> userScrapList = (ArrayList<UserScrapVo>)request.getAttribute("userScrapList");
+%>
+<script>
+	function scrapReview() {
+		location.href = "/userScrapReview.hang";
+	}
+	function scrapTip() {
+		location.href = "/scrapTip.hang"
+	}
+</script>
 <body>
 	<div class="container" style="width: 97.7%">
 		<!-- Ω∫≈©∑¶ -->
 		<div class="row hotitem">
-			<div class="title">
-				<font size="3"><b><p
-							style="display: table; margin-left: 1.8%;">Ω∫≈©∑¶</p></b></font>
-			</div>
+			<div class="title" style = "margin-left:1.5%">
+				<font size="3"><b>Ω∫≈©∑¶</b></font>
+			</div><p>
+			<input type="button" value="∏Æ∫‰" class="btn btn-default" style = "width:60px;margin-left:1.5%" onClick = "scrapReview()"/>
+			&nbsp;
+			<input type="button" value="∆¡" class="btn btn-default" style = "width:60px;" onClick = "scrapTip()"/>
+			<br>
 			<%
+			if(userScrapList != null && userScrapList.size() > 0) {
 				for (int i = 0; i < 6; i++) {
 			%>
 			<div class="col-md-3">
@@ -44,7 +60,12 @@
 			</div>
 			<%
 				}
-			%>
+			} else {
+%>
+				<H1>µ•¿Ã≈Õ∞° æ¯Ω¿¥œ¥Ÿ.</H1>
+<%
+			}
+%>
 		</div>
 
 		<!-- Ω∫≈©∑¶ ≥° -->

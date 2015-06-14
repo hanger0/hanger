@@ -42,8 +42,8 @@ public class ReviewWriteFormController extends BaseController{
 		ReviewVo review = new ReviewVo();
 		
 		String userCode = "UR0000000001";
-		String itemCode = "IT0000000001";
-		int reviewScore = 8;
+		String itemGroupCode = "IT0000000001";
+		String reviewScore = "8";
 		String reviewTitle = mul.getParameter("title");
 		String reviewContent = "";
 		String ip = request.getRemoteAddr();
@@ -70,7 +70,7 @@ public class ReviewWriteFormController extends BaseController{
 		System.out.println(reviewContent);
 		
 		review.setUserCode(userCode);
-		review.setItemCode(itemCode);
+		review.setItemGroupCode(itemGroupCode);
 		review.setReviewScore(reviewScore);
 		review.setReviewTitle(reviewTitle);
 		review.setReviewContent(reviewContent);
