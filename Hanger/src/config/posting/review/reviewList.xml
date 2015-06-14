@@ -3,7 +3,7 @@
 <sqlMap namespace="Data">
 	<typeAlias alias="review" type="com.hanger.posting.review.vo.ReviewVo" />
 	
-	<select id="selectReview" resultClass="reviewList">
+	<select id="selectReview" resultClass="review">
 		SELECT POSTING_CODE as postingCode, USER_CODE as userCode, ITEM_GROUP_CODE as itemGroupCode, REVIEW_USE_YN as reviewUseYn, REVIEW_SCORE as reviewScore, REVIEW_TITLE as reviewTitle, REVIEW_CONTENT as reviewContent, REG_ID as regId, REG_DATE as regDate, REG_IP as regIp, UPD_ID as updId, UPD_DATE as updDate, UPD_IP as updIp
 		FROM review
 	</select>
