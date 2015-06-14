@@ -27,7 +27,6 @@ public class ReviewLikeController extends BaseController {
 	public String reviewLikeCheck(HttpServletRequest req)
 	{
 		moveUrl = "posting/review/ReviewLikeCheck";
-		
 		//사용자의 아이디를 가져온다.
 		HttpSession session = req.getSession();
 		
@@ -44,8 +43,6 @@ public class ReviewLikeController extends BaseController {
 		map.put("userId", userId);
 		map.put("userIp", ip);
 		
-		
-	
 		//해당 사용자가 좋아요를 눌른적이 있다면 먼저 조회
 		List<ReviewLikeCheckVo> likeList = reviewLikeCheckDao.selectLike(map);
 		

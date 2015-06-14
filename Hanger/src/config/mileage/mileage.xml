@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="mileageVo" type="com.hanger.mileage.vo.MileageVo"/>
+	
+	<select id="selectUserMileage" parameterClass="HashMap" resultClass="mileageVo">
+		select 
+			MILEAGE_OWNER_CODE as mileageOwnerCode, MILEAGE_REASON_CODE as mileageReasonCode, 
+			MILEAGE_REASON_DETAIL_CODE as mileageReasonDetailCode, MILEAGE_AMOUNT as mileageAmount, 
+			MILEAGE_AVAILABLE_YN as mileageAvailableYn, a.UPD_DATE as updDate 
+		FROM 
+			mileage a, user b 
+		WHERE 
+			a.MILEAGE_OWNER_CODE = b.USER_CODE AND a.MILEAGE_OWNER_CODE = #myUserCode#
+	</select>
+	
+	<insert id="insertUseMileage" parameterClass="HashMap">
+		insert into mileage (
+			MILEAGE_OWNER_CODE as mileageOwnerCode, MILEAGE_REASON_CODE as mileageReasonCode, 
+			MILEAGE_REASON_DETAIL_CODE as mileageReasonDetailCode, MILEAGE_AMOUNT as mileageAmount, 
+			MILEAGE_AVAILABLE_YN as mileageAvailableYn, REG_ID as regId, REG_DATE as regDate, 
+			REG_IP as regIp, UPD_ID as updId, UPD_DATE as updDate, UPD_IP as updIp) 
+		VALUES (
+			#mileageOwnderCode#, #mileageReasonCode#, #mileageReasonDetailCode#, #mileageAmount#, #mileageAvailableYn#, 
+			#regId#, #regDate#, #regIp#, #updId#, #updDate#, #updIp#)
+	</insert>
+	
+</sqlMap>

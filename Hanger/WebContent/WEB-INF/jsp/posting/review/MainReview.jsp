@@ -1,86 +1,34 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
-
+<%@ page import = "com.hanger.scrap.vo.ScrapVo" %>
+<%@ page import = "java.util.*" %>
 <%
+	String postingCode =(String)request.getAttribute("postingCode");
+	String myUserCode = (String)session.getAttribute("myUserCode");
 	
-
-	String postingCode = "123123";
-	String userCode = "123123";
+	ArrayList<ScrapVo> scrapList = (ArrayList<ScrapVo>)request.getAttribute("scrapList");
+	
+	boolean checkScrap = false;
+	
+	for(int i = 0 ; i < scrapList.size(); i++) {
+		ScrapVo list = scrapList.get(i);
+		String dbPostingCode = list.getPostingCode();
+		String dbUserCode = list.getUserCode();
+		
+		if(myUserCode.equals(dbUserCode)){
+			checkScrap = true;
+		}
+	}
+	
 	int cntLike = 25;
+%>		
 	
-	System.out.println(postingCode);
-	System.out.println(userCode);
-	
-	
-%>   
         
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<!-- <script src="/js/jquery-2.1.3.min.js" type="text/javascript"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/Follow/follow.css" />
-<SCRIPT>
-$().ready(function(){
-    $.ajaxSetup({
-        error:function(x,e){
-            if(x.status==0){
-            alert('You are offline!!n Please Check Your Network.');
-            }else if(x.status==404){
-            alert('Requested URL not found.');
-            }else if(x.status==500){
-            alert('Internel Server Error.');
-            }else if(e=='parsererror'){
-            alert('Error.nParsing JSON Request failed.');
-            }else if(e=='timeout'){
-            alert('Request Time out.');
-            }else {
-            alert('Unknow Error.n'+x.responseText);
-            }
-        }
-    });
-});
-
-$(function(){
-	$("#like").click(function(){
-		var like = $(this);
-		var postingCode = <%=postingCode%> 
-		var userCode = <%=userCode%>
-		var cnt = <%=cntLike%>
-		
-		if((like.attr('class').indexOf('like')) != -1){
-			//좋아요		
-			$.ajax({
-				type: "POST", 
-				url: "/reviewLikeCheck.hang",
-				dataType: "text",
-				data: "postingCode="+postingCode+"&userCode=" + userCode,
-				success: function(text){
-					like.text('좋아요 취소'+"("+(cnt+1)+")");
-					like.removeClass('like');
-				}
-			  ,error:function(request,status,error){
-				    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
-			});
-			
-		} else {
-			//좋아요 취소
-			$.ajax({
-				type: "POST", 
-				url: "/reviewLikeCancel.hang",
-				dataType: "text",
-				data: "postingCode="+postingCode+"&userCode=" + userCode,
-				success: function(text){
-					like.text('좋아요' + (cnt));
-					like.removeClass('cancel');
-					like.addClass('like');
-				}
-			});
-		}
-	});
-});
-
-</SCRIPT>
-
+<script src = "/js/common/common.js"></script>
 <style>
 .myicon
 {
@@ -145,29 +93,176 @@ $(function(){
 	</div>
 	<!-- left menu 끝 -->
 	
-    <!-- 리뷰 작성 시작 -->
-    
-        <div class="thumbnail" style = "width:75%;float:right;margin-right:4%;"><br>
-          <form>
-          <input type="hidden" name="postingCode" value="<%=postingCode%>" />
-          <input type="hidden" name="userCode" value="<%=userCode%>" />
-        	<div class = "select" style = "margin-top:10px" align = "center"><p>
+	<!-- 스크랩 스크립트 -->
+	<script>
+		$(function(){
+			$("#like").click(function(){
+				var like = $(this);
+				var postingCode = "<%=postingCode%>"
+				var userCode = "<%=myUserCode%>"
+				var cnt = "<%=cntLike%>"
+				if((like.attr('class').indexOf('like')) != -1){
+					//좋아요		
+					$.ajax({
+						type: "POST", 
+						url: "/reviewLikeCheck.hang",
+						dataType: "text",
+						data: "postingCode="+postingCode+"&userCode=" + userCode,
+						success: function(text){
+							like.text('좋아요 취소'+"("+(parseInt(cnt)+1)+")");
+							like.removeClass('like');
+						}
+					  ,error:function(request,status,error){
+						    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+					});
+				} else {
+					//좋아요 취소
+					$.ajax({
+						type: "POST", 
+						url: "/reviewLikeCancel.hang",
+						dataType: "text",
+						data: "postingCode="+postingCode+"&userCode=" + userCode,
+						success: function(text){
+							like.text('좋아요(' + cnt + ')');
+							like.removeClass('cancel');
+							like.addClass('like');
+						}
+					});
+				}
+			});
 			
-				<div class = "top" style ="width:930px;height:50px">
+			$(".scrapDelete").click(function(){
+				var deleteClass = $(this);
+				var postingCode = $("input:hidden[name=postingCode]").val();
+				var checkScrap = $("input:hidden[name=checkScrap]").val();
 				
+				if(deleteClass.attr('class') === ('glyphicon glyphicon-tag myicon scrapDelete')){
+					var t = 	confirm("이미 스크랩이 되어있습니다.\n 해당 스크랩을 지우시겠습니까?");
+					if(t){	
+						$.ajax({
+							type:"POST",
+							url:"/scrap.hang",
+							dataType:"text",
+							data:"postingCode=" + postingCode + "&checkScrap="+checkScrap,
+							success:function(text){
+								var resultText = trim(text);
+								var resultScrap = "<FONT color = 'black' size = '6'>스크랩(" + resultText +")</FONT>"
+								alert("성공");
+								$("input:hidden[name=checkScrap]").val("false");
+								deleteClass.html(resultScrap);
+								deleteClass.removeClass("scrapDelete");
+								deleteClass.addClass("scrapInsert");
+							}
+						});
+					} else {
+						return false ;
+					}
+				} else {
+					var t = 	confirm("스크랩을 하시겠습니까?");
+					if(t){	
+						$.ajax({
+								type:"POST",
+								url:"/scrap.hang",
+								dataType:"text",
+								data:"postingCode=" + postingCode + "&checkScrap="+checkScrap,
+								success:function(text){
+									var resultText = trim(text);
+									var resultScrap = "<FONT color = 'red' size = '6'>스크랩(" + resultText +")</FONT>"
+									alert("성공");
+									$("input:hidden[name=checkScrap]").val("true");
+									deleteClass.html(resultScrap);
+									deleteClass.removeClass("scrapInsert");
+									deleteClass.addClass("scrapDelete");
+								}
+							});
+					} else {
+						return false ;
+					}
+				}
+			});
+			
+			$(".scrapInsert").click(function(){
+				var insertClass = $(this);
+				var postingCode = $("input:hidden[name=postingCode]").val();
+				var checkScrap = $("input:hidden[name=checkScrap]").val();
+				
+				if(insertClass.attr('class') === ('glyphicon glyphicon-tag myicon scrapInsert')){
+					var t = 	confirm("스크랩을 하시겠습니까?");
+					if(t){	
+						$.ajax({
+							type:"POST",
+							url:"/scrap.hang",
+							dataType:"text",
+							data:"postingCode=" + postingCode + "&checkScrap="+checkScrap,
+							success:function(text){
+								var resultText = trim(text);
+								var resultScrap = "<FONT color = 'red' size = '6'>스크랩(" + resultText +")</FONT>"
+								alert("성공");
+								$("input:hidden[name=checkScrap]").val("true");
+								insertClass.html(resultScrap);
+								insertClass.removeClass("scrapInsert");
+								insertClass.addClass("scrapDelete");
+							}
+						});
+					} else {
+						return false ;
+					}
+				} else {
+					var t = 	confirm("이미 스크랩이 되어있습니다.\n 해당 스크랩을 지우시겠습니까?");
+					if(t){	
+						$.ajax({
+								type:"POST",
+								url:"/scrap.hang",
+								dataType:"text",
+								data:"postingCode=" + postingCode + "&checkScrap="+checkScrap,
+								success:function(text){
+									var resultText = trim(text);
+									var resultScrap = "<FONT color = 'black' size = '6'>스크랩(" + resultText +")</FONT>"
+									alert("성공");
+									$("input:hidden[name=checkScrap]").val("false");
+									insertClass.html(resultScrap);
+									insertClass.removeClass("scrapDelete");
+									insertClass.addClass("scrapInsert");
+								}
+							});
+					} else {
+						return false ;
+					}
+				}
+			});
+		});
+		
+	</script>
+    <!-- 리뷰 작성 시작 -->
+        <div class="thumbnail" style = "width:75%;float:right;margin-right:4%;"><br>
+        	<div class = "select" style = "margin-top:10px" align = "center"><p>
+				<div class = "top" style ="width:930px;height:50px">
+				<input type="hidden" name="postingCode" value="<%= postingCode%>">
+				<input type="hidden" name="checkScrap" value="<%=checkScrap%>">
 					<span class = "glyphicon glyphicon-heart myicon like" id="like" style = "margin-right:auto;">
 						<font size = "6" color="black">좋아요(<%=cntLike %>)</font>
 					</span>
 					<span class = "glyphicon glyphicon-pencil myicon" >
 						<font size = "6"color="black">댓글(15)</font>
 					</span>
-					<span class = "glyphicon glyphicon-tag myicon" style = "margin-left:150px">
-						<font size = "6"color="black">스크랩(5)</font>
+					<%
+						if(checkScrap) {
+					%>
+					<span class = "glyphicon glyphicon-tag myicon scrapDelete"  style = "margin-left:150px">
+						<font size = "6"color="red">스크랩(<%= scrapList.size()%>)</font>
 					</span>
+					<%
+						}else{
+					%>
+					<span class = "glyphicon glyphicon-tag myicon scrapInsert"  style = "margin-left:150px">
+						<font size = "6"color="black">스크랩(<%= scrapList.size()%>)</font>
+					</span>
+					<%
+						}
+					%>
 					<br>		
 				</div>
         	</div>
-        </form>
 			<!-- 간격 -->
 			<hr>
 				<div class = "info" style = "width:94%;margin-left:3%;margin-top:10px;" align = "center">
@@ -191,7 +286,7 @@ $(function(){
 						<font size = "4" >쇼셜커머스</font>
 					</div>
 					<hr>
-					<div class = "" style = "width:100%;height:auto;" align = "left">
+					<div class = "like" style = "width:100%;height:auto;" align = "left">
 						<font size = "4" style = "margin-left:12px">이런분께 추천해 드려요!</font><br><Br>
 						<div class = "title" style = "height:auto;width:100%;">
 							<div class= "row" style="height:auto;">

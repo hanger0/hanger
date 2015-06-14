@@ -66,14 +66,14 @@ public class CartController extends BaseController {
 			cartDao.insertCart(cartMap);
 			message = "성공했습니다.";
 		} catch (DataIntegrityViolationException e){
-			message = "이미 장바구니에 담겨 있습니다.";
+			if(cartItemRecom != null){
+				cartDao.recomUpdate(cartMap);
+				message = "장바구니가 업데이트 되었습니다.";
+			} else {
+				message = "이미 장바구니에 담겨 있습니다.";
+			}
 		}
-		
-		if(cartItemRecom != null){
-			cartDao.recomUpdate(cartMap);
-			message = "장바구니가 업데이트 되었습니다.";
-		}
-		
+
 		req.setAttribute("message", message);
 		
 		return "order/CartMessage";

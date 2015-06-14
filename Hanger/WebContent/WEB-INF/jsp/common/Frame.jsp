@@ -24,7 +24,7 @@
 	}
 %>
 
-	<BODY style="margin:0px">
+	<BODY style="margin:0px;background-color:#EBEBEB;">
 		<div id="wrap">
 			<div id="header"> 
 				<jsp:include page ="Top.jsp"/>

@@ -15,5 +15,8 @@
 	<sqlMap resource="config/item/itemView.xml"/>
 	<sqlMap resource="config/posting/review/review.xml"/>
 	<sqlMap resource="config/posting/review/reviewLikeCheck.xml"/>
+	<sqlMap resource="config/posting/review/reviewList.xml" />
+	<sqlMap resource="config/scrap/scrap.xml" />
 	<sqlMap resource="config/reply/reply.xml"/>
+	<sqlMap resource="config/mileage/mileage.xml"/>
 </sqlMapConfig>

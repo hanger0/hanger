@@ -233,7 +233,7 @@ for(int i=0; i<2; i++)
 %>
                      <div class="col-md-6 rat">
                         <div class="thumbnail">
-                        <a href="s" data-toggle="modal" href="/DetailTip.hang" id="tipmodal">
+                        <a data-toggle="modal" href="/mainTip.hang" id="tipmodal">
                            <div class="image">
                               <img src="images/hommesun.jpg" class="hotimages" >
                            </div>

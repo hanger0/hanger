@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.mileage.dao.UserMileageDao;
+import com.hanger.mileage.vo.MileageVo;
 import com.hanger.order.dao.CartDao;
 import com.hanger.order.dao.OrderBuyDao;
 import com.hanger.order.vo.OrderVo;
@@ -25,7 +27,11 @@ public class OrderBuyController extends BaseController {
 	private OrderBuyDao orderBuyDao;
 	private UserSelectDao userSelectDao;
 	private CartDao cartDao;
+	private UserMileageDao userMileageDao;
 
+	public void setUserMileageDao(UserMileageDao userMileageDao) {
+		this.userMileageDao = userMileageDao;
+	}
 	public void setCartDao(CartDao cartDao) {
 		this.cartDao = cartDao;
 	}
@@ -40,7 +46,7 @@ public class OrderBuyController extends BaseController {
 	public String goOrder(HttpServletRequest req){
 		//
 		HttpSession session = req.getSession();
-		String userCode = (String)session.getAttribute("myUserCode");
+		String myUserCode = (String)session.getAttribute("myUserCode");
 		String itemCode = req.getParameter("itemCode");
 		String itemMarketPrice = req.getParameter("itemMarketPrice");
 		String itemPurchasePrice = req.getParameter("itemPurchasePrice");
@@ -125,7 +131,7 @@ public class OrderBuyController extends BaseController {
 
         	HashMap<String, String> map = new HashMap<String, String>();
         	map.put("itemCode", icode);
-        	map.put("userCode", userCode);
+        	map.put("userCode", myUserCode);
         	
         	String itemAmount = cartDao.selectAmount(map);
         	
@@ -137,12 +143,8 @@ public class OrderBuyController extends BaseController {
         	Hashtable table = new Hashtable();
         	
         	table.put("itemCode", itemCodeList.get(i));
-        	if(itemMarketPriceList != null && itemMarketPriceList.size() >0){
-        		table.put("itemMarketPrice", itemMarketPriceList.get(i));
-        	}
-        	if(itemPurchasePriceList != null && itemPurchasePriceList.size() > 0){
-        		table.put("itemPurchasePrice", itemPurchasePriceList.get(i));
-        	}
+    		table.put("itemMarketPrice", itemMarketPriceList.get(i));
+    		table.put("itemPurchasePrice", itemPurchasePriceList.get(i));
 			table.put("itemName", itemNameList.get(i));
 			table.put("itemPicPath", itemPicPathList.get(i));
 			table.put("itemPicSaveName", itemPicSaveNameList.get(i));
@@ -154,11 +156,30 @@ public class OrderBuyController extends BaseController {
 			cartList.add(table);
         }
     	
-    	UserVo user = userSelectDao.selectUser(userCode);
+    	UserVo user = userSelectDao.selectUser(myUserCode);
+    	
+    	HashMap<String, String> map = new HashMap<String, String>();
+    	map.put("myUserCode", myUserCode);
+    	
+    	ArrayList<MileageVo> mileageList = (ArrayList<MileageVo>)userMileageDao.selectUserMileage(map);
+    	int mileageAmount = 0;
+    	
+    	if(mileageList != null && mileageList.size() > 0){
+    		for(int i = 0; i < mileageList.size(); i++){
+    			MileageVo mileage = mileageList.get(i);
+    			String reason = mileage.getMileageReasonCode();
+    			int amount = Integer.parseInt(mileage.getMileageAmount());
+    			if(reason.equals("MR004")){
+    				mileageAmount -= amount;
+    			} else {
+    				mileageAmount += amount;
+    			}
+    		}
+    	}
     	
     	req.setAttribute("cartList", cartList);
     	req.setAttribute("user", user);
-		
+    	req.setAttribute("mileageAmount", mileageAmount + "");
 		req.setAttribute("mainUrl", root + "order/BuyPage.jsp");
 		
 		return moveUrl;
@@ -184,47 +205,124 @@ public class OrderBuyController extends BaseController {
 		String orderUsedMileage = req.getParameter("orderUsedMileage");
 		String orderState = req.getParameter("orderState");
 		
-		String itemCode = req.getParameter("itemCode");
-		String orderItemMarketPrice = req.getParameter("itemMarketPrice");
-		String orderItemSellPrice = req.getParameter("itemSellPrice");
-		String orderItemPurchasePrice = req.getParameter("itemPurchasePrice");
-		String discountReasonCode = req.getParameter("discountReasonCode");
-		String orderItemAmount = req.getParameter("orderItemAmount");
-		String orderItemRecom = req.getParameter("orderItemRecom");
+		String itemCodes = req.getParameter("itemCode");
+		String orderItemMarketPrices = req.getParameter("itemMarketPrice");
+		String orderItemSellPrices = req.getParameter("itemSellPrice");
+		String orderItemPurchasePrices = req.getParameter("itemPurchasePrice");
+		String discountReasonCodes = req.getParameter("discountReasonCode");
+		String orderItemRecoms = req.getParameter("orderItemRecom");
+		String orderItemAmounts = req.getParameter("orderItemAmount");
+		
+		ArrayList itemCodeList = new ArrayList();
+    	ArrayList itemMarketPriceList = new ArrayList();
+    	ArrayList itemPurchasePriceList = new ArrayList();
+    	ArrayList itemSellPriceList = new ArrayList();
+    	ArrayList cartItemRecomList = new ArrayList();
+    	ArrayList itemAmountList = new ArrayList();
+    	ArrayList discountReasonCodeList = new ArrayList();
+    	
+    	StringTokenizer st = new StringTokenizer(itemCodes, ",");
+    	if(st.countTokens() > 1){
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	            String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	            itemCodeList.add(temp);
+	        }
+	        st = new StringTokenizer(orderItemMarketPrices, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemMarketPriceList.add(temp);
+	        }
+	        st = new StringTokenizer(orderItemPurchasePrices, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemPurchasePriceList.add(temp);
+	        }
+	        st = new StringTokenizer(orderItemSellPrices, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemSellPriceList.add(temp);
+	        }
+	        st = new StringTokenizer(orderItemRecoms, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	cartItemRecomList.add(temp);
+	        }
+	        st = new StringTokenizer(orderItemAmounts, ",");
+	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
+	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        	itemAmountList.add(temp);
+	        }
+	        for(int i = 0; i < itemCodeList.size(); i++){
+	        	String itemCode = (String)itemCodeList.get(i);
+	        	String orderItemMarketPrice = (String)itemMarketPriceList.get(i);
+	        	String orderItemPurchasePrice = (String)itemPurchasePriceList.get(i);
+	        	String orderItemSellPrice = (String)itemSellPriceList.get(i);
+	        	String orderItemRecom = "";
+	        	if(cartItemRecomList != null && cartItemRecomList.size() > 0){
+	        		orderItemRecom = (String)cartItemRecomList.get(i);
+	        	}
+	        	String orderItemAmount = (String)itemAmountList.get(i);
+	        	String discountReasonCode = "";
+	        	if(discountReasonCodeList != null && discountReasonCodeList.size() > 0){
+	        		discountReasonCode = (String)discountReasonCodeList.get(i);
+	        	}
+		        OrderVo orderInfo = new OrderVo();
+		        orderInfo.setOrderCode(orderCode);
+		    	orderInfo.setItemCode(itemCode);
+		    	orderInfo.setOrderItemMarketPrice(orderItemMarketPrice);
+		    	orderInfo.setOrderItemSellPrice(orderItemSellPrice);
+		    	orderInfo.setOrderItemPurchasePrice(orderItemPurchasePrice);
+		    	orderInfo.setDiscountReasonCode(discountReasonCode);
+		    	orderInfo.setOrderItemAmount(orderItemAmount);
+		    	orderInfo.setOrderItemRecom(orderItemRecom);
+		    	
+		    	orderBuyDao.insertOrderInfo(orderInfo);
+		    	
+		    	HashMap<String, String> deleteCartMap = new HashMap<String, String>();
+				deleteCartMap.put("userCode", myUserCode);
+				deleteCartMap.put("itemCode", itemCode);
 
-		OrderVo order = new OrderVo();
-		order.setUserCode(myUserCode);
-		order.setOrderCode(orderCode);
-		order.setItemCode(itemCode);
-		order.setOrderName(orderName);
-		order.setOrderPhone(orderPhone);
-		order.setOrderAddr1(orderAddr1);
-		order.setOrderAddr2(orderAddr2);
-		order.setOrderPostCode1(orderPostCode1);
-		order.setOrderPostCode2(orderPostCode2);
-		order.setOrderMemo(orderMemo);
-		order.setOrderItemMarketPrice(orderItemMarketPrice);
-		order.setOrderItemSellPrice(orderItemSellPrice);
-		order.setOrderItemPurchasePrice(orderItemPurchasePrice);
-		order.setDiscountReasonCode(discountReasonCode);
-		order.setOrderItemAmount(orderItemAmount);
-		order.setOrderItemRecom(orderItemRecom);
-		order.setOrderUsedMileage(orderUsedMileage);
-		order.setOrderState(orderState);
-		order.setRegId(myUserId);
-		order.setRegIp(ip);
-		order.setUpdId(myUserId);
-		order.setUpdIp(ip);
-		
-		orderBuyDao.insertOrderInfo(order);
-		orderBuyDao.insertOrdering(order);
+				cartDao.deleteCart(deleteCartMap);
+	        }
+    	} else {
+        	OrderVo orderInfo = new OrderVo();
+        	orderInfo.setOrderCode(orderCode);
+        	orderInfo.setItemCode(itemCodes);
+        	orderInfo.setOrderItemMarketPrice(orderItemMarketPrices);
+        	orderInfo.setOrderItemSellPrice(orderItemSellPrices);
+        	orderInfo.setOrderItemPurchasePrice(orderItemPurchasePrices);
+        	orderInfo.setDiscountReasonCode(discountReasonCodes);
+        	orderInfo.setOrderItemAmount(orderItemAmounts);
+        	orderInfo.setOrderItemRecom(orderItemRecoms);
+        	
+        	orderBuyDao.insertOrderInfo(orderInfo);
+        	
+        	HashMap<String, String> deleteCartMap = new HashMap<String, String>();
+    		deleteCartMap.put("userCode", myUserCode);
+    		deleteCartMap.put("itemCode", itemCodes);
+    		
+    		cartDao.deleteCart(deleteCartMap);
+    	}
 
-		HashMap<String, String> deleteCartMap = new HashMap<String, String>();
-		deleteCartMap.put("userCode", myUserCode);
-		deleteCartMap.put("itemCode", itemCode);
+		OrderVo ordering = new OrderVo();
+		ordering.setUserCode(myUserCode);
+		ordering.setOrderCode(orderCode);
+		ordering.setOrderName(orderName);
+		ordering.setOrderPhone(orderPhone);
+		ordering.setOrderAddr1(orderAddr1);
+		ordering.setOrderAddr2(orderAddr2);
+		ordering.setOrderPostCode1(orderPostCode1);
+		ordering.setOrderPostCode2(orderPostCode2);
+		ordering.setOrderMemo(orderMemo);
+		ordering.setOrderUsedMileage(orderUsedMileage);
+		ordering.setOrderState(orderState);
+		ordering.setRegId(myUserId);
+		ordering.setRegIp(ip);
+		ordering.setUpdId(myUserId);
+		ordering.setUpdIp(ip);
 		
-		cartDao.deleteCart(deleteCartMap);
-		
+		orderBuyDao.insertOrdering(ordering);
+
 		req.setAttribute("mainUrl", mainUrl);
 		
 		return moveUrl;

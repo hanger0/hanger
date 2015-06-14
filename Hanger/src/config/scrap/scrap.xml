@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="scrap" type="com.hanger.scrap.vo.ScrapVo"/>
+	
+	<insert id="insertScrap" parameterClass="HashMap" >
+		INSERT INTO SCRAP(USER_CODE, POSTING_CODE, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
+		VALUES(#myUserCode#, #postingCode#, #myUserId#, sysdate(), #ip#, #myUserId#, sysdate(), #ip#)
+	</insert>
+	
+	<select id = "selectScrap" parameterClass = "HashMap" resultClass = "scrap">
+		SELECT
+			USER_CODE as userCode
+		FROM
+			SCRAP
+		WHERE
+			POSTING_CODE = #postingCode#
+	</select>
+	
+	<delete id="deleteScrap" parameterClass = "HashMap">
+			DELETE
+			FROM
+				scrap
+			WHERE
+				USER_CODE = #myUserCode# AND POSTING_CODE = #postingCode#
+	</delete>
+</sqlMap>

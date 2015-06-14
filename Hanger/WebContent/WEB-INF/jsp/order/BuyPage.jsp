@@ -3,6 +3,7 @@
 <%@ page import="java.util.*" %>
 <%
 	ArrayList cartList = (ArrayList)request.getAttribute("cartList");
+	String mileageAmount = (String)request.getAttribute("mileageAmount");
 	
 	UserVo user = (UserVo)request.getAttribute("user");
 	
@@ -11,12 +12,87 @@
 %>
 <script>
 $(function(){
-	var buyForm = $('#buyForm');
+	var buyForm = $('#form');
 	$("#buyBtn").click(function(){
 		if(!$(".checkbox").is(":checked")){
     		alert("상품을 한개 이상 골라 주세요.");
     		return false;
     	}
+		if($("input:text[name=userName]").val() == ""){
+    		alert("수령인의 이름을 입력해주세요.");
+    		return false;
+    	}
+		if($("input:text[name=userPhone]").val() == ""){
+    		alert("수령인의 전화번호를 입력해주세요.");
+    		return false;
+    	}
+		if($("input:text[name=zipCode1]").val() == ""){
+    		alert("수령인의 주소를 입력해주세요.");
+    		return false;
+    	}
+		if($("input:text[name=zipCode2]").val() == ""){
+			alert("수령인의 주소를 입력해주세요.");
+    		return false;
+    	}
+		if($("input:text[name=addr1]").val() == ""){
+			alert("수령인의 주소를 입력해주세요.");
+    		return false;
+    	}
+		if($("input:text[name=addr2]").val() == ""){
+			alert("수령인의 주소를 입력해주세요.");
+    		return false;
+    	}
+		if($("input:text[name=cardNum1]").val() == "" || $("input:text[name=cardNum1]").val().length <4 || !isNum($("input:text[name=cardNum1]").val())){
+    		alert("카드번호를 확인해 주세요.");
+    		return false;
+    	}
+		if($("input:text[name=cardNum2]").val() == "" || $("input:text[name=cardNum2]").val().length <4 || !isNum($("input:text[name=cardNum2]").val())){
+			alert("카드번호를 확인해 주세요.");
+    		return false;
+    	}
+		if($("input:text[name=cardNum3]").val() == "" || $("input:text[name=cardNum3]").val().length <4 || !isNum($("input:text[name=cardNum3]").val())){
+			alert("카드번호를 확인해 주세요.");
+    		return false;
+    	}
+		if($("input:text[name=cardNum4]").val() == "" || $("input:text[name=cardNum4]").val().length <4 || !isNum($("input:text[name=cardNum4]").val())){
+			alert("카드번호를 확인해 주세요.");
+    		return false;
+    	}
+		
+		var checkList = $(":checkbox[name='checkList']:checked");
+		
+		var itemMarketPrice = [];
+    	var itemPurchasePrice = [];
+    	var itemSellPrice = [];
+    	var cartItemRecom = [];
+   		var itemCode = [];
+   		var discountreasoncode = [];
+   		var itemAmount = [];
+   		
+   		checkList.each(function(index){
+	    	itemCode[index] = $(this).attr("itemCode");
+			itemMarketPrice[index] = $(this).attr("itemMarketPrice");
+	    	itemPurchasePrice[index] = $(this).attr("itemPurchasePrice");
+	    	itemSellPrice[index] = $(this).attr("itemSellPrice");
+	    	cartItemRecom[index] = $(this).attr("cartItemRecom");
+	    	discountreasoncode[index] = $(this).attr("discountreasoncode");
+	    	itemAmount[index] = $(this).attr("itemAmount");
+    	});
+	    var inputItemCode = $("input:hidden[name=itemCode]");
+	    var inputItemMarketPrice = $('input:hidden[name=itemMarketPrice]');
+    	var inputItemPurchasePrice = $('input:hidden[name=itemPurchasePrice]');
+    	var inputItemSellPrice = $('input:hidden[name=itemSellPrice]');
+    	var inputCartItemRecom = $('input:hidden[name=cartItemRecom]');
+    	var inputDiscountreasoncode = $('input:hidden[name=discountreasoncode]');
+    	var orderItemAmount = $('input:hidden[name=orderItemAmount]');
+	    
+		inputItemCode.val(itemCode);
+		inputItemMarketPrice.val(itemMarketPrice);
+		inputItemPurchasePrice.val(itemPurchasePrice);
+		inputItemSellPrice.val(itemSellPrice);
+		inputCartItemRecom.val(cartItemRecom);
+		inputDiscountreasoncode.val(discountreasoncode);
+		orderItemAmount.val(itemAmount);
 		
 		buyForm.submit();
 	});
@@ -43,6 +119,29 @@ $(function(){
 	$(".zipCode").click(function(){
 		window.open("/zipCode.hang", "zipSearchOpen", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=420, height=500");
 	});
+	$("#mileageUseBtn").click(function(){
+		var useMileage = $('input:text[name=usedMileage]').val();
+		var mileage = $("#mileage");
+		var sellPrice = $(".sellPrice");
+		var maxSellPrice = $("#maxSellPrice").attr("maxSellPrice");
+		var myMileage = $('input:hidden[name=myMileage]').val();
+		
+		if(parseInt(useMileage) > parseInt(myMileage)){
+			alert("보유한 마일리지를 확인해 주세요.");
+			return false;
+		}
+		if(parseInt(useMileage) > 5000){
+			alert("5000원 이하의 마일리지만 사용 가능합니다.");
+			return false;
+		}
+		if(parseInt(useMileage) > parseInt(maxSellPrice)){
+			alert("총 금액보다 많은 마일리지는 사용할 수 없습니다.");
+			return false;
+		}
+		
+		mileage.text(parseInt(useMileage)+"원");
+		sellPrice.text(parseInt(maxSellPrice)-parseInt(useMileage)+"원");
+	});
 });
 </script>
 <body style="background-color: #EBEBEB">
@@ -53,8 +152,9 @@ $(function(){
 	<input type="hidden" name="itemPurchasePrice" value=""/>
 	<input type="hidden" name="orderItemRecom" value=""/>
 	<input type="hidden" name="orderItemAmount" value=""/>
-	<input type="hidden" name="discountreasoncode" value="001"/>
+	<input type="hidden" name="discountreasoncode" value=""/>
 	<input type="hidden" name="orderState" value="입금대기중"/>
+	<input type="hidden" name="myMileage" value="<%= mileageAmount %>"/>
 	<div class="container">
 		<BR>
 		<div class="brand">
@@ -88,6 +188,8 @@ if(cartList != null) {
 		String itemPicPath = (String)table.get("itemPicPath");
 		String itemPicSaveName = (String)table.get("itemPicSaveName");
 		String itemName = (String)table.get("itemName");
+		String itemMarketPrice = (String)table.get("itemMarketPrice");
+		String itemPurchasePrice = (String)table.get("itemPurchasePrice");
 		int itemSellPrice = Integer.parseInt((String)table.get("itemSellPrice"));
 		int itemAmount = Integer.parseInt((String)table.get("itemAmount"));
 		String itemDetailInfo = (String)table.get("itemDetailInfo");
@@ -109,20 +211,20 @@ if(cartList != null) {
 		}
 %>
 					<tr align="center">
-						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px"
-							rowspan="2"><input class="checkbox" type="checkbox"></td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px" rowspan="2">
+							<input class="checkbox" name="checkList" type="checkbox" itemCode="<%= itemCode %>" itemMarketPrice="<%= itemMarketPrice %>" itemPurchasePrice="<%= itemPurchasePrice %>" itemSellPrice="<%= itemSellPrice %>" cartItemRecom="<%= cartItemRecom %>" itemAmount="<%= itemAmount %>">
+						</td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2" width="120px">
 							<img src="<%= itemPicPath %>/<%= itemPicSaveName %>" width="80px" height="80px" style="margin-left: -20px">
 						</td>
 						<td colspan="3" style="border-right: 1px solid gray;">
 							<font size="3"><b><%= itemName %></b></font>
 						</td>
-						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2"><%= itemSellPrice %>원</td>
-						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2">무료배송</td>
-						<td style="border-bottom: 2px solid gray;" rowspan="2"><font
-							size="3"><b><%= itemAmount %></b></font></td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;" rowspan="2"><%= itemSellPrice %>원</td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;" rowspan="2">무료배송</td>
+						<td style="border-bottom: 2px solid gray;" rowspan="2">
+							<font size="3"><b><%= itemAmount %></b></font>
+						</td>
 					</tr>
 					<tr>
 						<td style="border-bottom: 2px solid gray;" colspan="3"><font
@@ -135,27 +237,56 @@ if(cartList != null) {
 				</table>
 			</div>
 			<!--띄어쓰기-->
-			<br>
-			<div class="card-table" align="center">
-				<table style="width: 900px; table-layout: fixed">
-					<tr
-						style="height: 30px; background-color: #EAEAEA; border-top: 3px solid gray;"
-						align="center">
-						<td style="border-right: 1px solid white; text-align: center"><font
-							size="3"><b>총 상품 금액</b></font></td>
-						<td style="border-right: 1px solid white; text-align: center"><font
-							size="3"><b>배송비</b></font></td>
-						<td><font size="3"><b>결제 예정금액</b></font></td>
-					</tr>
-
-					<tr style="height: 60px; background-color: #F6F6F6" align="center">
-						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center"><%= maxSellPrice %>원</td>
-						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
-						<td style="border-bottom: 3px solid gray;"><%= sellPrice %>원</td>
+			<p><br>
+			<div class="poster" style="margin-left: 100px">
+				<p>
+					<font size="2"><b>· 포인트는 최소 0P~최대 5000P까지 사용가능 또는 구매금액의
+							20%까지 사용 가능합니다. (두 가지 방법 중 택1)</b></font>
+				<p>
+					<font size="2"><b>· 배송비는 포인트 사용 불가능 합니다.</b></font>
+				<p>
+			</div>
+			<div class="card-infotable" style="margin-left: 100px">
+				<table style="width: 900px; height: 40px">
+					<tr>
+						<td style="background-color: #EAEAEA; width: 140px; border-top: 3px solid gray; border-bottom: 1px solid gray" align="center">
+							<font size="3"><b>마일리지 사용</b></font>
+						</td>
+						<td style="border-top: 3px solid gray; border-bottom: 1px solid gray; padding-left: 10px">
+							<input name="usedMileage" type="text" value="0">&nbsp; 
+							<input id="mileageUseBtn" type="button" class="btn btn-default" value="사용하기">
+							<b> (사용가능포인트 <%= mileageAmount %>P) (보유포인트 <%= mileageAmount %>P)</b>
+						</td>
 					</tr>
 				</table>
 			</div>
 
+			<p>
+			<p>
+				<br>
+			<div class="poster" align="center">
+				<table style="width: 900px; table-layout: fixed">
+					<tr style="height: 30px; background-color: #EAEAEA; border-top: 3px solid gray;" align="center">
+						<td style="border-right: 1px solid white; text-align: center">
+							<font size="3"><b>총 상품 금액</b></font>
+						</td>
+						<td style="border-right: 1px solid white; text-align: center">
+							<font size="3"><b>마일리지</b></font>
+						</td>
+						<td style="border-right: 1px solid white; text-align: center">
+							<font size="3"><b>배송비</b></font>
+						</td>
+						<td><font size="3"><b>결제 예정금액</b></font></td>
+					</tr>
+
+					<tr style="height: 60px; background-color: #F6F6F6" align="center">
+						<td id="maxSellPrice" style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center" maxSellPrice="<%= maxSellPrice %>"><%= maxSellPrice %>원</td>
+						<td id="mileage" name="orderUsedMileage" style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
+						<td style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
+						<td class="sellPrice" style="border-bottom: 3px solid gray;"><%= sellPrice %>원</td>
+					</tr>
+				</table>
+			</div>
 			<!--띄어쓰기-->
 			<p><br><p><br>
 			<div class="product-info" style="margin-left: 100px">
@@ -180,7 +311,6 @@ if(cartList != null) {
 					</tr>
 				</table>
 			</div>
-
 			<!--띄어쓰기-->
 			<p><br><p><br>
 			<div class="send-info" style="margin-left: 100px">
@@ -201,10 +331,12 @@ if(cartList != null) {
 						</td>
 					</tr>
 					<tr>
-						<td style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray"><font
-							size="3"><b>이름</b></font></td>
+						<td style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray">
+							<font size="3"><b>이름</b></font>
+						</td>
 						<td style="padding-left: 20px; border-bottom: 1px solid gray">
-						<input type="text" name="userName" value="<%= user.getUserName() %>"></td>
+							<input type="text" name="userName" value="<%= user.getUserName() %>">
+						</td>
 					</tr>
 					<tr>
 						<td style="padding-left: 20px; background-color: #EAEAEA; border-bottom: 1px solid gray">
@@ -262,73 +394,12 @@ if(cartList != null) {
 					</b></font>
 			</div>
 			<!--띄어쓰기-->
-			<p><br><p><br>
-			<div class="card-info" style="margin-left: 100px">
-				<font size="4"><b>03. 결제 정보</b></font>
-			</div>
-			<p>
-			<div class="poster" style="margin-left: 100px">
-				<p>
-					<font size="2"><b>· 포인트는 최소 0P~최대 5000P까지 사용가능 또는 구매금액의
-							20%까지 사용 가능합니다. (두 가지 방법 중 택1)</b></font>
-				<p>
-					<font size="2"><b>· 배송비는 포인트 사용 불가능 합니다.</b></font>
-				<p>
-					<font size="2"><b>· 할인쿠폰 사용시 할인쿠폰 금액 이하 상품 적용 불가 / 각 쿠폰의
-							최소 결제금액 확인 후 사용 부탁드립니다.</b></font>
-				<p>
-			</div>
-			<div class="card-infotable" style="margin-left: 100px">
-				<table style="width: 900px; height: 40px">
-					<tr>
-						<td style="background-color: #EAEAEA; width: 140px; border-top: 3px solid gray; border-bottom: 1px solid gray" align="center">
-							<font size="3"><b>마일리지 사용</b></font>
-						</td>
-						<td style="border-top: 3px solid gray; border-bottom: 1px solid gray; padding-left: 10px">
-							<input name="orderUsedMileage" type="text" value="0">&nbsp; 
-							<input type="button" class="btn btn-default" value="사용하기">
-							<b> (사용가능포인트 0P) (보유포인트 0P)</b>
-						</td>
-					</tr>
-				</table>
-			</div>
-
-			<p>
-			<p>
-				<br>
-			<div class="poster" align="center">
-				<table style="width: 900px; table-layout: fixed">
-					<tr
-						style="height: 30px; background-color: #EAEAEA; border-top: 3px solid gray;"
-						align="center">
-						<td style="border-right: 1px solid white; text-align: center"><font
-							size="3"><b>총 상품 금액</b></font></td>
-						<td style="border-right: 1px solid white; text-align: center"><font
-							size="3"><b>마일리지</b></font></td>
-						<td style="border-right: 1px solid white; text-align: center"><font
-							size="3"><b>배송비</b></font></td>
-						<td><font size="3"><b>결제 예정금액</b></font></td>
-					</tr>
-
-					<tr style="height: 60px; background-color: #F6F6F6" align="center">
-						<td
-							style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
-						<td
-							style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
-						<td
-							style="border-right: 1px solid white; border-bottom: 3px solid gray; text-align: center">0원</td>
-						<td style="border-bottom: 3px solid gray;">0원</td>
-					</tr>
-				</table>
-			</div>
-
-			<!--띄어쓰기-->
 			<p>
 				<br>
 			<p>
 				<br>
 			<div class="card-infomation" style="margin-left: 100px">
-				<font size="4"><b>04. 카드 정보 입력</b></font>
+				<font size="4"><b>03. 카드 정보 입력</b></font>
 			</div>
 			<p>
 			<div class="poster" style="margin-left: 100px">
@@ -360,23 +431,23 @@ if(cartList != null) {
 						</td>
 					</tr>
 					<tr>
-						<td
-							style="background-color: #EAEAEA; width: 140px; border-bottom: 1px solid gray"
-							align="center"><font size="3"><b>카드번호</b></font></td>
+						<td style="background-color: #EAEAEA; width: 140px; border-bottom: 1px solid gray" align="center">
+							<font size="3"><b>카드번호</b></font>
+						</td>
 						<td style="border-bottom: 1px solid gray; padding-left: 10px">
-							<input type="text" style="width: 100px"> - <input
-							type="text" style="width: 100px"> - <input type="text"
-							style="width: 100px"> - <input type="text"
-							style="width: 100px">
+							<input name="cardNum1" type="text" style="width: 100px" maxlength="4"> - 
+							<input name="cardNum2" type="text" style="width: 100px" maxlength="4"> - 
+							<input name="cardNum3" type="text" style="width: 100px" maxlength="4"> - 
+							<input name="cardNum4" type="text" style="width: 100px" maxlength="4">
 						</td>
 					</tr>
 				</table>
 			</div>
 
 			<!--띄어쓰기-->
-			<p>
-				<br> <br>
+			<p><br><br>
 			<div class="buy-button" align="center">
+				<span class="sellPrice">총 결제금액 : <%= sellPrice %>원</span>
 				<input type="button" class="btn btn-default" id="buyBtn" value="결제하기"
 					style="width: 220px; height: 80px">
 			</div>

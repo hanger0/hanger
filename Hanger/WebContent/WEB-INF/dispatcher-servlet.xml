@@ -104,6 +104,7 @@
 		<property name="orderBuyDao" ref="orderBuyDao"></property>
 		<property name="userSelectDao" ref="userSelectDao"></property>
 		<property name="cartDao" ref="cartDao"></property>
+		<property name="userMileageDao" ref="userMileageDao"></property>
 	</bean>
 	<bean id="cartController" class="com.hanger.order.controller.CartController">
 		<property name="cartDao" ref="cartDao"></property>
@@ -118,7 +119,9 @@
 		<property name="orderDecideDao" ref="orderDecideDao"></property>
 	</bean>
 	
-	<bean id = "mainReviewController" class = "com.hanger.posting.review.controller.MainReviewController" />
+	<bean id = "mainReviewController" class = "com.hanger.posting.review.controller.MainReviewController" >
+		<property name = "scrapDao" ref = "scrapDao"></property>
+	</bean>
 	
 	<!-- Item 요청 url과 Controller 매핑 -->
 	<bean id="itemSearchController" class ="com.hanger.item.controller.ItemSearchController">
@@ -129,9 +132,17 @@
 		<property name="itemViewDao" ref="itemViewDao"></property>
 	</bean>
 	
-	<!-- Posting 요청 url과 Controller 매핑 -->
+	<!-- review 요청 url과 Controller 매핑 -->
 	<bean id="reviewLikeController" class ="com.hanger.posting.review.controller.ReviewLikeController">
 		<property name="reviewLikeCheckDao" ref="reviewLikeCheckDao"></property>
+	</bean>
+	<bean id = "reviewController" class = "com.hanger.posting.review.controller.ReviewController">
+		<property name="reviewListDao" ref = "reviewListDao"></property>
+	</bean>
+	
+	<!-- Scrap 요청 url과 Controller 매핑 -->
+	<bean id = "scrapController" class = "com.hanger.scrap.controller.ScrapController">
+		<property name = "scrapDao" ref = "scrapDao"></property>
 	</bean>
 	
 	<!-- Reply Controller 매핑 -->
@@ -141,6 +152,11 @@
 	</bean>
 	<bean id="replySelectController" class ="com.hanger.reply.controller.ReplySelectController">
 		<property name="replySelectDao" ref="replySelectDao"></property>
+	</bean>
+	
+	<!-- Mileage Controller 매핑 -->
+	<bean id="userMileageController" class ="com.hanger.mileage.controller.UserMileageController">
+		<property name="userMileageDao" ref="userMileageDao"></property>
 	</bean>
 	
 	<!-- ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ -->
@@ -221,9 +237,17 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 	
-	<!-- Posting Dao beans -->
+	<!-- review Dao beans -->
 	<bean id="reviewLikeCheckDao" class="com.hanger.posting.review.dao.ReviewLikeCheckDao">
 		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id = "reviewListDao" class = "com.hanger.posting.review.dao.ReviewListDao">
+		<constructor-arg ref = "sqlMapClientTemplate" />
+	</bean>
+	
+	<!-- Scrap Dao Beans -->
+	<bean id = "scrapDao" class = "com.hanger.scrap.dao.ScrapDao">
+		<constructor-arg ref = "sqlMapClientTemplate" />
 	</bean>
 	
 	<!-- Reply Dao beans -->
@@ -234,6 +258,14 @@
 		<constructor-arg ref="sqlMapClientTemplate"/>
 	</bean>
 
+	<!-- Mileage Dao beans -->
+	<bean id="userMileageDao" class="com.hanger.mileage.dao.UserMileageDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	<bean id="useMileageDao" class="com.hanger.mileage.dao.UseMileageDao">
+		<constructor-arg ref="sqlMapClientTemplate"/>
+	</bean>
+	
 	<!-- ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ -->
 
 	<!-- 컨트롤러의 처리 결과를 보여줄 뷰를 선택하는 방식 -->
