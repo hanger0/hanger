@@ -42,6 +42,7 @@ public class UserOrderPageController extends BaseController {
 		ArrayList<OrderVo> orderList = (ArrayList<OrderVo>)orderInfoDao.selectMyOrder(map);
 		
 		req.setAttribute("user", user);
+		req.setAttribute("orderList", orderList);
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/OrderPage.jsp");
 		

@@ -27,7 +27,10 @@ public class OrderVo {
 	private String updId;
 	private String updDate;
 	private String updIp;
-	
+	private String itemPicPath;
+	private String itemPicSaveName;
+	private String itemName;
+	private String itemDetailInfo;
 	public String getOrderInfoCode() {
 		return orderInfoCode;
 	}
@@ -184,4 +187,29 @@ public class OrderVo {
 	public void setUpdIp(String updIp) {
 		this.updIp = updIp;
 	}
+	public String getItemPicPath() {
+		return itemPicPath;
+	}
+	public void setItemPicPath(String itemPicPath) {
+		this.itemPicPath = itemPicPath;
+	}
+	public String getItemPicSaveName() {
+		return itemPicSaveName;
+	}
+	public void setItemPicSaveName(String itemPicSaveName) {
+		this.itemPicSaveName = itemPicSaveName;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public String getItemDetailInfo() {
+		return itemDetailInfo;
+	}
+	public void setItemDetailInfo(String itemDetailInfo) {
+		this.itemDetailInfo = itemDetailInfo;
+	}
+	
 }
