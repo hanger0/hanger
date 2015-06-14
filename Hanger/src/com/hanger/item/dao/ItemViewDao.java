@@ -18,4 +18,10 @@ public class ItemViewDao {
 	public ArrayList<ItemViewVo> getItemView(HashMap<String, String> itemViewMap) {
 		return (ArrayList<ItemViewVo>) smct.queryForList("getItemView", itemViewMap);
 	}
+	public ArrayList<ItemViewVo> getReviewListOfFollwing(HashMap<String, String> itemViewMap) {
+		return (ArrayList<ItemViewVo>) smct.queryForList("getReviewListOfFollwing", itemViewMap);
+	}
+	public ArrayList<ItemViewVo> getReviewList(HashMap<String, String> itemViewMap) {
+		return (ArrayList<ItemViewVo>) smct.queryForList("getReviewList", itemViewMap);
+	}
 }

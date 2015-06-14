@@ -1,8 +1,12 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 <%@ page import="java.util.*" %>
+<%@ page import="java.net.URLEncoder" %>
 <%@ page import="com.hanger.item.vo.ItemViewVo" %>
+<%@ page import="com.hanger.item.vo.ReviewListVo" %>
 <%
 	ArrayList itemViewList = (ArrayList)request.getAttribute("itemViewList");
+	ArrayList reviewListOfFollwing = (ArrayList)request.getAttribute("reviewListOfFollwing");
+	ArrayList reviewList = (ArrayList)request.getAttribute("reviewList");
 	
 	int listSize = itemViewList.size();
 	
@@ -15,7 +19,10 @@
 	String itemIngredient = ((ItemViewVo)itemViewList.get(0)).getItemIngredient();
 	String itemHowToUse = ((ItemViewVo)itemViewList.get(0)).getItemHowToUse();
 	String brandName = ((ItemViewVo)itemViewList.get(0)).getBrandName();
-	
+	String itemTotalInfo = ((ItemViewVo)itemViewList.get(0)).getItemTotalInfo();
+	System.out.println("아이템 뷰.jsp 아이템 토탈 인포 : "+itemTotalInfo);
+	String picName=URLEncoder.encode("라라 셀룰라이트 설명.jpg","euc-kr");
+	System.out.println("아이템 뷰.jsp 아이템 토탈 인포 : "+itemTotalInfo);
 	String[] marketPrice=new String[listSize];
 	String[] sellPrice=new String[listSize];
 	String[] purchasePrice=new String[listSize];
@@ -118,8 +125,7 @@
 	   $('#totalPrice1').html("총 상품 금액 :<font size = '5' ><font color = 'red'>"+totalPrice*amount+"</font></font> 원");	   
    }
 </Script>
-    <body class="ourBody" style = "background-color:#EBEBEB">
-    
+<body class="ourBody" style = "background-color:#EBEBEB">    
         <div class="container">
           <BR><BR><BR>
           <FORM name="cartForm" id="cartForm" action="/cart.hang" method="post">          	
@@ -224,7 +230,7 @@
       })
    </script>
 
-   <!-- 상품 정보 문서화 시작 -->
+<!-- 상품 정보 문서화 시작 -->
    <div class="thumbnail" style = "width:100%;height:300px;">
    <div class = "product-munsu" style = "width:100%;height:300px;"><BR>
       <div class = "title" style = "margin-left:22px;"><font size = "4"><B>상품 정보</B></font></div>
@@ -244,73 +250,124 @@
           <div role="tabpanel" class="tab-pane" id="profile"><%=itemHowToUse %></div>
           <div role="tabpanel" class="tab-pane" id="messages"><%=itemIngredient %></div>
           <div role="tabpanel" class="tab-pane" id="settings">빠름빠름빠름</div>
-        </div>    
-      
+        </div>      
    </div>
    </div>
    </div>
-   <!-- 상품 정보 문서화 끝 -->
+<!-- 상품 정보 문서화 끝 -->
    
    <BR>
    <BR>
-   
-   <!-- 팔로우 리뷰 작성 시작 -->
+<!-- 상세정보 시작-->
    <div class="thumbnail" style = "background-color:white;width:100%;"><BR>
-       <div class = "title" style = "margin-left:22px;"><font size = "4"><B>상품 이미지(상세)</B></font></div>
-          <div class="field description-wrap">
-             <div class = "etc" align = "center">
-              <img src = "/assets/images/1.jpg" />
-              </div>
-            </div>
-          </div>
+       <div class = "title" style = "margin-left:22px;">
+       		<font size = "4"><B>상품 이미지(상세)</B></font>
+       </div>
+       <div class="field description-wrap">
+          <div class = "etc" align = "center">
+              <%=itemTotalInfo%>
+           </div>
+        </div>
+    </div>
        
-    <!-- 팔로우 리뷰 작성 끝 -->
-    
+<!-- 상세 정보 끝 -->
     <BR>
-    <BR>
-    
-    <!-- 리뷰 작성 시작 -->
-        <div class="thumbnail" style = "background-color:white;width:100%;"><BR>
-           <div class = "title" style = "margin-left:22px;"><font size = "4"><B>팔로우 리뷰</B></font>
-           </div><BR>
+    <BR>    
+<!-- 팔로잉 리뷰 리스트 시작 -->
+<%
+    if(reviewListOfFollwing!=null&&reviewListOfFollwing.size()>0){
+%>    	
+	<div class="thumbnail" style = "background-color:white;width:100%;"><BR>
+		<div class = "title" style = "margin-left:22px;">
+			<font size = "4"><B>팔로우 리뷰</B></font>
+		</div>
+		<BR>
  <%
-       for(int i = 0 ; i < 2 ; i++) {
+ 		for(int y=0; y<reviewListOfFollwing.size(); y++){
+ 			String postingCode1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getPostingCode();
+ 			String reviewTitle1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getReviewTitle();
+ 			String reviewScore1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getReviewScore();
+ 			
+ 			String postingLikeCnt1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getPostingLikeCnt();
+ 			String replyCnt1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getReplyCnt(); 			
+ 			String scrapCnt1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getScrapCnt();
+ 			
+ 			String userName1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getUserName();
+ 			String userPicPath1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getUserPicPath();
+ 			String userPicSaveName1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getUserPicSaveName();
+ 			String userSkinTone1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getUserSkinTone();
+ 			String userType1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getUserType();
+ 			String date1 = ((ReviewListVo)reviewListOfFollwing.get(y)).getDate();
  %>      
-       <div class = "review" style = "background-color:white;width:100%;height:100px;">
-         <div class = "profile" style = "width:100px;height:100px;float:left;margin-left:2%">
-            <img src = "/assets/images/song.jpg" style = "width:100px;height:100px;"/></div>
-         <div class = "name" style = "width:400px;height:30px;float:left;margin-left:20px;">제목 : 이 상품 너무 좋아요
-         (<b>dofwk2@***** / 2015-05-29</b>)</div>
-         <br>
-         <BR>
-         <div class = "name" style = "width:700px;height:60px;float:left;margin-left:20px;">내용 : </div>
-      </div>
-      <hr style = "width:100%;">
+		<div class = "review" style = "background-color:white;width:100%;height:100px;">
+			<div class = "profile" style = "width:100px;height:100px;float:left;margin-left:2%">
+				<img src = "/assets/images/song.jpg" style = "width:100px;height:100px;"/>
+			</div>
+			<div class = "name" style = "width:400px;height:30px;float:left;margin-left:20px;">
+		  	제목 : <%=reviewTitle1 %>(<b>dofwk2@***** / 2015-05-29</b>)
+			</div>
+		  <BR>
+		  <BR>
+			<div class = "name" style = "width:700px;height:60px;float:left;margin-left:20px;">
+		   	내용 : 
+			</div>
+		</div>
+		<hr style = "width:100%;">
 <%
        }
 %>
-    </div>
-    <!--  리뷰 작성 끝 -->
-    
-    <BR>
-    
-    <!--  리뷰 작성 시작 -->
+	</div>
+<%
+       }
+%>
+<!-- 팔로잉 리뷰 리스트 끝 -->
+    <BR>    
+<!--  리뷰 리스트 시작 --> 
     <div class="thumbnail" style = "background-color:white;width:100%;height:100%;"><BR>
-        <div class = "title" style = "margin-left:22px;"><font size = "4"><B>리뷰</B></font></div><BR>
+        <div class = "title" style = "margin-left:22px;">
+        	<font size = "4"><B>리뷰</B></font>
+        </div>
+        <BR>
 <%
-       for(int i = 0 ; i < 5 ; i++) {
+    if(reviewList!=null&&reviewList.size()>0){
+	for(int m=0; m<reviewList.size(); m++){
+		String postingCode2 = ((ReviewListVo)reviewList.get(m)).getPostingCode();
+		String reviewTitle2 = ((ReviewListVo)reviewList.get(m)).getReviewTitle();
+		String reviewScore2 = ((ReviewListVo)reviewList.get(m)).getReviewScore();
+		
+		String postingLikeCnt2 = ((ReviewListVo)reviewList.get(m)).getPostingLikeCnt();
+		String replyCnt2 = ((ReviewListVo)reviewList.get(m)).getReplyCnt(); 			
+		String scrapCnt2 = ((ReviewListVo)reviewList.get(m)).getScrapCnt();
+		
+		String userName2 = ((ReviewListVo)reviewList.get(m)).getUserName();
+		String userPicPath2 = ((ReviewListVo)reviewList.get(m)).getUserPicPath();
+		String userPicSaveName2 = ((ReviewListVo)reviewList.get(m)).getUserPicSaveName();
+		String userSkinTone2 = ((ReviewListVo)reviewList.get(m)).getUserSkinTone();
+		String userType2 = ((ReviewListVo)reviewList.get(m)).getUserType();
+		String date2 = ((ReviewListVo)reviewList.get(m)).getDate();
  %>      
-       <div class = "review" style = "width:100%;">
-         <div class = "name" style = "width:400px;height:30px;float:left;margin-left:20px;">제목 : 이 상품 너무 좋아요
-         (<b>dofwk2@***** / 2015-05-29</b>)</div>
-         <br>
-         <BR>
-         <div class = "name" style = "width:650px;height:60px;float:left;margin-left:20px;">내용 : </div>
-      </div>
-      <hr style = "width:100%;">
+		<div class = "review" style = "width:100%;">
+			<div class = "name" style = "width:400px;height:30px;float:left;margin-left:20px;">
+				제목 : 이 상품 너무 좋아요(<b>dofwk2@***** / 2015-05-29</b>)
+			</div>
+			<BR>
+			<BR>
+			<div class = "name" style = "width:650px;height:60px;float:left;margin-left:20px;">
+				내용 : 
+			</div>
+		</div>
+		<hr style = "width:100%;">
 <%
        }
+    }
+    else
+    {
 %>
-    </div>
-</div>
-    </body>
+		<center>아직 댓글이 없습니다.</center>
+<%    
+    }
+%>
+    	</div>
+	</div>
+<!--  리뷰 리스트 끝 -->
+</body>

@@ -5,13 +5,12 @@
 	<select id="getItemView" resultClass="itemView" parameterClass="HashMap">
 		SELECT
 			item.ITEM_CODE AS itemCode, item.ITEM_GROUP_CODE AS itemGroupCode,
-			item.ITEM_NAME AS itemName, item.ITEM_SIZE AS itemSize, item.ITEM_SIZE_YN AS
-			itemSizeYn,
+			item.ITEM_NAME AS itemName, item.ITEM_SIZE AS itemSize, item.ITEM_SIZE_YN AS itemSizeYn,
 			stock.STOCK_MARKET_PRICE AS itemMarketPrice, stock.STOCK_SELL_PRICE AS itemSellPrice, stock.STOCK_PURCHASE_PRICE AS itemPurchasePrice,
 			item.ITEM_PIC_PATH AS itemPicPath, item.ITEM_PIC_SAVENAME AS
 			itemPicSavename, item.ITEM_SCORE AS itemScore,
 			item.ITEM_SUMMARY_INFO AS itemSummaryInfo, item.ITEM_DETAIL_INFO AS itemDetailInfo,
-			item.ITEM_INGREDIENT AS itemIngredient,
+			item.ITEM_TOTAL_INFO AS itemTotalInfo, item.ITEM_INGREDIENT AS itemIngredient,
 			item.ITEM_HOW_TO_USE AS itemHowToUse, item.ITEM_SELL_MAXNUM AS itemSellMaxnum,
 			stock.STOCK_AMOUNT AS itemStockAmount,
 			item.ITEM_STATUS AS itemStatus, brand.BRAND_NAME AS brandName,
@@ -20,7 +19,62 @@
 			ITEM item, BRAND brand, ITEM_STOCK stock
 		WHERE
 			item.BRAND_CODE = brand.BRAND_CODE AND item.ITEM_CODE = stock.ITEM_CODE
+			AND stock.STOCK_USE_YN = 'Y' 
 			AND item.ITEM_GROUP_CODE=#itemGroupCode#
+	</select>
+	
+	<!-- 리뷰 리스트 -->
+	<typeAlias alias="reviewList" type="com.hanger.item.vo.ReviewListVo" />
+	<select id="getReviewListOfFollwing" resultClass="reviewList" parameterClass="HashMap">
+		SELECT review1.POSTING_CODE AS postingCode, review1.ITEM_GROUP_CODE AS itemGroupCode,
+		review1.REVIEW_SCORE AS reviewScore, review1.REVIEW_TITLE AS reviewTitle, 
+		review1.REG_DATE AS date, user.USER_NAME AS userName, user.USER_PIC_PATH AS userPicPath, 
+		user.USER_PIC_SAVE_NAME AS userPicSaveName, user.USER_SKINTONE AS userSkinTone, 
+		feature2.FEATURE2_NAME AS userType,	COUNT(reply.USER_CODE) AS replyCnt, 
+		COUNT(postingLike.USER_CODE) AS postingLikeCnt, COUNT(scrap.USER_CODE) AS scrapCnt
+		FROM REVIEW review1 left join (SELECT POSTING_CODE, USER_CODE FROM REPLY WHERE
+		         REPLY_USE_YN='Y') reply on review1.POSTING_CODE=reply.POSTING_CODE,
+		         REVIEW review2 left join POSTING_LIKE postingLike on review2.POSTING_CODE = postingLike.POSTING_CODE,
+		         REVIEW review3 left join SCRAP scrap on review3.POSTING_CODE = scrap.POSTING_CODE,
+		         USER user, FEATURE2 feature2, RELATION relation
+		where review1.REVIEW_USE_YN='Y' AND review1.USER_CODE = user.USER_CODE
+		AND user.USER_SKINTYPE=feature2.FEATURE2_CODE AND review1.ITEM_GROUP_CODE = #itemGroupCode#
+		AND relation.RELATION_FOLLOWING=review1.USER_CODE
+		AND relation.RELATION_FOLLOWER=#userCode#
+		group by review1.POSTING_CODE, review1.ITEM_GROUP_CODE,
+		review1.REVIEW_SCORE, review1.REVIEW_TITLE, review1.REG_DATE, 
+		user.USER_NAME, user.USER_PIC_PATH, user.USER_PIC_SAVE_NAME, 
+		user.USER_SKINTONE, feature2.FEATURE2_NAME;
+	</select>	
+	<select id="getReviewList" resultClass="reviewList" parameterClass="HashMap">
+		SELECT review1.POSTING_CODE AS postingCode, review1.ITEM_GROUP_CODE AS itemGroupCode,
+		review1.REVIEW_SCORE AS reviewScore, review1.REVIEW_TITLE AS reviewTitle, 
+		review1.REG_DATE AS date, user.USER_NAME AS userName, user.USER_PIC_PATH AS userPicPath, 
+		user.USER_PIC_SAVE_NAME AS userPicSaveName, user.USER_SKINTONE AS userSkinTone, 
+		feature2.FEATURE2_NAME AS userType,	COUNT(reply.USER_CODE) AS replyCnt, 
+		COUNT(postingLike.USER_CODE) AS postingLikeCnt, COUNT(scrap.USER_CODE) AS scrapCnt
+		FROM REVIEW review1 left join (SELECT POSTING_CODE, USER_CODE FROM REPLY WHERE
+		         REPLY_USE_YN='Y') reply on review1.POSTING_CODE=reply.POSTING_CODE,
+		         REVIEW review2 left join POSTING_LIKE postingLike on review2.POSTING_CODE = postingLike.POSTING_CODE,
+		         REVIEW review3 left join SCRAP scrap on review3.POSTING_CODE = scrap.POSTING_CODE,
+		         USER user, FEATURE2 feature2
+		 <dynamic>
+			<isNotEmpty property="userCode">        
+		   		,RELATION relation
+		   	</isNotEmpty>
+		</dynamic>
+		where review1.REVIEW_USE_YN='Y' AND review1.USER_CODE = user.USER_CODE
+		AND user.USER_SKINTYPE=feature2.FEATURE2_CODE AND review1.ITEM_GROUP_CODE = #itemGroupCode#
+		<dynamic>
+			<isNotEmpty property="userCode">
+				AND relation.RELATION_FOLLOWING=review1.USER_CODE 
+				AND NOT relation.RELATION_FOLLOWER = #userCode#
+			</isNotEmpty>
+		</dynamic>
+		group by review1.POSTING_CODE, review1.ITEM_GROUP_CODE,
+		review1.REVIEW_SCORE, review1.REVIEW_TITLE, review1.REG_DATE,
+		user.USER_NAME, user.USER_PIC_PATH, user.USER_PIC_SAVE_NAME,
+		user.USER_SKINTONE, feature2.FEATURE2_NAME;
 	</select>
 </sqlMap>
 

@@ -1,5 +1,8 @@
 package com.hanger.user.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.order.dao.OrderInfoDao;
+import com.hanger.order.vo.OrderVo;
 import com.hanger.user.dao.UserSelectDao;
 import com.hanger.user.vo.UserVo;
 
@@ -28,9 +32,14 @@ public class UserOrderPageController extends BaseController {
 	public String userTipPage(HttpServletRequest req){
 		//
 		HttpSession session = req.getSession();
-		String userCode = (String)session.getAttribute("myUserCode");
+		String myUserCode = (String)session.getAttribute("myUserCode");
 		
-		UserVo user = userSelectDao.selectUser(userCode);
+		UserVo user = userSelectDao.selectUser(myUserCode);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
+		
+		ArrayList<OrderVo> orderList = (ArrayList<OrderVo>)orderInfoDao.selectMyOrder(map);
 		
 		req.setAttribute("user", user);
 		req.setAttribute("mainUrl", myPageUrl);

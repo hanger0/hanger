@@ -21,6 +21,13 @@ public class ItemViewVo {
 	String brandName;
 	String stockCode;
 	String itemPurchasePrice;
+	String itemTotalInfo;
+	public String getItemTotalInfo() {
+		return itemTotalInfo;
+	}
+	public void setItemTotalInfo(String itemTotalInfo) {
+		this.itemTotalInfo = itemTotalInfo;
+	}
 	public String getItemPurchasePrice() {
 		return itemPurchasePrice;
 	}

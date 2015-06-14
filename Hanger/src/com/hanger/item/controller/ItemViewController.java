@@ -25,7 +25,7 @@ public class ItemViewController extends BaseController {
 	public String itemViewPage(HttpServletRequest request, HttpSession session) {	
 		String itemGroupCode= request.getParameter("itemGroupCode");
 		String itemSizeYn= request.getParameter("itemSizeYn");
-		
+		String userCode = (String)session.getAttribute("myUserCode");
 		System.out.println("ItemViewController itemGroupCode : "+itemGroupCode);
 		
 		//String keyWord= request.getParameter("keyWord");
@@ -34,11 +34,20 @@ public class ItemViewController extends BaseController {
 		//String cateCode= request.getParameter("cateCode");
 		
 		HashMap<String, String> itemViewMap=new HashMap<String, String>();
-		itemViewMap.put("itemGroupCode", itemGroupCode);
+		itemViewMap.put("itemGroupCode", itemGroupCode);		
+		itemViewMap.put("userCode", userCode);
 		
 		ArrayList<ItemViewVo> itemViewList = (ArrayList<ItemViewVo>)itemViewDao.getItemView(itemViewMap);
-				
 		request.setAttribute("itemViewList", itemViewList);
+		
+		if(userCode!=null){			
+			ArrayList<ItemViewVo> reviewListOfFollwing = (ArrayList<ItemViewVo>)itemViewDao.getReviewListOfFollwing(itemViewMap);
+			request.setAttribute("reviewListOfFollwing", reviewListOfFollwing);
+		}
+		
+		ArrayList<ItemViewVo> reviewList = (ArrayList<ItemViewVo>)itemViewDao.getReviewList(itemViewMap);
+		request.setAttribute("reviewList", reviewList);
+				
 		request.setAttribute("mainUrl", root + "item/ItemView.jsp");
 		return moveUrl;
 	}

@@ -71,5 +71,25 @@
 		where item3.ITEM_USE_YN = 'Y' and stock.ITEM_CODE = item3.ITEM_CODE
 		order by itemSellPrice desc, e.groupNum;
 	</select>
+	
+	<typeAlias alias="cate" type="com.hanger.item.vo.CateListVo"/>	
+	<select id="getCate2" resultClass="cate" parameterClass="String">
+		SELECT cate3.CATEGORY2_CODE AS cateCode, cate2.CATEGORY2_NAME  AS cateName
+		FROM CATEGORY3 cate3, CATEGORY2 cate2
+		WHERE cate3.CATEGORY1_CODE=#cate1# AND cate3.CATEGORY2_CODE = cate2.CATEGORY2_CODE
+		GROUP BY cate3.CATEGORY2_CODE;
+	</select>
+	<select id="getCate3" resultClass="cate" parameterClass="String">
+		SELECT cate3.CATEGORY3_CODE AS cateCode, cate3.CATEGORY3_NAME AS cateName
+		FROM CATEGORY3 cate3, CATEGORY2 cate2
+		WHERE cate3.CATEGORY2_CODE=#cate2#
+		GROUP BY cate3.CATEGORY3_CODE;
+	</select>
+	<select id="getSpecificCate3" resultClass="cate" parameterClass="String">
+		SELECT cate3.CATEGORY2_CODE AS upperCateCode, cate33.CATEGORY3_CODE AS cateCode, cate33.CATEGORY3_NAME AS cateName
+		FROM CATEGORY3 cate3, CATEGORY3 cate33
+		WHERE cate3.CATEGORY3_CODE=#cate3# AND cate3.CATEGORY2_CODE = cate33.CATEGORY2_CODE
+		GROUP BY cate33.CATEGORY3_CODE;
+	</select>
 </sqlMap>
 

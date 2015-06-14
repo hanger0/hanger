@@ -1,6 +1,5 @@
 package com.hanger.item.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.item.dao.ItemSearchDao;
@@ -24,7 +22,7 @@ public class ItemSearchController extends BaseController {
 	public void setItemSearchDao(ItemSearchDao itemSearchDao) {
 		this.itemSearchDao = itemSearchDao;
 	}
-	public void setItemSearchInfoDao(ItemSearchInfoDao itemSearchInfoDao) {
+	public void setItemSearchInfoDao(ItemSearchInfoDao itemSearchInfoDao){
 		this.itemSearchInfoDao = itemSearchInfoDao;
 	}
 
@@ -51,20 +49,14 @@ public class ItemSearchController extends BaseController {
 		{
 			cateCode = "";
 		}
-		int pageNum=Integer.parseInt(pageNumInStrng);		
+		int pageNum=Integer.parseInt(pageNumInStrng);	
 
-		System.out.println("itmeSearch.java- keyword : "+keyWord);
-		System.out.println("itmeSearch.java- pageNumInStrng : "+pageNumInStrng);
-		System.out.println("itmeSearch.java- itemSort : "+itemSort);
-		System.out.println("itmeSearch.java- cateCode : "+cateCode);
-		
 		HashMap<String, String> itemSearchInfoMap = new HashMap<String, String>();
 		itemSearchInfoMap.put("keyWord", keyWord);
 		itemSearchInfoMap.put("cateCode", cateCode);
 		
 		ArrayList itemNumbeList = (ArrayList)itemSearchInfoDao.getItemSearchInfoList(itemSearchInfoMap);
-		
-						
+								
 		int pageTotalNum = 0;				// 전체 페이지 번호
 		int pageStartNum = 0;				// 시작페이지 번호
 		int pageEndNum = 0;				// 끝페이지 번호
@@ -75,7 +67,6 @@ public class ItemSearchController extends BaseController {
 		int articleEndNum = 0;				// 끝 글 번호
 		
 		articleTotalNum = Integer.parseInt((String)itemNumbeList.get(0));
-		System.out.println("articleTotalNum : "+articleTotalNum);
 		
 		if(articleTotalNum > 0)
 		{
@@ -116,8 +107,21 @@ public class ItemSearchController extends BaseController {
 		itemSearchMap.put("articleEndNum", articleEndNum);
 		
 		ArrayList itemList = (ArrayList)itemSearchDao.getItemSearchList(itemSearchMap);
+		ArrayList cateList=null;
+		if (cateCode.startsWith("C1")) {
+			cateList = (ArrayList)itemSearchDao.getCate2List(cateCode);
+		}
+		else if(cateCode.startsWith("C2"))
+		{
+			cateList = (ArrayList)itemSearchDao.getCate3List(cateCode);
+		}
+		else if(cateCode.startsWith("C3"))
+		{
+			cateList = (ArrayList)itemSearchDao.getSpecificCate3List(cateCode);
+		}
 		
 		request.setAttribute("itemList", itemList);
+		request.setAttribute("cateList", cateList);
 		
 		request.setAttribute("keyWord", keyWord);
 		request.setAttribute("itemSort", itemSort);
@@ -132,21 +136,7 @@ public class ItemSearchController extends BaseController {
 		request.setAttribute("pageStartNum", pageStartNum);
 		request.setAttribute("pageEndNum", pageEndNum);
 		
-		request.setAttribute("mainUrl", root + "item/ItemList.jsp");
-		
-		System.out.println("ItemSearchController itemList: "+ itemList);
-		
-		System.out.println("ItemSearchController itemSort: "+ itemSort);
-		System.out.println("ItemSearchController cateCode: "+ cateCode);
-		System.out.println("ItemSearchController pageNum: "+ pageNum);
-		System.out.println("ItemSearchController keyWord: "+ keyWord);
-		
-		System.out.println("ItemSearchController articleTotalNum: "+ articleTotalNum);
-		System.out.println("ItemSearchController articleStartNum: "+ articleStartNum);
-		System.out.println("ItemSearchController articleEndNum: "+ articleEndNum);
-		System.out.println("ItemSearchController pageTotalNum: "+ pageTotalNum);
-		System.out.println("ItemSearchController pageStartNum: "+ pageStartNum);
-		System.out.println("ItemSearchController pageEndNum: "+ pageEndNum);		
+		request.setAttribute("mainUrl", root + "item/ItemList.jsp");	
 		
 		return moveUrl;
 	}

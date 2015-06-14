@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.hanger.item.vo.ItemSearchVo" %>
+<%@ page import="com.hanger.item.vo.CateListVo" %>
 <%
 	ArrayList itemList = (ArrayList)request.getAttribute("itemList");
+	ArrayList cateList = (ArrayList)request.getAttribute("cateList");
 	String itemSort = (String)request.getAttribute("itemSort");
 	String cateCode = (String)request.getAttribute("cateCode");
 	String keyWord = (String)request.getAttribute("keyWord");
@@ -167,15 +169,19 @@
         			<option value = "높은가격순">높은가격순</option><option value = "팔로잉초이스">팔로잉초이스</option>
         			<option value = "할인율">할인율</option><option value = "리뷰개수">리뷰개수</option><option value = "평점순">평점순</option>
         		</select>
-<!-- 우측 상단 -->					
+<!-- 우측 상단 -->		
+<%
+	if(cateList!=null&&cateList.size()>0&&!(cateCode.startsWith("C3")))
+	{
+%>			
         		<div class = "dc3" style = "background-color:#EBEBEB;width:96%">
 					<table style = "width:100%;height:100px;display:table;margin-left:auto;margin-right:auto;">
 						<tr>
-						<td><a href = "#">- 전체보기</a></td>
+						<td><B><a href = "/itemSearch.hang?cateCode=<%=cateCode%>">- 전체보기</a></B></td>		
 <%
-							for(int i = 0;  i < 20 ;  i ++) {
+							for(int i = 0;  i < cateList.size() ;  i ++) {
 %>
-							<td><a href = "#">- 클렌징 폼</a></td>
+							<td><a href = "/itemSearch.hang?cateCode=<%=((CateListVo)cateList.get(i)).getCateCode()%>">- <%=((CateListVo)cateList.get(i)).getCateName() %></a></td>
 <%
 								if(i==5) {
 %>
@@ -192,6 +198,57 @@
 					</tr>
 					</table>
 				</div>
+<%
+	}
+	else if(cateList!=null&&cateList.size()>0&&cateCode.startsWith("C3"))
+	{System.out.println("아이템리스트 어퍼코드: "+((CateListVo)cateList.get(0)).getUpperCateCode());
+%>
+				<div class = "dc3" style = "background-color:#EBEBEB;width:96%">
+					<table style = "width:100%;height:100px;display:table;margin-left:auto;margin-right:auto;">
+						<tr>
+						<td><a href = "/itemSearch.hang?cateCode=<%=((CateListVo)cateList.get(0)).getUpperCateCode()%>">- 전체보기</a></td>		
+<%
+							for(int i = 0;  i < cateList.size() ;  i ++) {
+							%>
+							<td>
+							<%
+							if(cateCode.equals(((CateListVo)cateList.get(i)).getCateCode()))
+							{
+							%>
+							<B>
+							<%
+							}
+							 %>
+							 <a href = "/itemSearch.hang?cateCode=<%=((CateListVo)cateList.get(i)).getCateCode()%>">- <%=((CateListVo)cateList.get(i)).getCateName() %></a>
+							 <%
+							if(cateCode.equals(((CateListVo)cateList.get(i)).getCateCode()))
+							{
+							%>
+							<B>
+							<%
+							}
+							 %>
+							 </td>
+
+<%
+								if(i==5) {
+%>
+												</tr><tr>
+<%
+								}
+								else if(i>6&&i==12){
+%>
+										</tr><tr>		
+<%									
+								}
+							}
+%>
+					</tr>
+					</table>
+				</div>
+<%
+	}
+%>
 <!-- 우측 상단 끝-->	
         	</div>
 			<!-- 간격 -->
