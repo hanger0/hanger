@@ -2,7 +2,10 @@
 <%@ page import="com.hanger.reply.vo.ReplyVo" %>
 <%@ page import="java.util.*" %>
 <%
-	ArrayList<ReplyVo> replyList = (ArrayList<ReplyVo>)request.getAttribute("replyList");
+	// 댓글 불러오는 리스트~
+	ArrayList<ReplyVo> replyInsertList = (ArrayList<ReplyVo>)request.getAttribute("replyInsertList");
+	// 댓글 수정하는 리스트~
+	
 %>
 
 <link rel="stylesheet" href="css/Follow/follow.css" />
@@ -49,41 +52,38 @@
 </style>
 <script>
 $(function(){
-	$("#replyBtnName").click(function(e){
-		
-/*******************************************TRIM**************************************/
-		function trim(str)
-		{
-			var count = str.length;
-			var len = count;
-			var st = 0;
+	/*******************************************TRIM**************************************/
+	function trim(str)
+	{
+		var count = str.length;
+		var len = count;
+		var st = 0;
 
-			while ((st < len) && (str.charAt(st) <= ' '))
-			{
-				st++;
-			}
-			while ((st < len) && (str.charAt(len - 1) <= ' '))
-			{
-				len--;
-			}
-			return ((st > 0) || (len < count)) ? str.substring(st, len) : str ;
-		}	
-/**************************************TRIM 종료****************************************/
-		
-/***************************************AJAX 시작****************************************/
+		while ((st < len) && (str.charAt(st) <= ' '))
+		{
+			st++;
+		}
+		while ((st < len) && (str.charAt(len - 1) <= ' '))
+		{
+			len--;
+		}
+		return ((st > 0) || (len < count)) ? str.substring(st, len) : str ;
+	}	
+	/**************************************TRIM 종료****************************************/
+	/***************************************AJAX 시작****************************************/
+	$("#replyBtnName").click(function(e){
+				
 		var f = document.replyForm;
 		var postingCodeVal = trim(f.postingCode.value);
 		var replyContentVal = trim(f.replyContent.value);
-		
-		
-		alert("AJAX ㄱㄱ");
+			
 		$.ajax({
 			type: "POST", 
 			url: "/replyInsert.hang",
 			dataType: "text",
 			data: "postingCode=" + postingCodeVal + "&replyContent=" + replyContentVal, 
 			success: function(text){
-				alert("Ajax Success");
+				alert("댓글 작성 성공");
 				var result = trim(text);
 				$('#ajaxReviewList').html(result);
 				
@@ -92,13 +92,17 @@ $(function(){
 		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		    }
 		});	
-		//alert("AJAX END");
 		e.preventDefault();
 	});	
-	
+	// 삭제 AJAX
+	$("#replyDeleteBtn").click(function(e){
+		
+		
+		
+		e.preventDefault();
+	});
 });
 
-		
 		
 
 </script>
@@ -208,14 +212,17 @@ $(function(){
 				<hr>
 				<div class ="review" id="ajaxReviewList" style = "margin-left:3%;margin-top:10px;width:94%;">
 <%
-	if(replyList != null){
-		for(int i=0;i<replyList.size();i++){
-			ReplyVo reply = replyList.get(i);
+	if(replyInsertList != null){
+		for(int i=0;i<replyInsertList.size();i++){
+			ReplyVo reply = replyInsertList.get(i);
 			String replyContent = reply.getReplyContent();
+			String userCode = reply.getUserCode();
 			String replyName = reply.getUserName();
+			String replyCode = reply.getReplyCode();
 			String userPicPath = reply.getUserPicPath();
 			String userPicSaveName = reply.getUserPicSaveName();
 			String updDate = reply.getUpdDate();
+			
 %>
  		<div class = "review" style = "width:100%;height:100px;">
 			<div class="replyimg col-sm-1">
@@ -224,6 +231,11 @@ $(function(){
 			<div class = "name" style = "width:400px;height:30px;float:left;margin-left:5%;">
 				<font size = "3"><b><%=replyName %></b></font>
 				<font size = "2" style = "margin-left:3%"><font color = "gray"><%= updDate %></font></font>
+				
+			</div>
+			<div class="updateDelete" style="float:right;">
+					<a><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
+					<a id="replyDeleteBtn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
 			</div>
 			<br>
 			<BR>
@@ -243,7 +255,9 @@ $(function(){
         	 <div class="thumbnail" style = "width:75%;display:table;margin-left:auto;margin-right:auto;">
         		<div class="replywrite" style = "margin-left:2%" >
 <form role="form" id="replyForm" name="replyForm">
+	<!-- 포스팅 코드 고칠곳 -->
     <INPUT type="hidden" name="postingCode" value="posodes" />
+    <!-- 포스팅 코드 고칠곳 -->
 					<div class="replyimg col-sm-1" style = "width:20%;">
 						<img src="images/wonbin.PNG" alt="" class="img-circle rewriteimg" style = "width:80px;height:80px;">
 					</div>

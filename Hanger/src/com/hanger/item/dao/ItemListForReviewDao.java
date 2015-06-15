@@ -1,7 +1,6 @@
 package com.hanger.item.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
@@ -13,7 +12,6 @@ public class ItemListForReviewDao {
 	}
 	
 	public ArrayList getItemListForReview(String userCode) {
-		
 		return (ArrayList) smct.queryForList("getItemListForReview", userCode);
 	}
 }

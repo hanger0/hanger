@@ -312,12 +312,12 @@ public class OrderBuyController extends BaseController {
 		OrderVo ordering = new OrderVo();
 		ordering.setUserCode(myUserCode);
 		ordering.setOrderCode(orderCode);
-		ordering.setOrderName(orderName);
-		ordering.setOrderPhone(orderPhone);
-		ordering.setOrderAddr1(orderAddr1);
-		ordering.setOrderAddr2(orderAddr2);
-		ordering.setOrderPostCode1(orderPostCode1);
-		ordering.setOrderPostCode2(orderPostCode2);
+		ordering.setOrderRecipientName(orderName);
+		ordering.setOrderRecipientPhone(orderPhone);
+		ordering.setOrderRecipientAddr1(orderAddr1);
+		ordering.setOrderRecipientAddr2(orderAddr2);
+		ordering.setOrderRecipientPostCode1(orderPostCode1);
+		ordering.setOrderRecipientPostCode2(orderPostCode2);
 		ordering.setOrderMemo(orderMemo);
 		ordering.setOrderUsedMileage(orderUsedMileage);
 		ordering.setOrderState(orderState);

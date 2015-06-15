@@ -4,8 +4,8 @@
 	<typeAlias alias="order" type="com.hanger.order.vo.OrderVo"/>
 	
 	<insert id="insertOrdering" parameterClass="order">
-		insert into ordering (order_code, user_code, order_name, order_phone, order_addr1, order_addr2, order_postCode1, order_postCode2, order_memo, order_used_mileage, order_state, reg_id, reg_date, reg_ip, upd_id, upd_date, upd_ip)
-		values (#orderCode#, #userCode#, #orderName#, #orderPhone#, #orderAddr1#, #orderAddr2#, #orderPostCode1#, #orderPostCode2#, #orderMemo#, #orderUsedMileage#, #orderState#, #regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
+		insert into ordering (order_code, user_code, order_recipient_name, order_recipient_phone, order_recipient_addr1, order_recipient_addr2, order_recipient_postCode1, order_recipient_postCode2, order_memo, order_used_mileage, order_state, reg_id, reg_date, reg_ip, upd_id, upd_date, upd_ip)
+		values (#orderCode#, #userCode#, #orderRecipientName#, #orderRecipientPhone#, #orderRecipientAddr1#, #orderRecipientAddr2#, #orderRecipientPostCode1#, #orderRecipientPostCode2#, #orderMemo#, #orderUsedMileage#, #orderState#, #regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>
 	
 	<insert id="insertOrderInfo" parameterClass="order">

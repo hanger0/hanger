@@ -34,17 +34,22 @@ public class DetailTipController extends BaseController {
 		
 		/***************************Select & Page Move Start ***********************/
 		System.out.println("Tip 화면 실행....");
-    	
-		System.out.println("Select 실행....");
-    
-    	HashMap map = new HashMap();
-    	map.put("postingCodeList", "posodes");
-    	
 		
-    	ArrayList<ReplyVo> replyList = replySelectDao.selectReply(map);
+		System.out.println("Select 실행....");
+		//String postingCode = (String)req.getParameter("postingCode");
+		String postingCode = "posodes";
+	
+		System.out.println("postingCode : " + postingCode);
+	
+		
+    	HashMap map = new HashMap();
+    	map.put("postingCode", postingCode);
     	
-    	req.setAttribute("replyList", replyList);
-    	System.out.println("리플 리스트 : "+replyList.size());
+    	ArrayList<ReplyVo> tipReplyList = replySelectDao.selectReply(map);
+    	System.out.println("리플 맵 : "+map);
+    	
+    	req.setAttribute("replyInsertList", tipReplyList);
+    	System.out.println("리플 리스트 : "+tipReplyList);
    
 		//req.setAttribute("mainUrl", root + "common/Frame");
     	req.setAttribute("mainUrl", root + "posting/tip/MainTip.jsp");
@@ -68,7 +73,8 @@ public class DetailTipController extends BaseController {
 		String userId = (String)session.getAttribute("myUserId");
 		String userCode = (String)session.getAttribute("myUserCode");
 		String userName = (String)session.getAttribute("myUserName");
-    	String postingCode = req.getParameter("postingCode");
+		//String postingCode = (String)req.getParameter("postingCode");
+		String postingCode = "posodes";
     	String replyContent = req.getParameter("replyContent");
     	String ip = req.getRemoteAddr();
 		
@@ -85,20 +91,21 @@ public class DetailTipController extends BaseController {
     	replyInsertDao.insertReply(reply);
     	
     	HashMap map = new HashMap();
-    	map.put("postingCodeList", "posodes");
+    	map.put("postingCode", postingCode);
     	
-    	ArrayList<ReplyVo> replyInsertList = replySelectDao.selectReply(map);
+		
+    	ArrayList<ReplyVo> replyList = replySelectDao.selectReply(map);
     	//셀렉트 하는곳
     	System.out.println("포스팅코드:"+postingCode);
     	System.out.println("리플내용:"+replyContent);
     	System.out.println("유저아이디:"+userId);
     	System.out.println("유저코드:"+userCode);
     	System.out.println("Reply 실행....");
-    	System.out.println("리플 Insert:"+replyInsertList);
+    	System.out.println("리플 Insert:"+replyList);
     	
     	//STEP 같은 기능으로 페이지 구분 하기!
 		
-    	req.setAttribute("replyListSet",replyInsertList);
+    	req.setAttribute("replyListSet",replyList);
 		
 		//return "reply/replyInsert";
     	return moveUrl;

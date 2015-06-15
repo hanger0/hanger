@@ -5,12 +5,12 @@ public class OrderVo {
 	private String orderCode;
 	private String itemCode;
 	private String userCode;
-	private String orderName;
-	private String orderPhone;
-	private String orderAddr1;
-	private String orderAddr2;
-	private String orderPostCode1;
-	private String orderPostCode2;
+	private String orderRecipientName;
+	private String orderRecipientPhone;
+	private String orderRecipientAddr1;
+	private String orderRecipientAddr2;
+	private String orderRecipientPostCode1;
+	private String orderRecipientPostCode2;
 	private String orderMemo;
 	private String orderItemMarketPrice;
 	private String orderItemSellPrice;
@@ -55,41 +55,41 @@ public class OrderVo {
 	public void setUserCode(String userCode) {
 		this.userCode = userCode;
 	}
-	public String getOrderName() {
-		return orderName;
+	public String getOrderRecipientName() {
+		return orderRecipientName;
 	}
-	public void setOrderName(String orderName) {
-		this.orderName = orderName;
+	public void setOrderRecipientName(String orderRecipientName) {
+		this.orderRecipientName = orderRecipientName;
 	}
-	public String getOrderPhone() {
-		return orderPhone;
+	public String getOrderRecipientPhone() {
+		return orderRecipientPhone;
 	}
-	public void setOrderPhone(String orderPhone) {
-		this.orderPhone = orderPhone;
+	public void setOrderRecipientPhone(String orderRecipientPhone) {
+		this.orderRecipientPhone = orderRecipientPhone;
 	}
-	public String getOrderAddr1() {
-		return orderAddr1;
+	public String getOrderRecipientAddr1() {
+		return orderRecipientAddr1;
 	}
-	public void setOrderAddr1(String orderAddr1) {
-		this.orderAddr1 = orderAddr1;
+	public void setOrderRecipientAddr1(String orderRecipientAddr1) {
+		this.orderRecipientAddr1 = orderRecipientAddr1;
 	}
-	public String getOrderAddr2() {
-		return orderAddr2;
+	public String getOrderRecipientAddr2() {
+		return orderRecipientAddr2;
 	}
-	public void setOrderAddr2(String orderAddr2) {
-		this.orderAddr2 = orderAddr2;
+	public void setOrderRecipientAddr2(String orderRecipientAddr2) {
+		this.orderRecipientAddr2 = orderRecipientAddr2;
 	}
-	public String getOrderPostCode1() {
-		return orderPostCode1;
+	public String getOrderRecipientPostCode1() {
+		return orderRecipientPostCode1;
 	}
-	public void setOrderPostCode1(String orderPostCode1) {
-		this.orderPostCode1 = orderPostCode1;
+	public void setOrderRecipientPostCode1(String orderRecipientPostCode1) {
+		this.orderRecipientPostCode1 = orderRecipientPostCode1;
 	}
-	public String getOrderPostCode2() {
-		return orderPostCode2;
+	public String getOrderRecipientPostCode2() {
+		return orderRecipientPostCode2;
 	}
-	public void setOrderPostCode2(String orderPostCode2) {
-		this.orderPostCode2 = orderPostCode2;
+	public void setOrderRecipientPostCode2(String orderRecipientPostCode2) {
+		this.orderRecipientPostCode2 = orderRecipientPostCode2;
 	}
 	public String getOrderMemo() {
 		return orderMemo;

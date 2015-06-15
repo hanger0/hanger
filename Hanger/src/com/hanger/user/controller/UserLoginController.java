@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.item.dao.ItemListForReviewDao;
+import com.hanger.item.vo.ItemListForReviewVo;
 import com.hanger.user.dao.UserLoginDao;
 import com.hanger.user.vo.UserVo;
 
@@ -20,11 +21,12 @@ import com.hanger.user.vo.UserVo;
 @RequestMapping("/login.hang")
 public class UserLoginController extends BaseController {
 	private UserLoginDao userLoginDao;	
+	private ItemListForReviewDao itemListForReviewDao;
+	
 	public void setUserLoginDao(UserLoginDao userLoginDao)
 	{
 		this.userLoginDao = userLoginDao;
 	}
-	private ItemListForReviewDao itemListForReviewDao;
 	public void setItemListForReviewDao(ItemListForReviewDao itemListForReviewDao) {
 		this.itemListForReviewDao = itemListForReviewDao;
 	}
@@ -52,18 +54,18 @@ public class UserLoginController extends BaseController {
 		String message = "";
 		if(uvList != null && uvList.size()>0) {
 			String myName = (String)uvList.get(0).getUserName();
-			String myCode = (String)uvList.get(0).getUserCode();
+			String userCode = (String)uvList.get(0).getUserCode();
 			String adminYn = (String)uvList.get(0).getUserAdminYn();
 			System.out.println("로그인 성공");
 			session.setAttribute("loginYn", "Y");
 			session.setAttribute("myUserId", userId);
 			session.setAttribute("myUserName", myName);
-			session.setAttribute("myUserCode", myCode);
+			session.setAttribute("myUserCode", userCode);
 			session.setAttribute("adminYn", adminYn);
 			
-			ArrayList itemListForReview = (ArrayList)itemListForReviewDao.getItemListForReview(myCode);
+			ArrayList itemListForReview = (ArrayList)itemListForReviewDao.getItemListForReview(userCode);
 			session.setAttribute("itemListForReview", itemListForReview);
-			
+			System.out.println(itemListForReview);
 			message = null;
 			moveUrl = "common/Frame";
 		}

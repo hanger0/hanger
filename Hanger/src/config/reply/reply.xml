@@ -11,15 +11,15 @@
 	<select id="selectReply" parameterClass="HashMap" resultClass="reply">
 		SELECT B.USER_NAME AS userName, A.REPLY_CONTENT AS replyContent, A.REG_ID AS regId, A.REG_DATE AS reg_date, A.REG_ID AS regIp, A.UPD_ID AS updId, A.UPD_DATE AS updDate, A.UPD_IP AS updIp, B.USER_PIC_PATH as userPicPath, B.USER_PIC_SAVE_NAME AS userPicSaveName
 		FROM reply A, user B
-		WHERE REPLY_USE_YN != 'N' AND A.USER_CODE = B.USER_CODE AND A.POSTING_CODE = #postingCodeList#
+		WHERE REPLY_USE_YN != 'N' AND A.USER_CODE = B.USER_CODE AND A.POSTING_CODE = #postingCode#
 	</select>
 	
-	<update id="updateReply" parameterClass="reply">
+	<update id="updateReply" parameterClass="HashMap" >
 		UPDATE reply
 		SET REPLY_CONTENT = #replyContent#, REG_ID = #regId# , REG_DATE = SYSDATE(), REG_IP = #regIp#, UPD_DATE = SYSDATE(), UPD_ID = #updId#, UPD_IP = #updIp#
 		WHERE REPLY_CODE = #replyCode# AND USER_CODE = #userCode#
 	</update>
-	<update id="removeReply" parameterClass="reply">
+	<update id="removeReply" parameterClass="HashMap">
 		UPDATE reply SET REPLY_USE_YN = 'N' WHERE REPLY_CODE = #replyCode# AND USER_CODE = #userCode#
 	</update>
 	

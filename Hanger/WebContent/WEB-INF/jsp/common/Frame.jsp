@@ -9,11 +9,10 @@
 		message = (String)request.getAttribute("message");
 	}
 	boolean loginYn = false;
-	ArrayList itemListForReview=null;
+	ArrayList itemListForReview = (ArrayList)request.getAttribute("itemListForReview");
 	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y"))
 	{
 		loginYn = true;
-		itemListForReview = (ArrayList)request.getAttribute("itemListForReview");
 	}
 %>
 <HTML>
@@ -93,6 +92,7 @@ $(document).ready( function() {
 <%
 					if(loginYn)
 					{
+						System.out.println(itemListForReview);
 %>
 					<div id="floating">
     					<div class="containers">                                      
@@ -103,7 +103,7 @@ $(document).ready( function() {
     							</button>
     							<ul class="dropdown-menu" id="dropdown-menu"role="menu" aria-labelledby="menu1">
 <%
-								if(itemListForReview!=null&&itemListForReview.size()>0){
+							if(itemListForReview!=null && itemListForReview.size()>0){
     							for(int i=0; i<itemListForReview.size(); i++)
     							{
     								String itemGroupCode= ((ItemListForReviewVo)itemListForReview.get(i)).getItemGroupCode();
@@ -116,13 +116,13 @@ $(document).ready( function() {
       								<li role="presentation" class="divider"></li>      								
 <%
       							}
-								}
-								else
-								{
+							}
+							else
+							{
 %>
 									<center><li role="presentation"><P><B>리뷰를 작성할<Br>상품이 없습니다.</B></P></a></li></center>
 <%	
-								}
+							}
 %>
     							</ul>
   							</div>

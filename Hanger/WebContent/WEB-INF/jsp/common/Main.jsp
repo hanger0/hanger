@@ -93,16 +93,16 @@ body
    height:165px;
 }
 .more{
-	float:right;
-	cursor:pointer;
+   float:right;
+   cursor:pointer;
 }
 </STYLE>
 <SCRIPT>
 
 $(document).ready(function(){
-	$("#tipmodal").click(function(){
-		$("#tip").modal('show');
-	});
+   $("#tipmodal").click(function(){
+      $("#tip").modal('show');
+   });
 });
 
 
@@ -191,8 +191,8 @@ for(int i=0; i<4; i++)
                <div class="col-md-6 review">
                   <div class="row">
                      <div class = "row" style = "width:94%;margin-left:3%;">
-	                     <font size = "4"><b>인기리뷰</b>&nbsp;&nbsp;Review</font>
-	                     <div class = "more"><a href="/reviewList.hang">더 보기</a></div>
+                        <font size = "4"><b>인기리뷰</b>&nbsp;&nbsp;Review</font>
+                        <div class = "more"><a href="/reviewList.hang">더 보기</a></div>
                      </div>
 
 <% 
@@ -233,7 +233,7 @@ for(int i=0; i<2; i++)
 %>
                      <div class="col-md-6 rat">
                         <div class="thumbnail">
-                        <a data-toggle="modal" href="/mainTip.hang" id="tipmodal">
+                        <a data-toggle="modal" href="/detailTip.hang" id="tipmodal">
                            <div class="image">
                               <img src="images/hommesun.jpg" class="hotimages" >
                            </div>

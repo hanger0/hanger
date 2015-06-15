@@ -4,18 +4,20 @@
 	<typeAlias alias="itemListForReview" type="com.hanger.item.vo.ItemListForReviewVo"/>
 	<select id="getItemListForReview" resultClass="itemListForReview" parameterClass="String">
 		SELECT item.ITEM_GROUP_CODE AS itemGroupCode,
-		item.ITEM_PIC_PATH AS itemPicPath, item.ITEM_PIC_SAVENAME AS itemPicSavename, 
-		item.ITEM_NAME AS itemName, item.BRAND_NAME AS brandName
+			item.ITEM_PIC_PATH AS itemPicPath, item.ITEM_PIC_SAVENAME AS itemPicSavename, 
+			item.ITEM_NAME AS itemName, item.BRAND_NAME AS brandName
 		FROM 
-		   ORDERING ordering, ORDER_INFO info, 
-		    (SELECT it.ITEM_GROUP_CODE, it.ITEM_CODE, it.ITEM_PIC_PATH, it.ITEM_PIC_SAVENAME, it.ITEM_NAME, br.BRAND_NAME 
+			ORDERING ordering, ORDER_INFO info, 
+			(SELECT it.ITEM_GROUP_CODE, it.ITEM_CODE, it.ITEM_PIC_PATH, it.ITEM_PIC_SAVENAME, it.ITEM_NAME, br.BRAND_NAME 
 		    FROM ITEM it, BRAND br 
 		    WHERE it.BRAND_CODE = br.BRAND_CODE 
 		    GROUP BY ITEM_GROUP_CODE) item
 		WHERE ordering.USER_CODE=#userCode# AND ordering.ORDER_CODE=info.ORDER_CODE
-		      AND info.ORDER_ITEM_VERIFY='Y'
-		      AND item.ITEM_GROUP_CODE NOT IN (SELECT ITEM_GROUP_CODE FROM REVIEW WHERE USER_CODE=#userCode#)
-		      AND info.ITEM_CODE = item.ITEM_CODE;
+			AND info.ORDER_ITEM_VERIFY='Y'
+			AND item.ITEM_GROUP_CODE NOT IN (SELECT ITEM_GROUP_CODE FROM REVIEW WHERE USER_CODE=#userCode#)
+			AND info.ITEM_CODE = item.ITEM_CODE
+		GROUP BY
+			item.ITEM_GROUP_CODE;
 	</select>
 </sqlMap>
 
