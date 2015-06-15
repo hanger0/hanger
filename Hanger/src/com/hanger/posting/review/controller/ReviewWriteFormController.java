@@ -29,23 +29,29 @@ public class ReviewWriteFormController extends BaseController{
 	@RequestMapping(value="/reviewWriteResult.hang", method=RequestMethod.POST)
 	public ModelAndView mainPage(HttpServletRequest request, HttpSession session) throws IOException {		
 		
-		File dayFile = new File("/upfile/posting/review");
+		System.out.println("reviewWriteResult.hang...");
+		
+		File dayFile = new File("upfile/posting/review");
 		if(!dayFile.exists())
 		{
 			dayFile.mkdirs();
 		}
-//		String savePath = dayFile.getCanonicalPath();
 		String savePath = "upfile/posting/review";
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(request, "C:\\Users\\ggeunkk\\git\\hanger\\Hanger\\WebContent\\upfile\\posting\\review", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(request, "C:\\Users\\Administrator\\git\\hanger1\\Hanger\\WebContent\\upfile\\posting\\review", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		ReviewVo review = new ReviewVo();
 		
-		String userCode = "UR0000000001";
-		String itemGroupCode = "IT0000000001";
-		String reviewScore = "8";
-		String reviewTitle = mul.getParameter("title");
+		String userCode = (String) session.getAttribute("myUserCode");
+		String itemGroupCode = mul.getParameter("itemGroupCode");
+		String reviewScore = mul.getParameter("reviewScore");
+		String reviewTitle = mul.getParameter("reviewTitle");
 		String reviewContent = "";
+		String reviewMainPicPath = savePath;
+		String reviewMainPicOrgName = mul.getOriginalFileName("reviewMainPic");
+		String reviewMainPicSaveName = mul.getFilesystemName("reviewMainPic");
+		int reviewMainPicSize = 0;
+		
 		String ip = request.getRemoteAddr();
 		
 		String[] temp = (mul.getParameter("content")).split("\"");
@@ -55,41 +61,39 @@ public class ReviewWriteFormController extends BaseController{
 				temp[i+1] = savePath; //path
 				reviewContent += temp[i] + "\"";
 			}
-			else if(temp[i].equals(" data-filename=")){				
+			else if(temp[i].equals(" data-filename=")){		
 				reviewContent += "/";
 			} else if(temp[i].equals(savePath)){
 				reviewContent += temp[i];
 			} else {
 				reviewContent += temp[i] + "\"";
 			}
-			System.out.println(temp[i]);
-			System.out.println(reviewContent);
 		}
 		
 		reviewContent += temp[temp.length-2] + "\"" + temp[temp.length-1];
-		System.out.println(reviewContent);
 		
 		review.setUserCode(userCode);
 		review.setItemGroupCode(itemGroupCode);
 		review.setReviewScore(reviewScore);
 		review.setReviewTitle(reviewTitle);
 		review.setReviewContent(reviewContent);
+		review.setReviewMainPicPath(reviewMainPicPath);
+		review.setReviewMainPicOrgName(reviewMainPicOrgName);
+		review.setReviewMainPicSaveName(reviewMainPicSaveName);
+		review.setReviewMainPicSize(reviewMainPicSize);
 		review.setRegId("admin");
 		review.setRegIp(ip);
 		review.setUpdId("admin");
 		review.setUpdIp(ip);
 		
-		Enumeration formNames = mul.getFileNames();
-		int i = 0;
+//		Enumeration formNames = mul.getFileNames();
 		
-		reviewWriteDao.insertReview(review);
+		String reviewCode = reviewWriteDao.insertReview(review);
 		
 		ModelAndView mav = new ModelAndView();
-		moveUrl = "posting/review/ReviewShow";
-
+		moveUrl = "posting/review/reviewShow.hang?reviewCode=" + reviewCode;
+		
 		mav.setViewName(moveUrl);
-		mav.addObject("reviewTitle", reviewTitle);
-		mav.addObject("reviewContent", reviewContent);
 		
 		return mav;
 	}

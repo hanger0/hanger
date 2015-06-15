@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="EUC-KR"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
@@ -17,35 +15,36 @@
 	<!-- ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ -->
 
 	<!-- User 요청 url과 Controller 매핑 -->
-	<bean id="userJoinController" class ="com.hanger.user.controller.UserJoinController">
+	<bean id="userJoinController" class="com.hanger.user.controller.UserJoinController">
 		<property name="userJoinDao" ref="userJoinDao"></property>
 		<property name="userLoginDao" ref="userLoginDao"></property>
 		<property name="relationInsertDao" ref="relationInsertDao"></property>
 	</bean>
-	<bean id="userJoinZipCodeSearchController" class ="com.hanger.user.controller.UserJoinZipCodeSearchController">
+	<bean id="userJoinZipCodeSearchController"
+		class="com.hanger.user.controller.UserJoinZipCodeSearchController">
 		<property name="userJoinZipCodeDao" ref="userJoinZipCodeDao"></property>
 	</bean>
-	<bean id="userIdCheckController" class ="com.hanger.user.controller.UserIdCheckController">
+	<bean id="userIdCheckController" class="com.hanger.user.controller.UserIdCheckController">
 		<property name="userIdCheckDao" ref="userIdCheckDao"></property>
 	</bean>
-	<bean id="userLoginController" class ="com.hanger.user.controller.UserLoginController">
+	<bean id="userLoginController" class="com.hanger.user.controller.UserLoginController">
 		<property name="userLoginDao" ref="userLoginDao"></property>
 	</bean>
-	<bean id="userUpdateController" class ="com.hanger.user.controller.UserUpdateController">
+	<bean id="userUpdateController" class="com.hanger.user.controller.UserUpdateController">
 		<property name="userUpdateDao" ref="userUpdateDao"></property>
 	</bean>
-	<bean id="userDeleteController" class ="com.hanger.user.controller.UserDeleteController">
+	<bean id="userDeleteController" class="com.hanger.user.controller.UserDeleteController">
 		<property name="userDeleteDao" ref="userDeleteDao"></property>
 	</bean>
-	<bean id="userLogoutController" class ="com.hanger.user.controller.UserLogoutController" />
-	<bean id="userSearchController" class ="com.hanger.user.controller.UserSearchController">
+	<bean id="userLogoutController" class="com.hanger.user.controller.UserLogoutController" />
+	<bean id="userSearchController" class="com.hanger.user.controller.UserSearchController">
 		<property name="userSearchDao" ref="userSearchDao"></property>
 		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
-	<bean id="userFindPasswordController" class ="com.hanger.user.controller.UserFindPasswordController">
+	<bean id="userFindPasswordController" class="com.hanger.user.controller.UserFindPasswordController">
 		<property name="userFindPasswordDao" ref="userFindPasswordDao"></property>
 	</bean>
-	<bean id="userSelectController" class ="com.hanger.user.controller.UserSelectController">
+	<bean id="userSelectController" class="com.hanger.user.controller.UserSelectController">
 		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 	<bean id="userMyPageController" class="com.hanger.user.controller.UserMyPageController">
@@ -69,37 +68,42 @@
 	<bean id="userScrapPageController" class="com.hanger.user.controller.UserScrapPageController">
 		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
-	
+
 	<!-- Relation 요청 url과 Controller 매핑 -->
-	<bean id="relationInsertController" class ="com.hanger.user.controller.RelationInsertController">
+	<bean id="relationInsertController" class="com.hanger.user.controller.RelationInsertController">
 		<property name="relationInsertDao" ref="relationInsertDao"></property>
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
 		<property name="userSearchDao" ref="userSearchDao"></property>
 		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
-	<bean id="relationDeleteController" class ="com.hanger.user.controller.RelationDeleteController">
+	<bean id="relationDeleteController" class="com.hanger.user.controller.RelationDeleteController">
 		<property name="relationDeleteDao" ref="relationDeleteDao"></property>
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
 		<property name="userSearchDao" ref="userSearchDao"></property>
 		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
-	<bean id="relationSearchController" class ="com.hanger.user.controller.RelationSearchController">
+	<bean id="relationSearchController" class="com.hanger.user.controller.RelationSearchController">
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
 		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
-	
+
 	<!-- Manager/Item 요청 url과 Controller 매핑 -->
-	<bean id="managerAddItemController" class="com.hanger.manager.item.controller.ManagerAddItemController">
+	<bean id="managerAddItemController"
+		class="com.hanger.manager.item.controller.ManagerAddItemController">
 		<property name="managerAddItemDao" ref="managerAddItemDao"></property>
 	</bean>
-	<bean id="managerAddItemFormController" class="com.hanger.manager.item.controller.ManagerAddItemFormController">
+	<bean id="managerAddItemFormController"
+		class="com.hanger.manager.item.controller.ManagerAddItemFormController">
 		<property name="managerAddItemDao" ref="managerAddItemDao"></property>
 	</bean>
-	<bean id="managerBrandController" class="com.hanger.manager.item.controller.ManagerBrandController"/>
-	<bean id="managerSearchBrandController" class="com.hanger.manager.item.controller.ManagerSearchBrandController">
+	<bean id="managerBrandController"
+		class="com.hanger.manager.item.controller.ManagerBrandController" />
+	<bean id="managerSearchBrandController"
+		class="com.hanger.manager.item.controller.ManagerSearchBrandController">
 		<property name="managerSearchBrandDao" ref="managerSearchBrandDao"></property>
 	</bean>
-	<bean id="managerAddBrandController" class="com.hanger.manager.item.controller.ManagerAddBrandController">
+	<bean id="managerAddBrandController"
+		class="com.hanger.manager.item.controller.ManagerAddBrandController">
 		<property name="managerAddBrandDao" ref="managerAddBrandDao"></property>
 		<property name="managerSearchBrandDao" ref="managerSearchBrandDao"></property>
 	</bean>
@@ -124,191 +128,212 @@
 	<bean id="orderDecideController" class="com.hanger.order.controller.OrderDecideController">
 		<property name="orderDecideDao" ref="orderDecideDao"></property>
 	</bean>
-	
-	<bean id = "mainReviewController" class = "com.hanger.posting.review.controller.MainReviewController" >
-		<property name = "scrapDao" ref = "scrapDao"></property>
+
+	<bean id="mainReviewController"
+		class="com.hanger.posting.review.controller.MainReviewController">
+		<property name="scrapDao" ref="scrapDao"></property>
 		<property name="reviewLikeCheckDao" ref="reviewLikeCheckDao"></property>
 	</bean>
-	
+
 	<!-- Item 요청 url과 Controller 매핑 -->
-	<bean id="itemSearchController" class ="com.hanger.item.controller.ItemSearchController">
+	<bean id="itemSearchController" class="com.hanger.item.controller.ItemSearchController">
 		<property name="itemSearchDao" ref="itemSearchDao"></property>
 		<property name="itemSearchInfoDao" ref="itemSearchInfoDao"></property>
 	</bean>
-	<bean id="itemViewController" class ="com.hanger.item.controller.ItemViewController">
+	<bean id="itemViewController" class="com.hanger.item.controller.ItemViewController">
 		<property name="itemViewDao" ref="itemViewDao"></property>
 	</bean>
-	
+
 	<!-- review 요청 url과 Controller 매핑 -->
-	<bean id="reviewLikeController" class ="com.hanger.posting.review.controller.ReviewLikeController">
+	<bean id="reviewLikeController"
+		class="com.hanger.posting.review.controller.ReviewLikeController">
 		<property name="reviewLikeCheckDao" ref="reviewLikeCheckDao"></property>
 	</bean>
-	<bean id = "reviewController" class = "com.hanger.posting.review.controller.ReviewController">
-		<property name="reviewListDao" ref = "reviewListDao"></property>
+	<bean id="reviewController" class="com.hanger.posting.review.controller.ReviewController">
+		<property name="reviewListDao" ref="reviewListDao"></property>
 	</bean>
-	
+	<bean id="reviewWriteController"
+		class="com.hanger.posting.review.controller.ReviewWriteController">
+		<property name="itemViewDao" ref="itemViewDao"></property>
+	</bean>
+	<bean id="reviewWriteFormController"
+		class="com.hanger.posting.review.controller.ReviewWriteFormController">
+		<property name="reviewWriteDao" ref="reviewWriteDao"></property>
+	</bean>
+	<bean id="reviewShowController"
+		class="com.hanger.posting.review.controller.ReviewShowController">
+		<property name="reviewShowDao" ref="reviewShowDao"></property>
+	</bean>
+
 	<!-- Scrap 요청 url과 Controller 매핑 -->
-	<bean id = "scrapController" class = "com.hanger.scrap.controller.ScrapController">
-		<property name = "scrapDao" ref = "scrapDao"></property>
+	<bean id="scrapController" class="com.hanger.scrap.controller.ScrapController">
+		<property name="scrapDao" ref="scrapDao"></property>
 	</bean>
-	<bean id = "userScrapController" class  = "com.hanger.scrap.controller.UserScrapController">
-		<property name="userScrapDao" ref = "userScrapDao"></property>
-		<property name="userSelectDao" ref = "userSelectDao"></property>
+	<bean id="userScrapController" class="com.hanger.scrap.controller.UserScrapController">
+		<property name="userScrapDao" ref="userScrapDao"></property>
+		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
-	
-	<!--  Tip & TipReply Controller 매핑 -->
-	<bean id="detailTipController" class ="com.hanger.posting.tip.controller.DetailTipController">
+
+	<!-- Tip & TipReply Controller 매핑 -->
+	<bean id="detailTipController" class="com.hanger.posting.tip.controller.DetailTipController">
 		<property name="replyInsertDao" ref="replyInsertDao"></property>
 		<property name="replySelectDao" ref="replySelectDao"></property>
 	</bean>
-	
-	<!-- Reply Update & Delete Controller 매핑  -->
-	<bean id="replyUpdateController" class ="com.hanger.reply.controller.ReplyUpdateController">
+
+	<!-- Reply Update & Delete Controller 매핑 -->
+	<bean id="replyUpdateController" class="com.hanger.reply.controller.ReplyUpdateController">
 		<property name="replyUpdateDao" ref="replyUpdateDao"></property>
 		<property name="replyRemoveDao" ref="replyRemoveDao"></property>
 	</bean>
-	
+
 	<!-- Mileage Controller 매핑 -->
-	<bean id="userMileageController" class ="com.hanger.mileage.controller.UserMileageController">
+	<bean id="userMileageController" class="com.hanger.mileage.controller.UserMileageController">
 		<property name="userMileageDao" ref="userMileageDao"></property>
 	</bean>
-	
+
 	<!-- ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ -->
-	
-	<!-- User Dao beans  -->
+
+	<!-- User Dao beans -->
 	<bean id="userJoinDao" class="com.hanger.user.dao.UserJoinDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="userLoginDao" class="com.hanger.user.dao.UserLoginDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="userJoinZipCodeDao" class="com.hanger.user.dao.UserJoinZipCodeDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="userIdCheckDao" class="com.hanger.user.dao.UserIdCheckDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="userUpdateDao" class="com.hanger.user.dao.UserUpdateDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="userDeleteDao" class="com.hanger.user.dao.UserDeleteDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="userSearchDao" class="com.hanger.user.dao.UserSearchDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="userFindPasswordDao" class="com.hanger.user.dao.UserFindPasswordDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="userSelectDao" class="com.hanger.user.dao.UserSelectDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
-	
-	<!-- Relation Dao beans  -->
+
+	<!-- Relation Dao beans -->
 	<bean id="relationInsertDao" class="com.hanger.user.dao.RelationInsertDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="relationDeleteDao" class="com.hanger.user.dao.RelationDeleteDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="relationSearchDao" class="com.hanger.user.dao.RelationSearchDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
-	
-	<!-- Manager/Item Dao beans  -->
+
+	<!-- Manager/Item Dao beans -->
 	<bean id="managerAddItemDao" class="com.hanger.manager.item.dao.ManagerAddItemDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="managerSearchBrandDao" class="com.hanger.manager.item.dao.ManagerSearchBrandDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="managerAddBrandDao" class="com.hanger.manager.item.dao.ManagerAddBrandDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
-	
-	<!-- Order Dao beans  -->
+
+	<!-- Order Dao beans -->
 	<bean id="orderBuyDao" class="com.hanger.order.dao.OrderBuyDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="cartDao" class="com.hanger.order.dao.CartDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="cartUpdateAmountDao" class="com.hanger.order.dao.CartUpdateAmountDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="orderDecideDao" class="com.hanger.order.dao.OrderDecideDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="orderInfoDao" class="com.hanger.order.dao.OrderInfoDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
-	
+
 	<!-- Item Dao beans -->
 	<bean id="itemSearchDao" class="com.hanger.item.dao.ItemSearchDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="itemSearchInfoDao" class="com.hanger.item.dao.ItemSearchInfoDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="itemViewDao" class="com.hanger.item.dao.ItemViewDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
-	
+
 	<!-- review Dao beans -->
 	<bean id="reviewLikeCheckDao" class="com.hanger.posting.review.dao.ReviewLikeCheckDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
-	<bean id = "reviewListDao" class = "com.hanger.posting.review.dao.ReviewListDao">
-		<constructor-arg ref = "sqlMapClientTemplate" />
+	<bean id="reviewListDao" class="com.hanger.posting.review.dao.ReviewListDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="userReviewDao" class="com.hanger.user.dao.UserReviewDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
-	
+	<bean id="reviewWriteDao" class="com.hanger.posting.review.dao.ReviewWriteDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
+	</bean>
+	<bean id="reviewShowDao" class="com.hanger.posting.review.dao.ReviewShowDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
+	</bean>
+
 	<!-- Scrap Dao Beans -->
-	<bean id = "scrapDao" class = "com.hanger.scrap.dao.ScrapDao">
-		<constructor-arg ref = "sqlMapClientTemplate" />
+	<bean id="scrapDao" class="com.hanger.scrap.dao.ScrapDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
-	<bean id = "userScrapDao" class = "com.hanger.scrap.dao.UserScrapDao">
-		<constructor-arg ref = "sqlMapClientTemplate" />
+	<bean id="userScrapDao" class="com.hanger.scrap.dao.UserScrapDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
-	
+
 	<!-- Reply Dao beans -->
 	<bean id="replyInsertDao" class="com.hanger.reply.dao.ReplyInsertDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="replySelectDao" class="com.hanger.reply.dao.ReplySelectDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="replyUpdateDao" class="com.hanger.reply.dao.ReplyUpdateDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="replyRemoveDao" class="com.hanger.reply.dao.ReplyRemoveDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 
 	<!-- Mileage Dao beans -->
 	<bean id="userMileageDao" class="com.hanger.mileage.dao.UserMileageDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="useMileageDao" class="com.hanger.mileage.dao.UseMileageDao">
-		<constructor-arg ref="sqlMapClientTemplate"/>
+		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
-	
+
 	<!-- ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ -->
 
 	<!-- 컨트롤러의 처리 결과를 보여줄 뷰를 선택하는 방식 -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-	
+
 	<!--com.cookpon2 하위 모든 패키지에 있는 파일의 어노테이션을 스캔해서 빈으로 등록 -->
 	<context:component-scan base-package="com.hanger" />
-	
+
 	<!-- annotation을 쓰겠다 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
-	
+
 	<context:property-placeholder location="classpath:config/db.properties" />
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${driver}" />
@@ -318,10 +343,10 @@
 	</bean>
 
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation" value="classpath:config/sqlMapConfig.xml"/>
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:config/sqlMapConfig.xml" />
 	</bean>
 	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
-		<property name="sqlMapClient" ref="sqlMapClient"/>
+		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
 </beans>

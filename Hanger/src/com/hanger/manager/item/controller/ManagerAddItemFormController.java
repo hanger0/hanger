@@ -33,9 +33,10 @@ public class ManagerAddItemFormController extends BaseController{
 		{
 			dayFile.mkdirs();
 		}
-		String savePath = dayFile.getAbsolutePath();
+		String savePath = "/upfile/item/detail";
+		String saveAbsolutePath = dayFile.getAbsolutePath();
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(request, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(request, "C:\\Users\\Administrator\\git\\hanger1\\Hanger\\WebContent\\upfile\\item\\detail", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		ManagerItemVo item = new ManagerItemVo();
 		
@@ -67,9 +68,9 @@ public class ManagerAddItemFormController extends BaseController{
 			} else {
 				itemTotalInfo += temp[i] + "\"";
 			}
-			System.out.println(temp[i]);
-			System.out.println(itemTotalInfo);
 		}
+		
+		itemTotalInfo += temp[temp.length-2] + "\"" + temp[temp.length-1];
 		
 		String [] itemSize = new String[sizeCnt];
 		int [] itemMarketPrice = new int[sizeCnt];
@@ -95,7 +96,7 @@ public class ManagerAddItemFormController extends BaseController{
 //		String fileFormName=(String)formNames.nextElement(); // 업로드 하는 파일이 많을 경우 while 을 사용
 //		System.out.println(fileFormName);
 		
-		String itemMainPicPath = savePath;
+		String itemMainPicPath = "/upfile/item/main";
 		String itemMainPicOrgName = mul.getOriginalFileName("mainPic");
 		String itemMainPicSaveName = mul.getFilesystemName("mainPic");
 		int itemMainPicSize = 0;

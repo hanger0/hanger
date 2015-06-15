@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="Data">
-	<typeAlias alias="reviewVo" type="com.hanger.posting.review.vo.ReviewVo"/>
+	<typeAlias alias="review" type="com.hanger.posting.review.vo.ReviewVo"/>
+	<typeAlias alias="reviewShow" type="com.hanger.posting.review.vo.ReviewShowVo"/>
 	
-	<insert id="insertReview" parameterClass="reviewVo">
-		INSERT INTO REVIEW(POSTING_CODE, USER_CODE, ITEM_GROUP_CODE, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_SCORE, 
+	<insert id="insertReview" parameterClass="review">
+		INSERT INTO REVIEW(POSTING_CODE, 
+		USER_CODE, ITEM_GROUP_CODE, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_SCORE, 
+		REVIEW_MAIN_PIC_PATH, REVIEW_MAIN_PIC_ORGNAME, REVIEW_MAIN_PIC_SAVENAME, REVIEW_MAIN_PIC_SIZE, 
 		REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
 		VALUES(CONCAT("RV",LPAD((SELECT GET_SEQ('REVIEW_CODE')), 10, '0')), 
 		#userCode#, #itemGroupCode#, #reviewTitle#, #reviewContent#, #reviewScore#, 
+		#reviewMainPicPath#, #reviewMainPicOrgName#, #reviewMainPicSaveName#, #reviewMainPicSize#, 
 		#regId#, sysdate(), #regIp#, #updId#, sysdate(), #updIp#)
 	</insert>
 	
+	<select id="selectPostingCode" resultClass="String">
+		SELECT CONCAT("RV", LPAD((SELECT ID FROM SEQUENCE WHERE SEQ_NAME='REVIEW_CODE'), 10, '0'))
+	</select>
+	
+	<select id="getReviewDetail" parameterClass="String" resultClass="review">
+		SELECT POSTING_CODE as postingCode, USER_CODE as userCode, ITEM_GROUP_CODE as itemGroupCode, 
+		REVIEW_USE_YN as reviewUseYn, REVIEW_SCORE as reviewScore, REVIEW_TITLE as reviewTitle, REVIEW_CONTENT as reviewContent, 
+		REG_DATE as regDate, REG_ID as regId 
+		FROM REVIEW 
+		WHERE POSTING_CODE = #reviewCode#;
+	</select>
+	
+	<select id="getReviewShow" parameterClass="String" resultClass="reviewShow">
+		SELECT 
+		  R.POSTING_CODE as reviewCode, R.ITEM_GROUP_CODE as itemGroupCode, R.USER_CODE as WriterCode, 
+		  R.REVIEW_USE_YN as reviewUserYn, R.REVIEW_SCORE as reviewScore, R.REVIEW_TITLE as reviewTitle, R.REVIEW_CONTENT as reviewContent, 
+		  R.REVIEW_MAIN_PIC_PATH as reviewMainPicPath, R.REVIEW_MAIN_PIC_SAVENAME as reviewMainPicSaveName, L.REVIEW_LIKE_CNT as reviewLikeCnt, 
+		  S.REVIEW_SCRAP_CNT as reviewScrapCnt, R.REG_DATE as reviewRegDate, B.BRAND_NAME as itemBrandName, I.BRAND_CODE as itemBrandCode, 
+		  I.ITEM_NAME as itemName, I.ITEM_CODE as itemCode, I.ITEM_PIC_PATH as itemPicPath, I.ITEM_PIC_SAVENAME as itemPicSaveName, 
+		  ST.STOCK_SELL_PRICE as itemSellPrice, I.ITEM_SUMMARY_INFO as itemSummaryInfo, U.USER_CODE as writerCode, U.USER_NAME as writerName, 
+		  U.USER_PIC_SAVE_NAME as writerPicSaveName, U.USER_PIC_PATH as writerPicPath, U.USER_BIRTH as writerBirth, 
+		  U.USER_SKINTYPE as writerSkinType, U.USER_SKINTONE as writerSkinTone, RE.FOLLOWER_CNT as writerFollowerCnt, 
+		  P.POSTING_CNT as writerPostingCnt, PL.POSTING_LIKE_CNT as WriterPostingLikeCnt 
+		FROM 
+		  REVIEW R, BRAND B, ITEM I, USER U, ITEM_STOCK ST, 
+		  (SELECT COUNT(POSTING_LIKE.USER_CODE) AS REVIEW_LIKE_CNT FROM POSTING_LIKE, REVIEW WHERE POSTING_LIKE.POSTING_CODE = REVIEW.POSTING_CODE) L, 
+		  (SELECT COUNT(SCRAP.USER_CODE) AS REVIEW_SCRAP_CNT FROM SCRAP, REVIEW WHERE SCRAP.POSTING_CODE = REVIEW.POSTING_CODE) S,  
+		  (SELECT COUNT(RELATION.RELATION_FOLLOWER) AS FOLLOWER_CNT FROM RELATION, REVIEW WHERE RELATION.RELATION_FOLLOWING = REVIEW.USER_CODE) RE, 
+		  (SELECT COUNT(REVIEW.POSTING_CODE) AS POSTING_CNT FROM REVIEW, USER WHERE REVIEW.USER_CODE = USER.USER_CODE) P,
+		  (SELECT COUNT(POSTING_LIKE.USER_CODE) AS POSTING_LIKE_CNT FROM REVIEW, POSTING_LIKE, USER 
+		    WHERE REVIEW.USER_CODE = USER.USER_CODE AND REVIEW.POSTING_CODE = POSTING_LIKE.POSTING_CODE) PL 
+		WHERE B.BRAND_CODE = I.BRAND_CODE AND R.ITEM_GROUP_CODE = I.ITEM_GROUP_CODE AND
+		  ST.ITEM_CODE = I.ITEM_CODE AND ST.STOCK_USE_YN = "Y" AND 
+		  R.USER_CODE = U.USER_CODE AND R.REVIEW_USE_YN ="Y" AND R.POSTING_CODE = #reviewCode#;
+	</select>
 </sqlMap>

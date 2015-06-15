@@ -154,7 +154,7 @@
                } else if (session.getAttribute("adminYn") != null
                      && ((String) session.getAttribute("adminYn")).equals("Y")) {
             %>
-            <li class="headli"><a href="/goManagerMainPage.hang"><img
+            <li class="headli"><a href="/managerAddItem.hang"><img
                   src="images/icons/top/mypage.jpg" /></a></li>
             <li class="headli"><a href="/logout.hang"><img
                   src="images/icons/top/option.jpg" /></a></li>

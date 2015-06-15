@@ -7,8 +7,13 @@
 	{
 		message = (String)request.getAttribute("message");
 	}
+	boolean loginYn = false;
+	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y"))
+	{
+		loginYn = true;
+	}
 %>
-
+<HTML>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="/js/jquery-2.1.3.min.js" type="text/javascript"></script>
@@ -72,7 +77,6 @@ $(document).ready( function() {
 <%
 	}
 %>
-
 	<BODY style="margin:0px" data-spy="scroll" data-target="#affix">
 		<div id="wrap">
 			<div id="header"> 
@@ -84,14 +88,19 @@ $(document).ready( function() {
 				<p><br>
 				<div id="content">
 					<jsp:include page="<%= mainUrl %>" flush="true" />
+<%
+					if(loginYn)
+					{
+%>
 					<div id="floating">
     					<div class="containers">                                      
   							<div class="dropup">
     							<button class="btn btn-primary dropdown-toggle" id="mainReviewBtn" type="button" id="menu1" data-toggle="dropdown" aria-expanded="true">
-    								<B>Write Review</B><span class="caret">
-    							</span></button>
+    								<B>Write Review</B>
+    								<span class="caret"></span>
+    							</button>
     							<ul class="dropdown-menu" id="dropdown-menu"role="menu" aria-labelledby="menu1">
-      								<li  role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="images/yebin.jpg" class="dropimg"/><P>미샤 스킨&로션</P></a></li>
+      								<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="images/yebin.jpg" class="dropimg"/><P>미샤 스킨&로션</P></a></li>
       								<li role="presentation" class="divider"></li>
       								<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="images/yebin.jpg" class="dropimg"/><P>페이스샵 아이크림</P></a></li>
       								<li role="presentation" class="divider"></li>
@@ -102,6 +111,9 @@ $(document).ready( function() {
   							</div>
 						</div>
 					</div>
+<%
+					}
+%>
 				</div>
 				<!--
 				<div id="sidebar"> 
@@ -112,9 +124,6 @@ $(document).ready( function() {
 			<div id="footer"> 
 				<jsp:include page ="Bottom.jsp"/>
 			</div>
-		</div>
-		
-		
-	</BODY>
-	
-<HTML>
+		</div>		
+	</BODY>	
+</HTML>

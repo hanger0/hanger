@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,16 @@ public class ManagerAddItemController extends BaseController {
 		List<ManagerFeatureVo> feature1List = managerAddItemDao.selectFeature1();
 		List<ManagerFeatureVo> feature2List = managerAddItemDao.selectFeature2();
 		
+		HttpSession session = request.getSession(false);
+		String adminYn = (String)session.getAttribute("adminYn");
+		String message = "";
+		
+		if(adminYn.equals("N")){
+			ModelAndView mav = new ModelAndView();
+			moveUrl = "manager/item/ManagerAddItem";
+			message = "접근 권한이 없습니다.";
+		}
+		
 		moveUrl = "manager/item/ManagerAddItem";
 
 		ModelAndView mav = new ModelAndView();
@@ -40,7 +51,8 @@ public class ManagerAddItemController extends BaseController {
 		mav.addObject("category3List", category3List);
 		mav.addObject("feature1List", feature1List);
 		mav.addObject("feature2List", feature2List);
-
+		mav.addObject("message", message);
+		
 		System.out.println("AddItem...");
 		return mav;
 	}

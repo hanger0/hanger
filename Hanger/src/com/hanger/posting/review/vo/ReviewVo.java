@@ -24,6 +24,35 @@ public class ReviewVo {
 	private String updId;
 	private String updIp;
 	private String reviewContent;
+	private String reviewMainPicPath;
+	private String reviewMainPicOrgName;
+	private String reviewMainPicSaveName;
+	private int reviewMainPicSize;
+	
+	public String getReviewMainPicPath() {
+		return reviewMainPicPath;
+	}
+	public void setReviewMainPicPath(String reviewMainPicPath) {
+		this.reviewMainPicPath = reviewMainPicPath;
+	}
+	public String getReviewMainPicOrgName() {
+		return reviewMainPicOrgName;
+	}
+	public void setReviewMainPicOrgName(String reviewMainPicOrgName) {
+		this.reviewMainPicOrgName = reviewMainPicOrgName;
+	}
+	public String getReviewMainPicSaveName() {
+		return reviewMainPicSaveName;
+	}
+	public void setReviewMainPicSaveName(String reviewMainPicSaveName) {
+		this.reviewMainPicSaveName = reviewMainPicSaveName;
+	}
+	public int getReviewMainPicSize() {
+		return reviewMainPicSize;
+	}
+	public void setReviewMainPicSize(int reviewMainPicSize) {
+		this.reviewMainPicSize = reviewMainPicSize;
+	}
 	public String getPostingCode() {
 		return postingCode;
 	}
