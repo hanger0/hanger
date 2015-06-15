@@ -45,7 +45,13 @@ $(function(){
 				var resultArr = resultText.split("^");
 				var resultCode = resultArr[0];
 				var resultId = resultArr[1];
-				var resultMessage = "'<FONT color='red'>"+resultId + "</FONT>' 는 " + resultArr[2];
+				var resultMessage;
+				if(resultArr[2] == " "){
+					resultMessage = "'<FONT color='red'>이메일 형식에 맞지 않습니다.</FONT>'";
+					$('#idCheckMessage').html(resultMessage);
+					return false;
+				}
+				resultMessage = "'<FONT color='red'>"+resultId + "</FONT>' 는 " + resultArr[2];
 				if(resultCode=="1")
 				{
 					$("input:hidden[name=idCheckYn]").val('Y');

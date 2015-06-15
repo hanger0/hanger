@@ -1,10 +1,19 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.hanger.user.vo.*"%>
 <%
-   String myName = "";
-   if (session != null && session.getAttribute("loginYn") != null
-         && ((String) session.getAttribute("loginYn")).equals("Y")) {
-      myName = (String) session.getAttribute("myUserName");
-   }
+	String myName = "";
+	if (session != null && session.getAttribute("loginYn") != null
+	&& ((String) session.getAttribute("loginYn")).equals("Y")) {
+		myName = (String) session.getAttribute("myUserName");
+	}
+	   
+	ArrayList<UserVo> userList = (ArrayList<UserVo>)request.getAttribute("userList");
+	
+	String qt = "";
+	if((String)request.getAttribute("qt") != null && ((String)request.getAttribute("qt")).length() > 0){
+	qt = (String)request.getAttribute("qt");
+}
 %>
 <script type="text/javascript">
    $(document).ready(function($) {
@@ -43,6 +52,37 @@
    background: url(images/bg_grey.png);
 }
 </style>
+<SCRIPT>
+	$(function() {
+		var f = document.searchFriendForm;
+		$("#searchFriendBtn").click(function() {
+					
+			var ftext = trim(f.searchText.value);
+	
+			if(ftext != null) {
+				$.ajax({
+					type : "POST",
+					url : "/userMiniSearch.hang",
+					dataType : "text",
+					data : "searchText="+ftext,
+					success : function(text) {
+						var supertext = trim(text);
+						var resultMessage = "<FONT color='blue' >"+supertext + "</FONT>";
+						$('#friendSearchMessage').html(resultMessage);
+					},
+					error : function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:"
+								+ request.responseText + "\n" + "error:"
+								+ error);
+					}
+				});
+			} else {
+				alert("검색어를 입력해주세요");
+				false;
+			}
+		});
+	});
+</SCRIPT>
 
 <header id="header">
    <!--기본페이지에는 이거보임-->
@@ -72,69 +112,28 @@
                   <span class="glyphicon glyphicon-user" style = "font-size:24px"></span>
                </a>
             </li>
-            <!-- 알람시작 -->
-            <ul class="nav navbar-right ">
-               <li class="dropdown open"></li>
-               <li>
-                  <ul class="dropdown-menu" role="menu">
-                     <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                           <input type="text" class="form-control" placeholder="Search" />
-                        </div>
-                        <button type="submit" class="btn btn-default">검색</button>
-                     </form>
-                     <%
-                        for (int i = 1; i < 4; i++) {
-                     %>
-                     <li><a href="#"> <img src="images/test.png" />
-                           <div class="message-and-time" style="float: right;">
-                              <div class="message">
-                                 <span class="user">로리콘박상욱</span>님이 회원님을 팔로우 했습니다.
-                              </div>
-                              <div class="time">2015년 5월 27일</div>
-                           </div>
-                     </a></li>
-                     <%
-                        }
-                     %>
-                  </ul>
-               </li>
-            </ul>
-            <li>
-               <ul class="nav">
-                  <li class="dropdown">
-                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"  style=" width:50; height: 54">
-                        <span class="glyphicon glyphicon-bullhorn" style = "font-size:24px"></span>
-                     </a>
-                     <ul class="dropdown-menu" role="menu">
-                        <form class="navbar-form navbar-left" role="search">
-                           <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Search">
-                           </div>
-                           <button type="button" class="btn btn-default">검색</button>
-                        </form>
-                        <%
-                           for (int i = 1; i < 4; i++) {
-                        %>
-                        <li>
-                           <a href="#">
-                              <img src="images/test.png" />
-                              <div class="message-and-time" style="float: right;">
-                                 <div class="message">
-                                    <span class="user">로리콘박상욱</span>님이 회원님을 팔로우 했습니다.
-                                 </div>
-                                 <div class="time">2015년 5월 27일</div>
-                              </div>
-                           </a>
-                        </li>
-                        <%
-                           }
-                        %>
-                     </ul>
-                  </li>
-               </ul>
-            </li>
-            <!-- 알람 끝 -->
+           <!-- 알람시작 -->
+				<li>
+					<ul class="nav">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" aria-expanded="true"
+							style="width: 50; height: 54"> <span
+								class="glyphicon glyphicon-bullhorn" style="font-size: 24px"></span>
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<form class="navbar-form navbar-left" role="search" id="searchFriendForm" name="searchFriendForm" style="width:290px">
+									<div class="form-group">
+										<input type="text" class="form-control" id="searchText"
+											name="searchText" placeholder="친구검색">
+									</div>
+									<button type="button" class="btn btn-default"
+										id="searchFriendBtn" name="searchFriendBtn">검색</button>
+								</form>
+								<span class="user searchFriend" id = "friendSearchMessage"></span>
+							</ul></li>
+					</ul>
+				</li>
+				<!-- 알람 끝 -->
             <li class="headli">
                <a href="/cart.hang">
                   <span class = "glyphicon glyphicon-shopping-cart" style = "font-size:24px"></span>
@@ -183,7 +182,7 @@
          <div class="grey">
             <ul id="mega-menu-3" class="mega-menu">
                <li class="shadow" style="margin-left: 23%"><A>&nbsp;</A></li>
-               <li><a href="/itemList.hang">SHOP</a>
+               <li><a href="/itemList.hang" onclick="return false;">SHOP</a>
                   <ul>
                      <li style="margin-left: 10%">
                      	<a href="/itemSearch.hang?cateCode=C1001">
@@ -271,7 +270,7 @@
                            <li><a href="/itemSearch.hang?cateCode=C2018"><font size="2"><b> 도구</b></font></a></li>
                         </ul>
                   </ul></li>
-               <li><a href="/brand.hang">BRAND</a>
+               <li><a href="/brand.hang" onclick="return false;">BRAND</a>
                   <ul>
                      <li style="margin-left: 10%"><a href="#"><font size="4"><b>알파벳
                                  순</b></font></a>
@@ -386,7 +385,7 @@
                            <li><a href="#"><font size="2"><b>Z</b></font></a>
                         </ul>
                   </ul></li>
-               <li><a href="/sale.hang">SALE</a></li>
+               <li><a href="/sale.hang" onclick="return false;">TYPE</a></li>
             </ul>
          </div>
       </div>

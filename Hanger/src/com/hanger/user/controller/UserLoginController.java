@@ -1,5 +1,6 @@
 package com.hanger.user.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,19 +12,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.item.dao.ItemListForReviewDao;
 import com.hanger.user.dao.UserLoginDao;
 import com.hanger.user.vo.UserVo;
 
 @Controller
 @RequestMapping("/login.hang")
 public class UserLoginController extends BaseController {
-	private UserLoginDao userLoginDao;
-	
+	private UserLoginDao userLoginDao;	
 	public void setUserLoginDao(UserLoginDao userLoginDao)
 	{
 		this.userLoginDao = userLoginDao;
 	}
-	
+	private ItemListForReviewDao itemListForReviewDao;
+	public void setItemListForReviewDao(ItemListForReviewDao itemListForReviewDao) {
+		this.itemListForReviewDao = itemListForReviewDao;
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String form(){
 		return "user/Login";
@@ -55,6 +60,9 @@ public class UserLoginController extends BaseController {
 			session.setAttribute("myUserName", myName);
 			session.setAttribute("myUserCode", myCode);
 			session.setAttribute("adminYn", adminYn);
+			
+			ArrayList itemListForReview = (ArrayList)itemListForReviewDao.getItemListForReview(myCode);
+			session.setAttribute("itemListForReview", itemListForReview);
 			
 			message = null;
 			moveUrl = "common/Frame";

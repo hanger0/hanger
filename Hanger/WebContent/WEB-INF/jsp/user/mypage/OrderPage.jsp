@@ -5,6 +5,15 @@
 	ArrayList<OrderVo> orderList = (ArrayList<OrderVo>)request.getAttribute("orderList");
 %>
 
+<script>
+$(function(){
+	$("#decideBtn").click(function(){
+		var orderInfoCode = $(this).attr("orderInfoCode");
+		$("input:hidden[name=orderInfoCode]").val(orderInfoCode);
+		$("#decideForm").submit();
+	});
+});
+</script>
 <body>
 	<div class="container" style="width:97.7%">
 		<!-- 오더 작성 시작 -->
@@ -50,17 +59,28 @@
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2">동작구사랑방</td>
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2">4568121680<P>(배송중)</td>
+							rowspan="2"><P><%= order.getOrderState() %></td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2">
-							<!-- 구매확정을 누르면 AJAX로 리뷰쓰기로 변함 --> 
+				<%
+					if(order.getOrderItemVerify().equals("Y")){
+				%>
 							<input type="button" value="리뷰쓰기" class="btn btn-default" />
+				<%
+					} else{
+				%>
+						<form id="decideForm" action="/orderDecide.hang" method="POST">
+							<input name="orderInfoCode" type="hidden" />
+							<input id="decideBtn" type="button" value="구매확정" class="btn btn-default" orderInfoCode="<%= order.getOrderInfoCode() %>" />
+						</form>
+				<%
+					}
+				%>
 						</td>
 					</tr>
 					<tr>
-						<td
-							style="border-bottom: 2px solid gray; border-right: 1px solid gray; padding-right: 15px"
-							colspan="3"><font size="2">1. A타입(로레알파리 루센트 매직 비비에센스
-								01호 내츄럴 베이지+워터프루프 젤펜슬 아이라이너+립 컬러 스틱) / 19,000원 </font></td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; padding-right: 15px" colspan="3">
+							<font size="2"><%= order.getItemDetailInfo() %> / <%= Integer.parseInt(order.getOrderItemAmount()) * Integer.parseInt(order.getOrderItemSellPrice()) %>원 </font>
+						</td>
 					</tr>
 					<%
 			}

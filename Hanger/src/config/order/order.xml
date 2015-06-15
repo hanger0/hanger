@@ -25,7 +25,7 @@
 		select 
 			a.REG_DATE as regDate, ORDER_STATE as orderState, b.ORDER_ITEM_SELL_PRICE as orderItemSellPrice, b.ORDER_ITEM_RECOM as orderItemRecom,
 			b.ORDER_ITEM_VERIFY as orderItemVerify, b.ORDER_ITEM_AMOUNT as orderItemAmount, c.ITEM_PIC_PATH as itemPicPath, c.ITEM_PIC_SAVENAME as itemPicSaveName,
-			c.item_name as itemName, c.ITEM_DETAIL_INFO as itemDetailInfo
+			c.item_name as itemName, c.ITEM_DETAIL_INFO as itemDetailInfo, b.ORDER_INFO_CODE as orderInfoCode
 		FROM 
 			ordering a, order_info b, item c
 		WHERE 

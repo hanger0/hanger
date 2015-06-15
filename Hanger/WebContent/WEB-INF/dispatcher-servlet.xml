@@ -29,6 +29,7 @@
 	</bean>
 	<bean id="userLoginController" class="com.hanger.user.controller.UserLoginController">
 		<property name="userLoginDao" ref="userLoginDao"></property>
+		<property name="itemListForReviewDao" ref="itemListForReviewDao"></property>
 	</bean>
 	<bean id="userUpdateController" class="com.hanger.user.controller.UserUpdateController">
 		<property name="userUpdateDao" ref="userUpdateDao"></property>
@@ -127,8 +128,9 @@
 	</bean>
 	<bean id="orderDecideController" class="com.hanger.order.controller.OrderDecideController">
 		<property name="orderDecideDao" ref="orderDecideDao"></property>
+		<property name="userSelectDao" ref="userSelectDao"></property>
+		<property name="orderInfoDao" ref="orderInfoDao"></property>
 	</bean>
-
 	<bean id="mainReviewController"
 		class="com.hanger.posting.review.controller.MainReviewController">
 		<property name="scrapDao" ref="scrapDao"></property>
@@ -269,6 +271,9 @@
 		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="itemViewDao" class="com.hanger.item.dao.ItemViewDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
+	</bean>
+	<bean id="itemListForReviewDao" class="com.hanger.item.dao.ItemListForReviewDao">
 		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 

@@ -13,6 +13,9 @@
 			<font size="4">
 			<div class = "title" style = "width:97.7%;display:table;margin-left:auto;margin-right:auto">
 				<b>MyReview</b>
+				<div class = "reviewButton" style = "float:right">
+					<span><input type = "button" value = "¸®ºä¾²±â" style = "height:25px"></span>
+				</div>
 			</div>
 			</font>
 			<br>

@@ -10,7 +10,7 @@
 			<div class = "title" style = "width:97.7%;display:table;margin-left:auto;margin-right:auto">
 				<b>MyTip</b>
 				<div class = "reviewButton" style = "float:right">
-					<span><input type = "button" value = "리뷰쓰기" style = "height:25px"></span>
+					<span><input type = "button" value = "팁쓰기" style = "height:25px"></span>
 				</div>
 			</div>
 			</font>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
-
+<%@ page import="java.util.*" %>
+<%@ page import="com.hanger.item.vo.ItemListForReviewVo" %>
 <%
 	String mainUrl = (String)request.getAttribute("mainUrl");
 	String message = "";
@@ -8,9 +9,11 @@
 		message = (String)request.getAttribute("message");
 	}
 	boolean loginYn = false;
+	ArrayList itemListForReview=null;
 	if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y"))
 	{
 		loginYn = true;
+		itemListForReview = (ArrayList)request.getAttribute("itemListForReview");
 	}
 %>
 <HTML>
@@ -61,8 +64,7 @@ $(document).ready( function() {
 #dropdown-menu
 {
 	width:200px;
-	height:500px;
-	overflow:auto;
+	overflow-y:scroll;
 }
 .dropimg
 {
@@ -100,13 +102,28 @@ $(document).ready( function() {
     								<span class="caret"></span>
     							</button>
     							<ul class="dropdown-menu" id="dropdown-menu"role="menu" aria-labelledby="menu1">
-      								<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="images/yebin.jpg" class="dropimg"/><P>미샤 스킨&로션</P></a></li>
-      								<li role="presentation" class="divider"></li>
-      								<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="images/yebin.jpg" class="dropimg"/><P>페이스샵 아이크림</P></a></li>
-      								<li role="presentation" class="divider"></li>
-      								<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="images/yebin.jpg" class="dropimg"/><P>KOSTA 손세정제</P></a></li>
-      								<li role="presentation" class="divider"></li>
-      								<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><img src="images/yebin.jpg" class="dropimg"/><P>이니스프리 폼 클렌징</P></a></li>
+<%
+								if(itemListForReview!=null&&itemListForReview.size()>0){
+    							for(int i=0; i<itemListForReview.size(); i++)
+    							{
+    								String itemGroupCode= ((ItemListForReviewVo)itemListForReview.get(i)).getItemGroupCode();
+    								String itemName= ((ItemListForReviewVo)itemListForReview.get(i)).getItemName();
+    								String itemPicPath= ((ItemListForReviewVo)itemListForReview.get(i)).getItemPicPath();
+    								String itemPicSavename= ((ItemListForReviewVo)itemListForReview.get(i)).getItemPicSavename();
+    								String brandName= ((ItemListForReviewVo)itemListForReview.get(i)).getBrandName();
+%>
+    								<li role="presentation"><a role="menuitem" tabindex="-1" href="reviewWrite.hang?itemGroupCode=<%=itemGroupCode%>"><img src="<%=itemPicPath%>/<%=itemPicSavename %>" class="dropimg"/><P><%=itemName %></P></a></li>
+      								<li role="presentation" class="divider"></li>      								
+<%
+      							}
+								}
+								else
+								{
+%>
+									<center><li role="presentation"><P><B>리뷰를 작성할<Br>상품이 없습니다.</B></P></a></li></center>
+<%	
+								}
+%>
     							</ul>
   							</div>
 						</div>

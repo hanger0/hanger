@@ -21,7 +21,7 @@ var InputMainPic = (function loadImageFile() {
 			var img = document.getElementById("mainPic").files;
 
 			if (!fileType.test(img[0].type)) {
-				alert("ì´ë¯¸ì§€ íŒŒì¼ì„ ì—…ë¡œë“œ í•˜ì„¸ìš”");
+				alert("ÀÌ¹ÌÁö ÆÄÀÏÀ» ¾÷·Îµå ÇÏ¼¼¿ä");
 				return;
 			}
 			ImgReader.readAsDataURL(img[0]);
@@ -37,7 +37,7 @@ function home() {
 function searchBrand() {
 	window.open(
 				"/managerBrand.hang",
-				"ë¸Œëœë“œ ë“±ë¡",
+				"ºê·£µå µî·Ï",
 				"toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=420, height=500");
 }
 
@@ -46,7 +46,7 @@ function searchBrand() {
 //	var f = document.addItemForm;
 //	
 //	if(f.manufactureCheck.checked == true){
-//		//ì²´í¬ ì•ˆë˜ì–´ìˆë‹¤ê°€ ì²´í¬í•¨
+//		//Ã¼Å© ¾ÈµÇ¾îÀÖ´Ù°¡ Ã¼Å©ÇÔ
 //		f.manufactureYear.disabled = true;
 //		f.manufactureMonth.disabled = true;
 //		f.manufactureDay.disabled = true;
@@ -76,16 +76,16 @@ $(function(){
 		$("#manufactureDateForm").append("<SELECT id='manufactureYear"+ sizeCnt +"' name='manufactureYear"+ sizeCnt + "'>");
 		$("#manufactureYear"+ sizeCnt).append("<option value='0000' selected='1'>YEAR</option>");
 		for(var i = year; i > 2000; i--){
-			$("#manufactureYear"+ sizeCnt +"").append("<option value='"+ i +"'>"+ i +"ë…„</option>");
+			$("#manufactureYear"+ sizeCnt +"").append("<option value='"+ i +"'>"+ i +"³â</option>");
 		}
 		$("#manufactureDateForm").append("</SELECT>");
 		$("#manufactureDateForm").append("<SELECT id='manufactureMonth"+ sizeCnt +"' name='manufactureMonth"+ sizeCnt + "'>");
 		$("#manufactureMonth"+ sizeCnt).append("<option value='00' selected='1'>MONTH</option>");
 		for(var i = 1; i < 13; i++){
 			if(i < 10){
-				$("#manufactureMonth"+ sizeCnt).append("<option value='0"+ i +"'>"+ i +"ì›”</option>");
+				$("#manufactureMonth"+ sizeCnt).append("<option value='0"+ i +"'>"+ i +"¿ù</option>");
 			}else{
-				$("#manufactureMonth"+ sizeCnt).append("<option value='"+ i +"'>"+ i +"ì›”</option>");
+				$("#manufactureMonth"+ sizeCnt).append("<option value='"+ i +"'>"+ i +"¿ù</option>");
 			}
 		}
 		$("#manufactureDateForm").append("</SELECT>");
@@ -93,10 +93,10 @@ $(function(){
 		$("#manufactureDay"+ sizeCnt).append("<option value='00' selected='1'>DAY</option>");
 		for(var i = 1; i < 32; i++){
 			if(i < 10){
-				$("#manufactureDay"+ sizeCnt).append("<option value='0"+ i +"'>"+ i +"ì¼</option>");
+				$("#manufactureDay"+ sizeCnt).append("<option value='0"+ i +"'>"+ i +"ÀÏ</option>");
 			}
 			else{
-				$("#manufactureDay"+ sizeCnt).append("<option value='"+ i +"'>"+ i +"ì¼</option>");
+				$("#manufactureDay"+ sizeCnt).append("<option value='"+ i +"'>"+ i +"ÀÏ</option>");
 			}
 		}	
 		$("#manufactureDateForm").append("</SELECT>");
@@ -105,16 +105,16 @@ $(function(){
 		$("#expireDateForm").append("<SELECT id='expireYear"+ sizeCnt +"' name='expireYear"+ sizeCnt + "'>");
 		$("#expireYear"+ sizeCnt).append("<option value='0000' selected='1'>YEAR</option>");
 		for(var i = year; i < 2025; i++){
-			$("#expireYear"+ sizeCnt).append("<option value='"+ i +"'>"+ i +"ë…„</option>");
+			$("#expireYear"+ sizeCnt).append("<option value='"+ i +"'>"+ i +"³â</option>");
 		}
 		$("#expireDateForm").append("</SELECT>");
 		$("#expireDateForm").append("<SELECT id='expireMonth"+ sizeCnt +"' name='expireMonth"+ sizeCnt + "'>");
 		$("#expireMonth"+ sizeCnt).append("<option value='00' selected='1'>MONTH</option>");
 		for(var i = 1; i < 13; i++){
 			if(i < 10){
-				$("#expireMonth"+ sizeCnt).append("<option value='0"+ i +"'>"+ i +"ì›”</option>");
+				$("#expireMonth"+ sizeCnt).append("<option value='0"+ i +"'>"+ i +"¿ù</option>");
 			}else{
-				$("#expireMonth"+ sizeCnt).append("<option value='"+ i +"'>"+ i +"ì›”</option>");
+				$("#expireMonth"+ sizeCnt).append("<option value='"+ i +"'>"+ i +"¿ù</option>");
 			}
 		}
 		$("#expireDateForm").append("</SELECT>");
@@ -122,10 +122,10 @@ $(function(){
 		$("#expireDay"+ sizeCnt).append("<option value='00' selected='1'>DAY</option>");
 		for(var i = 1; i < 32; i++){
 			if(i < 10){
-				$("#expireDay"+ sizeCnt).append("<option value='0"+ i +"'>"+ i +"ì¼</option>");
+				$("#expireDay"+ sizeCnt).append("<option value='0"+ i +"'>"+ i +"ÀÏ</option>");
 			}
 			else{
-				$("#expireDay"+ sizeCnt).append("<option value='"+ i +"'>"+ i +"ì¼</option>");
+				$("#expireDay"+ sizeCnt).append("<option value='"+ i +"'>"+ i +"ÀÏ</option>");
 			}
 		}	
 		$("#expireDateForm").append("</SELECT>");
@@ -152,7 +152,7 @@ $(function(){
 			$("#expireDateForm").children().eq(3*sizeCnt).remove();
 			
 		} else {
-			alert("í•˜ë‚˜ ì´ìƒì˜ í•„ë“œëŠ” ì¡´ì¬í•´ì•¼ í•©ë‹ˆë‹¤.");
+			alert("ÇÏ³ª ÀÌ»óÀÇ ÇÊµå´Â Á¸ÀçÇØ¾ß ÇÕ´Ï´Ù.");
 		}
 		f.sizeCnt.value = sizeCnt;
 		return false;
@@ -169,25 +169,25 @@ function addItemAction() {
 	f.totalInfo.value = $('.summernote').code();
 	
 	if (f.brandCode.value == ""){
-		window.alert("ë¸Œëœë“œë¥¼ ë°˜ë“œì‹œ ì„ íƒí•´ì•¼ í•©ë‹ˆë‹¤.");
+		window.alert("ºê·£µå¸¦ ¹İµå½Ã ¼±ÅÃÇØ¾ß ÇÕ´Ï´Ù.");
 		return false;
 	}
 	
 	if (f.name.value == "") {
-		window.alert("ìƒí’ˆëª…ì„ ë°˜ë“œì‹œ ì…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.");
+		window.alert("»óÇ°¸íÀ» ¹İµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
 		f.name.focus();
 		return false;
 	}
 	
 	for(var i = 0; i < f.sizeCnt.value; i++){
 		if (d.getElementsByName("marketPrice"+i)[0].value == ""){
-			window.alert("ì‹œì¥ê°€ë¥¼ ë°˜ë“œì‹œ ì…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.");
+			window.alert("½ÃÀå°¡¸¦ ¹İµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
 			d.getElementsByName("marketPrice"+i)[0].focus();
 			return false;
 		}
 		
 		if ((d.getElementsByName("marketPrice"+i)[0].value * 0) != 0){
-			window.alert("ì‹œì¥ê°€ëŠ” ìˆ«ìë§Œ ì…ë ¥ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+			window.alert("½ÃÀå°¡´Â ¼ıÀÚ¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
 			d.getElementsByName("marketPrice"+i)[0].focus();
 			d.getElementsByName("marketPrice"+i)[0].select();
 			return false;
@@ -196,12 +196,12 @@ function addItemAction() {
 	
 	for(var i = 0; i < f.sizeCnt.value; i++){
 		if (d.getElementsByName("sellPrice"+i)[0].value == "") {
-			window.alert("íŒë§¤ê°€ë¥¼ ë°˜ë“œì‹œ ì…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.");
+			window.alert("ÆÇ¸Å°¡¸¦ ¹İµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
 			d.getElementsByName("sellPrice"+i)[0].focus();
 			return false;
 		}
 		if ((d.getElementsByName("sellPrice"+i)[0].value * 0) != 0){
-			window.alert("íŒë§¤ê°€ëŠ” ìˆ«ìë§Œ ì…ë ¥ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+			window.alert("ÆÇ¸Å°¡´Â ¼ıÀÚ¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
 			d.getElementsByName("sellPrice"+i)[0].focus();
 			d.getElementsByName("sellPrice"+i)[0].select();
 			return false;
@@ -210,13 +210,13 @@ function addItemAction() {
 	
 	for(var i = 0; i < f.sizeCnt.value; i++){
 		if (d.getElementsByName("purchasePrice"+i)[0].value == "") {
-			window.alert("ë§¤ì…ê°€ë¥¼ ë°˜ë“œì‹œ ì…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.");
+			window.alert("¸ÅÀÔ°¡¸¦ ¹İµå½Ã ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
 			d.getElementsByName("purchasePrice"+i)[0].focus();
 			return false;
 		}
 		
 		if ((d.getElementsByName("purchasePrice"+i)[0].value * 0) != 0){
-			window.alert("ë§¤ì…ê°€ëŠ” ìˆ«ìë§Œ ì…ë ¥ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+			window.alert("¸ÅÀÔ°¡´Â ¼ıÀÚ¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
 			d.getElementsByName("purchasePrice"+i)[0].focus();
 			d.getElementsByName("purchasePrice"+i)[0].select();
 			return false;
@@ -225,14 +225,14 @@ function addItemAction() {
 		
 	for(var i = 0; i < f.sizeCnt.value; i++){
 		if ((d.getElementsByName("sellMaxNum"+i)[0].value * 0) != 0){
-			window.alert("ìµœëŒ€íŒë§¤ê°€ëŠ¥ê°œìˆ˜ëŠ” ìˆ«ìë§Œ ì…ë ¥ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+			window.alert("ÃÖ´ëÆÇ¸Å°¡´É°³¼ö´Â ¼ıÀÚ¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
 			d.getElementsByName("sellMaxNum"+i)[0].focus();
 			d.getElementsByName("sellMaxNum"+i)[0].select();
 			return false;
 		}
 	}
 	
-	window.alert("ìƒí’ˆì´ ì •ìƒì ìœ¼ë¡œ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤");
+	window.alert("»óÇ°ÀÌ Á¤»óÀûÀ¸·Î µî·ÏµÇ¾ú½À´Ï´Ù");
 
 	f.submit();
 }
