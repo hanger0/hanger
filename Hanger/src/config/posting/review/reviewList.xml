@@ -8,7 +8,7 @@
 		FROM review
 	</select>
 	
-	<select id = "selectReview" parameterClass = "String" resultClass = "review">
+	<select id = "selectReview" parameterClass = "HashMap" resultClass = "review">
 		SELECT review1.POSTING_CODE as postingCode, review1.ITEM_GROUP_CODE as itemGroupCode, 
 			review1.REVIEW_SCORE as reviewScore, review1.REVIEW_TITLE as reviewTitle, review1.REG_DATE as regDate, 
 			review1.USER_CODE as userCode,
@@ -26,14 +26,24 @@
 		where review1.REVIEW_USE_YN='Y' AND review1.USER_CODE = user.USER_CODE
 			AND review1.ITEM_GROUP_CODE = item.ITEM_GROUP_CODE
 			AND item.BRAND_CODE=brand.BRAND_CODE
-			AND relation.RELATION_FOLLOWING=review1.USER_CODE
-			AND relation.RELATION_FOLLOWER=#userCode#
+			<dynamic>
+				<isNotEmpty property="yourUserCode">
+					AND review1.USER_CODE = #yourUserCode#
+				</isNotEmpty>
+			</dynamic>		
+			<dynamic>
+				<isNotEmpty property="myUserCode">
+					AND relation.RELATION_FOLLOWING=review1.USER_CODE AND relation.RELATION_FOLLOWER=#myUserCode#
+				</isNotEmpty>
+			</dynamic>			
 		group by review1.POSTING_CODE, review1.ITEM_GROUP_CODE,
 			review1.REVIEW_SCORE, review1.REVIEW_TITLE, review1.REG_DATE, 
 			item.ITEM_GROUP_CODE, item.ITEM_NAME, brand.BRAND_NAME, 
 			item.ITEM_PIC_PATH, item.ITEM_PIC_SAVENAME,
 			user.USER_NAME, user.USER_PIC_PATH, user.USER_PIC_SAVE_NAME, 
 			user.USER_SKINTONE, feature2.FEATURE2_NAME;
+			
+			
 	</select>
 </sqlMap>
 

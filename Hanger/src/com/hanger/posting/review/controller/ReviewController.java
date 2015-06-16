@@ -1,6 +1,7 @@
 package com.hanger.posting.review.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,8 +24,10 @@ public class ReviewController extends BaseController {
 	@RequestMapping(value = "/reviewList.hang", method = RequestMethod.GET)
 	public String reviewList(HttpServletRequest req, HttpSession session){
 		//
-		String userCode= (String)session.getAttribute("myUserCode");
-		ArrayList reviewList = reviewListDao.selectReview(userCode);
+		String myUserCode= (String)session.getAttribute("myUserCode");
+		HashMap userCodeMap = new HashMap() ;
+		userCodeMap.put("myUserCode",myUserCode);
+		ArrayList reviewList = reviewListDao.selectReview(userCodeMap);
 		
 		req.setAttribute("mainUrl", root + "posting/review/ReviewList.jsp");
 		req.setAttribute("reviewList", reviewList);

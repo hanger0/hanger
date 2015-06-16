@@ -50,7 +50,7 @@
 	</bean>
 	<bean id="userMyPageController" class="com.hanger.user.controller.UserMyPageController">
 		<property name="userSelectDao" ref="userSelectDao"></property>
-		<property name="userReviewDao" ref="userReviewDao"></property>
+		<property name="reviewListDao" ref="reviewListDao"></property>
 	</bean>
 	<bean id="userTipPageController" class="com.hanger.user.controller.UserTipPageController">
 		<property name="userSelectDao" ref="userSelectDao"></property>
@@ -282,9 +282,6 @@
 		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="reviewListDao" class="com.hanger.posting.review.dao.ReviewListDao">
-		<constructor-arg ref="sqlMapClientTemplate" />
-	</bean>
-	<bean id="userReviewDao" class="com.hanger.user.dao.UserReviewDao">
 		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="reviewWriteDao" class="com.hanger.posting.review.dao.ReviewWriteDao">

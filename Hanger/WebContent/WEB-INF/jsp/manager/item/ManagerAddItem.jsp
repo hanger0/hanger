@@ -35,7 +35,7 @@
 <html>
 <SCRIPT src="/js/jquery-2.1.3.min.js"></SCRIPT>
 <SCRIPT src="/js/common/common.js"></SCRIPT>
-<script src="/js/manager/item/managerItem1.js" type="text/javascript"></script>
+<script src="/js/manager/item/managerItem.js" type="text/javascript"></script>
 
 <!-- include libries(jQuery, bootstrap, fontawesome) -->
 <link

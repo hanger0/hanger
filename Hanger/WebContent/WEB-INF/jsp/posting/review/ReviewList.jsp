@@ -15,7 +15,7 @@
          <!--  ÆÁ ÀÛ¼º ³¡ -->
 
          <%
-        if(reviewList!=null){
+        if(reviewList!=null&&reviewList.size()>0){
             for (int i = 0; i < reviewList.size(); i++) {
             	ReviewVo review = (ReviewVo)reviewList.get(i);
             	
