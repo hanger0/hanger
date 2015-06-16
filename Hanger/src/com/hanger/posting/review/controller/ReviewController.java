@@ -3,6 +3,7 @@ package com.hanger.posting.review.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +21,13 @@ public class ReviewController extends BaseController {
 		this.reviewListDao = reviewListDao;
 	}
 	@RequestMapping(value = "/reviewList.hang", method = RequestMethod.GET)
-	public String reviewList(HttpServletRequest req){
+	public String reviewList(HttpServletRequest req, HttpSession session){
 		//
-		ArrayList reviewList = reviewListDao.selectReview();
+		String userCode= (String)session.getAttribute("myUserCode");
+		ArrayList reviewList = reviewListDao.selectReview(userCode);
 		
 		req.setAttribute("mainUrl", root + "posting/review/ReviewList.jsp");
 		req.setAttribute("reviewList", reviewList);
-		
 		return moveUrl; 
 	}
 }

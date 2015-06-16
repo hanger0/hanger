@@ -15,7 +15,7 @@
          <!--  ÆÁ ÀÛ¼º ³¡ -->
 
          <%
-        if(reviewList == null){
+        if(reviewList!=null){
             for (int i = 0; i < reviewList.size(); i++) {
             	ReviewVo review = (ReviewVo)reviewList.get(i);
             	
@@ -47,7 +47,7 @@
                   <img src="<%=itemPicPath %>/<%= itemPicSaveName%>" width="100%" height="180px" style="display: table; margin-left: auto; margin-right: auto;" class="hotimages">
                </div>
                <div class="caption">
-                  <a href = "/mainReview.hang?postingCode=<%=postingCode%>">
+                  <a href = "/reviewShow.hang?reviewCode=<%=postingCode%>">
                   	<h6><B><%= reviewTitle %></B></h6>
                   	<P>
                   	<h5><B></B></h5>

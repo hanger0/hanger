@@ -31,14 +31,14 @@ public class ReviewWriteFormController extends BaseController{
 		
 		System.out.println("reviewWriteResult.hang...");
 		
-		File dayFile = new File("upfile/posting/review");
+		File dayFile = new File("C:\\Workspace\\hanger\\Hanger\\WebContent\\upfile\\posting\\review");
 		if(!dayFile.exists())
 		{
 			dayFile.mkdirs();
 		}
 		String savePath = "upfile/posting/review";
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(request, "C:\\Users\\Administrator\\git\\hanger1\\Hanger\\WebContent\\upfile\\posting\\review", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(request, "C:\\Workspace\\hanger\\Hanger\\WebContent\\upfile\\posting\\review", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		ReviewVo review = new ReviewVo();
 		

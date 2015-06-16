@@ -65,7 +65,6 @@ public class UserLoginController extends BaseController {
 			
 			ArrayList itemListForReview = (ArrayList)itemListForReviewDao.getItemListForReview(userCode);
 			session.setAttribute("itemListForReview", itemListForReview);
-			System.out.println(itemListForReview);
 			message = null;
 			moveUrl = "common/Frame";
 		}

@@ -514,6 +514,7 @@ H4
         <label for="skinType" class="col-sm-2 control-label">SkinType : </label>
         <div class="col-sm-10">
             <select name="skinType" id="skinType" class="form-control">
+            	<option value="000"<%if(userSkinType.equals("000")){%>selected<%}%>>선택안함</option>
                 <option value="001"<%if(userSkinType.equals("001")){%>selected<%}%>>건성</option>
                 <option value="002"<%if(userSkinType.equals("002")){%>selected<%}%>>지성</option>
                 <option value="003"<%if(userSkinType.equals("003")){%>selected<%}%>>중성</option>
@@ -526,6 +527,7 @@ H4
         <label for="skintone" class="col-sm-2 control-label">SkinTone : </label>
         <div class="col-sm-10">
             <select name="skinTone" id="skinTone" class="form-control">
+                <option value="00"<%if(userSkinTone.equals("00")){%>selected<%}%>>선택안함</option>
                 <option value="13"<%if(userSkinTone.equals("13")){%>selected<%}%>>13호</option>
                 <option value="21"<%if(userSkinTone.equals("21")){%>selected<%}%>>21호</option>
                 <option value="23"<%if(userSkinTone.equals("23")){%>selected<%}%>>23호</option>

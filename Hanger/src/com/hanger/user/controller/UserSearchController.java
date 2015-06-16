@@ -66,13 +66,14 @@ public class UserSearchController extends BaseController {
 		RelationVo relation = new RelationVo();
 		relation.setRelationFollower(myUserCode);
 
-		HashMap map = new HashMap();
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", myUserCode);
 		map.put("qt", qt);
 
 		ArrayList<UserVo> userList = userSearchDao.mainFriendSearch(map);
 
 		req.setAttribute("userList", userList);
+		req.setAttribute("qt", qt);
 
 		return moveUrl;
 	}
