@@ -130,6 +130,7 @@
 		<property name="orderDecideDao" ref="orderDecideDao"></property>
 		<property name="userSelectDao" ref="userSelectDao"></property>
 		<property name="orderInfoDao" ref="orderInfoDao"></property>
+		<property name="itemListForReviewDao" ref="itemListForReviewDao"></property>
 	</bean>
 	<bean id="mainReviewController"
 		class="com.hanger.posting.review.controller.MainReviewController">
@@ -161,6 +162,8 @@
 	<bean id="reviewWriteFormController"
 		class="com.hanger.posting.review.controller.ReviewWriteFormController">
 		<property name="reviewWriteDao" ref="reviewWriteDao"></property>
+		<property name="reviewShowDao" ref="reviewShowDao"></property>
+		<property name="itemListForReviewDao" ref="itemListForReviewDao"></property>
 	</bean>
 	<bean id="reviewShowController"
 		class="com.hanger.posting.review.controller.ReviewShowController">

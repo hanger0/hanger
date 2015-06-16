@@ -295,10 +295,9 @@ H4
         <div class="col-sm-10">
             <select name="skinType" id="skinType" class="form-control">
                 <option value="000">선택안함</option>
-                <option value="001">건성</option>
-                <option value="002">지성</option>
-                <option value="003">중성</option>
-                <option value="004">복합성</option>
+                <option value="F2003">건성</option>
+                <option value="F2002">지성</option>
+                <option value="F2001">중/복합성</option>
             </select>
         </div>
     </div>
@@ -308,9 +307,9 @@ H4
         <div class="col-sm-10">
             <select name="skinTone" id="skinTone" class="form-control">
             	<option value="00">선택안함</option>
-                <option value="13">13호</option>
-                <option value="21">21호</option>
-                <option value="23">23호</option>
+                <option value="13호">13호</option>
+                <option value="21호">21호</option>
+                <option value="23호">23호</option>
             </select>
         </div>
     </div>
@@ -319,31 +318,31 @@ H4
         <label for="skintrouble" class="col-sm-2 control-label">Skin Trouble : </label>
         <div class="col-sm-10 checks">
             <label class="checkbox-inline">
-                <input type="checkbox" name="skinProblem" value="001">
-     			피지
+                <input type="checkbox" name="skinProblem" value="F2004">
+     			여드름
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" name="skinProblem" value="002">
-  				각질제거
+                <input type="checkbox" name="skinProblem" value="F2005">
+  				블랙헤드
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" name="skinProblem" value="003">
-  				주름개선
+                <input type="checkbox" name="skinProblem" value="F2006">
+  				모공
             </label>
         </div>
         <label for="skintrouble" class="col-sm-2 control-label"> </label>
         <div class="col-sm-10 checks">
             <label class="checkbox-inline">
-                <input type="checkbox" name="skinProblem" value="004">
-  				피부미백
+                <input type="checkbox" name="skinProblem" value="F2007">
+  				안티에이징
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" name="skinProblem" value="005">
-  				피부보습
+                <input type="checkbox" name="skinProblem" value="F2008">
+  				주름
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" name="skinProblem" value="006">
-  				보습
+                <input type="checkbox" name="skinProblem" value="F2009">
+  				홍조
             </label>
         </div>
     </div>

@@ -112,9 +112,8 @@ $(document).ready( function() {
     								String itemPicSavename= ((ItemListForReviewVo)itemListForReview.get(i)).getItemPicSavename();
     								String brandName= ((ItemListForReviewVo)itemListForReview.get(i)).getBrandName();
 %>
-    								<li role="presentation"><a role="menuitem" tabindex="-1" href="/reviewWrite.hang?itemGroupCode=<%=itemGroupCode%>"><img src="<%=itemPicPath%>/<%=itemPicSavename %>" class="dropimg"/><P><%=itemName %></P></a></li>
-      								<li role="presentation" class="divider"></li> 
-      								<div class="modal fade" id="myModal"tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">								
+    								<li role="presentation"><a role="menuitem" tabindex="-1" href="reviewWrite.hang?itemGroupCode=<%=itemGroupCode%>"><img src="<%=itemPicPath%>/<%=itemPicSavename %>" class="dropimg"/><P><%=itemName %></P></a></li>
+      								<li role="presentation" class="divider"></li>      								
 <%
       							}
 							}
@@ -141,7 +140,7 @@ $(document).ready( function() {
 			</div>
 			<div id="footer"> 
 				<jsp:include page ="Bottom.jsp"/>
-			</div>	
-		</div>
-	</BODY>
+			</div>
+		</div>		
+	</BODY>	
 </HTML>

@@ -1,5 +1,6 @@
 package com.hanger.posting.review.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -24,4 +25,10 @@ public class ReviewShowDao {
 	public List<ReviewShowVo> getReviewShow(String reviewCode){
 		return (List<ReviewShowVo>)smct.queryForList("getReviewShow", reviewCode);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ReviewShowVo> getReviewNowShow(HashMap map){
+		return (List<ReviewShowVo>)smct.queryForList("getReviewNowShow",map);
+	}
+	
 }

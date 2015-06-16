@@ -348,7 +348,7 @@
  %>      
 		<div class = "review" style = "width:100%;">
 			<div class = "name" style = "width:400px;height:30px;float:left;margin-left:20px;">
-				力格 : 捞 惑前 呈公 亮酒夸(<b>dofwk2@***** / 2015-05-29</b>)
+				力格 : <%=reviewTitle2 %>(<b>dofwk2@***** / 2015-05-29</b>)
 			</div>
 			<BR>
 			<BR>

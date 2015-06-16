@@ -1,5 +1,6 @@
 package com.hanger.posting.review.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -14,9 +15,11 @@ public class ReviewWriteDao {
 		this.smct = smct;
 	}
 	
-	public String insertReview(ReviewVo review){
-		smct.insert("insertReview", review);
-		return (String)smct.queryForObject("selectPostingCode");
-
+	public Object insertReview(ReviewVo review){
+		return smct.insert("insertReview", review);
+	}
+	
+	public String selectPostingCode(HashMap map){
+		return (String)smct.queryForObject("selectPostingCode", map);
 	}
 }

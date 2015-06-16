@@ -36,9 +36,10 @@
 		         REPLY_USE_YN='Y') reply on review1.POSTING_CODE=reply.POSTING_CODE,
 		         REVIEW review2 left join POSTING_LIKE postingLike on review2.POSTING_CODE = postingLike.POSTING_CODE,
 		         REVIEW review3 left join SCRAP scrap on review3.POSTING_CODE = scrap.POSTING_CODE,
-		         USER user, FEATURE2 feature2, RELATION relation
+		         USER user left join FEATURE2 feature2 on user.USER_SKINTYPE=feature2.FEATURE2_CODE,
+		         RELATION relation
 		where review1.REVIEW_USE_YN='Y' AND review1.USER_CODE = user.USER_CODE
-		AND user.USER_SKINTYPE=feature2.FEATURE2_CODE AND review1.ITEM_GROUP_CODE = #itemGroupCode#
+		AND review1.ITEM_GROUP_CODE = #itemGroupCode#
 		AND relation.RELATION_FOLLOWING=review1.USER_CODE
 		AND relation.RELATION_FOLLOWER=#userCode#
 		group by review1.POSTING_CODE, review1.ITEM_GROUP_CODE,
@@ -57,14 +58,10 @@
 		         REPLY_USE_YN='Y') reply on review1.POSTING_CODE=reply.POSTING_CODE,
 		         REVIEW review2 left join POSTING_LIKE postingLike on review2.POSTING_CODE = postingLike.POSTING_CODE,
 		         REVIEW review3 left join SCRAP scrap on review3.POSTING_CODE = scrap.POSTING_CODE,
-		         USER user, FEATURE2 feature2
-		 <dynamic>
-			<isNotEmpty property="userCode">        
-		   		,RELATION relation
-		   	</isNotEmpty>
-		</dynamic>
+		         USER user left join FEATURE2 feature2 on user.USER_SKINTYPE=feature2.FEATURE2_CODE, 
+             RELATION relation		   	
 		where review1.REVIEW_USE_YN='Y' AND review1.USER_CODE = user.USER_CODE
-		AND user.USER_SKINTYPE=feature2.FEATURE2_CODE AND review1.ITEM_GROUP_CODE = #itemGroupCode#
+		AND review1.ITEM_GROUP_CODE = #itemGroupCode#
 		<dynamic>
 			<isNotEmpty property="userCode">
 				AND relation.RELATION_FOLLOWING=review1.USER_CODE 
@@ -72,9 +69,10 @@
 			</isNotEmpty>
 		</dynamic>
 		group by review1.POSTING_CODE, review1.ITEM_GROUP_CODE,
-		review1.REVIEW_SCORE, review1.REVIEW_TITLE, review1.REG_DATE,
-		user.USER_NAME, user.USER_PIC_PATH, user.USER_PIC_SAVE_NAME,
-		user.USER_SKINTONE, feature2.FEATURE2_NAME;
+		review1.REVIEW_SCORE, review1.REVIEW_TITLE, 
+		review1.REG_DATE, user.USER_NAME, user.USER_PIC_PATH, 
+		user.USER_PIC_SAVE_NAME, user.USER_SKINTONE, 
+		feature2.FEATURE2_NAME;
 	</select>
 </sqlMap>
 

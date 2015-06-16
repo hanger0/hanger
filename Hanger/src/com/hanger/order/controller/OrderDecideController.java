@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.item.dao.ItemListForReviewDao;
 import com.hanger.order.dao.OrderDecideDao;
 import com.hanger.order.dao.OrderInfoDao;
 import com.hanger.order.vo.OrderVo;
@@ -22,9 +23,13 @@ public class OrderDecideController extends BaseController {
 	private OrderDecideDao orderDecideDao;
 	private UserSelectDao userSelectDao;
 	private OrderInfoDao orderInfoDao;
+	private ItemListForReviewDao itemListForReviewDao;
 	
 	public void setOrderInfoDao(OrderInfoDao orderInfoDao) {
 		this.orderInfoDao = orderInfoDao;
+	}
+	public void setItemListForReviewDao(ItemListForReviewDao itemListForReviewDao) {
+		this.itemListForReviewDao = itemListForReviewDao;
 	}
 	public void setUserSelectDao(UserSelectDao userSelectDao) {
 		this.userSelectDao = userSelectDao;
@@ -43,7 +48,12 @@ public class OrderDecideController extends BaseController {
 		HashMap<String, String> orderinfoMap = new HashMap<String, String>();
 		orderinfoMap.put("orderInfoCode", orderInfoCode);
 		
-		orderDecideDao.orderDecide(orderinfoMap);
+		int ok = orderDecideDao.orderDecide(orderinfoMap);
+		if(ok>0)
+		{
+			ArrayList itemListForReview = (ArrayList)itemListForReviewDao.getItemListForReview(myUserCode);
+			session.setAttribute("itemListForReview", itemListForReview);
+		}
 		
 		UserVo user = userSelectDao.selectUser(myUserCode);
 		

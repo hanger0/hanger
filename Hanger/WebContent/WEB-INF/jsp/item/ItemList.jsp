@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.hanger.item.vo.ItemSearchVo" %>
 <%@ page import="com.hanger.item.vo.CateListVo" %>
 <%
 	ArrayList itemList = (ArrayList)request.getAttribute("itemList");
@@ -166,7 +165,7 @@
         		<span class = "glyphicon glyphicon-home">&nbsp;HOME&nbsp;</span>>&nbsp;
         		<select>
         			<option value = "최신순">최신순</option><option value = "인기순">인기순</option><option value = "낮은가격순">낮은가격순</option>
-        			<option value = "높은가격순">높은가격순</option><option value = "팔로잉초이스">팔로잉초이스</option>
+        			<option value = "높은가격순">높은가격순</option>
         			<option value = "할인율">할인율</option><option value = "리뷰개수">리뷰개수</option><option value = "평점순">평점순</option>
         		</select>
 <!-- 우측 상단 -->		
@@ -257,34 +256,41 @@
 				<div class="row hotitem" style = "margin-left:1%">
 <%
 			for (int i = 0; i < itemList.size(); i++) {
-				ItemSearchVo isv =(ItemSearchVo)itemList.get(i);
+				Hashtable itemTabel =(Hashtable)itemList.get(i);
 				
-				String itemCode = isv.getItemCode();						
-				String itemGroupCode = isv.getItemGroupCode();						
-				String itemSizeYn = isv.getItemSizeYn();						
-				String itemName = isv.getItemName();
-				String brandName = isv.getBrandName();
+				String itemCode = (String)itemTabel.get("itemCode");			
+				String itemGroupCode = (String)itemTabel.get("itemGroupCode");						
+				String itemSizeYn = (String)itemTabel.get("itemSizeYn");			
+				String itemName = (String)itemTabel.get("itemName");
+				String brandName = (String)itemTabel.get("brandName");
 										
-				String itemMarketPrice = isv.getItemMarketPrice();
-				String itemSellPrice = isv.getItemSellPrice();
-				String itemDiscount = isv.getItemDiscount();
-										
-				String itemPicPath = isv.getItemPicPath();
-				String itemSavename = isv.getItemPicSavename();
+				String itemPicPath = (String)itemTabel.get("itemPicPath");
+				String itemSavename = (String)itemTabel.get("itemSavename");
 				
-				String itemStatus = isv.getItemStatus();
-				String itemScore = isv.getItemScore();
-				String itemReviewCnt = isv.getReviewCnt();
+				String itemStatus = (String)itemTabel.get("itemStatus");
+				String itemScore = (String)itemTabel.get("itemScore");
+				String itemReviewCnt = (String)itemTabel.get("itemReviewCnt");
+				ArrayList priceList = (ArrayList)itemTabel.get("priceList");
 %>
 				<div class="col-sm-6 col-md-2" style="display:table;margin-left:3px;">
 					<div class="thumbnail" style = " width:205px">
-						<img src="images/wonbin.PNG">
+						<a href="itemView.hang?itemGroupCode=<%=itemGroupCode%>">
+						<img src="<%=itemPicPath%>/<%=itemSavename%>">
+						</a>
 						<div class="caption">
 							<font size = "2"><b><%=brandName%></b></font>
 							<p>							
 							<A itemGroupCode="<%=itemGroupCode%>" class="itemView" style="cursor:pointer"><p><font size = "3"><font color = "orange"><b><%=itemName%></b></font></font></p></A>
 							<p><%=itemScore%>
-							<p>가격	&nbsp;&nbsp;<%=itemMarketPrice %>▶<%=itemSellPrice%>(<%=itemDiscount%>%)
+							<%
+								for(int p=0; p<priceList.size(); p++)
+								{
+									Hashtable pricemap = (Hashtable)priceList.get(p);
+							%>
+							<p>가격	&nbsp;&nbsp;<%=pricemap.get("itemMarketPrice") %>▶<%=pricemap.get("itemSellPrice")%>(<%=pricemap.get("itemDiscount")%>%)
+							<%
+								}
+							%>
 							<hr style="margin-bottom: 3px">
 							<div style="display: table; margin-left: auto; margin-right: auto;">							
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><span class="badge"><%=itemReviewCnt%></span>								
@@ -295,7 +301,6 @@
 				<%
 					}
 				%>
-    <!--  리뷰 작성 끝 -->
 				</div>
         	</div>
         </div>

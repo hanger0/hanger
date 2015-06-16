@@ -42,7 +42,7 @@
 			FROM
 			BRAND brand, ITEM_CATEGORY cate, CATEGORY3 cate3,
 			ITEM item left join (SELECT POSTING_CODE, ITEM_GROUP_CODE FROM REVIEW WHERE
-			REVIEW_USE_YN='Y') review on
+			REVIEW_USE_YN='Y' GROUP BY ITEM_GROUP_CODE) review on
 			item.ITEM_GROUP_CODE=review.ITEM_GROUP_CODE
 			WHERE
 			item.BRAND_CODE = brand.BRAND_CODE AND cate.ITEM_GROUP_CODE = item.ITEM_GROUP_CODE
@@ -66,7 +66,7 @@
 			ORDER BY dispNum DESC
 			)c,(SELECT @GR:=0) AS GR
 			)d
-			where d.groupNum between '1' and '1'
+			where d.groupNum between #articleStartNum# and #articleEndNum#
 			)e left join ITEM item3 on e.itemGroupCode=item3.ITEM_GROUP_CODE
 		where item3.ITEM_USE_YN = 'Y' and stock.ITEM_CODE = item3.ITEM_CODE
 		order by itemSellPrice desc, e.groupNum;
