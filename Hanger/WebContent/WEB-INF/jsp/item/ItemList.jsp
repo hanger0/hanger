@@ -276,7 +276,7 @@
 				<div class="col-sm-6 col-md-2" style="display:table;margin-left:3px;">
 					<div class="thumbnail" style = " width:205px">
 						<a href="itemView.hang?itemGroupCode=<%=itemGroupCode%>">
-						<img src="<%=itemPicPath%>/<%=itemSavename%>">
+						<img src="<%=itemPicPath%>/<%=itemSavename%>" style="width:128px;height:128px">
 						</a>
 						<div class="caption">
 							<font size = "2"><b><%=brandName%></b></font>
@@ -286,9 +286,13 @@
 							<%
 								for(int p=0; p<priceList.size(); p++)
 								{
-									Hashtable pricemap = (Hashtable)priceList.get(p);
+									
+									Hashtable priceMap = (Hashtable)priceList.get(p);
+									int itemMarketPrice = Integer.parseInt((String)priceMap.get("itemMarketPrice"));
+									int itemSellPrice = Integer.parseInt((String)priceMap.get("itemSellPrice"));
+									int discount = 100-((100*itemSellPrice)/itemMarketPrice);
 							%>
-							<p>가격	&nbsp;&nbsp;<%=pricemap.get("itemMarketPrice") %>▶<%=pricemap.get("itemSellPrice")%>(<%=pricemap.get("itemDiscount")%>%)
+							<p>&nbsp;&nbsp;<font color = "grey"><strike><%=itemMarketPrice%>원</strike></font>&nbsp;<font color = "red"><%=discount %>%off</font>&nbsp;<b><%=itemSellPrice%>원</b>
 							<%
 								}
 							%>

@@ -62,13 +62,13 @@ public class UserJoinController extends BaseController {
 			HttpServletRequest req
 			) throws IOException {
 		//
-		String path = "C:\\workspace\\hanger\\Hanger\\WebContent\\upfile\\user\\profile";
+		String path = "C:/workspace/hanger/Hanger/WebContent/upfile/user/profile";
 	      File dayFile = new File(path);
 	      if(!dayFile.exists())
 	      {
 	         dayFile.mkdirs();
 	      }
-	      String savePath = "\\upfile\\user\\profile";
+	      String savePath = "/upfile/user/profile";
 		int sizeLimit = 1000 * 1024 * 1024;
 		MultipartRequest mul = new MultipartRequest(req, path, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		

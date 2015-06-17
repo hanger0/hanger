@@ -6,7 +6,7 @@
 	<select id = "selectReview" parameterClass = "HashMap" resultClass = "review">
 		SELECT review1.POSTING_CODE as postingCode, review1.ITEM_GROUP_CODE as itemGroupCode, 
 			review1.REVIEW_SCORE as reviewScore, review1.REVIEW_TITLE as reviewTitle, review1.REG_DATE as regDate, 
-			review1.USER_CODE as userCode,
+			review1.USER_CODE as userCode, review1.REVIEW_MAIN_PIC_PATH as reviewMainPicPath, review1.REVIEW_MAIN_PIC_SAVENAME as reviewMainPicSaveName,
 			item.ITEM_NAME as itemName, brand.BRAND_NAME as brandName, 
 			item.ITEM_PIC_PATH as itemPicPath, item.ITEM_PIC_SAVENAME as itemPicSaveName,
 			user.USER_NAME as userName, user.USER_PIC_PATH as userPicPath, user.USER_PIC_SAVE_NAME as userPicSaveName, 

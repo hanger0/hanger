@@ -34,6 +34,8 @@
             	String userSkinTone = review.getUserSkinTone();
             	String featuer2Name = review.getFeatuer2Name();
 
+            	String reviewMainPicPath = review.getReviewMainPicPath();
+            	String reviewMainPicSaveName = review.getReviewMainPicSaveName();
             	String reviewScore = review.getReviewScore();
             	String reviewTitle = review.getReviewTitle(); 
             	String regDate = review.getRegDate();
@@ -44,7 +46,7 @@
          <div class="col-md-3" style = "height:65%">
             <div class="thumbnail" >
                <div class="image">
-                  <img src="<%=itemPicPath %>/<%= itemPicSaveName%>" width="100%" height="180px" style="display: table; margin-left: auto; margin-right: auto;" class="hotimages">
+                  <img src="<%=reviewMainPicPath %>/<%= reviewMainPicSaveName%>" width="100%" height="180px" style="display: table; margin-left: auto; margin-right: auto;" class="hotimages">
                </div>
                <div class="caption">
                   <a href = "/reviewShow.hang?reviewCode=<%=postingCode%>">

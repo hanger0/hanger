@@ -47,15 +47,15 @@ public class UserUpdateController extends BaseController {
 		//
 		HttpSession session = request.getSession(false);
 
-		String path = "C:\\workspace\\hanger\\Hanger\\WebContent\\upfile\\user\\profile";
+		String path = "C:/workspace/hanger/Hanger/WebContent/upfile/user/profile";
 	      File dayFile = new File(path);
 	      if(!dayFile.exists())
 	      {
 	         dayFile.mkdirs();
 	      }
-	      String savePath = "\\upfile\\user\\profile";
+	      String savePath = "/upfile/user/profile";
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(request, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(request, path, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		Enumeration formNames=mul.getFileNames();
 		String fileFormName=(String)formNames.nextElement(); // 업로드 하는 파일이 많을 경우 while 을 사용
