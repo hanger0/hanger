@@ -64,9 +64,13 @@ $(function(){
 				<%
 					if(order.getOrderItemVerify().equals("Y")){
 				%>
-							<input type="button" value="¸®ºä¾²±â" class="btn btn-default" />
+							<a href="#"><input type="button" value="¸®ºä¾²±â" class="btn btn-default" /></a>
 				<%
-					} else{
+					} else if(false){
+				%>
+							<a href="#"><input type="button" value="¸®ºäº¸±â" class="btn btn-default" /></a>
+				<%					
+					}else{
 				%>
 						<form id="decideForm" action="/orderDecide.hang" method="POST">
 							<input name="orderInfoCode" type="hidden" />

@@ -68,7 +68,7 @@ public class UserJoinController extends BaseController {
 	      {
 	         dayFile.mkdirs();
 	      }
-	      String savePath = "C:\\workspace\\hanger\\Hanger\\WebContent\\upfile\\user\\profile";
+	      String savePath = "\\upfile\\user\\profile";
 		int sizeLimit = 1000 * 1024 * 1024;
 		MultipartRequest mul = new MultipartRequest(req, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		

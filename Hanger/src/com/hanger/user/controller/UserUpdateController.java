@@ -47,12 +47,13 @@ public class UserUpdateController extends BaseController {
 		//
 		HttpSession session = request.getSession(false);
 
-		File dayFile = new File("C:\\hanger");
-		if(!dayFile.exists())
-		{
-			dayFile.mkdirs();
-		}
-		String savePath = dayFile.getAbsolutePath();
+		String path = "C:\\workspace\\hanger\\Hanger\\WebContent\\upfile\\user\\profile";
+	      File dayFile = new File(path);
+	      if(!dayFile.exists())
+	      {
+	         dayFile.mkdirs();
+	      }
+	      String savePath = "\\upfile\\user\\profile";
 		int sizeLimit = 1000 * 1024 * 1024;
 		MultipartRequest mul = new MultipartRequest(request, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
