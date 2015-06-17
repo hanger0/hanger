@@ -20,9 +20,6 @@
 	String itemHowToUse = ((ItemViewVo)itemViewList.get(0)).getItemHowToUse();
 	String brandName = ((ItemViewVo)itemViewList.get(0)).getBrandName();
 	String itemTotalInfo = ((ItemViewVo)itemViewList.get(0)).getItemTotalInfo();
-	System.out.println("¾ÆÀÌÅÛ ºä.jsp ¾ÆÀÌÅÛ ÅäÅ» ÀÎÆ÷ : "+itemTotalInfo);
-	String picName=URLEncoder.encode("¶ó¶ó ¼¿·ê¶óÀÌÆ® ¼³¸í.jpg","euc-kr");
-	System.out.println("¾ÆÀÌÅÛ ºä.jsp ¾ÆÀÌÅÛ ÅäÅ» ÀÎÆ÷ : "+itemTotalInfo);
 	String[] marketPrice=new String[listSize];
 	String[] sellPrice=new String[listSize];
 	String[] purchasePrice=new String[listSize];
@@ -49,6 +46,7 @@
 		itemPicPath[i] = ((ItemViewVo)itemViewList.get(i)).getItemPicPath();
 		itemPicSavename[i] = ((ItemViewVo)itemViewList.get(i)).getItemPicSavename();
 	}
+	System.out.println("¾ÆÀÌÅÛºä.jsp ---- itemPicPath : "+itemPicPath+"----itemPicSavename : "+itemPicSavename);
 	int maxAmount=Integer.parseInt(itemSellMaxnum[0]);
 	if(maxAmount>Integer.parseInt(itemStockAmount[0]))
 	{
@@ -142,7 +140,7 @@
           <div class="header" style = "width:980px;height:500px;margin-left:80px">
               <div class="product-info" style = "background-color:white;width:980px;height:500px;border:1px gray">
                <div class = "product" 
-               style = "width:460px;height:460px;background-image:url(/assets/images/hanger.png);float:left;margin-left:20px;margin-top:20px">
+               style = "width:460px;height:460px;background-image:url(<%=itemPicPath[0] %>/<%=itemPicSavename[0]%>);background-size:100% 100%;float:left;margin-left:20px;margin-top:20px;margin-right:20px;margin-bottom:20px">
                </div>
                <div class = "product-subject" style = "width:447px;height:460px;float:right">
                   <div class = "subTitle"><p><h5><%=brandName %></h5></p>

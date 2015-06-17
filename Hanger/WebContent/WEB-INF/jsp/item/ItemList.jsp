@@ -200,7 +200,7 @@
 <%
 	}
 	else if(cateList!=null&&cateList.size()>0&&cateCode.startsWith("C3"))
-	{System.out.println("아이템리스트 어퍼코드: "+((CateListVo)cateList.get(0)).getUpperCateCode());
+	{
 %>
 				<div class = "dc3" style = "background-color:#EBEBEB;width:96%">
 					<table style = "width:100%;height:100px;display:table;margin-left:auto;margin-right:auto;">
@@ -266,11 +266,12 @@
 										
 				String itemPicPath = (String)itemTabel.get("itemPicPath");
 				String itemSavename = (String)itemTabel.get("itemSavename");
-				
+								
 				String itemStatus = (String)itemTabel.get("itemStatus");
 				String itemScore = (String)itemTabel.get("itemScore");
 				String itemReviewCnt = (String)itemTabel.get("itemReviewCnt");
 				ArrayList priceList = (ArrayList)itemTabel.get("priceList");
+				System.out.println("아이템리스트 jsp --- itemPicPath : "+itemPicPath+"&&&&"+itemSavename);
 %>
 				<div class="col-sm-6 col-md-2" style="display:table;margin-left:3px;">
 					<div class="thumbnail" style = " width:205px">

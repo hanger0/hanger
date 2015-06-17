@@ -28,7 +28,7 @@
 	String writerSkinTone = review.getWriterSkinTone();
 	String writerPicPath = review.getWriterPicPath();
 	String writerPicSaveName = review.getWriterPicSaveName();
-	String writerFollowerCnt = review.getWriterFollowerCnt();
+	String writerFollowerCnt = "" + (Integer.parseInt(review.getWriterFollowerCnt()) - 1);
 	String writerPostingCnt = review.getWriterPostingCnt();
 	String writerPostingLikeCnt = review.getWriterPostingLikeCnt();
 %>    

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+   pageEncoding="EUC-KR"%>
 <%@ page import = "com.hanger.item.vo.ItemViewVo"%>
 <!DOCTYPE html>
 
@@ -31,7 +31,7 @@
 <link href="/css/posting/summernote.css" rel="stylesheet">
 <script src="/js/posting/summernote.js"></script>
 
-<!-- Î≥ÑÏ†ê ÎßÅÌÅ¨ Î∞è js , css -->
+<!-- ∫∞¡° ∏µ≈© π◊ js , css -->
 
 <head>
 <title>Review Write Editor</title>
@@ -58,7 +58,7 @@
       	 <INPUT type="hidden" id="itemGroupCode" name="itemGroupCode" value="<%=itemGroupCode%>"/>
          <INPUT type="hidden" id="content" name="content" value=""/>
          <INPUT type="hidden" id="ratingValue" name="rating" value=""/>
-         <font size = "4" style = "margin-left:70px;"><b>Î¶¨Î∑∞ÏûëÏÑ±</b></font>
+         <font size = "4" style = "margin-left:70px;"><b>∏Æ∫‰¿€º∫</b></font>
          <hr style = "border:2px solid white;width:87%"> 
          <div class = "reviewProduct" style = "width:87%;display:table;margin-left:auto;margin-right:auto">
             <img src = "<%=itemPicPath %>/<%=itemPicSavename %>" style = "width:220px;height:150px;" />
@@ -66,16 +66,16 @@
                <font size = "3"><%=brandName %></font><p><P>
                <font size = "4"><b><%=itemName %></b></font>&nbsp;&nbsp;<font size = "3"><%=itemSummaryInfo %></font><p>
                <font size = "2"><%=itemDetailInfo %></font><p>
-               <font size = "2">Í∞ÄÍ≤©&nbsp;&nbsp;</font><font size = "3">
+               <font size = "2">∞°∞›&nbsp;&nbsp;</font><font size = "3">
                <b>
                <%
                		if(minPrice == maxPrice){
          		%>
-         				<%=maxPrice %>Ïõê
+         				<%=maxPrice %>ø¯
          		<%
                		} else {
                %>
-               			<%=minPrice %>Ïõê ~ <%=maxPrice %>Ïõê
+               			<%=minPrice %>ø¯ ~ <%=maxPrice %>ø¯
                <%
                		}
                %>
@@ -85,7 +85,7 @@
          </div>
          <hr style = "border:1px solid white;width:87%"> 
          <div class = "reviewMainPic">
-            <FONT SIZE = "3" style = "margin-left:70px;"><B>Î©îÏù∏ÏÇ¨ÏßÑ</B></FONT><BR>
+            <FONT SIZE = "3" style = "margin-left:70px;"><B>∏ﬁ¿ŒªÁ¡¯</B></FONT><BR>
             <dl>
                <dd style = "margin-left:70px;">
                   <input class="button" id="reviewMainPic" name="reviewMainPic" type="file"
@@ -95,26 +95,26 @@
             </dl>
          </div>
          <hr style = "border:1px solid white;width:87%"> 
-         <FONT SIZE = "3" style = "margin-left:70px;"><B>Ï†úÎ™©ÏûÖÎ†•</B></FONT><BR>
+         <FONT SIZE = "3" style = "margin-left:70px;"><B>¡¶∏Ò¿‘∑¬</B></FONT><BR>
          
             <div class="thumbnail" style = "width:87%;display:table;margin-left:auto;margin-right:auto">
-               <input type="text" id="reviewTitle" name="reviewTitle" placeholder="Ï†úÎ™©ÏùÑ ÏûÖÎ†•ÌïòÏÑ∏Ïöî." style = "width:100%;height:50px;border:0px">
+               <input type="text" id="reviewTitle" name="reviewTitle" placeholder="¡¶∏Ò¿ª ¿‘∑¬«œººø‰." style = "width:100%;height:50px;border:0px">
             </div>
             
-            <FONT SIZE = "3" style = "margin-left:70px"><B>ÌèâÏ†ê</B></FONT> 
+            <FONT SIZE = "3" style = "margin-left:70px"><B>∆Ú¡°</B></FONT> 
             <div class="thumbnail" style = "background-color: white;width:200px;margin-left:70px">
 				<span id="starForm">
 					<select id="reviewScore" name="reviewScore" class="reviewScore" onchange="drawStar()">
-						<option value="10" selected="1">10Ï†ê</option>
-						<option value="9">9Ï†ê</option>
-						<option value="8">8Ï†ê</option>
-						<option value="7">7Ï†ê</option>
-						<option value="6">6Ï†ê</option>
-						<option value="5">5Ï†ê</option>
-						<option value="4">4Ï†ê</option>
-						<option value="3">3Ï†ê</option>
-						<option value="2">2Ï†ê</option>
-						<option value="1">1Ï†ê</option>
+						<option value="10" selected="1">10¡°</option>
+						<option value="9">9¡°</option>
+						<option value="8">8¡°</option>
+						<option value="7">7¡°</option>
+						<option value="6">6¡°</option>
+						<option value="5">5¡°</option>
+						<option value="4">4¡°</option>
+						<option value="3">3¡°</option>
+						<option value="2">2¡°</option>
+						<option value="1">1¡°</option>
 					</select>
 					<img src='/images/icons/star/star.png' style='width:20px; height:20px; margin-left:2px; margin-bottom:5px'/>
 					<img src='/images/icons/star/star.png' style='width:20px; height:20px; margin-left:2px; margin-bottom:5px'/>
@@ -127,21 +127,21 @@
             
             <hr style = "border:1px solid white;width:87%"> 
             
-      <!-- summernote ÏãúÏûë -->
-      <FONT SIZE = "3" style = "margin-left:70px"><B>ÎÇ¥Ïö©ÏûëÏÑ±</B></FONT> 
+      <!-- summernote Ω√¿€ -->
+      <FONT SIZE = "3" style = "margin-left:70px"><B>≥ªøÎ¿€º∫</B></FONT> 
       
       <div class="thumbnail"  style = "width:87%;display:table;margin-left:auto;margin-right:auto;">
          <textarea class="summernote" style = "width:300px;overflow:visible" onkeyup = "resize(this)"></textarea>
       </div>
       
-         <INPUT type="button" class="btn btn-default" value="ÏûëÏÑ±ÏôÑÎ£å" style="cursor: pointer;display:table;margin-left:auto;margin-right:auto" onclick="WriteReview()"/>   
-      <!-- summernote ÎÅù -->
+         <INPUT type="button" class="btn btn-default" value="¿€º∫øœ∑·" style="cursor: pointer;display:table;margin-left:auto;margin-right:auto" onclick="WriteReview()"/>   
+      <!-- summernote ≥° -->
       </form>
       
    </div>
    <BR><BR>
    <div class="btn-group dropup" style = "position: fixed;left: 20px;bottom:20px;">
-  <button type="button" class="btn btn-default">Î¶¨Î∑∞ÏûëÏÑ±</button>
+  <button type="button" class="btn btn-default">∏Æ∫‰¿€º∫</button>
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
     <span class="caret"></span>
     <span class="sr-only">Toggle Dropdown</span>

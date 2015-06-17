@@ -18,7 +18,7 @@ var InputReviewMainPic = (function loadImageFile() {
          var img = document.getElementById("reviewMainPic").files;
 
          if (!fileType.test(img[0].type)) {
-            alert("ÆÄÀÏµî·Ï½ÇÆĞ");
+            alert("ì‚¬ì§„ì—…ë¡œë“œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
             return;
          }
          ImgReader.readAsDataURL(img[0]);
@@ -32,7 +32,7 @@ function WriteReview() {
 	var f = document.reviewForm;
 	
 	if(f.title.value == ""){
-		alert("Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		alert("ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		f.title.focus();
 		return false;
 	}
@@ -40,7 +40,7 @@ function WriteReview() {
 	f.content.value = $('.summernote').code();
 	
 	f.submit();
-	alert("¸®ºä°¡ µî·ÏµÇ¾ú½À´Ï´Ù.");
+	alert("ë¦¬ë·°ë¥¼ ë“±ë¡í•˜ì˜€ìŠµë‹ˆë‹¤.");
 }
 
 function drawStar(){
