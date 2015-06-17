@@ -62,27 +62,11 @@
 			}
 %>
 
-		<!-- 더보기 창 이동  START-->
-			<div class="message" width="100%">
-				<div style="margin-bottom:-20px">
-					<button style="width:100%;" class="btn btn-default" onclick="searchLoock()">
-							더보기
-					</button>
-				</div>	
-			</div>
-		<!-- 더보기 창 이동  END-->
 <%		}
 		else
 		{
 %>
 			검색되는 친구가 없습니다.
-			<div class="message" width="100%">
-				<div style="margin-bottom:-20px">
-					<button style="width:100%;" class="btn btn-default" onclick="searchLoock()">
-							더보기
-					</button>
-				</div>	
-			</div>
 <%
 		}
 %>

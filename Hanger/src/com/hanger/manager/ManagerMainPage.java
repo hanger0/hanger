@@ -10,9 +10,9 @@ import com.hanger.common.controller.BaseController;
 @Controller
 public class ManagerMainPage extends BaseController {
 	
-	@RequestMapping("/goManagerMainPage.hang")
+	@RequestMapping("/managerPageMain.hang")
 	public String goManagerMainPage(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "manager/AdminPageMain.jsp");
+		req.setAttribute("mainUrl", root + "manager/ManagerPageMain.jsp");
 		return moveUrl;
 	}
 }

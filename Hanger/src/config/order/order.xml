@@ -25,12 +25,14 @@
 		select 
 			a.REG_DATE as regDate, ORDER_STATE as orderState, b.ORDER_ITEM_SELL_PRICE as orderItemSellPrice, b.ORDER_ITEM_RECOM as orderItemRecom,
 			b.ORDER_ITEM_VERIFY as orderItemVerify, b.ORDER_ITEM_AMOUNT as orderItemAmount, c.ITEM_PIC_PATH as itemPicPath, c.ITEM_PIC_SAVENAME as itemPicSaveName,
-			c.item_name as itemName, c.ITEM_DETAIL_INFO as itemDetailInfo, b.ORDER_INFO_CODE as orderInfoCode
+			c.item_name as itemName, c.ITEM_DETAIL_INFO as itemDetailInfo, b.ORDER_INFO_CODE as orderInfoCode,
+      c.ITEM_GROUP_CODE as itemGroupCode, re.POSTING_CODE as postingCode
 		FROM 
-			ordering a, order_info b, item c
+			ordering a, order_info b,
+			item c left join review re on (c.ITEM_GROUP_CODE = re.ITEM_GROUP_CODE and re.USER_CODE=#myUserCode#)
 		WHERE 
-			a.ORDER_CODE = b.ORDER_CODE AND b.item_code = c.ITEM_CODE AND
-			a.USER_CODE = #myUserCode#
+			a.ORDER_CODE = b.ORDER_CODE AND b.item_code = c.ITEM_CODE 
+      AND a.USER_CODE = #myUserCode#
 	</select>
 
 </sqlMap>

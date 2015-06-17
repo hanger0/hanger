@@ -70,7 +70,7 @@ public class UserJoinController extends BaseController {
 	      }
 	      String savePath = "\\upfile\\user\\profile";
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(req, savePath, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(req, path, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		Enumeration formNames=mul.getFileNames();
 		String fileFormName=(String)formNames.nextElement(); // 업로드 하는 파일이 많을 경우 while 을 사용

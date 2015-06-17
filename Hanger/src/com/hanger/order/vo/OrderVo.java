@@ -31,6 +31,20 @@ public class OrderVo {
 	private String itemPicSaveName;
 	private String itemName;
 	private String itemDetailInfo;
+	private String itemGroupCode;
+	private String postingCode;
+	public String getItemGroupCode() {
+		return itemGroupCode;
+	}
+	public void setItemGroupCode(String itemGroupCode) {
+		this.itemGroupCode = itemGroupCode;
+	}
+	public String getPostingCode() {
+		return postingCode;
+	}
+	public void setPostingCode(String postingCode) {
+		this.postingCode = postingCode;
+	}
 	public String getOrderInfoCode() {
 		return orderInfoCode;
 	}

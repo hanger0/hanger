@@ -299,7 +299,7 @@
  %>      
 		<div class = "review" style = "background-color:white;width:100%;height:100px;">
 			<div class = "profile" style = "width:100px;height:100px;float:left;margin-left:2%">
-				<img src = "/assets/images/song.jpg" style = "width:100px;height:100px;"/>
+				<img src = "<%=userPicPath1%>/<%=userPicSaveName1 %>" style = "width:100px;height:100px;"/>
 			</div>
 			<div class = "name" style = "width:400px;height:30px;float:left;margin-left:20px;">
 		  	Á¦¸ñ : <%=reviewTitle1 %>(<b>dofwk2@***** / 2015-05-29</b>)

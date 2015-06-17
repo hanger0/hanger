@@ -62,13 +62,13 @@ $(function(){
 							rowspan="2"><P><%= order.getOrderState() %></td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2">
 				<%
-					if(order.getOrderItemVerify().equals("Y")){
+					if(order.getOrderItemVerify().equals("Y")&&order.getPostingCode()==null){
 				%>
-							<a href="#"><input type="button" value="¸®ºä¾²±â" class="btn btn-default" /></a>
+							<a href="reviewWrite.hang?itemGroupCode=<%=order.getItemGroupCode()%>"><input type="button" value="¸®ºä¾²±â" class="btn btn-default" /></a>
 				<%
-					} else if(false){
+					} else if(order.getPostingCode()!=null){
 				%>
-							<a href="#"><input type="button" value="¸®ºäº¸±â" class="btn btn-default" /></a>
+							<a href="reviewShow.hang?reviewCode=<%=order.getPostingCode() %>"><input type="button" value="¸®ºäº¸±â" class="btn btn-default" /></a>
 				<%					
 					}else{
 				%>

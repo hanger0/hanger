@@ -17,7 +17,13 @@ public class UserLogoutController extends BaseController {
 		HttpSession session = req.getSession(false);
 		session.setAttribute("loginYn", "N");
 		session.setAttribute("adminYn", "N");
-		session.removeAttribute("name");
+		session.removeAttribute("myUserName");
+		session.removeAttribute("myUserId");
+		session.removeAttribute("myUserCode");
+		session.removeAttribute("adminYn");
+		session.removeAttribute("loginYn");
+		session.removeAttribute("itemListForReview");
+		session.invalidate();
 		
 		moveUrl = "common/Frame";
 		ModelAndView mav = new ModelAndView();

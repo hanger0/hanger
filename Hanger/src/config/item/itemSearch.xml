@@ -38,11 +38,11 @@
 			(SELECT
 			item.ITEM_CODE AS tempItemCode, item.ITEM_NAME AS itemName, item.ITEM_SCORE AS
 			itemScore,
-			brand.BRAND_NAME as brandName, COUNT(review.POSTING_CODE) AS reviewCnt
+			brand.BRAND_NAME as brandName, COUNT(distinct review.POSTING_CODE) AS reviewCnt
 			FROM
 			BRAND brand, ITEM_CATEGORY cate, CATEGORY3 cate3,
 			ITEM item left join (SELECT POSTING_CODE, ITEM_GROUP_CODE FROM REVIEW WHERE
-			REVIEW_USE_YN='Y' GROUP BY ITEM_GROUP_CODE) review on
+			REVIEW_USE_YN='Y') review on
 			item.ITEM_GROUP_CODE=review.ITEM_GROUP_CODE
 			WHERE
 			item.BRAND_CODE = brand.BRAND_CODE AND cate.ITEM_GROUP_CODE = item.ITEM_GROUP_CODE
