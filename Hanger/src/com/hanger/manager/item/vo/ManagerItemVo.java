@@ -20,14 +20,14 @@ public class ManagerItemVo {
 	private String itemTotalInfo;
 	private String itemIngredient;
 	private String itemHowToUse;
-	private int itemSellCnt;
-	private int itemSellMaxNum;
+	private String itemSellCnt;
+	private String itemSellMaxNum;
 	private String itemManufactureDate;
 	private String itemExpireDate;
 	private String itemReleaseDate;
 	private String[] itemCategory;
 	private String[] itemFeature;
-	private int itemStockAmount;
+	private String itemStockAmount;
 	private String itemDetailPicPath;
 	private String itemDetailPicOrgName;
 	private String itemDetailPicSaveName;
@@ -39,7 +39,6 @@ public class ManagerItemVo {
 	private String updId;
 	private String updDate;
 	private String updIp;
-	
 	public String getItemGroupCode() {
 		return itemGroupCode;
 	}
@@ -154,16 +153,16 @@ public class ManagerItemVo {
 	public void setItemHowToUse(String itemHowToUse) {
 		this.itemHowToUse = itemHowToUse;
 	}
-	public int getItemSellCnt() {
+	public String getItemSellCnt() {
 		return itemSellCnt;
 	}
-	public void setItemSellCnt(int itemSellCnt) {
+	public void setItemSellCnt(String itemSellCnt) {
 		this.itemSellCnt = itemSellCnt;
 	}
-	public int getItemSellMaxNum() {
+	public String getItemSellMaxNum() {
 		return itemSellMaxNum;
 	}
-	public void setItemSellMaxNum(int itemSellMaxNum) {
+	public void setItemSellMaxNum(String itemSellMaxNum) {
 		this.itemSellMaxNum = itemSellMaxNum;
 	}
 	public String getItemManufactureDate() {
@@ -196,10 +195,10 @@ public class ManagerItemVo {
 	public void setItemFeature(String[] itemFeature) {
 		this.itemFeature = itemFeature;
 	}
-	public int getItemStockAmount() {
+	public String getItemStockAmount() {
 		return itemStockAmount;
 	}
-	public void setItemStockAmount(int itemStockAmount) {
+	public void setItemStockAmount(String itemStockAmount) {
 		this.itemStockAmount = itemStockAmount;
 	}
 	public String getItemDetailPicPath() {
@@ -268,6 +267,8 @@ public class ManagerItemVo {
 	public void setUpdIp(String updIp) {
 		this.updIp = updIp;
 	}
+
+
 	
 }
 

@@ -78,8 +78,8 @@ public class ManagerAddItemFormController extends BaseController{
 		int [] itemPurchasePrice = new int[sizeCnt];
 		String [] itemManufactureDate = new String[sizeCnt];
 		String [] itemExpireDate = new String[sizeCnt];
-		int [] itemSellMaxNum = new int[sizeCnt];
-		int [] itemStockAmount = new int[sizeCnt];
+		String [] itemSellMaxNum = new String[sizeCnt];
+		String [] itemStockAmount = new String[sizeCnt];
 
 		for(int i = 0; i < sizeCnt; i++){
 			itemSize[i] = mul.getParameter("size" + i);
@@ -88,8 +88,8 @@ public class ManagerAddItemFormController extends BaseController{
 			itemPurchasePrice[i] = Integer.parseInt(mul.getParameter("purchasePrice" + i));
 			itemManufactureDate[i] = (mul.getParameter("manufactureYear" + i)) + (mul.getParameter("manufactureMonth" + i)) + (mul.getParameter("manufactureDay" + i));
 			itemExpireDate[i] = (mul.getParameter("expireYear" + i)) + (mul.getParameter("expireMonth" + i)) + (mul.getParameter("expireDay" + i));
-			itemSellMaxNum[i] = Integer.parseInt(mul.getParameter("sellMaxNum" + i));
-			itemStockAmount[i] = Integer.parseInt(mul.getParameter("stockAmount" + i));
+			itemSellMaxNum[i] = mul.getParameter("sellMaxNum" + i);
+			itemStockAmount[i] = mul.getParameter("stockAmount" + i);
 		}
 		
 		Enumeration formNames = mul.getFileNames();

@@ -64,8 +64,10 @@
 		AND review1.ITEM_GROUP_CODE = #itemGroupCode#
 		<dynamic>
 			<isNotEmpty property="userCode">
-				AND relation.RELATION_FOLLOWING=review1.USER_CODE 
-				AND NOT relation.RELATION_FOLLOWER = #userCode#
+				AND relation.RELATION_FOLLOWING=review1.USER_CODE
+				AND review1.POSTING_CODE 
+        		NOT IN (SELECT POSTING_CODE FROM review rev, relation rel 
+        		WHERE rev.USER_CODE=rel.RELATION_FOLLOWING AND rel.RELATION_FOLLOWER=#userCode#)
 			</isNotEmpty>
 		</dynamic>
 		group by review1.POSTING_CODE, review1.ITEM_GROUP_CODE,
