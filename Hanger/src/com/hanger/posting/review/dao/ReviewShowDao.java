@@ -10,25 +10,25 @@ import com.hanger.posting.review.vo.ReviewVo;
 
 public class ReviewShowDao {
 	private SqlMapClientTemplate smct;
-	
-	public ReviewShowDao(SqlMapClientTemplate smct)
-	{
+
+	public ReviewShowDao(SqlMapClientTemplate smct) {
 		this.smct = smct;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<ReviewVo> getReview(String reviewCode){
-		return (List<ReviewVo>)smct.queryForList("getReviewDetail", reviewCode);
+	public List<ReviewVo> getReview(String reviewCode) {
+		return (List<ReviewVo>) smct
+				.queryForList("getReviewDetail", reviewCode);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<ReviewShowVo> getReviewShow(String reviewCode){
-		return (List<ReviewShowVo>)smct.queryForList("getReviewShow", reviewCode);
+	public List<ReviewShowVo> getReviewShow(HashMap map) {
+		return (List<ReviewShowVo>) smct.queryForList("getReviewShow", map);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<ReviewShowVo> getReviewNowShow(HashMap map){
-		return (List<ReviewShowVo>)smct.queryForList("getReviewNowShow",map);
+	public List<ReviewShowVo> getReviewNowShow(HashMap map) {
+		return (List<ReviewShowVo>) smct.queryForList("getReviewNowShow", map);
 	}
-	
+
 }

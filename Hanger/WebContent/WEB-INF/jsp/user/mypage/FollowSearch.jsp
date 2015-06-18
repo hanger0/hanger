@@ -84,7 +84,7 @@ $(function(){
             <div class="col-sm-2" style = "width:20%" align = "center">
                <div class="unpa-card user-card followable  followed">
                   <!-- 클릭시 사용자 정보로 이동 -->
-                  <a href="#">
+                  <a href="/myPage.hang?yourUserCode=<%= user.getUserCode() %>">
                      <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
                      <div class="user-nickname"><%= user.getUserName() %></div>
                      <div class="user-skin-info">
@@ -129,7 +129,7 @@ $(function(){
             <div class="col-sm-2" align = "center" style = "width:20%">
                <div class="unpa-card user-card followable  followed">
                   <!-- 클릭시 사용자 정보로 이동 -->
-                  <a href="#">
+                  <a href="/myPage.hang?yourUserCode=<%= user.getUserCode() %>">
                      <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
                      <div class="user-nickname"><%= user.getUserName() %></div>
                      <div class="user-skin-info">
@@ -190,7 +190,7 @@ $(function(){
             <div class="col-sm-2" align = "center" style = "width:20%">
                <div class="unpa-card user-card followable  followed">
                   <!-- 클릭시 사용자 정보로 이동 -->
-                  <a href="#">
+                  <a href="/myPage.hang?yourUserCode=<%= user.getUserCode() %>">
                      <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
                      <div class="user-nickname"><%= user.getUserName() %></div>
                      <div class="user-skin-info">

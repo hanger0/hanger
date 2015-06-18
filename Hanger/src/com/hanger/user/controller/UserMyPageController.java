@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.posting.review.dao.ReviewListDao;
+import com.hanger.posting.review.vo.ReviewVo;
 import com.hanger.user.dao.UserSelectDao;
 import com.hanger.user.vo.UserVo;
 
@@ -27,25 +28,32 @@ public class UserMyPageController extends BaseController {
 		this.reviewListDao = reviewListDao;
 	}
 
-
 	@RequestMapping("/myPage.hang")
 	public String userMainPage(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String yourUserCode= req.getParameter("yourUserCode");
 
 		UserVo user = userSelectDao.selectUser(myUserCode);
 
-		HashMap userCodeMap = new HashMap() ;
+		HashMap<String, String> userCodeMap = new HashMap<String, String>() ;
 		
 		userCodeMap.put("yourUserCode",myUserCode);
 		
 		if (yourUserCode!=null&&!yourUserCode.equals("")) {
 			userCodeMap.put("yourUserCode",yourUserCode);
+			user = userSelectDao.selectUser(yourUserCode);
 		}
 		
-		ArrayList reviewList = reviewListDao.selectReview(userCodeMap);
+		ArrayList<ReviewVo> reviewList = reviewListDao.selectReview(userCodeMap);
 		
 		req.setAttribute("user", user);
 		req.setAttribute("mainUrl", myPageUrl);

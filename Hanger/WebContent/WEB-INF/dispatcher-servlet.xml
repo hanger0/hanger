@@ -76,6 +76,7 @@
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
 		<property name="userSearchDao" ref="userSearchDao"></property>
 		<property name="userSelectDao" ref="userSelectDao"></property>
+		<property name="notificationDao" ref="notificationDao"></property>
 	</bean>
 	<bean id="relationDeleteController" class="com.hanger.user.controller.RelationDeleteController">
 		<property name="relationDeleteDao" ref="relationDeleteDao"></property>
@@ -148,20 +149,16 @@
 	</bean>
 
 	<!-- review 요청 url과 Controller 매핑 -->
-	<bean id="reviewLikeController"
-		class="com.hanger.posting.review.controller.ReviewLikeController">
+	<bean id="reviewLikeController" class="com.hanger.posting.review.controller.ReviewLikeController">
 		<property name="reviewLikeCheckDao" ref="reviewLikeCheckDao"></property>
 	</bean>
 	<bean id="reviewController" class="com.hanger.posting.review.controller.ReviewController">
 		<property name="reviewListDao" ref="reviewListDao"></property>
 	</bean>
-	<bean id="reviewWriteController"
-		class="com.hanger.posting.review.controller.ReviewWriteController">
+	<bean id="reviewWriteController" class="com.hanger.posting.review.controller.ReviewWriteController">
 		<property name="itemViewDao" ref="itemViewDao"></property>
-		<property name="itemListForReviewDao" ref="itemListForReviewDao"></property>
 	</bean>
-	<bean id="reviewWriteFormController"
-		class="com.hanger.posting.review.controller.ReviewWriteFormController">
+	<bean id="reviewWriteFormController" class="com.hanger.posting.review.controller.ReviewWriteFormController">
 		<property name="reviewWriteDao" ref="reviewWriteDao"></property>
 		<property name="reviewShowDao" ref="reviewShowDao"></property>
 		<property name="itemListForReviewDao" ref="itemListForReviewDao"></property>
@@ -195,6 +192,11 @@
 	<!-- Mileage Controller 매핑 -->
 	<bean id="userMileageController" class="com.hanger.mileage.controller.UserMileageController">
 		<property name="userMileageDao" ref="userMileageDao"></property>
+	</bean>
+
+	<!-- Notification Controller 매핑 -->
+	<bean id="notificationController" class="com.hanger.notification.controller.NotificationController">
+		<property name="notificationDao" ref="notificationDao"></property>
 	</bean>
 
 	<!-- ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ -->
@@ -322,6 +324,11 @@
 		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="useMileageDao" class="com.hanger.mileage.dao.UseMileageDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<!-- Notification Dao beans -->
+	<bean id="notificationDao" class="com.hanger.notification.dao.NotificationDao">
 		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 

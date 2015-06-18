@@ -22,7 +22,14 @@ public class UserHangOutPageController extends BaseController {
 	@RequestMapping("/userHangOutPage.hang")
 	public String userTipPage(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String userCode = (String)session.getAttribute("myUserCode");
 		
 		UserVo user = userSelectDao.selectUser(userCode);

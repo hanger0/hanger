@@ -10,11 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.notification.dao.NotificationDao;
 import com.hanger.user.dao.RelationInsertDao;
 import com.hanger.user.dao.RelationSearchDao;
 import com.hanger.user.dao.UserSearchDao;
 import com.hanger.user.dao.UserSelectDao;
-import com.hanger.user.vo.RelationVo;
 import com.hanger.user.vo.UserVo;
 
 @Controller
@@ -24,7 +24,11 @@ public class RelationInsertController extends BaseController {
 	private RelationSearchDao relationSearchDao;
 	private UserSearchDao userSearchDao;
 	private UserSelectDao userSelectDao;
+	private NotificationDao notificationDao;
 	
+	public void setNotificationDao(NotificationDao notificationDao) {
+		this.notificationDao = notificationDao;
+	}
 	public void setUserSelectDao(UserSelectDao userSelectDao) {
 		this.userSelectDao = userSelectDao;
 	}
@@ -41,13 +45,21 @@ public class RelationInsertController extends BaseController {
 	@RequestMapping("/relationFollowerInsert.hang")
 	public String insertFollowerRelation(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String myUserId = (String)session.getAttribute("myUserId");
+		String myUserName = (String)session.getAttribute("myUserName");
 		String ip = req.getRemoteAddr();
 		String userCode = req.getParameter("userCode");
 		
-		HashMap relationMap = new HashMap();
+		HashMap<String, String> relationMap = new HashMap<String, String>();
 		relationMap.put("myUserCode", myUserCode);
 		relationMap.put("myUserId", myUserId);
 		relationMap.put("ip", ip);
@@ -59,10 +71,20 @@ public class RelationInsertController extends BaseController {
 		
 		UserVo user = userSelectDao.selectUser(myUserCode);
 		
+		HashMap<String, String> notiMap = new HashMap<String, String>();
+		notiMap.put("fromUserCode", myUserCode);
+		notiMap.put("toUserCode", userCode);
+		notiMap.put("message", myUserName + "님이 팔로우 하셨습니다.");
+		notiMap.put("url", "myPage.hang?yourUserCode="+myUserCode);
+		notiMap.put("id", myUserId);
+		notiMap.put("ip", ip);
+		
+		notificationDao.insertNotification(notiMap);
+		
 		req.setAttribute("user", user);
 		req.setAttribute("followerList", followerList);
 		req.setAttribute("mainUrl", myPageUrl);
-		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
+		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		
 		return moveUrl;
 	}
@@ -70,14 +92,22 @@ public class RelationInsertController extends BaseController {
 	@RequestMapping("/relationSearchInsert.hang")
 	public String insertSearchRelation(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String myUserId = (String)session.getAttribute("myUserId");
+		String myUserName = (String)session.getAttribute("myUserName");
 		String ip = req.getRemoteAddr();
 		String userCode = req.getParameter("userCode");
 		String qt = req.getParameter("insertQt");
 		
-		HashMap relationMap = new HashMap();
+		HashMap<String, String> relationMap = new HashMap<String, String>();
 		relationMap.put("myUserCode", myUserCode);
 		relationMap.put("myUserId", myUserId);
 		relationMap.put("ip", ip);
@@ -93,10 +123,20 @@ public class RelationInsertController extends BaseController {
 
 		UserVo user = userSelectDao.selectUser(userCode);
 		
+		HashMap<String, String> notiMap = new HashMap<String, String>();
+		notiMap.put("fromUserCode", myUserCode);
+		notiMap.put("toUserCode", userCode);
+		notiMap.put("message", myUserName + "님이 팔로우 하셨습니다.");
+		notiMap.put("url", "myPage.hang?yourUserCode="+myUserCode);
+		notiMap.put("id", myUserId);
+		notiMap.put("ip", ip);
+		
+		notificationDao.insertNotification(notiMap);
+		
 		req.setAttribute("user", user);
 		req.setAttribute("userList", userList);
 		req.setAttribute("mainUrl", myPageUrl);
-		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
+		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		req.setAttribute("qt", qt);
 		
 		return moveUrl;

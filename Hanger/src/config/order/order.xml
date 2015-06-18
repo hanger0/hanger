@@ -34,5 +34,4 @@
 			a.ORDER_CODE = b.ORDER_CODE AND b.item_code = c.ITEM_CODE 
       AND a.USER_CODE = #myUserCode#
 	</select>
-
 </sqlMap>

@@ -212,7 +212,7 @@ if(cartList != null) {
 %>
 					<tr align="center">
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px" rowspan="2">
-							<input class="checkbox" name="checkList" type="checkbox" itemCode="<%= itemCode %>" itemMarketPrice="<%= itemMarketPrice %>" itemPurchasePrice="<%= itemPurchasePrice %>" itemSellPrice="<%= itemSellPrice %>" cartItemRecom="<%= cartItemRecom %>" itemAmount="<%= itemAmount %>">
+							<input class="checkbox" name="checkList" type="checkbox" checked="checked" itemCode="<%= itemCode %>" itemMarketPrice="<%= itemMarketPrice %>" itemPurchasePrice="<%= itemPurchasePrice %>" itemSellPrice="<%= itemSellPrice %>" cartItemRecom="<%= cartItemRecom %>" itemAmount="<%= itemAmount %>">
 						</td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2" width="120px">
 							<img src="<%= itemPicPath %>/<%= itemPicSaveName %>" width="80px" height="80px" style="margin-left: -20px">

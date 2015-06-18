@@ -41,7 +41,14 @@ public class RelationDeleteController extends BaseController {
 	@RequestMapping("/relationFollowerDelete.hang")
 	public String relationFollowerDelete(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String userCode = req.getParameter("userCode");
 		
@@ -58,7 +65,7 @@ public class RelationDeleteController extends BaseController {
 		req.setAttribute("user", user);
 		req.setAttribute("followerList", followerList);
 		req.setAttribute("mainUrl", myPageUrl);
-		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
+		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		
 		return moveUrl;
 	}
@@ -66,7 +73,14 @@ public class RelationDeleteController extends BaseController {
 	@RequestMapping("/relationFollowingDelete.hang")
 	public String relationFollowingDelete(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String userCode = req.getParameter("userCode");
 		
@@ -82,7 +96,7 @@ public class RelationDeleteController extends BaseController {
 		req.setAttribute("user", user);
 		req.setAttribute("followingList", followingList);
 		req.setAttribute("mainUrl", myPageUrl);
-		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
+		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		
 		return moveUrl;
 	}
@@ -90,7 +104,14 @@ public class RelationDeleteController extends BaseController {
 	@RequestMapping("/relationSearchDelete.hang")
 	public String relationSearchDelete(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String userCode = req.getParameter("userCode");
 		String qt = req.getParameter("deleteQt");
@@ -112,7 +133,7 @@ public class RelationDeleteController extends BaseController {
 		req.setAttribute("user", user);
 		req.setAttribute("userList", userList);
 		req.setAttribute("mainUrl", myPageUrl);
-		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
+		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		req.setAttribute("qt", qt);
 		
 		return moveUrl;

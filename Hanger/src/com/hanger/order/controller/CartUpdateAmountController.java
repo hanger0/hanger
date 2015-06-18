@@ -23,7 +23,14 @@ public class CartUpdateAmountController extends BaseController {
 	@RequestMapping("/updateAmount.hang")
 	public String name(HttpServletRequest req) {
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+                || ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String userCode = (String)session.getAttribute("myUserCode");
 		String itemCode = req.getParameter("itemCode");
 		String value = req.getParameter("value");
@@ -35,6 +42,8 @@ public class CartUpdateAmountController extends BaseController {
 		
 		cartUpdateAmountDao.updateAmount(map);
 		
-		return root + "order/UpdateAmount.jsp";
+		req.setAttribute("amount", value);
+		
+		return "order/UpdateAmount";
 	}
 }

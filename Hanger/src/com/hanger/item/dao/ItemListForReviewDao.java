@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
+import com.hanger.item.vo.ItemListForReviewVo;
+
 public class ItemListForReviewDao {
 	private SqlMapClientTemplate smct;
 
@@ -11,7 +13,8 @@ public class ItemListForReviewDao {
 		this.smct = smct;
 	}
 	
-	public ArrayList getItemListForReview(String userCode) {
-		return (ArrayList) smct.queryForList("getItemListForReview", userCode);
+	@SuppressWarnings("unchecked")
+	public ArrayList<ItemListForReviewVo> getItemListForReview(String userCode) {
+		return (ArrayList<ItemListForReviewVo>) smct.queryForList("getItemListForReview", userCode);
 	}
 }

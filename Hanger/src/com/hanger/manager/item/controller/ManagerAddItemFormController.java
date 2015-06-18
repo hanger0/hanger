@@ -6,11 +6,11 @@ import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.manager.item.dao.ManagerAddItemDao;
@@ -27,20 +27,31 @@ public class ManagerAddItemFormController extends BaseController{
 	}
 	
 	@RequestMapping(value="/managerAddItemResult.hang", method=RequestMethod.POST)
-	public ModelAndView managerAddItemForm(HttpServletRequest request) throws IOException{
+	public String managerAddItemForm(HttpServletRequest req) throws IOException{
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+                || ((String) session.getAttribute("loginYn")).equals("N")
+                || session.getAttribute("adminYn") == null
+                || ((String) session.getAttribute("adminYn")).equals("N")) {
+			req.setAttribute("message", "관리자로 로그인 해주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		File dayFile = new File("C:/workspace/hanger/Hanger/WebContent/upfile/item/detail");
 		if(!dayFile.exists())
 		{
 			dayFile.mkdirs();
 		}
 		String savePath = "/upfile/item/detail";
-		String saveAbsolutePath = dayFile.getAbsolutePath();
+		//String saveAbsolutePath = dayFile.getAbsolutePath();
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(request, "C:/workspace/hanger/Hanger/WebContent/upfile/item/detail", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(req, "C:/workspace/hanger/Hanger/WebContent/upfile/item/detail", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		ManagerItemVo item = new ManagerItemVo();
 		
-		List<ManagerItemVo> itemList;
+		//List<ManagerItemVo> itemList;
 
 		int sizeCnt = Integer.parseInt(mul.getParameter("sizeCnt"));
 		String brandCode = mul.getParameter("brandCode");
@@ -106,7 +117,7 @@ public class ManagerAddItemFormController extends BaseController{
 //		String itemDetailPicSaveName = "";
 //		int itemDetailPicSize = 0;
 
-		String ip = request.getRemoteAddr();
+		String ip = req.getRemoteAddr();
 		
 		item.setBrandCode(brandCode);
 		item.setItemName(itemName);
@@ -179,9 +190,6 @@ public class ManagerAddItemFormController extends BaseController{
 //			}
 //		}
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("../../index"); // 상품등록 끝나고 돌아갈 화면
-		
-		return mav;
+		return "../../index";// 상품등록 끝나고 돌아갈 화면
 	}
 }

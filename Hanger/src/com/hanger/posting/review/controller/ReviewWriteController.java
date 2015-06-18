@@ -9,10 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
-import com.hanger.item.dao.ItemListForReviewDao;
 import com.hanger.item.dao.ItemViewDao;
 import com.hanger.item.vo.ItemListForReviewVo;
 import com.hanger.item.vo.ItemViewVo;
@@ -21,28 +19,31 @@ import com.hanger.item.vo.ItemViewVo;
 public class ReviewWriteController extends BaseController{
 	
 	private ItemViewDao itemViewDao;
-	private ItemListForReviewDao itemListForReviewDao;
 	
 	public void setItemViewDao(ItemViewDao itemViewDao) {
 		this.itemViewDao = itemViewDao;
 	}
 	
-	public void setItemListForReviewDao(ItemListForReviewDao itemListForReviewDao){
-		this.itemListForReviewDao = itemListForReviewDao;
-	}
-
 	@RequestMapping(value="/reviewWrite.hang", method=RequestMethod.GET)
-	public String mainPage(HttpServletRequest request, HttpSession session) {
+	public String mainPage(HttpServletRequest req) {
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
 		
 		ArrayList<ItemListForReviewVo> itemListForReview = (ArrayList)session.getAttribute("itemListForReview");
-		String itemGroupCode = request.getParameter("itemGroupCode");
+		String itemGroupCode = req.getParameter("itemGroupCode");
 		
 		if(itemListForReview.size() == 0){
-			request.setAttribute("message", "리뷰는 구매한 상품에 한해서 한번만 작성이 가능합니다.");
+			req.setAttribute("message", "리뷰는 구매한 상품에 한해서 한번만 작성이 가능합니다.");
 		} else{
 			for(int i = 0; i < itemListForReview.size(); i ++){
 				if(!(itemListForReview.get(i).getItemGroupCode()).equals(itemGroupCode)){
-					request.setAttribute("message", "리뷰는 구매한 상품에 한해서 한번만 작성이 가능합니다.");
+					req.setAttribute("message", "리뷰는 구매한 상품에 한해서 한번만 작성이 가능합니다.");
 				}
 			}
 		}
@@ -69,10 +70,10 @@ public class ReviewWriteController extends BaseController{
 			}
 		}
 		
-		request.setAttribute("maxPrice", maxPrice);
-		request.setAttribute("minPrice", minPrice);
-		request.setAttribute("item", item);
-		request.setAttribute("mainUrl", root + "posting/review/ReviewWriteEditor.jsp");
+		req.setAttribute("maxPrice", maxPrice);
+		req.setAttribute("minPrice", minPrice);
+		req.setAttribute("item", item);
+		req.setAttribute("mainUrl", root + "posting/review/ReviewWriteEditor.jsp");
 		
 		return moveUrl;
 	}

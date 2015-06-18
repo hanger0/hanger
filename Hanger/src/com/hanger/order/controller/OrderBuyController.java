@@ -49,8 +49,14 @@ public class OrderBuyController extends BaseController {
 
 	@RequestMapping(value="/goOrderBuyPage.hang", method=RequestMethod.POST)
 	public String goOrder(HttpServletRequest req){
-		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+                || ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String itemCode = req.getParameter("itemCode");
 		String itemMarketPrice = req.getParameter("itemMarketPrice");
@@ -75,48 +81,48 @@ public class OrderBuyController extends BaseController {
     	
     	StringTokenizer st = new StringTokenizer(itemCode, ",");
     	if(st.countTokens() > 1){
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	            String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	            String temp = st.nextToken();
 	            itemCodeList.add(temp);
 	        }
 	        st = new StringTokenizer(itemMarketPrice, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){ 
+	        	String temp = st.nextToken();
 	        	itemMarketPriceList.add(temp);
 	        }
 	        st = new StringTokenizer(itemPurchasePrice, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	        	String temp = st.nextToken();
 	        	itemPurchasePriceList.add(temp);
 	        }
 	        st = new StringTokenizer(itemName, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){ 
+	        	String temp = st.nextToken();
 	        	itemNameList.add(temp);
 	        }
 	        st = new StringTokenizer(itemPicPath, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	        	String temp = st.nextToken();
 	        	itemPicPathList.add(temp);
 	        }
 	        st = new StringTokenizer(itemPicSaveName, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	        	String temp = st.nextToken(); 
 	        	itemPicSaveNameList.add(temp);
 	        }
 	        st = new StringTokenizer(itemSellPrice, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	        	String temp = st.nextToken();
 	        	itemSellPriceList.add(temp);
 	        }
 	        st = new StringTokenizer(cartItemRecom, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){ 
+	        	String temp = st.nextToken();
 	        	cartItemRecomList.add(temp);
 	        }
 	        st = new StringTokenizer(itemDetailInfo, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	        	String temp = st.nextToken(); 
 	        	itemDetailInfoList.add(temp);
 	        }
     	} else {
@@ -193,8 +199,13 @@ public class OrderBuyController extends BaseController {
 	@RequestMapping(value="/orderBuy.hang", method=RequestMethod.POST)
 	public String buyOrder(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
-		System.out.println("orderbuy.hang에 들어옴");
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+                || ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String myUserId = (String)session.getAttribute("myUserId");
@@ -228,33 +239,33 @@ public class OrderBuyController extends BaseController {
     	
     	StringTokenizer st = new StringTokenizer(itemCodes, ",");
     	if(st.countTokens() > 1){
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	            String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	            String temp = st.nextToken();
 	            itemCodeList.add(temp);
 	        }
 	        st = new StringTokenizer(orderItemMarketPrices, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	        	String temp = st.nextToken();
 	        	itemMarketPriceList.add(temp);
 	        }
 	        st = new StringTokenizer(orderItemPurchasePrices, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	        	String temp = st.nextToken();
 	        	itemPurchasePriceList.add(temp);
 	        }
 	        st = new StringTokenizer(orderItemSellPrices, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){ 
+	        	String temp = st.nextToken();
 	        	itemSellPriceList.add(temp);
 	        }
 	        st = new StringTokenizer(orderItemRecoms, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	        	String temp = st.nextToken();
 	        	cartItemRecomList.add(temp);
 	        }
 	        st = new StringTokenizer(orderItemAmounts, ",");
-	        while(st.hasMoreTokens()){   //토근이 있는동안 while문이 실행됨
-	        	String temp = st.nextToken(); // 토근을 temp 변수에 저장
+	        while(st.hasMoreTokens()){
+	        	String temp = st.nextToken();
 	        	itemAmountList.add(temp);
 	        }
 	        for(int i = 0; i < itemCodeList.size(); i++){

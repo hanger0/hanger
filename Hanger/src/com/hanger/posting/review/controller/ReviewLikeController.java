@@ -26,16 +26,23 @@ public class ReviewLikeController extends BaseController {
 	@RequestMapping(value="/reviewLikeCheck.hang",method=RequestMethod.POST )
 	public String reviewLikeCheck(HttpServletRequest req)
 	{
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		moveUrl = "posting/review/ReviewLikeCheck";
 		//사용자의 아이디를 가져온다.
-		HttpSession session = req.getSession();
-		
 		String userId = (String)session.getAttribute("myUserId");
 		String userCode = (String)session.getAttribute("myUserCode");
 		String postingCode = req.getParameter("postingCode");
 		String ip = req.getRemoteAddr();
 		
-		HashMap map = new HashMap();
+		HashMap<String, String> map = new HashMap<String, String>();
 		
 		map.put("userCode", userCode);
 		map.put("postingCode", postingCode);

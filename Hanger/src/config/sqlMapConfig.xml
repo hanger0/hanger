@@ -21,4 +21,5 @@
 	<sqlMap resource="config/scrap/userScrapList.xml"/>
 	<sqlMap resource="config/reply/reply.xml"/>
 	<sqlMap resource="config/mileage/mileage.xml"/>
+	<sqlMap resource="config/notification/notification.xml"/>
 </sqlMapConfig>

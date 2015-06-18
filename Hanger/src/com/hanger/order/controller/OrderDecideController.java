@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.item.dao.ItemListForReviewDao;
+import com.hanger.item.vo.ItemListForReviewVo;
 import com.hanger.order.dao.OrderDecideDao;
 import com.hanger.order.dao.OrderInfoDao;
 import com.hanger.order.vo.OrderVo;
@@ -41,7 +42,14 @@ public class OrderDecideController extends BaseController {
 	@RequestMapping("/orderDecide.hang")
 	public String orderDecide(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+                || ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String orderInfoCode = req.getParameter("orderInfoCode");
 		
@@ -51,7 +59,7 @@ public class OrderDecideController extends BaseController {
 		int ok = orderDecideDao.orderDecide(orderinfoMap);
 		if(ok>0)
 		{
-			ArrayList itemListForReview = (ArrayList)itemListForReviewDao.getItemListForReview(myUserCode);
+			ArrayList<ItemListForReviewVo> itemListForReview = (ArrayList<ItemListForReviewVo>)itemListForReviewDao.getItemListForReview(myUserCode);
 			session.setAttribute("itemListForReview", itemListForReview);
 		}
 		

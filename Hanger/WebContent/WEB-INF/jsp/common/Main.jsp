@@ -1,21 +1,6 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
  
 <link href="css/Follow/follow.css" rel="stylesheet" />
-<script type="text/javascript">
-$(document).ready(function($){
-   
-   $('#mega-menu-3').dcMegaMenu({
-      rowItems: '7',
-      speed: 'fast',
-      effect: 'fade'
-   });
-   $('#mega-menu-9').dcMegaMenu({
-      rowItems: '3',
-      speed: 'fast',
-      effect: 'fade'
-   });
-});
-</script>
 <STYLE>
 body
 {

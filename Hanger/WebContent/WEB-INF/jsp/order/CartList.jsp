@@ -71,14 +71,18 @@ $(function(){
     	}
     });
     $(".amount").change(function(){
+    	var itemSellPrice = $(this).parent().prev();
     	var value = $(this).val();
-    	var amountCode = $(this).attr("itemCode");
+    	var itemCode = $(this).attr("itemCode");
     	$.ajax({
 			type: "POST", 
 			url: "/updateAmount.hang",
 			dataType: "text",
-			data: "value=" + value + "&itemCode=" + amountCode, 
+			data: "value=" + value + "&itemCode=" + itemCode, 
 			success: function(text){
+				var resultText = trim(text);
+				var price = parseInt(resultText) * parseInt(itemSellPrice.attr('itemSellPrice'));
+				itemSellPrice.text(price);
 			}
 		});
     });
@@ -177,7 +181,7 @@ if(cartList != null){
 						<td colspan="3" style="border-right: 1px solid gray;"><font
 							size="3"><b><%= itemName %></b></font></td>
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2"><%= itemSellPrice %>¿ø</td>
+							rowspan="2" itemSellPrice="<%= itemSellPrice %>"><%= cartItemAmount * itemSellPrice %>¿ø
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2">
 						<select class="amount" itemCode="<%= itemCode %>">

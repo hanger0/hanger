@@ -53,16 +53,23 @@ $(function(){
 							width="120px" height="100px"><img src="<%= order.getItemPicPath() %>/<%= order.getItemPicSaveName() %>"
 							width="80px" height="80px" style="margin-left: 10px"></td>
 						<td colspan="3" style="border-right: 1px solid gray;"><font
-							size="3"><b><%= order.getItemName() %></b></font></td>
+							size="3"><b><%=i %>번째 <%= order.getItemName() %></b></font></td>
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2"><%= order.getOrderItemAmount() %></td>
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
-							rowspan="2">동작구사랑방</td>
+							rowspan="2">해당없음</td>
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2"><P><%= order.getOrderState() %></td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2">
 				<%
-					if(order.getOrderItemVerify().equals("Y")&&order.getPostingCode()==null){
+					if(order.getOrderItemVerify().equals("N")){
+				%>
+						<form id="decideForm" action="/orderDecide.hang" method="POST">
+							<input name="orderInfoCode" type="hidden" />
+							<input id="decideBtn" type="button" value="구매확정" class="btn btn-default" orderInfoCode="<%= order.getOrderInfoCode() %>" />
+						</form>
+				<%						
+					} else if(order.getOrderItemVerify().equals("Y")&&order.getPostingCode()==null){
 				%>
 							<a href="reviewWrite.hang?itemGroupCode=<%=order.getItemGroupCode()%>"><input type="button" value="리뷰쓰기" class="btn btn-default" /></a>
 				<%
@@ -70,13 +77,6 @@ $(function(){
 				%>
 							<a href="reviewShow.hang?reviewCode=<%=order.getPostingCode() %>"><input type="button" value="리뷰보기" class="btn btn-default" /></a>
 				<%					
-					}else{
-				%>
-						<form id="decideForm" action="/orderDecide.hang" method="POST">
-							<input name="orderInfoCode" type="hidden" />
-							<input id="decideBtn" type="button" value="구매확정" class="btn btn-default" orderInfoCode="<%= order.getOrderInfoCode() %>" />
-						</form>
-				<%
 					}
 				%>
 						</td>

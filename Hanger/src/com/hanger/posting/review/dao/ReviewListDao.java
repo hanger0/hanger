@@ -15,7 +15,7 @@ public class ReviewListDao {
 		this.smct = smct ;
 	}
 	@SuppressWarnings("unchecked")
-	public ArrayList<ReviewVo> selectReview(HashMap userCodeMap) {
+	public ArrayList<ReviewVo> selectReview(HashMap<String, String> userCodeMap) {
 		return (ArrayList<ReviewVo>)smct.queryForList("selectReview", userCodeMap);
 	}
 }

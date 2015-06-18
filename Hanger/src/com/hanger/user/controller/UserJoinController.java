@@ -40,21 +40,19 @@ public class UserJoinController extends BaseController {
 	}
 	
 	@RequestMapping(value="/join.hang", method=RequestMethod.GET)
-	protected ModelAndView memberJoin(HttpServletRequest request) {
+	protected String memberJoin(HttpServletRequest req) {
 		//
-		HttpSession session = request.getSession(false);
+		HttpSession session = req.getSession(false);
 		
-		ModelAndView mav = new ModelAndView() ;
 		if(session != null && session.getAttribute("loginYn")!=null && ((String)session.getAttribute("loginYn")).equals("Y")) {
-			mav.setViewName(moveUrl);
-			mav.addObject("mainUrl", mainUrl);
-			mav.addObject("message", "이미 로그인된 상태입니다.");
+			req.setAttribute("mainUrl", mainUrl);
+			req.setAttribute("message", "이미 로그인된 상태입니다.");
 		} else {
-			mav.setViewName("user/Join");
+			moveUrl = "user/Join";
 		}
 		
 		System.out.println("MemberJoin...");
-		return mav ;
+		return moveUrl;
 	}
 
 	@RequestMapping(value="/joinResult.hang", method=RequestMethod.POST)

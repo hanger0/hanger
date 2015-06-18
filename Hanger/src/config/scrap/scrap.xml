@@ -7,7 +7,14 @@
 		INSERT INTO SCRAP(USER_CODE, POSTING_CODE, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
 		VALUES(#myUserCode#, #postingCode#, #myUserId#, sysdate(), #ip#, #myUserId#, sysdate(), #ip#)
 	</insert>
-	
+	<select id = "selectScrapYn" parameterClass = "HashMap" resultClass = "scrap">
+		SELECT
+			USER_CODE as userCode
+		FROM
+			SCRAP
+		WHERE
+			USER_CODE = #myUserCode# AND POSTING_CODE = #postingCode#
+	</select>
 	<select id = "selectScrap" parameterClass = "HashMap" resultClass = "scrap">
 		SELECT
 			USER_CODE as userCode

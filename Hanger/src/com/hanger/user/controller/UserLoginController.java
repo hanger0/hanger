@@ -9,17 +9,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.item.dao.ItemListForReviewDao;
-import com.hanger.item.vo.ItemListForReviewVo;
 import com.hanger.user.dao.UserLoginDao;
 import com.hanger.user.vo.UserVo;
 
 @Controller
 @RequestMapping("/login.hang")
 public class UserLoginController extends BaseController {
+	
 	private UserLoginDao userLoginDao;	
 	private ItemListForReviewDao itemListForReviewDao;
 	
@@ -37,7 +36,7 @@ public class UserLoginController extends BaseController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView submit(
+	public String submit(
 			HttpServletRequest req){
 		//
 		HttpSession session = req.getSession();
@@ -74,11 +73,9 @@ public class UserLoginController extends BaseController {
 			moveUrl = "user/Login";
 		}
 
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName(moveUrl);
-		mav.addObject("message", message);
-		mav.addObject("mainUrl", mainUrl);
+		req.setAttribute("message", message);
+		req.setAttribute("mainUrl", mainUrl);
 
-		return mav;
+		return moveUrl;
 	}
 }

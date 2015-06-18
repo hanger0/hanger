@@ -1,6 +1,5 @@
 package com.hanger.user.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,90 +32,93 @@ public class UserSearchController extends BaseController {
 	}
 
 	@RequestMapping("/userSearch.hang")
-	   public String userSearch(HttpServletRequest req) {
-	      //
-	      // moveUrl = "user/FriendSearch";
-	      HttpSession session = req.getSession(false);
+	public String userSearch(HttpServletRequest req) {
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
 
-	      String myUserCode = (String) session.getAttribute("myUserCode");
-	      String qt = entoKo(req.getParameter("qt"));
-	      
-	      HashMap<String, String> map = new HashMap<String, String>();
-	      map.put("myUserCode", myUserCode);
-	      map.put("qt", qt);
-	      ArrayList<UserVo> userList = userSearchDao.searchUser(map);
+		String myUserCode = (String) session.getAttribute("myUserCode");
+		String qt = req.getParameter("qt");
 
-	      System.out.println("qt================"+qt);
-	      UserVo user = userSelectDao.selectUser(myUserCode);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
+		map.put("qt", qt);
+		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
 
-	      req.setAttribute("user", user);
-	      req.setAttribute("userList", userList);
-	      req.setAttribute("mainUrl", myPageUrl);
-	      req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
-	      req.setAttribute("qt", qt);
+		System.out.println("qt================" + qt);
+		UserVo user = userSelectDao.selectUser(myUserCode);
 
-	      return moveUrl;
-	   }
+		req.setAttribute("user", user);
+		req.setAttribute("userList", userList);
+		req.setAttribute("mainUrl", myPageUrl);
+		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
+		req.setAttribute("qt", qt);
 
-	   @RequestMapping("/userMiniSearch.hang")
-	   public String userMiniSearch(HttpServletRequest req) {
+		return moveUrl;
+	}
 
-	      HttpSession session = req.getSession();
-	      String myUserCode = (String) session.getAttribute("myUserCode");
-	      String qt = req.getParameter("searchText");
+	@RequestMapping("/userMiniSearch.hang")
+	public String userMiniSearch(HttpServletRequest req) {
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
+		String myUserCode = (String) session.getAttribute("myUserCode");
+		String qt = req.getParameter("searchText");
 
-	      RelationVo relation = new RelationVo();
-	      relation.setRelationFollower(myUserCode);
+		RelationVo relation = new RelationVo();
+		relation.setRelationFollower(myUserCode);
 
-	      HashMap<String, String> map = new HashMap<String, String>();
-	      map.put("myUserCode", myUserCode);
-	      map.put("qt", qt);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
+		map.put("qt", qt);
 
-	      ArrayList<UserVo> userList = userSearchDao.mainFriendSearch(map);
+		ArrayList<UserVo> userList = userSearchDao.mainFriendSearch(map);
 
-	      req.setAttribute("userList", userList);
-	      req.setAttribute("qt", qt);
+		req.setAttribute("userList", userList);
+		req.setAttribute("qt", qt);
 
-	      return "user/FriendSearch";
-	   }
+		return "user/FriendSearch";
+	}
 
-	   // ///새로만든거 친구 찾기 더보기
-	   @RequestMapping("/SearchTheLook.hang")
-	   public String SearchTheLook(HttpServletRequest req) {
+	// ///새로만든거 친구 찾기 더보기
+	@RequestMapping("/SearchTheLook.hang")
+	public String SearchTheLook(HttpServletRequest req) {
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
+		String myUserCode = (String) session.getAttribute("myUserCode");
 
-	      HttpSession session = req.getSession();
-	      String myUserCode = (String) session.getAttribute("myUserCode");
+		System.out.println("더보기");
+		RelationVo relation = new RelationVo();
+		relation.setRelationFollower(myUserCode);
 
-	      String qt = (String)entoKo(req.getParameter("searchText"));
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
 
-	      System.out.println("더보기");
-	      RelationVo relation = new RelationVo();
-	      relation.setRelationFollower(myUserCode);
+		ArrayList<UserVo> userList = relationSearchDao
+				.searchFollowerRelation(myUserCode);
 
-	      HashMap<String, String> map = new HashMap<String, String>();
-	      map.put("myUserCode", myUserCode);
+		req.setAttribute("userList", userList);
+		req.setAttribute("mainUrl", myPageUrl);
+		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 
-	      ArrayList<UserVo> userList = relationSearchDao
-	            .searchFollowerRelation(myUserCode);
-
-	      req.setAttribute("userList", userList);
-	      req.setAttribute("mainUrl", myPageUrl);
-	      req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
-
-	      return "moveUrl";
-	   }
-	   //한글변환
-	   public String entoKo(String en)
-	   {
-	      String enKo = null;
-	      try
-	      {
-	         enKo = new String(en.getBytes("iso-8859-1"),"ksc5601");
-	      }
-	      catch(UnsupportedEncodingException e)
-	      {
-	         System.out.println(e);
-	      }
-	      return enKo;
-	   }
+		return "moveUrl";
+	}
 }

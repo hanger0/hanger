@@ -29,7 +29,14 @@ public class RelationSearchController extends BaseController {
 	@RequestMapping("/relationFollowerSearch.hang")
 	public String relationFollowerSearch(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		ArrayList<UserVo> followerList = relationSearchDao.searchFollowerRelation(myUserCode);
 		
@@ -38,14 +45,22 @@ public class RelationSearchController extends BaseController {
 		req.setAttribute("user", user);
 		req.setAttribute("followerList", followerList);
 		req.setAttribute("mainUrl", myPageUrl);
-		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
+		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		
 		return moveUrl;
 	}
 	
 	@RequestMapping("/relationFollowingSearch.hang")
 	public String relationFollowingSearch(HttpServletRequest req){
-		HttpSession session = req.getSession();
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		ArrayList<UserVo> followingList = relationSearchDao.searchFollowingRelation(myUserCode);
 		
@@ -54,7 +69,7 @@ public class RelationSearchController extends BaseController {
 		req.setAttribute("user", user);
 		req.setAttribute("followingList", followingList);
 		req.setAttribute("mainUrl", myPageUrl);
-		req.setAttribute("myPageUrl", root + "user/mypage/FlowSearch.jsp");
+		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		
 		return moveUrl;
 	}

@@ -28,24 +28,37 @@ public class UserUpdateController extends BaseController {
 	}
 	
 	@RequestMapping(value="/updateUser.hang",method=RequestMethod.GET)
-	public String userUpdateController(HttpServletRequest request)
-	{
-		HttpSession session = request.getSession(false);
+	public String userUpdateController(HttpServletRequest req) {
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String userCode = (String)session.getAttribute("myUserCode");
 		
 		ArrayList<UserVo> userList = userUpdateDao.selectUserInfo(userCode);
 		UserVo user = userList.get(0);
 		
-		request.setAttribute("user", user);
-		request.setAttribute("mainUrl", root + "user/mypage/UserUpdate.jsp");
+		req.setAttribute("user", user);
+		req.setAttribute("mainUrl", root + "user/mypage/UserUpdate.jsp");
 		
 		return moveUrl;
 	}
 	
 	@RequestMapping(value="/updateUserResult.hang", method = RequestMethod.POST)
-	public String updateUser(HttpServletRequest request) throws IOException{
+	public String updateUser(HttpServletRequest req) throws IOException{
 		//
-		HttpSession session = request.getSession(false);
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
 
 		String path = "C:/workspace/hanger/Hanger/WebContent/upfile/user/profile";
 	      File dayFile = new File(path);
@@ -55,7 +68,7 @@ public class UserUpdateController extends BaseController {
 	      }
 	      String savePath = "/upfile/user/profile";
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(request, path, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(req, path, sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		Enumeration formNames=mul.getFileNames();
 		String fileFormName=(String)formNames.nextElement(); // 업로드 하는 파일이 많을 경우 while 을 사용
@@ -87,7 +100,7 @@ public class UserUpdateController extends BaseController {
 		String month = mul.getParameter("month");
 		String day = mul.getParameter("day");
 		String[] userSkinProblems = mul.getParameterValues("skinProblem");
-		String updIp = request.getRemoteAddr();
+		String updIp = req.getRemoteAddr();
 		
 		String userSkinProblem = null;
 		if(userSkinProblems != null){
@@ -130,8 +143,8 @@ public class UserUpdateController extends BaseController {
 		} else {
 			message = "수정실패 하셨습니다.";
 		}
-		request.setAttribute("message", message);
-		request.setAttribute("mainUrl", mainUrl);
+		req.setAttribute("message", message);
+		req.setAttribute("mainUrl", mainUrl);
 		
 		return moveUrl;
 	}

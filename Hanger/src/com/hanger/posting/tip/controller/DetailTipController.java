@@ -31,6 +31,14 @@ public class DetailTipController extends BaseController {
 	
 	@RequestMapping("/detailTip.hang")
 	public String review(HttpServletRequest req){
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
 		
 		/***************************Select & Page Move Start ***********************/
 		System.out.println("Tip 화면 실행....");
@@ -42,7 +50,7 @@ public class DetailTipController extends BaseController {
 		System.out.println("postingCode : " + postingCode);
 	
 		
-    	HashMap map = new HashMap();
+    	HashMap<String, String> map = new HashMap<String, String>();
     	map.put("postingCode", postingCode);
     	
     	ArrayList<ReplyVo> tipReplyList = replySelectDao.selectReply(map);
@@ -63,10 +71,16 @@ public class DetailTipController extends BaseController {
 	@RequestMapping(value="/replyInsert.hang", method=RequestMethod.POST)
 	public String insertReply(HttpServletRequest req){
 		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
 		
 		moveUrl = "reply/replyInsert";
 		System.out.println("Insert 시작");
-		HttpSession session = req.getSession(false);
 		
 		ReplyVo reply = new ReplyVo();
 		//log("리플라이");
@@ -90,7 +104,7 @@ public class DetailTipController extends BaseController {
     		
     	replyInsertDao.insertReply(reply);
     	
-    	HashMap map = new HashMap();
+    	HashMap<String, String> map = new HashMap<String, String>();
     	map.put("postingCode", postingCode);
     	
 		

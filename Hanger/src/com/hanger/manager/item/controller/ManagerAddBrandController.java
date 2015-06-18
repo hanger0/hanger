@@ -3,17 +3,15 @@ package com.hanger.manager.item.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.manager.item.dao.ManagerAddBrandDao;
 import com.hanger.manager.item.dao.ManagerSearchBrandDao;
 import com.hanger.manager.item.vo.ManagerBrandVo;
-import com.oreilly.servlet.MultipartRequest;
 
 @Controller
 public class ManagerAddBrandController extends BaseController {
@@ -28,11 +26,20 @@ public class ManagerAddBrandController extends BaseController {
 	}
 
 	@RequestMapping(value = "/managerAddBrand.hang")
-	protected ModelAndView addBrand(HttpServletRequest request,
-			HttpServletResponse response) {
-
+	protected String addBrand(HttpServletRequest req) {
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+                || ((String) session.getAttribute("loginYn")).equals("N")
+                || session.getAttribute("adminYn") == null
+                || ((String) session.getAttribute("adminYn")).equals("N")) {
+			req.setAttribute("message", "관리자로 로그인 해주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		ManagerBrandVo brand = new ManagerBrandVo();
-		String brandName = request.getParameter("brandName");
+		String brandName = req.getParameter("brandName");
 		String message = "이미 등록되어 있는 브랜드입니다.";
 		
 		List<ManagerBrandVo> brandList = managerSearchBrandDao.searchCompleteBrand(brandName);		
@@ -48,11 +55,9 @@ public class ManagerAddBrandController extends BaseController {
 			message = "브랜드가 등록되었습니다.";
 		}
 		
-		ModelAndView mav = new ModelAndView();
 		moveUrl = "manager/item/ManagerSearchBrand";
-		mav.setViewName(moveUrl);
-		mav.addObject("message", message);
+		req.setAttribute("message", message);
 		
-		return mav;
+		return moveUrl;
 	}
 }

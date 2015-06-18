@@ -12,7 +12,7 @@ public class OrderDecideDao {
 		this.smct = smct;
 	}
 	
-	public int orderDecide(HashMap map){
+	public int orderDecide(HashMap<String, String> map){
 		return smct.update("orderDecide", map);
 	}
 }

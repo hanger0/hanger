@@ -1,49 +1,69 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
 <%@ page import = "com.hanger.posting.review.vo.ReviewShowVo" %>
+<%@ page import = "java.util.*" %>
 
 <%
-   ReviewShowVo review = (ReviewShowVo)request.getAttribute("review");
+	String myUserCode = (String)session.getAttribute("myUserCode");
+   List<ReviewShowVo> reviewList = (List<ReviewShowVo>)request.getAttribute("reviewList");
    
    //review
-   String reviewTitle = review.getReviewTitle();
-   String reviewContent = review.getReviewContent();
-   String reviewScore = review.getReviewScore();
-   String reviewDate = review.getReviewRegDate();
-   String reviewLikeCnt = review.getReviewLikeCnt();
-   String reviewReplyCnt = review.getReviewReplyCnt();
-   String reviewScrapCnt = review.getReviewScrapCnt();
+   String reviewCode = reviewList.get(0).getReviewCode();
+   String reviewContent = reviewList.get(0).getReviewContent();
+   String reviewTitle = reviewList.get(0).getReviewTitle();
+   String reviewMainPicPath = reviewList.get(0).getReviewMainPicPath();
+   String reviewMainPicSaveName = reviewList.get(0).getReviewMainPicSaveName();
+   String reviewScore = reviewList.get(0).getReviewScore();
+   String reviewLikeCnt = reviewList.get(0).getReviewLikeCnt();
+   String reviewReplyCnt = reviewList.get(0).getReviewReplyCnt();
+   String reviewScrapCnt = reviewList.get(0).getReviewScrapCnt();
+   String reviewRegDate = reviewList.get(0).getReviewRegDate();
+   String myLikeYn = reviewList.get(0).getMyLikeYn();
+   String myScrapYn = reviewList.get(0).getMyScrapYn();
    
    //item
-   String itemGroupCode = review.getItemGroupCode();
-   String itemBrandName = review.getItemBrandName();
-   String itemName = review.getItemName();
-   String itemSummaryInfo = review.getItemSummaryInfo();
-   String itemPicPath = review.getItemPicPath();
-   String itemPicSaveName = review.getItemPicSaveName();
-   int maxPrice = review.getItemMaxPrice();
-   int minPrice = review.getItemMinPrice();
+   String itemGroupCode = reviewList.get(0).getItemGroupCode();
+   String itemBrandCode = reviewList.get(0).getItemBrandCode();
+   String itemBrandName = reviewList.get(0).getItemBrandName();
+   String itemCode = reviewList.get(0).getItemCode();
+   String itemName = reviewList.get(0).getItemName();
+   HashMap<String, String> itemSizeList = new HashMap<String, String>(); //itemSize와 itemSellPrice를 매치
+   for(int i = 0; i < reviewList.size(); i++){
+      itemSizeList.put(reviewList.get(i).getItemSize(), ""+reviewList.get(i).getItemSellPrice());
+   }
+   int maxPrice = (Integer)request.getAttribute("maxPrice");
+   int minPrice = (Integer)request.getAttribute("minPrice");
+   String itemPicPath = reviewList.get(0).getItemPicPath();
+   String itemPicSaveName = reviewList.get(0).getItemPicSaveName();
+   String itemSummaryInfo = reviewList.get(0).getItemSummaryInfo();
    
    //writer
-   String writerUserCode = review.getWriterCode();
-   String writerName = review.getWriterName();
-   String writerSkinType = review.getWriterSkinType();
-   String writerSkinTone = review.getWriterSkinTone();
-   String writerPicPath = review.getWriterPicPath();
-   String writerPicSaveName = review.getWriterPicSaveName();
-   String writerFollowerCnt = "" + (Integer.parseInt(review.getWriterFollowerCnt()) - 1);
-   String writerPostingCnt = review.getWriterPostingCnt();
-   String writerPostingLikeCnt = review.getWriterPostingLikeCnt();
-%>    
+   String writerCode = reviewList.get(0).getWriterCode();
+   String writerName = reviewList.get(0).getWriterName();
+   String writerSkinType = reviewList.get(0).getWriterSkinType();
+   String writerSkinTone = reviewList.get(0).getWriterSkinTone();
+   String writerPicPath = reviewList.get(0).getWriterPicPath();
+   String writerPicSaveName = reviewList.get(0).getWriterPicSaveName();
+   String writerFollowerCnt = "" + (Integer.parseInt(reviewList.get(0).getWriterFollowerCnt()) - 1);
+   String writerPostingCnt = reviewList.get(0).getWriterPostingCnt();
+   String writerPostingLikeCnt = reviewList.get(0).getWriterPostingLikeCnt();
+   
+   boolean myReviewYn = false;
+   if(myUserCode.equals(writerCode))
+   {
+	   myReviewYn=true;
+   }
+%>
         
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="/js/common/common.js" type="text/javascript"></script>
 <link rel="stylesheet" href="css/Follow/follow.css" />
 <style>
 .myicon
 {
-   font-size:30px;
+   font-size:20px;
    color:gray;
 }
 .col1
@@ -58,14 +78,181 @@
    font-size:30px;
 }
 </style>
-
+<script>
+	function sameProduct() {
+		location.href = "/";
+	}
+</script>
+<!-- 스크랩 스크립트 -->
+	<script>
+		$(function(){
+			$(".like").click(function(){
+				var like = $(this);
+				var postingCode = $("input:hidden[name=postingCode]").val();
+				if(like.attr('class') === ('glyphicon glyphicon-heart myicon like')){
+					//좋아요		
+					$.ajax({
+						type: "POST", 
+						url: "/reviewLikeCheck.hang",
+						dataType: "text",
+						data: "postingCode="+postingCode,
+						success: function(text){
+							var cnt = trim(text);
+							like.html("<FONT color = 1266FF size = '5'>좋아요("+ cnt +")</FONT>");
+							like.removeClass('like');
+							like.addClass('likeCancel');
+						}
+					});
+				} else {
+					//좋아요 취소
+					$.ajax({
+						type: "POST", 
+						url: "/reviewLikeCheck.hang",
+						dataType: "text",
+						data: "postingCode="+postingCode,
+						success: function(text){
+							var cnt = trim(text);
+							like.html("<FONT color = 'grey' size = '5'>좋아요(" + cnt + ')</FONT>');
+							like.removeClass('likeCancel');
+							like.addClass('like');
+						}
+					});
+				}
+			});
+			
+			$(".likeCancel").click(function(){
+				var like = $(this);
+				var postingCode = $("input:hidden[name=postingCode]").val();
+				if(like.attr('class') === ('glyphicon glyphicon-heart myicon likeCancel')){
+					//좋아요 취소		
+					$.ajax({
+						type: "POST", 
+						url: "/reviewLikeCheck.hang",
+						dataType: "text",
+						data: "postingCode="+postingCode,
+						success: function(text){
+							var cnt = trim(text);
+							like.html("<FONT color = 'grey' size = '5'>좋아요("+ cnt +")</FONT>");
+							like.removeClass('likeCancel');
+							like.addClass('like');
+						}
+					});
+				} else {
+					//좋아요
+					$.ajax({
+						type: "POST", 
+						url: "/reviewLikeCheck.hang",
+						dataType: "text",
+						data: "postingCode="+postingCode,
+						success: function(text){
+							var cnt = trim(text);
+							like.html("<FONT color = 1266FF size = '5'>좋아요(" + cnt + ')</FONT>');
+							like.removeClass('like');
+							like.addClass('likeCancel');
+						}
+					});
+				}
+			});
+//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★/////////////////////////////////////////////////////////////////////////			
+			$(".scrap").click(function(){
+				var insertClass = $(this);
+				var postingCode = $("input:hidden[name=postingCode]").val();
+				
+				if(insertClass.attr('class') === ('glyphicon glyphicon-tag myicon scrap')){
+					var t = confirm("스크랩을 하시겠습니까?");
+					if(t){	
+						$.ajax({
+							type:"POST",
+							url:"/scrap.hang",
+							dataType:"text",
+							data:"postingCode=" + postingCode,
+							success:function(text){
+								var resultText = trim(text);
+								var resultScrap = "<FONT color = 1266FF size = '5'>스크랩(" + resultText +")</FONT>"
+								insertClass.html(resultScrap);
+								insertClass.removeClass("scrap");
+								insertClass.addClass("scrapDelete");
+							}
+						});
+					} else {
+						return false ;
+					}
+				} else {
+					var t = confirm("이미 스크랩이 되어있습니다.\n 해당 스크랩을 지우시겠습니까?");
+					if(t){	
+						$.ajax({
+								type:"POST",
+								url:"/scrap.hang",
+								dataType:"text",
+								data:"postingCode=" + postingCode,
+								success:function(text){
+									var resultText = trim(text);
+									var resultScrap = "<FONT color = 'grey' size = '5'>스크랩(" + resultText +")</FONT>"
+									insertClass.html(resultScrap);
+									insertClass.removeClass("scrapDelete");
+									insertClass.addClass("scrap");
+								}
+							});
+					} else {
+						return false ;
+					}
+				}
+			});
+			$(".scrapCancel").click(function(){
+				var deleteClass = $(this);
+				var postingCode = $("input:hidden[name=postingCode]").val();
+				
+				if(deleteClass.attr('class') === ('glyphicon glyphicon-tag myicon scrapCancel')){
+					var t = confirm("이미 스크랩이 되어있습니다.\n 해당 스크랩을 지우시겠습니까?");
+					if(t){	
+						$.ajax({
+							type:"POST",
+							url:"/scrap.hang",
+							dataType:"text",
+							data:"postingCode=" + postingCode,
+							success:function(text){
+								var resultText = trim(text);
+								var resultScrap = "<FONT color = 'grey' size = '5'>스크랩(" + resultText +")</FONT>"
+								deleteClass.html(resultScrap);
+								deleteClass.removeClass("scrapCancel");
+								deleteClass.addClass("scrap");
+							}
+						});
+					} else {
+						return false ;
+					}
+				} else {
+					var t = confirm("스크랩을 하시겠습니까?");
+					if(t){	
+						$.ajax({
+								type:"POST",
+								url:"/scrap.hang",
+								dataType:"text",
+								data:"postingCode=" + postingCode,
+								success:function(text){
+									var resultText = trim(text);
+									var resultScrap = "<FONT color = 1266FF size = '5'>스크랩(" + resultText +")</FONT>"
+									deleteClass.html(resultScrap);
+									deleteClass.removeClass("scrap");
+									deleteClass.addClass("scrapCancel");
+								}
+							});
+					} else {
+						return false ;
+					}
+				}
+			});			
+//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★/////////////////////////////////////////////////////////////////////			
+		});
+	</script>
 <body style = "background-color:#EBEBEB">
 <br><BR><br>   
    <!-- 페이지 시작 -->
-        <div class="container" style = "width:100%;">
+<div class="container" style = "width:1000px;padding:0px" >
     <!-- left menu -->
-   <div class ="thumbnail" style = "width:16%;float:left;margin-left:3%;" align = "center" >
-      <div class="unpa-card user-card followable followed">
+   <div class ="container" style = "width:180px; float:left;padding:0px">
+   <div class ="thumbnail"  style = "width:100%;margin-bottom:20px;" align = "center" >
+      			<div class="unpa-card user-card followable followed">
                      <!-- 클릭시 사용자 정보로 이동 -->
                      <a href="#">
                         <div class="unpa-user-labels"></div>
@@ -94,147 +281,166 @@
                            </div>
                         </div>
                      </a>
+<%
+				if(!myReviewYn){
+%>
                      <button class="user-follow-button followed">
-                        <span class="glyphicon glyphicon-user"></span> 팔로우 중
+                        <span class="glyphicon glyphicon-user"></span>!팔로우 중
                      </button>
-                     <button class="user-follow-button">
-                        <i class="unpacon-user"></i> 팔로우
-                     </button>
+<%
+				}
+%>
                   </div>
-   </div>
+                  </div>
+               <div class ="thumbnail"  style = "width:100%;" align = "center" >  
+                  <div class = "" align = "center">
+                  <p><p>
+                  <img src = "<%=itemPicPath %>/<%=itemPicSaveName %>" style = "width:150px;height:100px;display:table;margin-left:auto;margin-right:auto">
+                  <p>
+                  <font><b><%=itemBrandName %></b></font><p>
+                  <font><%=itemName %></font><p>
+                  <font>
+<%
+					if(minPrice == maxPrice){
+%>
+						<%=maxPrice %>원
+<%
+					} else {
+%>
+						<%=minPrice %>원 ~ <%=maxPrice %>원
+<%
+					}
+%>				  
+				  </font><p>
+<%
+				if(!myReviewYn){
+%>				  
+                  <hr style = "margin-top:0px;margin-bottom:10px">
+                  	<select style = "width:100px;height:26px;">
+                  		<option value = "">용량</option>
+                  		<option value = "ml">ml</option>
+                  		<option value = "g">g</option>
+                  	</select>
+                  	<p>
+                  <div class = "sameproduct" style = "background-color:#1266FF;height:30px;">
+                  		<button style = "background-color:#1266FF;margin-top:3px" onClick = "sameProduct()" >
+                  			<b><font color = "white">같은 제품 구매</font></b>
+                  		</button>
+                  </div>
+<%
+					}
+%>	
+                  </div>
+                  </div>
+   				</div>
    <!-- left menu 끝 -->
-   
-    <!-- 리뷰 작성 시작 -->
-        <div class="thumbnail" style = "width:75%;float:right;margin-right:4%;"><br>
-           <div class = "select" style = "margin-top:10px" align = "center"><p>
-            <div class = "top" style ="width:930px;height:50px">
-               <span class = "glyphicon glyphicon-heart myicon" style = "margin-right:150px">
-                  <font size = "6" color="black">좋아요(<%=reviewLikeCnt %>)</font>
-               </span>
-               <span class = "glyphicon glyphicon-pencil myicon" >
-                  <font size = "6"color="black">댓글(<%=reviewReplyCnt %>)</font>
-               </span>
-               <span class = "glyphicon glyphicon-tag myicon" style = "margin-left:150px">
-                  <font size = "6"color="black">스크랩(<%=reviewLikeCnt %>)</font>
-               </span>
-               <br>      
-            </div>
-           </div>
-         <!-- 간격 -->
-         <hr>
-            <div class = "info" style = "width:94%;margin-left:3%;margin-top:10px;" align = "center">
-               
-               <div class ="reviewTitle">
-               	<font size = "5"><b><%= reviewTitle %></b></font>
-               </div>
-               <hr>
-               <div class = "brandInfo" style = "width:100%;">
-                  <div class = "brand">
-                     <font size = "4"><%=itemBrandName %></font>
-                     <br><br>
-                  </div>
-                  <div class="images">
-                  	<img src="<%=itemPicPath %>/<%=itemPicSaveName %>" style="background-color:white;width:360px;height:180px">
-                  </div>
-                  <br>
-                  <div class = "itemInfo">
-                     <font size = "5">
-                     	<a href="/itemView.hang?itemGroupCode=<%=itemGroupCode%>" style="color:black">
-                     		<%=itemName %>
-                     	</a>
-                     </font>
-                  </div>
-                  	<br>
-	               <div class = "product" style = "width:100%;height:30px;" >
-	                  <font color = "gray" size = "2" style = "margin-right:15px">
-	                  	가격
-	                  </font>
-	                  <font size = "3" style = "margin-right:15px">
-	                     <%
-	                              if(minPrice == maxPrice){
-	                        %>
-	                              <%=maxPrice %>원
-	                        <%
-	                              } else {
-	                         %>
-	                                 <%=minPrice %>원 ~ <%=maxPrice %>원
-	                         <%
-	                              }
-	                         %>
-	                  </font>
-	                 
-	               </div>
-	               
-               </div>
-                <br>
-               <hr>
-            <!--
-               <div class = "like" style = "width:100%;height:auto;" align = "left">
-                  <font size = "4" style = "margin-left:12px">이런분께 추천해 드려요!</font><br><Br>
-                  <div class = "title" style = "height:auto;width:100%;">
-                     <div class= "row" style="height:auto;">
-                        <div class="col-sm-1 col1">
-                           <center>
-                              <font size = "4"><font color = "orange">추천</font></font>
-                              </center>
-                        </div>
-                        <div class="col-sm-11"style="width:90%;margin-top:8px">
-                           입술이 건조하고 주름이 많으신분들께 추천! 아 나는 머리부터 발끝까지 편한게 최고인 자유인에 싸면 장땡이다라는 분들껜 비추천.
-                        </div>
-                     </div>
-                  </div>
-                  <hr>
-               </div>
-            -->
-            </div>
-         <!-- 인기상품 -->
+<!-- 리뷰 시작-->   
+    <!-- 좋아요 댓글 스크랩 -->
+	<div class="container" style = "width:800px;padding:0px;float:right;" >
+        <div class="thumbnail" style = "width:100%;margin-right:0px;padding:0px"><br>
+			<div style="width: 100%;height:50px;padding:0px">
+			<input type="hidden" name="postingCode" value="<%= reviewCode%>">
+<%
+						if(myLikeYn.equals("0")){ //좋아요가 안눌려있는 상태
+%>
+						<span class="glyphicon glyphicon-heart myicon like" style="width: 240px;height:100%;margin-left:20px; " align="center"> 
+							<font size="5" color="grey">좋아요(<%=reviewLikeCnt%>)</font>
+						</span>
+<%
+						} else if(myLikeYn.equals("1")){ //이미 좋아요 되어있는 상태
+%>
+						<span class="glyphicon glyphicon-heart myicon likeCancel" style="width: 240px;height:100%;margin-left:20px; " align="center"> 
+							<font size="5" color=1266FF>좋아요(<%=reviewLikeCnt%>)</font>
+						</span>
+<%
+						}
+%>
+						<span class="glyphicon glyphicon-pencil myicon" style="width: 240px;height:100%; margin-left:20px;" align="center"> 
+							<font size="5" color="black">댓글(<%=reviewReplyCnt%>)</font>
+						</span>
+<%
+					if(!myReviewYn){
+						if(myScrapYn.equals("0")){ //스크랩이 안눌려있는 상태
+%>
+						<span class="glyphicon glyphicon-tag myicon scrap"	 style="width: 240px;height:100%; margin-left:20px;" align="center"> 
+							<font size="5" color="grey">스크랩(<%=reviewLikeCnt%>)</font>
+						</span>
+<%
+						} else if(myLikeYn.equals("1")){ //이미 스크랩이 되어있는 상태
+%>
+						<span class="glyphicon glyphicon-tag myicon scrapCancel"	 style="width: 240px;height:100%; margin-left:20px;" align="center"> 
+							<font size="5" color=1266FF>스크랩(<%=reviewLikeCnt%>)</font>
+						</span>
+<%
+						}
+					}
+%>
+			</div>
+	<!--  제목과 메인 리뷰사진 --><hr style = "margin-top:0px;margin-bottom:20px">
+			<div class="info" align="center">
+				<div class="reviewTitle"  style = "margin-bottom:20px">
+					<font size="5"><b>제목</b></font>
+				</div>
+				<div class="brandInfo">			
+					<img src="<%=reviewMainPicPath %>/<%=reviewMainPicSaveName %>" style="background-color: white; width: 400px; height: 300px">
+				</div>
+			</div>
+	<!-- 리뷰 상세 --><hr style = "margin-top:20px;margin-bottom:20px">
             <div class="row hotitem" style = "margin-left:3%;margin-top:10px;width:94%;" align = "center">
-               <div class = "userinfo">
+            	<div class = "reviewInfo">
                   <%=reviewContent %>
-               </div>
+				</div>
             </div>
-            <br><br>
-            <hr>
-            <div class ="review" style = "margin-left:3%;margin-top:10px;width:94%;">
+	<!-- 댓글  시작 --><hr style = "margin-top:20px;margin-bottom:20px">
+		<div class ="container" style = "width:760px;margin-left:20px;margin-right:20px;margin-bottom:10px;padding:0px;">
 <%
        for(int i = 0; i < 6; i++) {
- %>      
-       <div class = "review" style = "width:100%;height:100px;">
-         <div class="replyimg col-sm-1">
-            <img src="images/yebin.jpg" alt="예빈짜응" class="img-circle reimgs" style = "width:100px;height:100px">
-         </div>
-         <div class = "name" style = "width:400px;height:30px;float:left;margin-left:5%;">
-            <font size = "3"><b>동작구 사랑방</b></font>
-            <font size = "2" style = "margin-left:3%"><font color = "gray">2015년 6월 8일</font></font>
-         </div>
-         <br>
-         <BR>
-         <div class = "name" style = "width:700px;height:60px;float:left;margin-left:5%;">
-            <font size = "2">
-               ddzzzzzz
-            </font> 
-         </div>
-      </div>
-      <hr>
+ %>
+				<div class="review" style="width: 100%; height: 60px; padding: 0px;">
+				
+					<div class="replyimg col-sm-1" style="height: 100%; padding: 0px">
+						<img src="images/yebin.jpg" class="img-circle reimgs" style="width: 60px; height: 60px">
+					</div>
+					
+					<div class="name"	style="width: 685px; height:20px; float: left; margin-left:10px;margin-bottom:2px;">
+						<font size="2"><b>이름</b></font> 
+						<font size="1"	style="margin-left: 5px"><font color="gray">2015년 6월 8일</font></font>
+					</div>
+	
+					<div class="name"	style="width: 685px; height: 38px; float: left; margin-left:10px;">
+						<font size="2"> 댓글 내용 </font>
+					</div>
+					
+				</div>
+				
+				<hr style = "margin-top:10px;margin-bottom:10px">
 <%
-       }
+	}
 %>   
-            </div>
-           </div>
-            <div class="thumbnail" style = "width:75%;float:right;margin-right:4%;">
-              <div class="replywrite" style = "margin-left:2%" >
-               <div class="replyimg col-sm-1" style = "width:20%;">
-                  <img src="images/yebin.jpg" alt="" class="img-circle rewriteimg" style = "width:80px;height:80px;">
-               </div>
-               <div class="replyinsert col-sm-10" style = "width:77%;margin-left:-10%;margin-top:1.5%">
-                  <input type="text" class="form-control insert" rows="1" style="resize:none;width:100%;height:50px"/>
-               </div>
-               <div class="replybtn col-sm-1" style = "width:10%;margin-left:-2.3%;margin-top:1.5%">
-                  <button style = "width:100px;height:50px">
-                     <span class="glyphicon glyphicon-pencil rebtn" aria-hidden="true"></span>
-                  </button>
-               </div>
-            </div>      
-           </div>
+			</div>
         </div>
-    </body>
+<!-- 리뷰 끝-->
+<!-- 리뷰 쓰기 시작-->
+		<div class="thumbnail" style = "width:800px;height:100px;padding:20px;">
+			<div class="replywrite" style = "width:100%;padding:0px;background-color:yellow" >
+				
+				<div class="replyimg col-sm-1" style="height: 100%; padding: 0px">
+					<img src="<%="" %>/<%="" %>" alt="" class="img-circle rewriteimg" style = "width:60px;height:60px;">
+				</div>
+				
+				<div class="replyinsert col-sm-10" style = "float: left;">
+					<input type="text" class="form-control insert" rows="1" style="resize:none;width:615px;height:60px"/>
+				</div>
+				
+				<div class="replybtn col-sm-1"style = "float: left;" >
+					<button style = "width:55px;height:55px;background-color:white">
+				          <span class="glyphicon glyphicon-pencil rebtn" aria-hidden="true"></span>
+					</button>
+				</div>
+				
+			 </div>      
+		</div>
+	</div>
+<!-- 리뷰 쓰기 끝-->
+</div>
+</body>

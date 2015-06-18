@@ -1,26 +1,33 @@
 package com.hanger.manager.item.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
 
 @Controller
 public class ManagerBrandController extends BaseController{
+	//
 	@RequestMapping("/managerBrand.hang")
-	protected ModelAndView searchBrand(HttpServletRequest request, HttpServletResponse response){
+	protected String searchBrand(HttpServletRequest req){
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+                || ((String) session.getAttribute("loginYn")).equals("N")
+                || session.getAttribute("adminYn") == null
+                || ((String) session.getAttribute("adminYn")).equals("N")) {
+			req.setAttribute("message", "관리자로 로그인 해주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
 		
 		moveUrl = "manager/item/ManagerSearchBrand";
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(moveUrl);
-		
 		System.out.println("SearchBrand...");
-		return mav;
+		return moveUrl;
 	}
 }
 

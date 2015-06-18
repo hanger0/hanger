@@ -2,6 +2,7 @@ package com.hanger.scrap.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.scrap.dao.ScrapDao;
+import com.hanger.scrap.vo.ScrapVo;
 
 
 //ajax 컨트롤입니다.
@@ -26,33 +28,37 @@ public class ScrapController extends BaseController{
 	
 	@RequestMapping(value = "/scrap.hang", method=RequestMethod.POST)
 	public String scrap(HttpServletRequest req){
-		
-		HttpSession session = req.getSession();
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String postingCode = (String)req.getParameter("postingCode");
 		String ip = req.getRemoteAddr();
-		String myUserId = (String)session.getAttribute("myUserId");
-		String checkScrap = (String)req.getParameter("checkScrap");
-		
-		System.out.println("checkScrap : "+checkScrap);
-		System.out.println("postingCode : "+postingCode);
+		String myUserId = (String)session.getAttribute("myUserId");		
 
-		HashMap map = new HashMap();
+		HashMap<String, String> map = new HashMap<String, String>();
+		
 		map.put("myUserCode", myUserCode);
 		map.put("postingCode", postingCode);
 		map.put("myUserId", myUserId);
 		map.put("ip", ip);
 		
-		if(checkScrap.equals("true")){
-			System.out.println("삭제");
+		//해당 사용자가 좋아요를 눌른적이 있다면 먼저 조회
+		List<ScrapVo> scrapYnList = scrapDao.selectScrapYn(map);
+		
+		if(scrapYnList.size()>0 ){
 			scrapDao.deleteScrap(map);
-		} else if(checkScrap.equals("false")) {
-			System.out.println("인설트");
+		} else{
 			scrapDao.insertScrap(map);
 		}
 		//스크랩 AJAX
-		ArrayList scrapList = scrapDao.selectScrap(map);
+		ArrayList<ScrapVo> scrapList = scrapDao.selectScrap(map);
 		req.setAttribute("scrapList", scrapList);
 		
 		return "posting/review/Scrap" ;

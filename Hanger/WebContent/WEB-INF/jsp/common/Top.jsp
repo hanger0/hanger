@@ -25,7 +25,20 @@
    }
 </SCRIPT>
 <SCRIPT>
-   $(function() {
+	$(function() {
+		// 알림을 뿌리기 위한 Ajax
+		$.ajax({
+			type : "POST",
+			url : "/searchNotification.hang",
+			dataType : "text",
+			success : function(text){
+				var resultText = trim(text);
+				var resultMessage = "<FONT color='blue' >" + resultText + "</FONT>";
+				$('#notification').empty();
+				$('#notification').append(resultMessage);
+			}
+		});
+	
       var f = document.searchFriendForm;
 
       $("#searchText").keyup(
@@ -136,28 +149,42 @@ div, ul, li {
                      && session.getAttribute("adminYn") != null
                      && ((String) session.getAttribute("adminYn")).equals("N")) {
             %>
-            <!-- 알람시작 -->
-            <!-- 마이페이지 -->
+            <!-- 마이페이지 시작 -->
             <li class="headli">
             	<a href="/myPage.hang">
             		<span class="glyphicon glyphicon-user" style="font-size: 24px;"></span>
             	</a>
             </li>
-            
-            <!-- 마이페이지 -->
+            <!-- 마이페이지 끝 -->
+           <!-- 알람시작 -->
             <li class="headli">
-            	<a href="#">
-            		<span class="glyphicon glyphicon-bullhorn" style="font-size: 24px"></span>
-            	</a>
+            	<ul class="nav">
+                  <li class="dropdown headli">
+                  <span class="dropdown-toggle"  data-toggle="dropdown" aria-expanded="true" style="width: 50; height: 54">
+                     <span class="glyphicon glyphicon-bullhorn" style="font-size: 24px; margin-top: 14px; margin-left: 7px; cursor: pointer;"></span>
+                  </span>
+                     <ul class="dropdown-menu" role="menu">
+                        <form class="navbar-form navbar-left" role="search" id="searchFriendForm" name="searchFriendForm" style="width: 290px">
+	                        <div id="notification"></div>
+                        </form>
+                        <div class="message" width="100%">
+							<div style="margin-bottom: -20px">
+                            	<button style="width: 100%;" class="btn btn-default notificationLoog">더보기</button>
+                       		</div>
+                        </div>
+                     </ul>
+                  </li>
+               </ul>
             </li>
-
-			<!-- 카트 -->
+            <!-- 알람 끝 -->
+			<!-- 카트 시작 -->
             <li class="headli">
             	<a href="/cart.hang">
             		<span class="glyphicon glyphicon-shopping-cart" style="font-size: 24px"></span>
             	</a>
             </li>
-
+			<!-- 카트 끝 -->
+			<!-- 친구 검색 시작 -->
             <li>
                <ul class="nav">
                   <li class="dropdown headli">
@@ -182,13 +209,14 @@ div, ul, li {
                   </li>
                </ul>
             </li>
+            <!-- 친구 검색 끝 -->
 			<script>
 				function logout() {
 					location.href = "/logout.hang";
 				}
 			</script>
 			
-			<!-- 로그아웃 -->
+			<!-- 로그아웃 시작 -->
             <li class="logoutMenu">
             	<a href="#">
             	<span class="dropdown-toggle"  data-toggle="dropdown" aria-expanded="true" style="width:50px; height: 54px">
@@ -205,7 +233,7 @@ div, ul, li {
                      </ul>
             	</a>
             </li>
-            <!-- 알람 끝 -->
+            <!-- 로그아웃 끝 -->
             <%
                } else if (session.getAttribute("adminYn") != null
                      && ((String) session.getAttribute("adminYn")).equals("Y")) {

@@ -1,6 +1,5 @@
 package com.hanger.posting.review.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanger.common.controller.BaseController;
-
 import com.hanger.posting.review.dao.ReviewShowDao;
 import com.hanger.posting.review.vo.ReviewShowVo;
 
@@ -20,45 +18,56 @@ import com.hanger.posting.review.vo.ReviewShowVo;
 public class ReviewShowController extends BaseController {
 
 	private ReviewShowDao reviewShowDao;
-	
+
 	public void setReviewShowDao(ReviewShowDao reviewShowDao) {
 		this.reviewShowDao = reviewShowDao;
 	}
-	
-	@RequestMapping(value="/reviewShow.hang", method=RequestMethod.GET)
-	public String MainReview(HttpServletRequest request, HttpSession session) {
+
+	@RequestMapping(value = "/reviewShow.hang", method = RequestMethod.GET)
+	public String MainReview(HttpServletRequest req) {
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
 		
 		System.out.println("reviewShow.hang");
+
+		String reviewCode = (String) req.getParameter("reviewCode");
+		String userCode = (String) session.getAttribute("myUserCode");
+		// review
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("reviewCode", reviewCode);
+		map.put("userCode", userCode);
+		List<ReviewShowVo> reviewList = reviewShowDao.getReviewShow(map);
 		
-		String reviewCode = (String)request.getParameter("reviewCode");
-		
-		//review
-		List<ReviewShowVo> reviewList = reviewShowDao.getReviewShow(reviewCode);
 		ReviewShowVo review = reviewList.get(0);
-		
 		int maxPrice = review.getItemSellPrice();
 		int minPrice = review.getItemSellPrice();
 		int price = 0;
-		
-		for(int i = 0; i < reviewList.size(); i++){
+
+		for (int i = 0; i < reviewList.size(); i++) {
 			review = reviewList.get(i);
 			price = review.getItemSellPrice();
-			if(maxPrice < price){
+			if (maxPrice < price) {
 				maxPrice = price;
 			}
-			if(minPrice > price){
+			if (minPrice > price) {
 				minPrice = price;
 			}
 
 		}
-		
-		review.setItemMaxPrice(maxPrice);
-		review.setItemMinPrice(minPrice);
-						
-		request.setAttribute("review", review);
 
+		req.setAttribute("maxPrice", maxPrice);
+		req.setAttribute("minPrice", minPrice);
+		req.setAttribute("reviewList", reviewList);
+		
 		moveUrl = "posting/review/ReviewShow";
 		return moveUrl;
-		
+
 	}
 }

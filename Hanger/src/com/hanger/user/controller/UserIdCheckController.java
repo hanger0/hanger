@@ -21,9 +21,7 @@ public class UserIdCheckController extends BaseController {
 	}
 
 	@RequestMapping("/idCheck.hang")
-	public String idCheck(
-			HttpServletRequest req
-			){
+	public String idCheck(HttpServletRequest req){
 		//
 		moveUrl = "user/IdCheck";
 		String joinId = req.getParameter("joinId");

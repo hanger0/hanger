@@ -31,11 +31,18 @@ public class UserScrapController extends BaseController {
 	
 	@RequestMapping(value = "/userScrapReview.hang", method=RequestMethod.GET)
 	public String userScrap(HttpServletRequest req) {
-		
+		//
 		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		
-		HashMap map = new HashMap();
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", myUserCode);
 		
 		ArrayList<UserScrapVo> userScrapList = userScrapDao.selectUserScrap(map);

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.posting.review.dao.ReviewListDao;
+import com.hanger.posting.review.vo.ReviewVo;
 
 @Controller
 public class ReviewController extends BaseController {
@@ -22,12 +23,20 @@ public class ReviewController extends BaseController {
 		this.reviewListDao = reviewListDao;
 	}
 	@RequestMapping(value = "/reviewList.hang", method = RequestMethod.GET)
-	public String reviewList(HttpServletRequest req, HttpSession session){
+	public String reviewList(HttpServletRequest req){
 		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode= (String)session.getAttribute("myUserCode");
-		HashMap userCodeMap = new HashMap() ;
+		HashMap<String, String> userCodeMap = new HashMap<String, String>() ;
 		userCodeMap.put("myUserCode",myUserCode);
-		ArrayList reviewList = reviewListDao.selectReview(userCodeMap);
+		ArrayList<ReviewVo> reviewList = reviewListDao.selectReview(userCodeMap);
 		
 		req.setAttribute("mainUrl", root + "posting/review/ReviewList.jsp");
 		req.setAttribute("reviewList", reviewList);

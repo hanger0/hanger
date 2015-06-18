@@ -27,7 +27,14 @@ public class CartController extends BaseController {
 	@RequestMapping(value="/cart.hang", method=RequestMethod.GET)
 	public String myCart(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+                || ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		ArrayList<CartVo> cartList = cartDao.selectCart(myUserCode);
 		
@@ -40,7 +47,13 @@ public class CartController extends BaseController {
 	@RequestMapping(value="/cart.hang", method=RequestMethod.POST)
 	public String goCart(HttpServletRequest req){
 		//
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+                || ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
 		
 		HashMap<String, String> cartMap = new HashMap<String, String>();
 		

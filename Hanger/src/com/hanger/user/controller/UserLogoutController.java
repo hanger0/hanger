@@ -5,16 +5,23 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
 
 @Controller
 public class UserLogoutController extends BaseController {
+	
 	@RequestMapping("/logout.hang")
-	public ModelAndView loginout(HttpServletRequest req){
+	public String loginout(HttpServletRequest req){
 		//
 		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
 		session.setAttribute("loginYn", "N");
 		session.setAttribute("adminYn", "N");
 		session.removeAttribute("myUserName");
@@ -25,10 +32,8 @@ public class UserLogoutController extends BaseController {
 		session.removeAttribute("itemListForReview");
 		session.invalidate();
 		
-		moveUrl = "common/Frame";
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(moveUrl);
-		mav.addObject("mainUrl", mainUrl);
-		return mav;
+		req.setAttribute("mainUrl", mainUrl);
+		
+		return moveUrl;
 	}
 }
