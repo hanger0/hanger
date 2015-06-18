@@ -18,7 +18,7 @@ var InputReviewMainPic = (function loadImageFile() {
          var img = document.getElementById("reviewMainPic").files;
 
          if (!fileType.test(img[0].type)) {
-            alert("ì‚¬ì§„ì—…ë¡œë“œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
+            alert("ÆÄÀÏµî·Ï½ÇÆĞ");
             return;
          }
          ImgReader.readAsDataURL(img[0]);
@@ -27,21 +27,6 @@ var InputReviewMainPic = (function loadImageFile() {
    document.getElementById("reviewMainPicPreview").src = document
          .getElementById("reviewMainPic").value;
 })();
-
-function WriteReview() {
-	var f = document.reviewForm;
-	
-	if(f.title.value == ""){
-		alert("ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
-		f.title.focus();
-		return false;
-	}
-	
-	f.content.value = $('.summernote').code();
-	
-	f.submit();
-	alert("ë¦¬ë·°ë¥¼ ë“±ë¡í•˜ì˜€ìŠµë‹ˆë‹¤.");
-}
 
 function drawStar(){
 	var reviewScore = document.reviewForm.reviewScore.value;
@@ -61,16 +46,28 @@ function drawStar(){
 	$("#starForm").children().eq(1).remove();
 	
 	for(var i = 0; i < fullStarNum; i++){
-		$("#starForm").append("<img src='/images/icons/star/star.png' style='width:20px; height:20px; margin-left:2px; margin-bottom:5px'/>");
+		$("#starForm").append("<img src='/images/icons/star/star.png' style='width:20px; height:20px; margin-left:5px; margin-bottom:5px'/>");
 	}
 	for(var i = 0; i < halfStarNum; i++){
-		$("#starForm").append("<img src='/images/icons/star/star-half.png' style='width:20px; height:20px; margin-left:2px; margin-bottom:5px'/>");
+		$("#starForm").append("<img src='/images/icons/star/star-half.png' style='width:20px; height:20px; margin-left:5px; margin-bottom:5px'/>");
 	}
 	for(var i = 0; i < emptyStarNum; i++){
-		$("#starForm").append("<img src='/images/icons/star/star-empty.png' style='width:20px; height:20px; margin-left:2px; margin-bottom:5px'/>");
+		$("#starForm").append("<img src='/images/icons/star/star-empty.png' style='width:20px; height:20px; margin-left:5px; margin-bottom:5px'/>");
 	}
 	
 }
 
-
-
+function WriteReview() {
+	var f = document.reviewForm;
+	
+	if(f.reviewTitle.value == ""){
+		alert("Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		f.reviewTitle.focus();
+		return false;
+	}
+	
+	//f.content.value = $('.summernote').code();
+	
+	f.submit();
+	alert("¸®ºä°¡ µî·ÏµÇ¾ú½À´Ï´Ù.");
+}

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 
+<body>
 <script>
 	$(function() {
 		$("#datepicker1, #datepicker2").datepicker(
@@ -19,37 +20,28 @@
 				});
 	});
 </script>
-<div class="container">
 	<CENTER>
-		<span><h1>회원 구매내역</h1></span> <br> <br> <br> <br>
-		<p>
-			조회기간: <input type="text" id="datepicker1"> ~ <input
-				type="text" id="datepicker2"> 
-			회원아이디: <input type="text" id=""> <input type="button"
-				value="확인" />
-		</p>
-		<TABLE class="table table-hover table-bordered">
+	<br>
+			조회기간: <input type="text" id="datepicker1"> ~ <input type="text" id="datepicker2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			회원아이디: <input type="text" id=""> <input type="button" value="확인" />
+	<br><Br><br>
+		<TABLE class="table table-hover table-bordered" style = "background-color:white;width:1100px;">
 			<TR bgcolor="#CFDDFA" align="center">
 				<TD width="40"><B>No.</B></TD>
-				<TD width="150"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=ID">아이디(이름)</A></B></TD>
-				<TD width="150"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=JUMIN">상품 이름</A></B></TD>
-				<TD width="100"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=USEYN">구매방법</A></B></TD>
-				<TD width="100"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=USEYN">가격</A></B></TD>
-				<TD width="100"><B><A
-						href="/managerUserServlet.mo?func=managerUser_001&sort=USEYN">적용 마일리지</A></B></TD>
+				<TD width="150"><B>아이디(이름)</B></TD>
+				<TD width="150"><B>상품 이름</A></B></TD>
+				<TD width="100"><B>구매방법</A></B></TD>
+				<TD width="100"><B>가격</A></B></TD>
+				<TD width="100"><B>적용 마일리지</A></B></TD>
 			</TR>
 
 			<%
-				for (int i = 1; i < 5; i++) {
+				for (int i = 0; i < 8; i++) {
 			%>
 
 			<TR align="center">
-				<TD>i+1</TD>
-				<TD><A href="javascript:goDetailInfo('asdf')">id + 이름</A></TD>
+				<TD><%= i+1 %></TD>
+				<TD>id + 이름</TD>
 				<TD>잭필드 3종세트</TD>
 				<TD>카드</TD>
 				<TD>39,900 원</TD>
@@ -57,8 +49,6 @@
 				<%
 					}
 				%>
-			
 		</TABLE>
-
 	</CENTER>
-</div>
+</body>

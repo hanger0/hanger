@@ -158,6 +158,7 @@
 	<bean id="reviewWriteController"
 		class="com.hanger.posting.review.controller.ReviewWriteController">
 		<property name="itemViewDao" ref="itemViewDao"></property>
+		<property name="itemListForReviewDao" ref="itemListForReviewDao"></property>
 	</bean>
 	<bean id="reviewWriteFormController"
 		class="com.hanger.posting.review.controller.ReviewWriteFormController">

@@ -1,17 +1,19 @@
 package com.hanger.posting.review.controller;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hanger.common.controller.BaseController;
 import com.hanger.item.dao.ItemListForReviewDao;
@@ -40,53 +42,6 @@ public class ReviewWriteFormController extends BaseController {
 		this.itemListForReviewDao = itemListForReviewDao;
 	}
 
-//	@RequestMapping(value = "/reviewImageUpload.hang", method = RequestMethod.POST)
-//	public void ReviewImageUpload(HttpServletRequest request,
-//			HttpServletResponse response, @RequestParam MultipartFile upload) {
-//		OutputStream out = null;
-//		PrintWriter printWriter = null;
-//		response.setCharacterEncoding("EUC-KR");
-//		response.setContentType("text/html;charset=utf-8");
-//
-//		try {
-//			String fileName = upload.getOriginalFilename();
-//			byte[] bytes = upload.getBytes();
-//			String uploadPath = "저장경로/" + fileName; // 저장경로
-//
-//			out = new FileOutputStream(new File(uploadPath));
-//			out.write(bytes);
-//			String callback = request.getParameter("CKEditorFuncNum");
-//
-//			printWriter = response.getWriter();
-//			String fileUrl = "저장한 URL경로/" + fileName;// url경로
-//
-//			printWriter
-//					.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
-//							+ callback
-//							+ ",'"
-//							+ fileUrl
-//							+ "','이미지를 업로드 하였습니다.'"
-//							+ ")</script>");
-//			printWriter.flush();
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				if (out != null) {
-//					out.close();
-//				}
-//				if (printWriter != null) {
-//					printWriter.close();
-//				}
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//		return;
-//	}
-
 	@RequestMapping(value = "/reviewWriteResult.hang", method = RequestMethod.POST)
 	public String ReviewWriteForm(HttpServletRequest request,
 			HttpSession session) throws IOException {
@@ -94,15 +49,15 @@ public class ReviewWriteFormController extends BaseController {
 		System.out.println("reviewWriteResult.hang...");
 
 		File dayFile = new File(
-				"C:\\workspace\\hanger\\Hanger\\WebContent\\upfile\\posting\\review");
+				"C:/workspace/hanger/Hanger/WebContent/upfile/posting/review/main");
 		if (!dayFile.exists()) {
 			dayFile.mkdirs();
 		}
-		String savePath = "upfile/posting/review";
+		String savePath = "upfile/posting/review/main";
 		int sizeLimit = 1000 * 1024 * 1024;
 		MultipartRequest mul = new MultipartRequest(
 				request,
-				"C:\\workspace\\hanger\\Hanger\\WebContent\\upfile\\posting\\review",
+				"C:/workspace/hanger/Hanger/WebContent/upfile/posting/review/main",
 				sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 
 		ReviewVo review = new ReviewVo();
@@ -111,7 +66,7 @@ public class ReviewWriteFormController extends BaseController {
 		String itemGroupCode = mul.getParameter("itemGroupCode");
 		String reviewScore = mul.getParameter("reviewScore");
 		String reviewTitle = mul.getParameter("reviewTitle");
-		String reviewContent = "";
+		String reviewContent = mul.getParameter("reviewContent");
 		String reviewMainPicPath = savePath;
 		String reviewMainPicOrgName = mul.getOriginalFileName("reviewMainPic");
 		String reviewMainPicSaveName = mul.getFilesystemName("reviewMainPic");
@@ -119,27 +74,7 @@ public class ReviewWriteFormController extends BaseController {
 		String regIp = request.getRemoteAddr();
 		String updId = (String)session.getAttribute("myUserId");
 		String updIp = request.getRemoteAddr();
-		int reviewMainPicSize = 0;
-
-		String ip = request.getRemoteAddr();
-
-		String[] temp = (mul.getParameter("content")).split("\"");
-		// quot
-		for (int i = 0; i < (temp.length - 2); i++) {
-			if ((temp[i].length() >= 4)
-					&& (temp[i].substring(temp[i].length() - 4).equals("src="))) {
-				temp[i + 1] = savePath; // path
-				reviewContent += temp[i] + "\"";
-			} else if (temp[i].equals(" data-filename=")) {
-				reviewContent += "/";
-			} else if (temp[i].equals(savePath)) {
-				reviewContent += temp[i];
-			} else {
-				reviewContent += temp[i] + "\"";
-			}
-		}
-
-		reviewContent += temp[temp.length - 2] + "\"" + temp[temp.length - 1];
+		int reviewMainPicSize = (int)dayFile.length();
 
 		review.setUserCode(userCode);
 		review.setItemGroupCode(itemGroupCode);
@@ -164,6 +99,16 @@ public class ReviewWriteFormController extends BaseController {
 			session.setAttribute("itemListForReview", itemListForReview);			
 		}
 		
+		//전체 리뷰 아이템 점수 불러와서 계산
+		Double itemScoreAvg = reviewWriteDao.selectReviewScoreAvg(itemGroupCode);
+		itemScoreAvg = Double.parseDouble(String.format("%.10f", itemScoreAvg));
+		//계산한 평균점수를 업데이트
+		HashMap<String, Object> scoreMap = new HashMap<String, Object>();
+		scoreMap.put("itemScoreAvg", itemScoreAvg);
+		scoreMap.put("itemGroupCode", itemGroupCode);
+		reviewWriteDao.updateItemScore(scoreMap);
+		
+		//방금 작성한 리뷰 화면으로 넘어가기
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", userCode);
 		map.put("itemGroupCode", itemGroupCode);
@@ -188,7 +133,7 @@ public class ReviewWriteFormController extends BaseController {
 		
 		reviewShow.setItemMaxPrice(maxPrice);
 		reviewShow.setItemMinPrice(minPrice);
-						
+		
 		request.setAttribute("review", reviewShow);
 		request.setAttribute("mainUrl", root + "posting/review/ReviewShow.jsp");
 		

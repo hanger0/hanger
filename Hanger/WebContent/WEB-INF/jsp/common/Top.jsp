@@ -20,9 +20,9 @@
 
 <script type="text/javascript" src="js/common/common.js"></SCRIPT>
 <SCRIPT>
-	function searchLoock() {
-		location.href = "/userSearch.hang?qt=<%=qt%>";
-	}
+   function searchLoock() {
+      location.href = "/userSearch.hang?qt=<%=qt%>";
+   }
 </SCRIPT>
 <SCRIPT>
    $(function() {
@@ -172,11 +172,12 @@ div, ul, li {
                         </form>
                         <div class="user searchFriend" id="friendSearchMessage"></div>
                         <div class="message" width="100%">
-                           <div style="margin-bottom: -20px">
-                              <button style="width: 100%;" class="btn btn-default"
-                                 onclick="searchLoock()">더보기</button>
-                           </div>
-                        </div>
+							<div style="margin-bottom:-20px">
+								<button style="width:100%;" class="btn btn-default" onclick="searchLoock()">
+										더보기
+								</button>
+							</div>	
+						</div>
                      </ul>
                   </li>
                </ul>

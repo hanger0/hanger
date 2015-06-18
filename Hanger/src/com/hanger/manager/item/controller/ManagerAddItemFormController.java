@@ -28,7 +28,7 @@ public class ManagerAddItemFormController extends BaseController{
 	
 	@RequestMapping(value="/managerAddItemResult.hang", method=RequestMethod.POST)
 	public ModelAndView managerAddItemForm(HttpServletRequest request) throws IOException{
-		File dayFile = new File("C:\\workspace\\hanger\\Hanger\\WebContent\\upfile\\item\\detail");
+		File dayFile = new File("C:/workspace/hanger/Hanger/WebContent/upfile/item/detail");
 		if(!dayFile.exists())
 		{
 			dayFile.mkdirs();
@@ -36,7 +36,7 @@ public class ManagerAddItemFormController extends BaseController{
 		String savePath = "/upfile/item/detail";
 		String saveAbsolutePath = dayFile.getAbsolutePath();
 		int sizeLimit = 1000 * 1024 * 1024;
-		MultipartRequest mul = new MultipartRequest(request, "C:\\workspace\\hanger\\Hanger\\WebContent\\upfile\\item\\detail", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
+		MultipartRequest mul = new MultipartRequest(request, "C:/workspace/hanger/Hanger/WebContent/upfile/item/detail", sizeLimit, "KSC5601", new DefaultFileRenamePolicy());
 		
 		ManagerItemVo item = new ManagerItemVo();
 		

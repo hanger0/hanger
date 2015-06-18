@@ -11,8 +11,10 @@ public class ReviewShowVo {
 	private String reviewScore;
 	private String reviewLikeCnt;
 	private String reviewScrapCnt;
+	private String reviewReplyCnt;
 	private String reviewRegDate;
 	
+	private String itemGroupCode;
 	private String itemBrandCode;
 	private String itemBrandName;
 	private String itemCode;
@@ -33,6 +35,7 @@ public class ReviewShowVo {
 	private String writerFollowerCnt;
 	private String writerPostingCnt;
 	private String writerPostingLikeCnt;
+	
 	
 	public String getReviewCode() {
 		return reviewCode;
@@ -82,11 +85,23 @@ public class ReviewShowVo {
 	public void setReviewScrapCnt(String reviewScrapCnt) {
 		this.reviewScrapCnt = reviewScrapCnt;
 	}
+	public String getReviewReplyCnt() {
+		return reviewReplyCnt;
+	}
+	public void setReviewReplyCnt(String reviewReplyCnt) {
+		this.reviewReplyCnt = reviewReplyCnt;
+	}
 	public String getReviewRegDate() {
 		return reviewRegDate;
 	}
 	public void setReviewRegDate(String reviewRegDate) {
 		this.reviewRegDate = reviewRegDate;
+	}
+	public String getItemGroupCode() {
+		return itemGroupCode;
+	}
+	public void setItemGroupCode(String itemGroupCode) {
+		this.itemGroupCode = itemGroupCode;
 	}
 	public String getItemBrandCode() {
 		return itemBrandCode;

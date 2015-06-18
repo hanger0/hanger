@@ -12,7 +12,17 @@ public class ManagerMainPage extends BaseController {
 	
 	@RequestMapping("/managerPageMain.hang")
 	public String goManagerMainPage(HttpServletRequest req){
-		req.setAttribute("mainUrl", root + "manager/ManagerPageMain.jsp");
+		
+		req.setAttribute("mainUrl", managerPageUrl);
+		req.setAttribute("managerPageUrl", root + "manager/ManagerPageMain.jsp");
+		return moveUrl;
+	}
+	
+	@RequestMapping("/productInfo.hang")
+	public String productInfo(HttpServletRequest req) {
+		
+		req.setAttribute("mainUrl", managerPageUrl);
+		req.setAttribute("managerPageUrl", root + "manager/ManagerPageMain.jsp");
 		return moveUrl;
 	}
 }

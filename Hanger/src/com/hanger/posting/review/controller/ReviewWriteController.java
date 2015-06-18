@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,23 +12,42 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.item.dao.ItemListForReviewDao;
 import com.hanger.item.dao.ItemViewDao;
+import com.hanger.item.vo.ItemListForReviewVo;
 import com.hanger.item.vo.ItemViewVo;
 
 @Controller
 public class ReviewWriteController extends BaseController{
 	
 	private ItemViewDao itemViewDao;
+	private ItemListForReviewDao itemListForReviewDao;
 	
 	public void setItemViewDao(ItemViewDao itemViewDao) {
 		this.itemViewDao = itemViewDao;
 	}
+	
+	public void setItemListForReviewDao(ItemListForReviewDao itemListForReviewDao){
+		this.itemListForReviewDao = itemListForReviewDao;
+	}
 
 	@RequestMapping(value="/reviewWrite.hang", method=RequestMethod.GET)
-	public ModelAndView mainPage(HttpServletRequest request) {		
-		System.out.println("Review Write Controller...");
+	public String mainPage(HttpServletRequest request, HttpSession session) {
 		
+		ArrayList<ItemListForReviewVo> itemListForReview = (ArrayList)session.getAttribute("itemListForReview");
 		String itemGroupCode = request.getParameter("itemGroupCode");
+		
+		if(itemListForReview.size() == 0){
+			request.setAttribute("message", "리뷰는 구매한 상품에 한해서 한번만 작성이 가능합니다.");
+		} else{
+			for(int i = 0; i < itemListForReview.size(); i ++){
+				if(!(itemListForReview.get(i).getItemGroupCode()).equals(itemGroupCode)){
+					request.setAttribute("message", "리뷰는 구매한 상품에 한해서 한번만 작성이 가능합니다.");
+				}
+			}
+		}
+		
+		System.out.println("Review Write Controller...");		
 
 		HashMap<String, String> itemViewMap = new HashMap<String, String>();
 		itemViewMap.put("itemGroupCode", itemGroupCode);
@@ -49,14 +69,11 @@ public class ReviewWriteController extends BaseController{
 			}
 		}
 		
-		ModelAndView mav = new ModelAndView();
-		moveUrl = "posting/review/ReviewWriteEditor";
+		request.setAttribute("maxPrice", maxPrice);
+		request.setAttribute("minPrice", minPrice);
+		request.setAttribute("item", item);
+		request.setAttribute("mainUrl", root + "posting/review/ReviewWriteEditor.jsp");
 		
-		mav.addObject("maxPrice", maxPrice);
-		mav.addObject("minPrice", minPrice);
-		mav.addObject("item", item);
-		mav.setViewName(moveUrl);
-		
-		return mav;
+		return moveUrl;
 	}
 }
