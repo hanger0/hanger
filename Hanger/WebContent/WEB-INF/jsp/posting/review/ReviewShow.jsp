@@ -254,7 +254,7 @@
    <div class ="thumbnail"  style = "width:100%;margin-bottom:20px;" align = "center" >
       			<div class="unpa-card user-card followable followed">
                      <!-- 클릭시 사용자 정보로 이동 -->
-                     <a href="#">
+                     <a href="/myPage.hang?yourUserCode=<%=writerCode%>">
                         <div class="unpa-user-labels"></div>
                         <div class="user-image"
                            style='background-image: url("<%=writerPicPath %>/<%=writerPicSaveName %>");'></div><br>
@@ -295,6 +295,7 @@
                <div class ="thumbnail"  style = "width:100%;" align = "center" >  
                   <div class = "" align = "center">
                   <p><p>
+                  <A href="/itemView.hang?itemGroupCode=<%=itemGroupCode%>">
                   <img src = "<%=itemPicPath %>/<%=itemPicSaveName %>" style = "width:150px;height:100px;display:table;margin-left:auto;margin-right:auto">
                   <p>
                   <font><b><%=itemBrandName %></b></font><p>
@@ -311,7 +312,9 @@
 <%
 					}
 %>				  
-				  </font><p>
+				  </font>
+				  </A>
+				  <p>
 <%
 				if(!myReviewYn){
 %>				  

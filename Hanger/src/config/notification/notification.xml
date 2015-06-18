@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="notificationVo" type="com.hanger.notification.vo.NotificationVo"/>
+	
+	<insert id="insertNotification" parameterClass="HashMap">
+		INSERT INTO NOTIFICATION(NOTIFICATION_FROM_USER_CODE, NOTIFICATION_TO_USER_CODE, NOTIFICATION_MESSAGE, NOTIFICATION_URL, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
+		VALUES(#fromUserCode#, #toUserCode#, #message#, #url#, #id#, sysdate(), #ip#, #id#, sysdate(), #ip#)
+	</insert>
+	
+	<select id="selectNotification" parameterClass="String" resultClass="notificationVo">
+		select 
+			NOTIFICATION_MESSAGE as notificationMessage, 
+			NOTIFICATION_URL as notificationUrl, NOTIFICATION_READ_YN notificationReadYn, 
+			b.USER_PIC_PATH as userPicPath, b.USER_PIC_SAVE_NAME as userPicSaveName 
+		from 
+			NOTIFICATION a, USER b
+		where 
+			a.NOTIFICATION_FROM_USER_CODE = b.USER_CODE
+		AND 
+			NOTIFICATION_TO_USER_CODE = #myUserCode#
+	</select>
+	
+</sqlMap>
