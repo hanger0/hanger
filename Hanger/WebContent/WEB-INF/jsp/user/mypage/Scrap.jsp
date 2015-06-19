@@ -3,13 +3,24 @@
 <%@ page import = "com.hanger.scrap.vo.UserScrapVo" %>
 <%
 	ArrayList<UserScrapVo> userScrapList = (ArrayList<UserScrapVo>)request.getAttribute("userScrapList");
+	String yourUserCode = "";
+	if ((String)request.getAttribute("yourUserCode") != null
+			&& ((String)request.getAttribute("yourUserCode")).length() > 0) {
+		yourUserCode = (String)request.getAttribute("yourUserCode");
+	}
 %>
 <script>
 	function scrapReview() {
 		location.href = "/userScrapReview.hang";
 	}
 	function scrapTip() {
-		location.href = "/scrapTip.hang"
+		location.href = "/scrapTip.hang";
+	}
+	function yourScrapReview() {
+		location.href = "/userScrapReview.hang?yourUserCode=<%= yourUserCode %>";
+	}
+	function yourScrapTip() {
+		location.href = "/scrapTip.hang?yourUserCode=<%= yourUserCode %>";
 	}
 </script>
 <body>
@@ -19,9 +30,15 @@
 			<div class="title" style = "margin-left:1.5%">
 				<font size="3"><b>½ºÅ©·¦</b></font>
 			</div><p>
+<% if(yourUserCode.equals("")){ %>
 			<input type="button" value="¸®ºä" class="btn btn-default" style = "width:60px;margin-left:1.5%" onClick = "scrapReview()"/>
 			&nbsp;
 			<input type="button" value="ÆÁ" class="btn btn-default" style = "width:60px;" onClick = "scrapTip()"/>
+<% } else { %>
+			<input type="button" value="¸®ºä" class="btn btn-default" style = "width:60px;margin-left:1.5%" onClick = "yourScrapReview()"/>
+			&nbsp;
+			<input type="button" value="ÆÁ" class="btn btn-default" style = "width:60px;" onClick = "yourScrapTip()"/>
+<% } %>
 			<br>
 			<%
 			if(userScrapList != null && userScrapList.size() > 0) {

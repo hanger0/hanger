@@ -5,10 +5,40 @@
 	ArrayList<UserVo> followerList = (ArrayList<UserVo>)request.getAttribute("followerList");
 	ArrayList<UserVo> followingList = (ArrayList<UserVo>)request.getAttribute("followingList");
 	ArrayList<UserVo> userList = (ArrayList<UserVo>)request.getAttribute("userList");
+	String myUserCode = (String)session.getAttribute("myUserCode");
 	
+	String followerListSize = "0";
+	String followingListSize = "0";
+	if((String)request.getAttribute("followerListSize") != null && ((String)request.getAttribute("followerListSize")).length() > 0){
+		followerListSize = (String)request.getAttribute("followerListSize");
+	}
+	if((String)request.getAttribute("followingListSize") != null && ((String)request.getAttribute("followingListSize")).length() > 0){
+		followingListSize = (String)request.getAttribute("followingListSize");
+	}
+	
+	int followerSize = 0;
+	int followingSize = 0;
+
+	if(followerList != null && followerList.size() > 0){
+		followerSize = followerList.size();
+		followingSize = Integer.parseInt(followingListSize);
+	} else if(followingList != null && followingList.size() > 0){
+		followingSize = followingList.size();
+		followerSize = Integer.parseInt(followerListSize);
+	} else {
+		followingSize = Integer.parseInt(followingListSize);
+		followerSize = Integer.parseInt(followerListSize);
+	}
+
 	String qt = "";
 	if((String)request.getAttribute("qt") != null && ((String)request.getAttribute("qt")).length() > 0){
 		qt = (String)request.getAttribute("qt");
+	}
+	
+	String yourUserCode = "";
+	if ((String)request.getAttribute("yourUserCode") != null
+			&& ((String)request.getAttribute("yourUserCode")).length() > 0) {
+		yourUserCode = (String)request.getAttribute("yourUserCode");
 	}
 %>
 <link rel="stylesheet" href="css/Follow/follow.css" />
@@ -52,22 +82,27 @@ $(function(){
 		
 		f.submit();
 	});
+	$('.myPageBtn').click(function(){
+		$(this).parent().submit();
+	});
 });
 </script>
 
 <body>
-   <div class="container" style="width:97.7%;">
-         <div class="thumbnail" style = "height:80px;">
-            <form class="navbar-form navbar" style="width:100%;height:40px;" action="/userSearch.hang" method="post">
-               <div class="form-group" style = "display:table;margin-left:auto;margin-right:auto;margin-top:8px;width:100%">
-               <button type="button" id="goFollowingList" class="btn btn-default" style = "margin-right:2%;">팔로잉</button>
-               <button type="button" id="goFollowerList" class="btn btn-default" style = "margin-right:23%;">팔로워</button>
-                  <input type="text" class="form-control" placeholder="회원검색" name="qt" value="<%= qt %>">
-               <button type="submit" class="btn btn-default" style = "margin-left:10px;">Submit</button>
-               </div>
-            </form>
+	<div class="container" style="width:97.7%;">
+		<div class="thumbnail" style = "height:80px;">
+			<form class="navbar-form navbar" style="width:100%;height:40px;" action="/userSearch.hang" method="post">
+				<div class="form-group" style = "display:table;margin-left:auto;margin-right:auto;margin-top:8px;width:100%">
+					<button type="button" id="goFollowingList" class="btn btn-default" style = "margin-right:2%;">팔로잉(<%= followingSize %>)</button>
+					<button type="button" id="goFollowerList" class="btn btn-default" style = "margin-right:23%;">팔로워(<%= followerSize %>)</button>
+<% if(yourUserCode.equals("")){ %>
+					<input type="text" class="form-control" placeholder="회원검색" name="qt" value="<%= qt %>">
+					<button type="submit" class="btn btn-default" style = "margin-left:10px;">Submit</button>
+<% } %>
+				</div>
+			</form>
             <p><br>
-         </div>
+		</div>
          
        <div class="row row-flex-height-md" style = "width:100%">
 <%
@@ -100,18 +135,44 @@ $(function(){
                         </div>
                         <!--  글쓴 수 -->
                         <div>
-                           <span class="glyphicon glyphicon-pencil"></span>(<%= user.getPotingCount() %>)
+                           <span class="glyphicon glyphicon-pencil"></span>(<%= user.getPostingCount() %>)
                         </div>
                      </div>
                   </a>
-                  <form id="deleteFollowing" name="deleteFollowing" action="/relationFollowingDelete.hang" method="POST">
-				  	  <input type="hidden" name="userCode" value="<%= user.getUserCode() %>"/>
-	                  <button class="user-follow-button followed" onClick="deleteFollowing()">
-							팔로우 취소
-	                  </button>
-                  </form>
-               </div>
-            </div>
+<%
+				if(!myUserCode.equals(user.getUserCode())){
+					if(user.getFollowYn()!= null){
+%>
+					<form id="deleteFollower" name="deleteFollower" action="/relationFollowingDelete.hang" method="POST">
+					  	  <input type="hidden" name="userCode" value="<%= user.getUserCode() %>"/>
+		                  <button class="user-follow-button followed" onClick="deleteFollowing()">
+		                     	팔로우 취소
+		                  </button>
+	                </form>
+<%
+					} else {
+%>
+					<form id="insertFollower" name="insertFollower" action="/relationFollowingInsert.hang" method="POST">
+					  	  <input type="hidden" name="userCode" value="<%= user.getUserCode() %>"/>
+		                  <button class="user-follow-button followed" onClick="insertFollowing()">
+		                     	팔로우 맺기
+		                  </button>
+					</form>
+<%
+					}
+				} else {
+%>
+				<form id="myPageForm" action="/myPage.hang" method="POST">
+	                <button class="user-follow-button followed myPageBtn">
+	                	마이페이지
+	                </button>
+				</form>
+<%
+				}
+%>
+	               </div>
+	            </div>
+
 <%
 		}
 	} 
@@ -146,12 +207,13 @@ $(function(){
                         </div>
                         <!--  글쓴 수 -->
                         <div>
-                           <span class="glyphicon glyphicon-pencil"></span>(<%= user.getPotingCount() %>)
+                           <span class="glyphicon glyphicon-pencil"></span>(<%= user.getPostingCount() %>)
                         </div>
                      </div>
                   </a>
 <%
-				if(user.getRelationFollowing() != null){
+			if(!myUserCode.equals(user.getUserCode())){
+				if(user.getFollowYn()!= null){
 %>
 				<form id="deleteFollower" name="deleteFollower" action="/relationFollowerDelete.hang" method="POST">
 				  	  <input type="hidden" name="userCode" value="<%= user.getUserCode() %>"/>
@@ -170,6 +232,15 @@ $(function(){
 				</form>
 <%
 				}
+			} else {
+%>
+				<form id="myPageForm" action="/myPage.hang" method="POST">
+	                <button class="user-follow-button followed myPageBtn">
+	                	마이페이지
+	                </button>
+				</form>
+<%
+			}
 %>
                </div>
             </div>
@@ -207,12 +278,13 @@ $(function(){
                         </div>
                         <!--  글쓴 수 -->
                         <div>
-                           <span class="glyphicon glyphicon-pencil"></span>(<%= user.getPotingCount() %>)
+                           <span class="glyphicon glyphicon-pencil"></span>(<%= user.getPostingCount() %>)
                         </div>
                      </div>
                   </a>
 <%
-			if(user.getRelationFollowing() != null){
+		if(!myUserCode.equals(user.getUserCode())){
+			if(user.getFollowYn() != null){
 %>
 				<form id="deleteSearch" name="deleteSearch" action="/relationSearchDelete.hang" method="POST">
 				  	  <input type="hidden" name="userCode" value="<%= user.getUserCode() %>"/>
@@ -233,6 +305,15 @@ $(function(){
                 </form>
 <%
 			}
+		} else {
+%>
+			<form id="myPageForm" action="/myPage.hang" method="POST">
+                <button class="user-follow-button followed myPageBtn">
+                	마이페이지
+                </button>
+			</form>
+<%
+		}
 %>
                </div>
             </div>

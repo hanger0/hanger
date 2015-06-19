@@ -21,4 +21,13 @@
 			NOTIFICATION_TO_USER_CODE = #myUserCode#
 	</select>
 	
+	<update id="updateNotificationReadYn" parameterClass="HashMap">
+		update notification set notification_read_yn = 'Y', upd_id = #updId#, UPD_IP = #updIp#, UPD_DATE = now()
+		where notification_from_user_code = #userId#
+	</update>
+	
+	<delete id="deleteNotification" parameterClass="HashMap">
+		DELETE FROM NOTIFICATION
+	</delete>
+	
 </sqlMap>

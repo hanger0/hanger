@@ -16,7 +16,14 @@ public class ReplyVo {
 	private String userName;
 	private String userPicPath;
 	private String userPicSaveName;
+	private String replyuserCode;
 	
+	public String getReplyuserCode() {
+		return replyuserCode;
+	}
+	public void setReplyuserCode(String replyuserCode) {
+		this.replyuserCode = replyuserCode;
+	}
 	public String getReplyCode() {
 		return replyCode;
 	}

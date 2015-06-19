@@ -23,10 +23,12 @@ public class UserSearchController extends BaseController {
 	private UserSelectDao userSelectDao;
 	private RelationSearchDao relationSearchDao;
 
+	public void setRelationSearchDao(RelationSearchDao relationSearchDao) {
+		this.relationSearchDao = relationSearchDao;
+	}
 	public void setUserSelectDao(UserSelectDao userSelectDao) {
 		this.userSelectDao = userSelectDao;
 	}
-
 	public void setUserSearchDao(UserSearchDao userSearchDao) {
 		this.userSearchDao = userSearchDao;
 	}
@@ -48,13 +50,19 @@ public class UserSearchController extends BaseController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", myUserCode);
 		map.put("qt", qt);
+		map.put("yourUserCode", myUserCode);
+		
 		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
 
-		System.out.println("qt================" + qt);
 		UserVo user = userSelectDao.selectUser(myUserCode);
-
+		
+		ArrayList<UserVo> followingList = relationSearchDao.selectMyFollowingRelation(map);
+		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
+		
 		req.setAttribute("user", user);
 		req.setAttribute("userList", userList);
+		req.setAttribute("followingListSize", followingList.size()+"");
+		req.setAttribute("followerListSize", followerList.size()+"");
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		req.setAttribute("qt", qt);
@@ -105,15 +113,14 @@ public class UserSearchController extends BaseController {
 		
 		String myUserCode = (String) session.getAttribute("myUserCode");
 
-		System.out.println("´õº¸±â");
 		RelationVo relation = new RelationVo();
 		relation.setRelationFollower(myUserCode);
 
 		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("yourUserCode", myUserCode);
 		map.put("myUserCode", myUserCode);
 
-		ArrayList<UserVo> userList = relationSearchDao
-				.searchFollowerRelation(myUserCode);
+		ArrayList<UserVo> userList = relationSearchDao.selectMyFollowerRelation(map);
 
 		req.setAttribute("userList", userList);
 		req.setAttribute("mainUrl", myPageUrl);

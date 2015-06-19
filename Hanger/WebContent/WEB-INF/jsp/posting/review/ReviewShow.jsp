@@ -320,7 +320,6 @@
 %>				  
                   <hr style = "margin-top:0px;margin-bottom:10px">
                   	<select style = "width:100px;height:26px;">
-                  		<option value = "">¿ë·®</option>
                   		<option value = "ml">ml</option>
                   		<option value = "g">g</option>
                   	</select>

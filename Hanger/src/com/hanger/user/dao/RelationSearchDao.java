@@ -1,6 +1,7 @@
 package com.hanger.user.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
@@ -15,12 +16,12 @@ public class RelationSearchDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<UserVo> searchFollowerRelation(String myUserCode){
-		return (ArrayList<UserVo>)smct.queryForList("selectFollowerRelation", myUserCode);
+	public ArrayList<UserVo> selectMyFollowerRelation(HashMap<String, String> map){
+		return (ArrayList<UserVo>)smct.queryForList("selectFollowerRelation", map);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<UserVo> searchFollowingRelation(String myUserCode){
-		return (ArrayList<UserVo>)smct.queryForList("selectFollowingRelation", myUserCode);
+	public ArrayList<UserVo> selectMyFollowingRelation(HashMap<String, String> map){
+		return (ArrayList<UserVo>)smct.queryForList("selectFollowingRelation", map);
 	}
 }

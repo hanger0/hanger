@@ -41,11 +41,17 @@ public class UserScrapController extends BaseController {
 		}
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");
+		String yourUserCode= req.getParameter("yourUserCode");
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", myUserCode);
 		
 		ArrayList<UserScrapVo> userScrapList = userScrapDao.selectUserScrap(map);
+
+		if (yourUserCode!=null&&!yourUserCode.equals("")) {
+			myUserCode = yourUserCode;
+			req.setAttribute("yourUserCode", yourUserCode);
+		}
 		
 		UserVo user = userSelectDao.selectUser(myUserCode);
 		

@@ -51,6 +51,11 @@ public class RelationDeleteController extends BaseController {
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String userCode = req.getParameter("userCode");
+		String yourUserCode= req.getParameter("yourUserCode");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
+		map.put("yourUserCode", myUserCode);
 		
 		RelationVo relation = new RelationVo();
 		relation.setRelationFollower(myUserCode);
@@ -58,11 +63,21 @@ public class RelationDeleteController extends BaseController {
 		
 		relationDeleteDao.deleteRelation(relation);
 		
-		ArrayList<UserVo> followerList = relationSearchDao.searchFollowerRelation(myUserCode);
+		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
+		ArrayList<UserVo> followingList = relationSearchDao.selectMyFollowingRelation(map);
+		
+		if (yourUserCode!=null&&!yourUserCode.equals("")) {
+			myUserCode = yourUserCode;
+			map.put("yourUserCode", yourUserCode);
+			followerList = relationSearchDao.selectMyFollowerRelation(map);
+			followingList = relationSearchDao.selectMyFollowingRelation(map);
+			req.setAttribute("yourUserCode", yourUserCode);
+		}
 		
 		UserVo user = userSelectDao.selectUser(userCode);
 		
 		req.setAttribute("user", user);
+		req.setAttribute("followingListSize", followingList.size()+"");
 		req.setAttribute("followerList", followerList);
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
@@ -83,18 +98,34 @@ public class RelationDeleteController extends BaseController {
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String userCode = req.getParameter("userCode");
+		String yourUserCode= req.getParameter("yourUserCode");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
+		map.put("yourUserCode", myUserCode);
 		
 		RelationVo relation = new RelationVo();
 		relation.setRelationFollower(myUserCode);
 		relation.setRelationFollowing(userCode);
 		
 		relationDeleteDao.deleteRelation(relation);
-		ArrayList<UserVo> followingList = relationSearchDao.searchFollowingRelation(myUserCode);
+		
+		ArrayList<UserVo> followingList = relationSearchDao.selectMyFollowingRelation(map);
+		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
+		
+		if (yourUserCode!=null&&!yourUserCode.equals("")) {
+			myUserCode = yourUserCode;
+			map.put("yourUserCode", yourUserCode);
+			followingList = relationSearchDao.selectMyFollowingRelation(map);
+			followerList = relationSearchDao.selectMyFollowerRelation(map);
+			req.setAttribute("yourUserCode", yourUserCode);
+		}
 		
 		UserVo user = userSelectDao.selectUser(userCode);
 		
 		req.setAttribute("user", user);
 		req.setAttribute("followingList", followingList);
+		req.setAttribute("followerListSize", followerList.size()+"");
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		
@@ -125,13 +156,19 @@ public class RelationDeleteController extends BaseController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", myUserCode);
 		map.put("qt", qt);
+		map.put("yourUserCode", myUserCode);
 		
 		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
+		
+		ArrayList<UserVo> followingList = relationSearchDao.selectMyFollowingRelation(map);
+		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
 		
 		UserVo user = userSelectDao.selectUser(userCode);
 		
 		req.setAttribute("user", user);
 		req.setAttribute("userList", userList);
+		req.setAttribute("followingListSize", followingList.size()+"");
+		req.setAttribute("followerListSize", followerList.size()+"");
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		req.setAttribute("qt", qt);

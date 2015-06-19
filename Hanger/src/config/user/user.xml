@@ -27,18 +27,20 @@
 	</update>
 	
 	<select id="searchUser" parameterClass="HashMap" resultClass="user">
-		SELECT 
-			a.USER_NAME as userName, a.USER_ID as userId, a.USER_PHONE as userPhone, a.USER_PIC_PATH as userPicPath, a.USER_PIC_SAVE_NAME as userPicSaveName, 
-			a.USER_CODE as userCode, a.USER_SKINTYPE as userSkinType, a.USER_SKINTONE as userSkinTone, a.USER_SKINPROBLEM as userSkinProblem, count(b.RELATION_FOLLOWING) as followerCount,
-      		count(c.posting_code) as postingCount, G.RELATION_FOLLOWING as relationFollowing
-		FROM 
-			USER a left join relation b on a.USER_CODE = b.RELATION_FOLLOWER left join review c on a.USER_CODE = c.USER_CODE
-      		left join (SELECT relation_following FROM relation WHERE relation_follower = #myUserCode#)G on a.USER_CODE = G.RELATION_FOLLOWING
-		WHERE 
-			(a.USER_NAME LIKE '%$qt$%' OR a.USER_PHONE = #qt# OR a.USER_ID = #qt#) AND a.USER_USE_YN = 'Y' AND NOT a.USER_CODE = #myUserCode#
-  		GROUP BY 
-  			a.USER_NAME, a.USER_ID, a.USER_PHONE, a.USER_PIC_PATH, a.USER_PIC_SAVE_NAME,  
-			a.USER_CODE, a.USER_SKINTYPE, a.USER_SKINTONE, a.USER_SKINPROBLEM
+		SELECT yourFollowingList.*, myRelation.RELATION_FOLLOWING as followYn   
+ 		from (SELECT user.USER_CODE as userCode, user.USER_ID as userId, user.USER_NAME as userName, 
+		user.USER_PIC_PATH as userPicPath, user.USER_PIC_SAVE_NAME as userPicSaveName, 
+		user.USER_SKINTYPE as userSkinType, user.USER_SKINTONE as userSkinTone, count(distinct review.POSTING_CODE) as postingCount, 
+		count(distinct relation1.RELATION_FOLLOWER) as followerCount
+		FROM USER user, RELATION relation,
+		USER user1 left join (SELECT POSTING_CODE, USER_CODE FROM REVIEW WHERE REVIEW_USE_YN='Y') review
+		on user1.USER_CODE = review.USER_CODE,
+		USER user2 left join RELATION relation1 on (user2.USER_CODE=relation1.RELATION_FOLLOWING AND NOT relation1.RELATION_FOLLOWER = user2.USER_CODE)
+		WHERE user.USER_USE_YN='Y' AND NOT user.USER_CODE=#myUserCode# AND user.USER_CODE = relation.RELATION_FOLLOWING
+		AND user.USER_CODE = user1.USER_CODE AND user.USER_CODE = user2.USER_CODE AND (user.USER_NAME LIKE '%$qt$%' OR user.USER_PHONE =#qt# OR user.USER_ID =#qt#)
+		GROUP BY user.USER_CODE, user.USER_ID, user.USER_NAME, user.USER_PIC_PATH, user.USER_PIC_SAVE_NAME, 
+		user.USER_SKINTYPE, user.USER_SKINTONE) yourFollowingList left join RELATION myRelation 
+		on (yourFollowingList.userCode=myRelation.RELATION_FOLLOWING AND myRelation.RELATION_FOLLOWER=#myUserCode#);
 	</select>
 	
 	<select id="selectPassword" parameterClass="user" resultClass="String">

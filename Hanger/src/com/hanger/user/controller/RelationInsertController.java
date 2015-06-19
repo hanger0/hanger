@@ -58,6 +58,11 @@ public class RelationInsertController extends BaseController {
 		String myUserName = (String)session.getAttribute("myUserName");
 		String ip = req.getRemoteAddr();
 		String userCode = req.getParameter("userCode");
+		String yourUserCode= req.getParameter("yourUserCode");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
+		map.put("yourUserCode", myUserCode);
 		
 		HashMap<String, String> relationMap = new HashMap<String, String>();
 		relationMap.put("myUserCode", myUserCode);
@@ -67,7 +72,16 @@ public class RelationInsertController extends BaseController {
 		
 		relationInsertDao.insertRelation(relationMap);
 		
-		ArrayList<UserVo> followerList = relationSearchDao.searchFollowerRelation(myUserCode);
+		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
+		ArrayList<UserVo> followingList = relationSearchDao.selectMyFollowingRelation(map);
+		
+		if (yourUserCode!=null&&!yourUserCode.equals("")) {
+			myUserCode = yourUserCode;
+			map.put("yourUserCode", yourUserCode);
+			followerList = relationSearchDao.selectMyFollowerRelation(map);
+			followingList = relationSearchDao.selectMyFollowingRelation(map);
+			req.setAttribute("yourUserCode", yourUserCode);
+		}
 		
 		UserVo user = userSelectDao.selectUser(myUserCode);
 		
@@ -82,7 +96,70 @@ public class RelationInsertController extends BaseController {
 		notificationDao.insertNotification(notiMap);
 		
 		req.setAttribute("user", user);
+		req.setAttribute("followingListSize", followingList.size()+"");
 		req.setAttribute("followerList", followerList);
+		req.setAttribute("mainUrl", myPageUrl);
+		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
+		
+		return moveUrl;
+	}
+	
+	@RequestMapping("/relationFolloingInsert.hang")
+	public String insertFollowingRelation(HttpServletRequest req){
+		//
+		HttpSession session = req.getSession(false);
+		if (session == null || session.getAttribute("loginYn") == null
+				|| ((String) session.getAttribute("loginYn")).equals("N")) {
+			req.setAttribute("message", "로그인 후 이용해 주세요.");
+			req.setAttribute("mainUrl", mainUrl);
+			return moveUrl;
+		}
+		
+		String myUserCode = (String)session.getAttribute("myUserCode");
+		String myUserId = (String)session.getAttribute("myUserId");
+		String myUserName = (String)session.getAttribute("myUserName");
+		String ip = req.getRemoteAddr();
+		String userCode = req.getParameter("userCode");
+		String yourUserCode= req.getParameter("yourUserCode");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
+		map.put("yourUserCode", myUserCode);
+		
+		HashMap<String, String> relationMap = new HashMap<String, String>();
+		relationMap.put("myUserCode", myUserCode);
+		relationMap.put("myUserId", myUserId);
+		relationMap.put("ip", ip);
+		relationMap.put("userCode", userCode);
+		
+		relationInsertDao.insertRelation(relationMap);
+		
+		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
+		ArrayList<UserVo> followingList = relationSearchDao.selectMyFollowingRelation(map);
+		
+		if (yourUserCode!=null&&!yourUserCode.equals("")) {
+			myUserCode = yourUserCode;
+			map.put("yourUserCode", yourUserCode);
+			followerList = relationSearchDao.selectMyFollowerRelation(map);
+			followingList = relationSearchDao.selectMyFollowingRelation(map);
+			req.setAttribute("yourUserCode", yourUserCode);
+		}
+		
+		UserVo user = userSelectDao.selectUser(myUserCode);
+		
+		HashMap<String, String> notiMap = new HashMap<String, String>();
+		notiMap.put("fromUserCode", myUserCode);
+		notiMap.put("toUserCode", userCode);
+		notiMap.put("message", myUserName + "님이 팔로우 하셨습니다.");
+		notiMap.put("url", "myPage.hang?yourUserCode="+myUserCode);
+		notiMap.put("id", myUserId);
+		notiMap.put("ip", ip);
+		
+		notificationDao.insertNotification(notiMap);
+		
+		req.setAttribute("user", user);
+		req.setAttribute("followingListSize", followingList);
+		req.setAttribute("followerList", followerList.size()+"");
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		
@@ -118,6 +195,7 @@ public class RelationInsertController extends BaseController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("myUserCode", myUserCode);
 		map.put("qt", qt);
+		map.put("yourUserCode", myUserCode);
 		
 		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
 
@@ -131,10 +209,15 @@ public class RelationInsertController extends BaseController {
 		notiMap.put("id", myUserId);
 		notiMap.put("ip", ip);
 		
+		ArrayList<UserVo> followingList = relationSearchDao.selectMyFollowingRelation(map);
+		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
+		
 		notificationDao.insertNotification(notiMap);
 		
 		req.setAttribute("user", user);
 		req.setAttribute("userList", userList);
+		req.setAttribute("followingListSize", followingList.size()+"");
+		req.setAttribute("followerListSize", followerList.size()+"");
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		req.setAttribute("qt", qt);

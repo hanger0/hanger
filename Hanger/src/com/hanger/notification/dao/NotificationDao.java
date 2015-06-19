@@ -23,4 +23,12 @@ public class NotificationDao {
 	public void insertNotification(HashMap<String, String> map){
 		smct.insert("insertNotification", map);
 	}
+	
+	public void updateNotificationReadYn(HashMap<String, String> map){
+		smct.update("updateNotificationReadYn", map);
+	}
+	
+	public void deleteNotification(HashMap<String, String> map){
+		smct.delete("deleteNotification", map);
+	}
 }

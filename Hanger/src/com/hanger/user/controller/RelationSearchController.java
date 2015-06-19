@@ -1,6 +1,7 @@
 package com.hanger.user.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,11 +39,27 @@ public class RelationSearchController extends BaseController {
 		}
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");
-		ArrayList<UserVo> followerList = relationSearchDao.searchFollowerRelation(myUserCode);
+		String yourUserCode= req.getParameter("yourUserCode");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
+		map.put("yourUserCode", myUserCode);
+		
+		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
+		ArrayList<UserVo> followingList = relationSearchDao.selectMyFollowingRelation(map);
+		
+		if (yourUserCode!=null&&!yourUserCode.equals("")) {
+			myUserCode = yourUserCode;
+			map.put("yourUserCode", yourUserCode);
+			followerList = relationSearchDao.selectMyFollowerRelation(map);
+			followingList = relationSearchDao.selectMyFollowingRelation(map);
+			req.setAttribute("yourUserCode", yourUserCode);
+		}
 		
 		UserVo user = userSelectDao.selectUser(myUserCode);
 		
 		req.setAttribute("user", user);
+		req.setAttribute("followingListSize", followingList.size()+"");
 		req.setAttribute("followerList", followerList);
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
@@ -62,12 +79,28 @@ public class RelationSearchController extends BaseController {
 		}
 		
 		String myUserCode = (String)session.getAttribute("myUserCode");
-		ArrayList<UserVo> followingList = relationSearchDao.searchFollowingRelation(myUserCode);
+		String yourUserCode= req.getParameter("yourUserCode");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
+		map.put("yourUserCode", myUserCode);
+		
+		ArrayList<UserVo> followingList = relationSearchDao.selectMyFollowingRelation(map);
+		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
+		
+		if (yourUserCode!=null&&!yourUserCode.equals("")) {
+			myUserCode = yourUserCode;
+			map.put("yourUserCode", yourUserCode);
+			followingList = relationSearchDao.selectMyFollowingRelation(map);
+			followerList = relationSearchDao.selectMyFollowerRelation(map);
+			req.setAttribute("yourUserCode", yourUserCode);
+		}
 		
 		UserVo user = userSelectDao.selectUser(myUserCode);
 		
 		req.setAttribute("user", user);
 		req.setAttribute("followingList", followingList);
+		req.setAttribute("followerListSize", followerList.size()+"");
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/FollowSearch.jsp");
 		

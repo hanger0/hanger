@@ -41,6 +41,7 @@
 	<bean id="userSearchController" class="com.hanger.user.controller.UserSearchController">
 		<property name="userSearchDao" ref="userSearchDao"></property>
 		<property name="userSelectDao" ref="userSelectDao"></property>
+		<property name="relationSearchDao" ref="relationSearchDao"></property>
 	</bean>
 	<bean id="userFindPasswordController" class="com.hanger.user.controller.UserFindPasswordController">
 		<property name="userFindPasswordDao" ref="userFindPasswordDao"></property>
@@ -51,6 +52,7 @@
 	<bean id="userMyPageController" class="com.hanger.user.controller.UserMyPageController">
 		<property name="userSelectDao" ref="userSelectDao"></property>
 		<property name="reviewListDao" ref="reviewListDao"></property>
+		<property name="notificationDao" ref="notificationDao"></property>
 	</bean>
 	<bean id="userTipPageController" class="com.hanger.user.controller.UserTipPageController">
 		<property name="userSelectDao" ref="userSelectDao"></property>
@@ -133,11 +135,6 @@
 		<property name="orderInfoDao" ref="orderInfoDao"></property>
 		<property name="itemListForReviewDao" ref="itemListForReviewDao"></property>
 	</bean>
-	<bean id="mainReviewController"
-		class="com.hanger.posting.review.controller.MainReviewController">
-		<property name="scrapDao" ref="scrapDao"></property>
-		<property name="reviewLikeCheckDao" ref="reviewLikeCheckDao"></property>
-	</bean>
 
 	<!-- Item 요청 url과 Controller 매핑 -->
 	<bean id="itemSearchController" class="com.hanger.item.controller.ItemSearchController">
@@ -166,6 +163,7 @@
 	<bean id="reviewShowController"
 		class="com.hanger.posting.review.controller.ReviewShowController">
 		<property name="reviewShowDao" ref="reviewShowDao"></property>
+		<property name="replyDao" ref="replyDao"></property>
 	</bean>
 
 	<!-- Scrap 요청 url과 Controller 매핑 -->
@@ -179,14 +177,6 @@
 
 	<!-- Tip & TipReply Controller 매핑 -->
 	<bean id="detailTipController" class="com.hanger.posting.tip.controller.DetailTipController">
-		<property name="replyInsertDao" ref="replyInsertDao"></property>
-		<property name="replySelectDao" ref="replySelectDao"></property>
-	</bean>
-
-	<!-- Reply Update & Delete Controller 매핑 -->
-	<bean id="replyUpdateController" class="com.hanger.reply.controller.ReplyUpdateController">
-		<property name="replyUpdateDao" ref="replyUpdateDao"></property>
-		<property name="replyRemoveDao" ref="replyRemoveDao"></property>
 	</bean>
 
 	<!-- Mileage Controller 매핑 -->
@@ -306,16 +296,7 @@
 	</bean>
 
 	<!-- Reply Dao beans -->
-	<bean id="replyInsertDao" class="com.hanger.reply.dao.ReplyInsertDao">
-		<constructor-arg ref="sqlMapClientTemplate" />
-	</bean>
-	<bean id="replySelectDao" class="com.hanger.reply.dao.ReplySelectDao">
-		<constructor-arg ref="sqlMapClientTemplate" />
-	</bean>
-	<bean id="replyUpdateDao" class="com.hanger.reply.dao.ReplyUpdateDao">
-		<constructor-arg ref="sqlMapClientTemplate" />
-	</bean>
-	<bean id="replyRemoveDao" class="com.hanger.reply.dao.ReplyRemoveDao">
+	<bean id="replyDao" class="com.hanger.reply.dao.ReplyDao">
 		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 

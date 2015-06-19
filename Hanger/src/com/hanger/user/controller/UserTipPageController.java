@@ -31,6 +31,12 @@ public class UserTipPageController extends BaseController {
 		}
 		
 		String userCode = (String)session.getAttribute("myUserCode");
+		String yourUserCode= req.getParameter("yourUserCode");
+		
+		if (yourUserCode!=null&&!yourUserCode.equals("")) {
+			userCode = yourUserCode;
+			req.setAttribute("yourUserCode", yourUserCode);
+		}
 		
 		UserVo user = userSelectDao.selectUser(userCode);
 		

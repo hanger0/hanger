@@ -49,7 +49,7 @@
                   <img src="<%=reviewMainPicPath %>/<%= reviewMainPicSaveName%>" width="100%" height="180px" style="display: table; margin-left: auto; margin-right: auto;" class="hotimages">
                </div>
                <div class="caption">
-                  <a href = "/reviewShow.hang?reviewCode=<%=postingCode%>">
+                  <a href = "/reviewShow.hang?reviewCode=<%=postingCode%>&checkReply=Select">
                   	<h6><B><%= reviewTitle %></B></h6>
                   	<P>
                   	<h5><B></B></h5>

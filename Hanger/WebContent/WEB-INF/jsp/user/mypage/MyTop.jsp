@@ -3,6 +3,11 @@
 <%
 	String myPageUrl = (String)request.getAttribute("myPageUrl");
 	UserVo user = (UserVo)request.getAttribute("user");
+	String yourUserCode = "";
+	if ((String)request.getAttribute("yourUserCode") != null
+			&& ((String)request.getAttribute("yourUserCode")).length() > 0) {
+		yourUserCode = (String)request.getAttribute("yourUserCode");
+	}
 %>
 <STYLE>
 .nav {
@@ -50,7 +55,10 @@
 				<div class="circle-inner">
 					<p><br><p><br><p><br><br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;<a href="/updateUser.hang"><span class="glyphicon glyphicon-cog"></span></a>
+					&nbsp;&nbsp;&nbsp;
+<% if(yourUserCode.equals("")){ %>
+					<a href="/updateUser.hang"><span class="glyphicon glyphicon-cog"></span></a>
+<% } %>
 				</div>
 			</div>
 			<P><P><P><P><P>
@@ -63,6 +71,7 @@
 				<ul class="nav nav-pills"
 					style="display: table; margin-left: auto; margin-right: auto"
 					align="center">
+<% if(yourUserCode.equals("")){ %>
 					<li role="presentation" style="width: 120px; height: 40px;">
 						<a href="/myPage.hang">¸®ºä</a>
 					</li>
@@ -87,6 +96,23 @@
 					<li role="presentation" style="width: 120px; height: 40px">
 						<a href="/userMileagePage.hang">¸¶ÀÌ»ùÇÃ</a>
 					</li>
+<% } else { %>
+					<li role="presentation" style="width: 120px; height: 40px;">
+						<a href="/myPage.hang?yourUserCode=<%= yourUserCode %>">¸®ºä</a>
+					</li>
+					<li role="presentation" style="width: 120px; height: 40px">
+						<a href="/userTipPage.hang?yourUserCode=<%= yourUserCode %>">ÆÁ</a>
+					</li>
+					<li role="presentation" style="width: 120px; height: 40px">
+						<a href="/userHangOutPage.hang?yourUserCode=<%= yourUserCode %>">Çà¾Æ¿ô</a>
+					</li>
+					<li role="presentation" style="width: 120px; height: 40px">
+						<a href="/relationFollowingSearch.hang?yourUserCode=<%= yourUserCode %>">ÆÈ·Î¿ì</a>
+					</li>
+					<li role="presentation" style="width: 120px; height: 40px">
+						<a href="/userScrapPage.hang?yourUserCode=<%= yourUserCode %>">½ºÅ©·¦</a>
+					</li>
+<% } %>
 				</ul>
 			</div>
 		</div>

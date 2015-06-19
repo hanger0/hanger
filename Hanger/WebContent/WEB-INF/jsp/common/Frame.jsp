@@ -22,8 +22,8 @@
 <script src="/js/common/common.js" type="text/javascript"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- JQuery Á¾·á -->
-<<script type="text/javascript">
-$(document).ready( function() {
+<script type="text/javascript">
+$(document).ready(function() {
 	$('.dropdown-toggle').dropdown();
 });
 </script>

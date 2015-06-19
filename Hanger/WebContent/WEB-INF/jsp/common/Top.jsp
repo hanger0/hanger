@@ -2,20 +2,20 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.hanger.user.vo.*"%>
 <%
-   String myName = "";
-   if (session != null && session.getAttribute("loginYn") != null
-         && ((String) session.getAttribute("loginYn")).equals("Y")) {
-      myName = (String) session.getAttribute("myUserName");
-   }
-   
-    ArrayList<UserVo> followerList = (ArrayList<UserVo>)request.getAttribute("followerList");
-   ArrayList<UserVo> followingList = (ArrayList<UserVo>)request.getAttribute("followingList");
-   ArrayList<UserVo> userList = (ArrayList<UserVo>)request.getAttribute("userList");
-   
-   String qt = "";
-   if((String)request.getAttribute("qt") != null && ((String)request.getAttribute("qt")).length() > 0){
-      qt = (String)request.getAttribute("qt");
-   }
+	String myName = "";
+	if (session != null && session.getAttribute("loginYn") != null
+			&& ((String) session.getAttribute("loginYn")).equals("Y")) {
+		myName = (String) session.getAttribute("myUserName");
+	}
+	
+	ArrayList<UserVo> followerList = (ArrayList<UserVo>)request.getAttribute("followerList");
+	ArrayList<UserVo> followingList = (ArrayList<UserVo>)request.getAttribute("followingList");
+	ArrayList<UserVo> userList = (ArrayList<UserVo>)request.getAttribute("userList");
+	
+	String qt = "";
+	if((String)request.getAttribute("qt") != null && ((String)request.getAttribute("qt")).length() > 0){
+		qt = (String)request.getAttribute("qt");
+	}
 %>
 
 <script type="text/javascript" src="js/common/common.js"></SCRIPT>
@@ -25,51 +25,47 @@
    }
 </SCRIPT>
 <SCRIPT>
-	$(function() {
-		// 알림을 뿌리기 위한 Ajax
-		$.ajax({
-			type : "POST",
-			url : "/searchNotification.hang",
-			dataType : "text",
-			success : function(text){
-				var resultText = trim(text);
-				var resultMessage = "<FONT color='blue' >" + resultText + "</FONT>";
-				$('#notification').empty();
-				$('#notification').append(resultMessage);
-			}
-		});
+$(function() {
+	// 알림을 뿌리기 위한 Ajax
+	$.ajax({
+		type : "POST",
+		url : "/searchNotification.hang",
+		dataType : "text",
+		success : function(text){
+			var resultText = trim(text);
+			var resultMessage = "<FONT color='blue' >" + resultText + "</FONT>";
+			$('#notification').empty();
+			$('#notification').append(resultMessage);
+		}
+	});
 	
-      var f = document.searchFriendForm;
-
-      $("#searchText").keyup(
-            function(key) {
-
-               var ftext = trim(f.searchText.value);
-               if (ftext != null) {
-                  $.ajax({
-                     type : "POST",
-                     url : "/userMiniSearch.hang",
-                     dataType : "text",
-                     data : "searchText=" + ftext,
-                     success : function(text) {
-                        var supertext = trim(text);
-                        var resultMessage = "<FONT color='blue' >"
-                              + supertext + "</FONT>";
-                        $('#friendSearchMessage').empty();
-                        $('#friendSearchMessage').append(resultMessage);
-                     },
-                     error : function(request, status, error) {
-                        alert("code:" + request.status + "\n"
-                              + "message:" + request.responseText
-                              + "\n" + "error:" + error);
-                     }
-                  });
-               } else {
-                  alert("검색어를 입력해주세요");
-                  false;
-               }
-            });
-   });
+	$("#searchText").keyup(function(key) {
+		var ftext = trim($("#searchText").val());
+		if (ftext != null) {
+			$.ajax({
+				type : "POST",
+				url : "/userMiniSearch.hang",
+				dataType : "text",
+				data : "searchText=" + ftext,
+				success : function(text) {
+				   var supertext = trim(text);
+				   var resultMessage = "<FONT color='blue' >"
+				         + supertext + "</FONT>";
+				   $('#friendSearchMessage').empty();
+				   $('#friendSearchMessage').append(resultMessage);
+				},
+				error : function(request, status, error) {
+				   alert("code:" + request.status + "\n"
+				         + "message:" + request.responseText
+				         + "\n" + "error:" + error);
+				}
+			});
+		} else {
+		   alert("검색어를 입력해주세요");
+		   false;
+		}
+	});
+});
 </SCRIPT>
 <style>
 /* 블로그메뉴 */
@@ -194,7 +190,7 @@ div, ul, li {
                      <ul class="dropdown-menu" role="menu">
                         <form class="navbar-form navbar-left" role="search" id="searchFriendForm" name="searchFriendForm" style="width: 290px">
                            <div class="form-group">
-                              <input type="text" class="form-control" id="searchText"  name="searchText" placeholder="친구검색">
+                              <input type="text" class="form-control" id="searchText" name="searchText" placeholder="친구검색">
                            </div>
                         </form>
                         <div class="user searchFriend" id="friendSearchMessage"></div>

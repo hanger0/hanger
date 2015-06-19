@@ -29,8 +29,8 @@ public class UserVo {
 	private String updDate;
 	private String updIp;
 	private int followerCount;
-	private int potingCount;
-	private String relationFollowing;
+	private int postingCount;
+	private String followYn;
 	public String getUserCode() {
 		return userCode;
 	}
@@ -199,16 +199,17 @@ public class UserVo {
 	public void setFollowerCount(int followerCount) {
 		this.followerCount = followerCount;
 	}
-	public int getPotingCount() {
-		return potingCount;
+	public int getPostingCount() {
+		return postingCount;
 	}
-	public void setPotingCount(int potingCount) {
-		this.potingCount = potingCount;
+	public void setPostingCount(int postingCount) {
+		this.postingCount = postingCount;
 	}
-	public String getRelationFollowing() {
-		return relationFollowing;
+	public String getFollowYn() {
+		return followYn;
 	}
-	public void setRelationFollowing(String relationFollowing) {
-		this.relationFollowing = relationFollowing;
+	public void setFollowYn(String followYn) {
+		this.followYn = followYn;
 	}
+	
 }

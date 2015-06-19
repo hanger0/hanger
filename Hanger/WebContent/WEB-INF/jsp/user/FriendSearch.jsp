@@ -5,8 +5,6 @@
 		ArrayList userList = (ArrayList)request.getAttribute("userList");	
 		String qt = (String)request.getAttribute("qt");
 %>
-
-<link rel="stylesheet" media="screen" href="/css/bootstrap/bootstrap.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
       <!-- 부가적인 테마 -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">

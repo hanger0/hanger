@@ -13,19 +13,12 @@
 				String path = notification.getUserPicPath();
 				String picName = notification.getUserPicSaveName();
 				String url = notification.getNotificationUrl();
-				System.out.println(url);
+				String yn = notification.getNotificationReadYn();
 %>
-<script>
-	$(function(){
-		$('a').click(function(){
-			
-		});
-	})
-</script>
-			<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<li <% if(yn.equals("Y")){%> style="background: gray;"<%} %>>
 				<a href="/<%= url %>">
-				<img src="<%= path %>\\<%= picName %>" /><%= message %>
-				<div class="message-and-time" style="float: right;">
+				<img src="<%= path %>\\<%= picName %>" width="40px;" height="40px" /><%= message %>
+				<div class="message-and-time" style="float: right;background-color:yellow">
 					<div class="message">
 						
 					</div>
@@ -42,15 +35,16 @@
 				String path = notification.getUserPicPath();
 				String picName = notification.getUserPicSaveName();
 				String url = notification.getNotificationUrl();
+				String yn = notification.getNotificationReadYn();
 %>
-				<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<li <% if(yn.equals("Y")){%> style="background: gray;"<%} %>>
 					<a href="/<%= url %>">
-					<img src="<%= path %>/<%= picName %>" /><%= message %>
-					<div class="message-and-time" style="float: right;">
-						<div class="message">
-								
+						<img src="<%= path %>/<%= picName %>" width="40px;" height="40px"/><%= message %>
+						<div class="message-and-time" style="float: right;">
+							<div class="message">
+									
+							</div>
 						</div>
-					</div>
 					</a>
 				</li>
 <%				}

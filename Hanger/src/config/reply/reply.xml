@@ -3,24 +3,76 @@
 <sqlMap namespace="Data">
 	<typeAlias alias="reply" type="com.hanger.reply.vo.ReplyVo"/>
 	
-	<insert id="insertReply" parameterClass="reply">
-		INSERT INTO REPLY(REPLY_CODE, USER_CODE, POSTING_CODE, REPLY_CONTENT, REG_ID, REG_DATE, REG_IP, UPD_ID, UPD_DATE, UPD_IP)
-		VALUES(CONCAT("RE",LPAD((SELECT GET_SEQ('REPLY_CODE')), 10, '0')), #userCode#, #postingCode#, #replyContent#, #regId#, SYSDATE(), #regIp#, #updId#, SYSDATE(), #updIp#)
+	<insert id="insertReply" parameterClass="HashMap">
+		INSERT INTO REPLY
+						 (REPLY_CODE,
+						  USER_CODE,
+						  POSTING_CODE,
+						  REPLY_CONTENT,
+						  REG_ID,
+						  REG_DATE,
+						  REG_IP,
+						  UPD_ID,
+						  UPD_DATE,
+						  UPD_IP)
+								 VALUES
+								 (CONCAT("RE",LPAD((SELECT GET_SEQ('REPLY_CODE')), 10, '0')),
+								 #userCode#,
+								 #reviewCode#,
+								 #replyContent#,
+								 #regId#,
+								 SYSDATE(),
+								 #regIp#,
+								 #updId#,
+								 SYSDATE(),
+								 #updIp#)
 	</insert>
 	
 	<select id="selectReply" parameterClass="HashMap" resultClass="reply">
-		SELECT B.USER_NAME AS userName, A.REPLY_CONTENT AS replyContent, A.REG_ID AS regId, A.REG_DATE AS reg_date, A.REG_ID AS regIp, A.UPD_ID AS updId, A.UPD_DATE AS updDate, A.UPD_IP AS updIp, B.USER_PIC_PATH as userPicPath, B.USER_PIC_SAVE_NAME AS userPicSaveName
-		FROM reply A, user B
-		WHERE REPLY_USE_YN != 'N' AND A.USER_CODE = B.USER_CODE AND A.POSTING_CODE = #postingCode#
+		SELECT 
+			  A.REPLY_CODE AS replyCode,
+			  B.USER_NAME AS userName,
+			  B.USER_CODE AS userCode,
+			  A.REPLY_CONTENT AS replyContent,
+			  A.REG_ID AS regId,
+			  A.REG_DATE AS reg_date,
+			  A.REG_ID AS regIp, 
+			  A.UPD_ID AS updId,
+			  A.UPD_DATE AS updDate,
+			  A.UPD_IP AS updIp,
+			  A.REPLY_USE_YN AS replyUseYn,
+			  B.USER_PIC_PATH as userPicPath,
+			  B.USER_PIC_SAVE_NAME AS userPicSaveName
+													 FROM reply A, user B	
+														 				 WHERE
+															 				  REPLY_USE_YN != 'N'
+															 				  AND
+															 				  A.POSTING_CODE = #reviewCode#
+															 				  AND
+															 				  A.USER_CODE = B.USER_CODE
 	</select>
+	
 	
 	<update id="updateReply" parameterClass="HashMap" >
 		UPDATE reply
-		SET REPLY_CONTENT = #replyContent#, REG_ID = #regId# , REG_DATE = SYSDATE(), REG_IP = #regIp#, UPD_DATE = SYSDATE(), UPD_ID = #updId#, UPD_IP = #updIp#
-		WHERE REPLY_CODE = #replyCode# AND USER_CODE = #userCode#
+					 SET
+					 	REPLY_CONTENT = #replyContent#,	
+					 	UPD_DATE = SYSDATE(),
+					 	UPD_ID = #updId#,
+					 	UPD_IP = #updIp#
+										WHERE
+											 REPLY_CODE = #replyCode#
+											 AND
+											 USER_CODE = #myUserCode#
 	</update>
-	<update id="removeReply" parameterClass="HashMap">
-		UPDATE reply SET REPLY_USE_YN = 'N' WHERE REPLY_CODE = #replyCode# AND USER_CODE = #userCode#
+	<update id="deleteReply" parameterClass="HashMap">
+		UPDATE reply 
+				     SET
+				     	  REPLY_USE_YN = 'N'
+				     WHERE
+				     	  REPLY_CODE = #replyCode#
+				     	  AND
+				     	  USER_CODE = #myUserCode#
 	</update>
 	
 </sqlMap>
