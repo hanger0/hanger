@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="user" type="com.hanger.user.vo.UserVo"/>
+	
+	<select id="managerSelectAllUser" resultClass="user">
+		select 
+			USER_CODE as userCode, USER_ID as userId, USER_NAME as userName, USER_GENDER as userGender, USER_BIRTH as userBirth, 
+			USER_PHONE as userPhone, USER_PIC_PATH as userPicPath, USER_PIC_ORG_NAME as userPicOrgName, USER_PIC_SAVE_NAME as userPicSaveName, 
+			USER_SKINTYPE as userSkinType, USER_SKINTONE as userSkinTone, USER_SKINPROBLEM as userSkinProblem, USER_RANK_CODE as userRankCode, USER_ADDR1 as userAddr1,
+      		USER_ADDR2 as userAddr2, USER_QUESTION as userQuestion, USER_ANSWER as userAnswer, USER_POSTCODE1 as userPostCode1, USER_POSTCODE2 as userPostCode2,
+      		USER_PWD as userPwd
+		from 
+			USER
+	</select>
+	
+	<!-- SKINTYPE 매치
+		SELECT 
+		U.USER_CODE as userCode, USER_ID as userId, U.USER_PWD as userPwd, U.USER_NAME as userName, 
+	    U.USER_GENDER as userGender, U.USER_BIRTH as userBirth, U.USER_PHONE as userPhone, 
+	    U.USER_PIC_PATH as userPicPath, U.USER_PIC_ORG_NAME as userPicOrgName, U.USER_PIC_SAVE_NAME as userPicSaveName, 
+			F.FEATURE2_NAME as userSkinType, U.USER_SKINTONE as userSkinTone, U.USER_SKINPROBLEM as userSkinProblem, 
+	    U.USER_RANK_CODE as userRankCode, U.USER_ADDR1 as userAddr1, U.USER_ADDR2 as userAddr2, 
+	    U.USER_QUESTION as userQuestion, U.USER_ANSWER as userAnswer, 
+	    U.USER_POSTCODE1 as userPostCode1, U.USER_POSTCODE2 as userPostCode2
+		FROM 
+			USER U
+	  LEFT JOIN
+	    FEATURE2 F ON F.FEATURE2_CODE = U.USER_SKINTYPE
+    ;
+	 -->
+</sqlMap>

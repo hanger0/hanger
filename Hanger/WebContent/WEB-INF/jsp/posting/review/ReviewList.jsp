@@ -55,7 +55,7 @@
                   	<h5><B></B></h5>
                   </a>
                   <hr style = "margin-top:-1%;"><p>
-                  <img src="images/wonbin.PNG" width="40px" height="40px" class="img-circle" />
+                  <img src="<%= userPicPath%>/<%=userPicSaveName %>" width="40px" height="40px" class="img-circle" />
                      <font size = "3"><b><%=userName %></b></font>&nbsp;&nbsp;
                      <font size = "2"><%= featuer2Name%></font>&nbsp;&nbsp;
                      <font size = "2"><%=userSkinTone %></font><p>

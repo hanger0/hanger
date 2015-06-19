@@ -48,7 +48,6 @@ public class ManagerAddItemController extends BaseController {
 			message = "접근 권한이 없습니다.";
 		}
 		
-		moveUrl = "manager/item/ManagerAddItem";
 
 		req.setAttribute("category1List", category1List);
 		req.setAttribute("category2List", category2List);
@@ -56,8 +55,10 @@ public class ManagerAddItemController extends BaseController {
 		req.setAttribute("feature1List", feature1List);
 		req.setAttribute("feature2List", feature2List);
 		req.setAttribute("message", message);
-		
-		System.out.println("AddItem...");
+		req.setAttribute("mainUrl", managerPageUrl);
+		req.setAttribute("managerPageUrl", root
+				+ "manager/item/ManagerAddItem.jsp");
+
 		return moveUrl;
 	}
 }

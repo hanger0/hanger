@@ -141,7 +141,6 @@ if(cartList != null){
 		String userCode = cart.getUserCode();
 		String itemCode = cart.getItemCode();
 		int cartItemAmount = Integer.parseInt(cart.getCartItemAmount());
-		String cartItemRecom = cart.getCartItemRecom();
 		int itemSellPrice = Integer.parseInt(cart.getItemSellPrice());
 		String itemName = cart.getItemName();
 		String itemPicPath = cart.getItemPicPath();
@@ -152,6 +151,11 @@ if(cartList != null){
 		int itemSellMaxNum = Integer.parseInt(cart.getItemSellMaxNum());
 		int stockAmount = Integer.parseInt(cart.getStockAmount());
 		String itemGroupCode = cart.getItemGroupCode();
+		
+		String cartItemRecom = cart.getCartItemRecom();
+		String recomUserName = cart.getRecomUserName();
+		String recomUserPicPath = cart.getRecomUserPicPath();
+		String recomUserPicPicSaveName = cart.getRecomUesrPicSaveName();
 
 		if(itemSellMaxNum > stockAmount){
 			itemSellMaxNum = stockAmount;
@@ -159,18 +163,7 @@ if(cartList != null){
 		
 		if(cartItemAmount > itemSellMaxNum){
 			cartItemAmount = itemSellMaxNum;
-		}
-		
-		if(cartItemRecom != null && cartItemRecom.length() > 0){
-%>
-					<tr>
-						<td style="background-color: #747474"></td>
-						<td colspan="8" style="background-color: #747474"><font
-							color="white"> <b><%= cartItemRecom %></b>님을 통하여 구매하였습니다.
-						</font></td>
-					</tr>
-<%
-		}
+		}	
 %>
 					<tr align="center">
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray; width: 10px" rowspan="2">
@@ -187,10 +180,14 @@ if(cartList != null){
 <%
 							if(cartItemRecom != null && cartItemRecom.length() > 0){
 %>
-								<%="너임마 "%>
+							<a href="/reviewShow.hang?reviewCode=<%=cartItemRecom%>">
+								<img src="<%= recomUserPicPath%>/<%=recomUserPicPicSaveName %>" width="40px" height="40px" class="img-circle" />
+								<%=recomUserName %>
+							</a>								
 <%
 							}
-%>							
+%>						
+						</td>	
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2" itemSellPrice="<%= itemSellPrice %>"><%= cartItemAmount * itemSellPrice %>원
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
@@ -214,7 +211,7 @@ if(cartList != null){
 					<tr>
 						<td style="border-bottom: 2px solid gray;" colspan="3"><font
 							size="2"><%= itemDetailInfo %></font></td>
-					</tr>
+					</tr> 
 <%
 	}
 }

@@ -9,6 +9,10 @@
 	<sqlMap resource="config/user/relation.xml"/>
 	<sqlMap resource="config/manager/item/managerItem.xml"/>
 	<sqlMap resource="config/manager/item/managerBrand.xml"/>
+	<sqlMap resource="config/manager/managerPage/managerOrder.xml"/>
+	<sqlMap resource="config/manager/managerPage/managerStock.xml"/>
+	<sqlMap resource="config/manager/managerPage/managerSales.xml"/>
+	<sqlMap resource="config/manager/managerPage/managerUser.xml"/>
 	<sqlMap resource="config/order/order.xml"/>
 	<sqlMap resource="config/order/cart.xml"/>
 	<sqlMap resource="config/item/itemSearch.xml"/>

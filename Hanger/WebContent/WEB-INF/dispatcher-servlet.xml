@@ -86,6 +86,7 @@
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
 		<property name="userSearchDao" ref="userSearchDao"></property>
 		<property name="userSelectDao" ref="userSelectDao"></property>
+		<property name="notificationDao" ref="notificationDao"></property>
 	</bean>
 	<bean id="relationSearchController" class="com.hanger.user.controller.RelationSearchController">
 		<property name="relationSearchDao" ref="relationSearchDao"></property>
@@ -111,6 +112,30 @@
 		class="com.hanger.manager.item.controller.ManagerAddBrandController">
 		<property name="managerAddBrandDao" ref="managerAddBrandDao"></property>
 		<property name="managerSearchBrandDao" ref="managerSearchBrandDao"></property>
+	</bean>
+	
+	<!-- Manager/ManagerPage 요청 url과 Controller 매핑 -->
+	<bean id="managerOrderListController"
+		class="com.hanger.manager.managerPage.controller.ManagerOrderListController">
+		<property name="managerOrderListDao" ref="managerOrderListDao"></property>
+	</bean>
+	<bean id="managerPageMainController"
+		class="com.hanger.manager.managerPage.controller.ManagerPageMainController">
+	</bean>
+	<bean id="managerSalesController"
+		class="com.hanger.manager.managerPage.controller.ManagerSalesController">
+		<property name="managerSalesDao" ref="managerSalesDao"></property>
+	</bean>
+	<bean id="managerStockController"
+		class="com.hanger.manager.managerPage.controller.ManagerStockController">
+		<property name="managerStockDao" ref="managerStockDao"></property>
+	</bean>
+	<bean id="managerUserListController"
+		class="com.hanger.manager.managerPage.controller.ManagerUserListController">
+		<property name="managerUserListDao" ref="managerUserListDao"></property>
+		<property name="orderInfoDao" ref="orderInfoDao"></property>
+		<property name="userMileageDao" ref="userMileageDao"></property>
+		<property name="userSelectDao" ref="userSelectDao"></property>
 	</bean>
 
 	<!-- Order 요청 url과 Controller 매핑 -->
@@ -149,6 +174,7 @@
 	<!-- review 요청 url과 Controller 매핑 -->
 	<bean id="reviewLikeController" class="com.hanger.posting.review.controller.ReviewLikeController">
 		<property name="reviewLikeCheckDao" ref="reviewLikeCheckDao"></property>
+		<property name="notificationDao" ref="notificationDao"></property>
 	</bean>
 	<bean id="reviewController" class="com.hanger.posting.review.controller.ReviewController">
 		<property name="reviewListDao" ref="reviewListDao"></property>
@@ -161,15 +187,16 @@
 		<property name="reviewShowDao" ref="reviewShowDao"></property>
 		<property name="itemListForReviewDao" ref="itemListForReviewDao"></property>
 	</bean>
-	<bean id="reviewShowController"
-		class="com.hanger.posting.review.controller.ReviewShowController">
+	<bean id="reviewShowController" class="com.hanger.posting.review.controller.ReviewShowController">
 		<property name="reviewShowDao" ref="reviewShowDao"></property>
 		<property name="replyDao" ref="replyDao"></property>
+		<property name="notificationDao" ref="notificationDao"></property>
 	</bean>
 
 	<!-- Scrap 요청 url과 Controller 매핑 -->
 	<bean id="scrapController" class="com.hanger.scrap.controller.ScrapController">
 		<property name="scrapDao" ref="scrapDao"></property>
+		<property name="notificationDao" ref="notificationDao"></property>
 	</bean>
 	<bean id="userScrapController" class="com.hanger.scrap.controller.UserScrapController">
 		<property name="userScrapDao" ref="userScrapDao"></property>
@@ -240,6 +267,21 @@
 		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 	<bean id="managerAddBrandDao" class="com.hanger.manager.item.dao.ManagerAddBrandDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<!-- Manager/ManagerPage Dao beans -->
+	<bean id="managerOrderListDao" class="com.hanger.manager.managerPage.dao.ManagerOrderListDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
+	</bean>
+	<bean id="managerSalesDao" class="com.hanger.manager.managerPage.dao.ManagerSalesDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
+	</bean>
+	<bean id="managerStockDao" class="com.hanger.manager.managerPage.dao.ManagerStockDao">
+		<constructor-arg ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<bean id="managerUserListDao" class="com.hanger.manager.managerPage.dao.ManagerUserListDao">
 		<constructor-arg ref="sqlMapClientTemplate" />
 	</bean>
 

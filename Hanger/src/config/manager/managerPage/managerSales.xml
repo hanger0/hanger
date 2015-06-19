@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="managerSales" type="com.hanger.manager.managerPage.vo.ManagerSalesVo"/>
+	<typeAlias alias="managerPeriodSales" type="com.hanger.manager.managerPage.vo.ManagerPeriodSalesVo"/>
+	
+	<select id = "managerSelectSalesListAll" resultClass = "managerSales">
+		SELECT O.ORDER_CODE as orderCode, O.USER_CODE as userCode, U.USER_ID as userId, 
+		    O.ORDER_USED_MILEAGE as orderUsedMileage, O.ORDER_STATE as orderState, 
+		    O.REG_ID as orderRegId, O.REG_DATE as orderRegDate, O.REG_IP as orderRegIp,
+		    OI.ORDER_INFO_CODE as orderInfoCode, OI.ITEM_CODE as itemCode, 
+		    OI.ORDER_ITEM_MARKET_PRICE as orderItemMarketPrice, OI.ORDER_ITEM_SELL_PRICE, 
+		    OI.ORDER_ITEM_PURCHASE_PRICE, OP.ORDER_TOTAL_PRICE as orderTotalPrice,
+		    OI.DISCOUNT_REASON_CODE, DR.DISCOUNT_REASON_NAME, 
+		    OI.ORDER_ITEM_AMOUNT,
+		    OI.ORDER_ITEM_VERIFY, OI.ORDER_ITEM_RECOM,
+		    OC.INFO_CNT_PER_ORDER 
+		  FROM ORDERING O, USER U, 
+		    (SELECT ORDER_CODE, COUNT(ORDER_INFO_CODE) AS INFO_CNT_PER_ORDER
+		      FROM ORDER_INFO GROUP BY ORDER_CODE) OC,
+		    (SELECT O2.ORDER_CODE, SUM(OI2.ORDER_ITEM_SELL_PRICE) AS ORDER_TOTAL_PRICE 
+		      FROM ORDERING O2, ORDER_INFO OI2
+		      WHERE O2.ORDER_CODE = OI2.ORDER_CODE
+		      GROUP BY O2.ORDER_CODE) OP,
+		    ORDER_INFO OI
+		  LEFT JOIN DISCOUNT_REASON DR ON OI.DISCOUNT_REASON_CODE = DR.DISCOUNT_REASON_CODE
+		  WHERE O.ORDER_CODE = OI.ORDER_CODE AND OP.ORDER_CODE = O.ORDER_CODE AND
+		    OC.ORDER_CODE = O.ORDER_CODE AND O.USER_CODE = U.USER_CODE;	
+	</select>
+	
+	<select id="managerSelectMonthSales" resultClass="managerPeriodSales">
+		  select date_format(O.REG_DATE, '%Y-%m') as period, 
+		    SUM(OI.ORDER_ITEM_SELL_PRICE) AS totalSellPrice,
+		    SUM(OI.ORDER_ITEM_PURCHASE_PRICE) AS totalPurchasePrice,
+		    SUM(O.ORDER_USED_MILEAGE) AS totalUsedMileage
+		  from ORDERING O, ORDER_INFO OI
+		  WHERE DATE_FORMAT(O.REG_DATE, '%Y') = DATE_FORMAT(SYSDATE(), '%Y') AND
+		    OI.ORDER_CODE = O.ORDER_CODE
+		  group by date_format(O.REG_DATE, '%Y-%m');
+	</select>
+	
+</sqlMap>

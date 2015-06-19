@@ -65,6 +65,10 @@ $(function() {
 		   false;
 		}
 	});
+	
+	$(".notificationList").click(function(){
+		$(location).attr('href', "/searchNotificationList.hang");
+	});
 });
 </SCRIPT>
 <style>
@@ -165,7 +169,7 @@ div, ul, li {
                         </form>
                         <div class="message" width="100%">
 							<div style="margin-bottom: -20px">
-                            	<button style="width: 100%;" class="btn btn-default notificationLoog">더보기</button>
+                            	<button style="width: 100%;" class="btn btn-default notificationList">더보기</button>
                        		</div>
                         </div>
                      </ul>

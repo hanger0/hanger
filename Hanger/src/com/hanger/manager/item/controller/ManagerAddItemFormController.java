@@ -112,10 +112,6 @@ public class ManagerAddItemFormController extends BaseController{
 		String itemMainPicSaveName = mul.getFilesystemName("mainPic");
 		int itemMainPicSize = 0;
 		
-//		String itemDetailPicPath = savePath;
-//		String itemDetailPicOrgName = "";
-//		String itemDetailPicSaveName = "";
-//		int itemDetailPicSize = 0;
 
 		String ip = req.getRemoteAddr();
 		
@@ -133,10 +129,6 @@ public class ManagerAddItemFormController extends BaseController{
 		item.setItemMainPicOrgName(itemMainPicOrgName);
 		item.setItemMainPicSaveName(itemMainPicSaveName);
 		item.setItemMainPicSize(itemMainPicSize);
-//		item.setItemDetailPicPath(itemDetailPicPath);
-//		item.setItemDetailPicOrgName(itemDetailPicOrgName);
-//		item.setItemDetailPicSaveName(itemDetailPicSaveName);
-//		item.setItemDetailPicSize(itemDetailPicSize);
 		item.setRegId("admin");
 		item.setRegIp(ip);
 		item.setUpdId("admin");
@@ -170,26 +162,6 @@ public class ManagerAddItemFormController extends BaseController{
 			String itemFeatureValue = itemFeature[i];
 			managerAddItemDao.insertItemFeature(itemFeatureValue);
 		}
-		
-//		for(int i = 1; i < 6; i++){
-////			fileFormName = (String)formNames.nextElement();
-////			System.out.println(fileFormName);
-//			if(mul.getOriginalFileName("detailPic" + i) != null){
-//
-//				itemDetailPicPath = savePath;
-//				itemDetailPicOrgName = mul.getOriginalFileName("detailPic" + i);
-//				itemDetailPicSaveName = mul.getFilesystemName("detailPic" + i);
-//				itemDetailPicSize = 0;
-//	
-//				item.setItemDetailPicPath(itemDetailPicPath);
-//				item.setItemDetailPicOrgName(itemDetailPicOrgName);
-//				item.setItemDetailPicSaveName(itemDetailPicSaveName);
-//				item.setItemDetailPicSize(itemDetailPicSize);
-//				
-//				managerAddItemDao.insertItemPic(item);
-//			}
-//		}
-		
 		return "../../index";// 상품등록 끝나고 돌아갈 화면
 	}
 }

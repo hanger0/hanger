@@ -10,7 +10,7 @@
 	
 	<select id="selectNotification" parameterClass="String" resultClass="notificationVo">
 		select 
-			NOTIFICATION_MESSAGE as notificationMessage, 
+			NOTIFICATION_MESSAGE as notificationMessage, NOTIFICATION_FROM_USER_CODE as notificationFromUserCode, 
 			NOTIFICATION_URL as notificationUrl, NOTIFICATION_READ_YN notificationReadYn, 
 			b.USER_PIC_PATH as userPicPath, b.USER_PIC_SAVE_NAME as userPicSaveName 
 		from 
@@ -22,12 +22,17 @@
 	</select>
 	
 	<update id="updateNotificationReadYn" parameterClass="HashMap">
-		update notification set notification_read_yn = 'Y', upd_id = #updId#, UPD_IP = #updIp#, UPD_DATE = now()
-		where notification_from_user_code = #userId#
+		update 
+			notification set notification_read_yn = 'Y', upd_id = #id#, UPD_IP = #ip#, UPD_DATE = now()
+		where 
+			notification_from_user_code = #fromUserCode# AND notification_to_user_code = #myUserCode# AND notification_url = #url#
 	</update>
 	
 	<delete id="deleteNotification" parameterClass="HashMap">
-		DELETE FROM NOTIFICATION
+		DELETE FROM 
+			NOTIFICATION 
+		WHERE 
+			notification_from_user_code = #fromUserCode# AND notification_to_user_code = #toUserCode# AND notification_url = #url#
 	</delete>
 	
 </sqlMap>

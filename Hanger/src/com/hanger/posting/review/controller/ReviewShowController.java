@@ -9,9 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.notification.dao.NotificationDao;
 import com.hanger.posting.review.dao.ReviewShowDao;
 import com.hanger.posting.review.vo.ReviewShowVo;
 import com.hanger.reply.dao.ReplyDao;
@@ -21,7 +21,11 @@ public class ReviewShowController extends BaseController {
 
 	private ReviewShowDao reviewShowDao;
 	private ReplyDao replyDao;
-
+	private NotificationDao notificationDao;
+	
+	public void setNotificationDao(NotificationDao notificationDao) {
+		this.notificationDao = notificationDao;
+	}
 	public void setReviewShowDao(ReviewShowDao reviewShowDao) {
 		this.reviewShowDao = reviewShowDao;
 	}
@@ -42,7 +46,6 @@ public class ReviewShowController extends BaseController {
 		
 		// review
 		String reviewCode = (String) req.getParameter("reviewCode");
-		String userCode = (String) session.getAttribute("myUserCode");
 		// reply
 		String myUserId = (String)session.getAttribute("myUserId");
 		String myUserCode = (String)session.getAttribute("myUserCode");
@@ -52,13 +55,13 @@ public class ReviewShowController extends BaseController {
     	String ip = req.getRemoteAddr();
     	String checkReply = "";
     	String replyUseYn = req.getParameter("replyUseYn");
-    	String replyuserCode = req.getParameter("replyuserCode");
+    	String yourUserCode = req.getParameter("yourUserCode");
     	if(req.getParameter("checkReply") != null){
     		checkReply = req.getParameter("checkReply");
     	}
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("reviewCode", reviewCode);
-		map.put("userCode", userCode);
+		map.put("userCode", myUserCode);
 		List<ReviewShowVo> reviewList = reviewShowDao.getReviewShow(map);
 		
 		ReviewShowVo review = reviewList.get(0);
@@ -90,7 +93,15 @@ public class ReviewShowController extends BaseController {
 		replyMap.put("updId", myUserId);
 		replyMap.put("updIp", ip);
 		replyMap.put("checkReply", checkReply);
-		replyMap.put("replyuserCode", replyuserCode);
+		
+		HashMap<String, String> notiMap = new HashMap<String, String>();
+
+		notiMap.put("fromUserCode", myUserCode);
+		notiMap.put("toUserCode", yourUserCode);
+		notiMap.put("message", myUserName + "¥‘¿Ã µ´±€¿ª ≥≤∞‰Ω¿¥œ¥Ÿ.");
+		notiMap.put("url", "reviewShow.hang?reviewCode="+reviewCode);
+		notiMap.put("id", myUserId);
+		notiMap.put("ip", ip);
 		
 		if(checkReply.equals("Insert")){
 			ArrayList<String> selectSeqList =replyDao.selectSeq();
@@ -100,6 +111,8 @@ public class ReviewShowController extends BaseController {
 			ArrayList replyOne = replyDao.selectReply(replyMap);
 			req.setAttribute("replyOne", replyOne);
 			replyMap.remove("replySeq");
+			
+			notificationDao.insertNotification(notiMap);
 			
 			moveUrl = "reply/replyInsert";
 		}
@@ -135,6 +148,7 @@ public class ReviewShowController extends BaseController {
 		}
 		else if(checkReply.equals("Delete")) {
 			replyDao.deleteReply(replyMap);
+			notificationDao.deleteNotification(notiMap);
 			moveUrl = "reply/replyDelete";
 		}
 		else{

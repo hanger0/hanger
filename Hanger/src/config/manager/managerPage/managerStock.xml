@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Data">
+	<typeAlias alias="stock" type="com.hanger.manager.managerPage.vo.ManagerStockVo"/>
+	
+	<select id="managerSelecStockAll" resultClass="stock">
+		SELECT 
+		    ST.STOCK_CODE as stockCode, ST.ITEM_CODE as itemCode, ST.STOCK_MARKET_PRICE as stockMarketPrice, 
+		    ST.STOCK_SELL_PRICE as stockSellPrice, ST.STOCK_PURCHASE_PRICE as stockPurchasePrice, 
+		    ST.STOCK_MANUFACTURE_DATE as stockManufactureDate, ST.STOCK_EXPIRE_DATE as stockExpireDate, 
+		    ST.STOCK_AMOUNT as stockAmount, ST.STOCK_USE_YN as stockUseYn, 
+		    ST.REG_ID as stockRegId, ST.REG_DATE as stockRegDate, ST.REG_IP as stockRegIp, 
+		    ST.UPD_ID as stockUpdId, ST.UPD_DATE as stockUpdDate, ST.UPD_IP as stockUpdIp,
+		    IT.ITEM_GROUP_CODE as itemGroupCode, IT.ITEM_NAME as itemName, IC.ITEM_CNT_PER_GROUP as itemCntPerGroup,
+		    IT.BRAND_CODE as itemBrandCode, B.BRAND_NAME as itemBrandName,
+		    IT.ITEM_SIZE as itemSize, IT.ITEM_RELEASE_DATE as itemReleaseDate, IT.ITEM_SCORE as itemScore, 
+		    IT.ITEM_SUMMARY_INFO as itemSummaryInfo, IT.ITEM_DETAIL_INFO as itemDetailInfo, 
+		    IT.ITEM_TOTAL_INFO as itemTotalInfo, IT.ITEM_INGREDIENT as itemIngredient, 
+		    IT.ITEM_HOW_TO_USE as itemHowToUse, IT.ITEM_SELL_CNT as itemSellCnt, 
+		    IT.ITEM_SELL_MAXNUM as itemSellMaxNum, IT.ITEM_STATUS as itemStatus, IT.ITEM_USE_YN as itemUseYn,
+		    DR.DISCOUNT_REASON_NAME as discountReasonName, IT.ITEM_PIC_PATH as itemPicPath, 
+		    IT.ITEM_PIC_ORGNAME as itemPicOrgName, IT.ITEM_PIC_SAVENAME as itemPicSaveName,
+		    IT.REG_ID as itemRegId, IT.REG_DATE as itemRegDate, IT.REG_IP as itemRegIp,
+		    IT.UPD_ID as itemUpdId, IT.UPD_DATE as itemUpdDate, IT.UPD_IP as itemRegIp,
+		    SA.STOCK_AMOUNT_TOTAL as stockAmountTotal, SC.ITEM_CNT_PER_SIZE as itemCntPerSize
+		  FROM
+		    ITEM_STOCK ST, BRAND B, 
+		    (SELECT ITEM_GROUP_CODE, COUNT(ITEM_CODE) AS ITEM_CNT_PER_GROUP FROM ITEM GROUP BY ITEM_GROUP_CODE) IC,
+		    (SELECT I.ITEM_GROUP_CODE, I.ITEM_SIZE, SUM(S.STOCK_AMOUNT) AS STOCK_AMOUNT_TOTAL 
+		      FROM ITEM_STOCK S, ITEM I
+		      WHERE I.ITEM_CODE = S.ITEM_CODE
+		      GROUP BY I.ITEM_GROUP_CODE, I.ITEM_SIZE) SA,
+		    (SELECT ITEM_GROUP_CODE, ITEM_SIZE, COUNT(ITEM_GROUP_CODE) AS ITEM_CNT_PER_SIZE 
+		      FROM ITEM GROUP BY ITEM_SIZE, ITEM_GROUP_CODE) SC,
+		    ITEM IT 
+		  LEFT JOIN DISCOUNT_REASON DR
+		    ON IT.ITEM_DISCOUNT_REASON_CODE = DR.DISCOUNT_REASON_CODE
+		  WHERE IT.ITEM_CODE = ST.ITEM_CODE AND IT.BRAND_CODE = B.BRAND_CODE AND
+		    IC.ITEM_GROUP_CODE = IT.ITEM_GROUP_CODE AND
+		    SA.ITEM_GROUP_CODE = IT.ITEM_GROUP_CODE AND SA.ITEM_SIZE = IT.ITEM_SIZE AND
+		    SC.ITEM_GROUP_CODE = IT.ITEM_GROUP_CODE AND SC.ITEM_SIZE = IT.ITEM_SIZE 
+		  ORDER BY IT.ITEM_GROUP_CODE, IT.ITEM_SIZE;
+	</select>
+</sqlMap>

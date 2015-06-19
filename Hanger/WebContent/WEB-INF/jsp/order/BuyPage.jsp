@@ -173,7 +173,8 @@ $(function(){
 						<td align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray; width: 30px">
 							<input id="checkBox" type="checkbox">
 						</td>
-						<td colspan="4" align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>상품명</B></td>
+						<td colspan="3" align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>상품명</B></td>
+						<td align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>추천 리뷰</B></td>
 						<td align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>상품금액</B></td>
 						<td align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>배송비</B></td>
 						<td align="center" style="border-bottom: 2px solid gray"><b>수량</b></td>
@@ -217,9 +218,10 @@ if(cartList != null) {
 						<td style="border-bottom: 2px solid gray;" rowspan="2" width="120px">
 							<img src="<%= itemPicPath %>/<%= itemPicSaveName %>" width="80px" height="80px" style="margin-left: -20px">
 						</td>
-						<td colspan="3" style="border-right: 1px solid gray;">
+						<td colspan="2" style="border-right: 1px solid gray;">
 							<font size="3"><b><%= itemName %></b></font>
 						</td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;" rowspan="2"> 너 임마</td>
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;" rowspan="2"><%= itemSellPrice * itemAmount %>원</td>
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;" rowspan="2">무료배송</td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2">

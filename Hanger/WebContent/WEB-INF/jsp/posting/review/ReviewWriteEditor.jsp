@@ -41,10 +41,7 @@
 
 <!-- include summernote css/js-->
 <link href="/css/posting/summernote.css" rel="stylesheet">
-<!-- <script src="/js/posting/summernote.js"></script>
- -->
-<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="/ckfinder/ckfinder.js"></script>
+<script src="/js/posting/summernote.js"></script>
 
 <head>
 <title>Review Write Editor</title>
@@ -78,7 +75,7 @@
 			<INPUT type="hidden" id="itemGroupCode" name="itemGroupCode"
 				value="<%=itemGroupCode%>" /> 
 			<INPUT type="hidden"
-				id="contentHidden" name="contentHidden" value="" /> 
+				id="reviewContent" name="reviewContent" value="" /> 
 			<INPUT type="hidden" id="ratingValue" name="rating" value="" /> <font
 				size="4" style="margin-left: 70px;"><b>리뷰작성</b></font>
 			<hr style="border: 2px solid white; width: 87%">
@@ -164,31 +161,7 @@
 
 			<div class="thumbnail"
 				style="width: 87%; display: table; margin-left: auto; margin-right: auto;">
-				<!-- <textarea class="summernote" style = "width:300px;overflow:visible" onkeyup = "resize(this)"></textarea>
-	          -->
-				<textarea rows="10" cols="60" name="reviewContent" id="reviewContent"></textarea>
-				<script type="text/javascript">
-					CKEDITOR.replace('reviewContent', {
-						toolbar : 'Basic',
-						width : '100%',
-						height : '400px',
-						enterMode : '2',
-						shiftEnterMode : '3'
-					});
-				
-					CKEDITOR.on('dialogDefinition', function(ev) {
-						var dialogName = ev.data.name;
-						var dialogDefinition = ev.data.definition;
-				
-						switch (dialogName) {
-						case 'image': //Image Properties dialog
-							//dialogDefinition.removeContents('info');
-							dialogDefinition.removeContents('Link');
-							dialogDefinition.removeContents('advanced');
-							break;
-						}
-					});
-				</script>
+				<textarea class="summernote" style = "width:300px;overflow:visible" onkeyup = "resize(this)"></textarea>
 			</div>
 
 			<INPUT type="button" class="btn btn-default" value="작성완료"

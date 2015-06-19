@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.notification.dao.NotificationDao;
 import com.hanger.user.dao.RelationDeleteDao;
 import com.hanger.user.dao.RelationSearchDao;
 import com.hanger.user.dao.UserSearchDao;
@@ -24,7 +25,11 @@ public class RelationDeleteController extends BaseController {
 	private RelationSearchDao relationSearchDao;
 	private UserSearchDao userSearchDao;
 	private UserSelectDao userSelectDao;
+	private NotificationDao notificationDao;
 	
+	public void setNotificationDao(NotificationDao notificationDao) {
+		this.notificationDao = notificationDao;
+	}
 	public void setUserSelectDao(UserSelectDao userSelectDao) {
 		this.userSelectDao = userSelectDao;
 	}
@@ -76,6 +81,13 @@ public class RelationDeleteController extends BaseController {
 		
 		UserVo user = userSelectDao.selectUser(myUserCode);
 		
+		HashMap<String, String> notiMap = new HashMap<String, String>();
+		notiMap.put("fromUserCode", myUserCode);
+		notiMap.put("toUserCode", userCode);
+		notiMap.put("url", "myPage.hang?yourUserCode="+myUserCode);
+		
+		notificationDao.deleteNotification(notiMap);
+		
 		req.setAttribute("user", user);
 		req.setAttribute("followingListSize", followingList.size()+"");
 		req.setAttribute("followerList", followerList);
@@ -123,6 +135,13 @@ public class RelationDeleteController extends BaseController {
 		
 		UserVo user = userSelectDao.selectUser(myUserCode);
 		
+		HashMap<String, String> notiMap = new HashMap<String, String>();
+		notiMap.put("fromUserCode", myUserCode);
+		notiMap.put("toUserCode", userCode);
+		notiMap.put("url", "myPage.hang?yourUserCode="+myUserCode);
+		
+		notificationDao.deleteNotification(notiMap);
+		
 		req.setAttribute("user", user);
 		req.setAttribute("followingList", followingList);
 		req.setAttribute("followerListSize", followerList.size()+"");
@@ -164,6 +183,13 @@ public class RelationDeleteController extends BaseController {
 		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
 		
 		UserVo user = userSelectDao.selectUser(myUserCode);
+		
+		HashMap<String, String> notiMap = new HashMap<String, String>();
+		notiMap.put("fromUserCode", myUserCode);
+		notiMap.put("toUserCode", userCode);
+		notiMap.put("url", "myPage.hang?yourUserCode="+myUserCode);
+		
+		notificationDao.deleteNotification(notiMap);
 		
 		req.setAttribute("user", user);
 		req.setAttribute("userList", userList);

@@ -97,7 +97,7 @@ public class ReviewWriteFormController extends BaseController {
 			String userCode = (String) session.getAttribute("myUserCode");
 			String reviewScore = mul.getParameter("reviewScore");
 			String reviewTitle = mul.getParameter("reviewTitle");
-			String reviewContent = mul.getParameter("reviewContent");
+			String reviewContent = "";
 			String reviewMainPicPath = savePath;
 			String reviewMainPicOrgName = mul.getOriginalFileName(fileFormName);
 			String reviewMainPicSaveName = mul.getFilesystemName(fileFormName);
@@ -108,6 +108,25 @@ public class ReviewWriteFormController extends BaseController {
 			} else {
 				reviewMainPicSize = (int) mul.getFile(fileFormName).length();
 			}
+			
+			String[] temp = (mul.getParameter("reviewContent")).split("\"");
+		      //quot
+		      for(int i = 0; i < (temp.length - 2); i++){
+		         if((temp[i].length() >= 4) && (temp[i].substring(temp[i].length()-4).equals("src="))){
+		            temp[i+1] = savePath; //path
+		            reviewContent += temp[i] + "\"";
+		         }
+		         else if(temp[i].equals(" data-filename=")){            
+		        	 reviewContent += "/";
+		         } else if(temp[i].equals(savePath)){
+		        	 reviewContent += temp[i];
+		         } else {
+		        	 reviewContent += temp[i] + "\"";
+		         }
+		      }
+		      
+		      reviewContent += temp[temp.length-2] + "\"" + temp[temp.length-1];
+		      
 
 			String regId = (String) session.getAttribute("myUserId");
 			String regIp = req.getRemoteAddr();

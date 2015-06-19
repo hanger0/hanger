@@ -106,13 +106,14 @@ $(function(){
 			$(".like").click(function(){
 				var like = $(this);
 				var postingCode = $("input:hidden[name=postingCode]").val();
+				var yourUserCode = $("input:hidden[name=yourUserCode]").val();
 				if(like.attr('class') === ('glyphicon glyphicon-heart myicon like')){
 					//좋아요		
 					$.ajax({
 						type: "POST", 
 						url: "/reviewLikeCheck.hang",
 						dataType: "text",
-						data: "postingCode="+postingCode,
+						data: "postingCode="+postingCode+"&yourUserCode="+yourUserCode,
 						success: function(text){
 							var cnt = trim(text);
 							like.html("<FONT color = 1266FF size = '5'>좋아요("+ cnt +")</FONT>");
@@ -126,7 +127,7 @@ $(function(){
 						type: "POST", 
 						url: "/reviewLikeCheck.hang",
 						dataType: "text",
-						data: "postingCode="+postingCode,
+						data: "postingCode="+postingCode+"&yourUserCode="+yourUserCode,
 						success: function(text){
 							var cnt = trim(text);
 							like.html("<FONT color = 'grey' size = '5'>좋아요(" + cnt + ')</FONT>');
@@ -140,13 +141,14 @@ $(function(){
 			$(".likeCancel").click(function(){
 				var like = $(this);
 				var postingCode = $("input:hidden[name=postingCode]").val();
+				var yourUserCode = $("input:hidden[name=yourUserCode]").val();
 				if(like.attr('class') === ('glyphicon glyphicon-heart myicon likeCancel')){
 					//좋아요 취소		
 					$.ajax({
 						type: "POST", 
 						url: "/reviewLikeCheck.hang",
 						dataType: "text",
-						data: "postingCode="+postingCode,
+						data: "postingCode="+postingCode+"&yourUserCode="+yourUserCode,
 						success: function(text){
 							var cnt = trim(text);
 							like.html("<FONT color = 'grey' size = '5'>좋아요("+ cnt +")</FONT>");
@@ -160,7 +162,7 @@ $(function(){
 						type: "POST", 
 						url: "/reviewLikeCheck.hang",
 						dataType: "text",
-						data: "postingCode="+postingCode,
+						data: "postingCode="+postingCode+"&yourUserCode="+yourUserCode,
 						success: function(text){
 							var cnt = trim(text);
 							like.html("<FONT color = 1266FF size = '5'>좋아요(" + cnt + ')</FONT>');
@@ -174,7 +176,7 @@ $(function(){
 			$(".scrap").click(function(){
 				var insertClass = $(this);
 				var postingCode = $("input:hidden[name=postingCode]").val();
-				
+				var yourUserCode = $("input:hidden[name=yourUserCode]").val();
 				if(insertClass.attr('class') === ('glyphicon glyphicon-tag myicon scrap')){
 					var t = confirm("스크랩을 하시겠습니까?");
 					if(t){	
@@ -182,7 +184,7 @@ $(function(){
 							type:"POST",
 							url:"/scrap.hang",
 							dataType:"text",
-							data:"postingCode=" + postingCode,
+							data: "postingCode="+postingCode+"&yourUserCode="+yourUserCode,
 							success:function(text){
 								var resultText = trim(text);
 								var resultScrap = "<FONT color = 1266FF size = '5'>스크랩(" + resultText +")</FONT>"
@@ -201,7 +203,7 @@ $(function(){
 								type:"POST",
 								url:"/scrap.hang",
 								dataType:"text",
-								data:"postingCode=" + postingCode,
+								data: "postingCode="+postingCode+"&yourUserCode="+yourUserCode,
 								success:function(text){
 									var resultText = trim(text);
 									var resultScrap = "<FONT color = 'grey' size = '5'>스크랩(" + resultText +")</FONT>"
@@ -218,7 +220,7 @@ $(function(){
 			$(".scrapCancel").click(function(){
 				var deleteClass = $(this);
 				var postingCode = $("input:hidden[name=postingCode]").val();
-				
+				var yourUserCode = $("input:hidden[name=yourUserCode]").val();
 				if(deleteClass.attr('class') === ('glyphicon glyphicon-tag myicon scrapCancel')){
 					var t = confirm("이미 스크랩이 되어있습니다.\n 해당 스크랩을 지우시겠습니까?");
 					if(t){	
@@ -226,7 +228,7 @@ $(function(){
 							type:"POST",
 							url:"/scrap.hang",
 							dataType:"text",
-							data:"postingCode=" + postingCode,
+							data: "postingCode="+postingCode+"&yourUserCode="+yourUserCode,
 							success:function(text){
 								var resultText = trim(text);
 								var resultScrap = "<FONT color = 'grey' size = '5'>스크랩(" + resultText +")</FONT>"
@@ -245,7 +247,7 @@ $(function(){
 								type:"POST",
 								url:"/scrap.hang",
 								dataType:"text",
-								data:"postingCode=" + postingCode,
+								data: "postingCode="+postingCode+"&yourUserCode="+yourUserCode,
 								success:function(text){
 									var resultText = trim(text);
 									var resultScrap = "<FONT color = 1266FF size = '5'>스크랩(" + resultText +")</FONT>"
@@ -292,7 +294,7 @@ $(function(){
 					type: "POST", 
 					url: "/reviewShow.hang",
 					dataType: "text",
-					data: "reviewCode=" + reviewCodeVal + "&replyContent=" + replyContentVal +"&checkReply="+ checkReplyVal,
+					data: "reviewCode=" + reviewCodeVal + "&replyContent=" + replyContentVal +"&checkReply="+ checkReplyVal+ "&yourUserCode=<%=writerCode%>",
 					
 					success: function(text){
 						var result = trim(text);
@@ -318,7 +320,7 @@ $(function(){
 						type: "POST", 
 						url: "/reviewShow.hang",
 						dataType: "text",
-						data: "replyCode=" + deleteReplyCode + "&reviewCode=" + reviewCodeVal +"&checkReply="+ deleteCheckReply,
+						data: "replyCode=" + deleteReplyCode + "&reviewCode=" + reviewCodeVal +"&checkReply="+ deleteCheckReply+ "&yourUserCode=<%=writerCode%>",
 						success: function(text){
 							var result = trim(text);
 								replyDelBtn.parent("div").parent("div").hide();
@@ -478,6 +480,7 @@ $(function(){
         <div class="thumbnail" style = "width:100%;margin-right:0px;padding:0px"><br>
 			<div style="width: 100%;height:50px;padding:0px">
 			<input type="hidden" name="postingCode" value="<%= reviewCode%>">
+			<input type="hidden" name="yourUserCode" value="<%= writerCode%>">
 <%
 						if(myLikeYn.equals("0")){ //좋아요가 안눌려있는 상태
 %>
