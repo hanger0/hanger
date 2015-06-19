@@ -21,6 +21,12 @@ public class CartVo {
 	private String itemSellMaxNum;
 	private String stockAmount;
 	private String itemGroupCode;
+	
+	private String recomUserName;
+	private String recomUserCode; 
+	private String recomUserPicPath;
+	private String recomUesrPicSaveName;
+	
 	public String getUserCode() {
 		return userCode;
 	}
@@ -140,6 +146,30 @@ public class CartVo {
 	}
 	public void setItemGroupCode(String itemGroupCode) {
 		this.itemGroupCode = itemGroupCode;
+	}
+	public String getRecomUserName() {
+		return recomUserName;
+	}
+	public void setRecomUserName(String recomUserName) {
+		this.recomUserName = recomUserName;
+	}
+	public String getRecomUserCode() {
+		return recomUserCode;
+	}
+	public void setRecomUserCode(String recomUserCode) {
+		this.recomUserCode = recomUserCode;
+	}
+	public String getRecomUserPicPath() {
+		return recomUserPicPath;
+	}
+	public void setRecomUserPicPath(String recomUserPicPath) {
+		this.recomUserPicPath = recomUserPicPath;
+	}
+	public String getRecomUesrPicSaveName() {
+		return recomUesrPicSaveName;
+	}
+	public void setRecomUesrPicSaveName(String recomUesrPicSaveName) {
+		this.recomUesrPicSaveName = recomUesrPicSaveName;
 	}
 	
 }

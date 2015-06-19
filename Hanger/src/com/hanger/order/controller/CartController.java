@@ -60,7 +60,11 @@ public class CartController extends BaseController {
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String myUserId = (String)session.getAttribute("myUserId");
 		String itemCode = req.getParameter("itemCode");
-		String itemAmount = req.getParameter("itemAmount");
+		String itemAmount = "1";
+		if(req.getParameter("itemAmount")!=null&&req.getParameter("itemAmount")!="")
+		{
+			itemAmount=req.getParameter("itemAmount");
+		}
 		String cartItemRecom = req.getParameter("cartItemRecom");
 		String ip = req.getRemoteAddr();
 		

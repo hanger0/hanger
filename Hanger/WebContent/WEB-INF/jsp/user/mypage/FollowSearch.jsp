@@ -129,7 +129,7 @@ $(function(){
                <div class="unpa-card user-card followable  followed">
                   <!-- 클릭시 사용자 정보로 이동 -->
                   <a href="/myPage.hang?yourUserCode=<%= user.getUserCode() %>">
-                     <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
+                     <div class="user-image" style="background-image: url(<%=user.getUserPicPath()%>/<%=user.getUserPicSaveName()%>);"></div>
                      <div class="user-nickname"><%= user.getUserName() %></div>
                      <div class="user-skin-info">
                         <!-- 피부 건성인지 지성인지 -->
@@ -200,7 +200,7 @@ $(function(){
                <div class="unpa-card user-card followable  followed">
                   <!-- 클릭시 사용자 정보로 이동 -->
                   <a href="/myPage.hang?yourUserCode=<%= user.getUserCode() %>">
-                     <div class="user-image" style="background-image: url(/images/omnia.jpg);"></div>
+                     <div class="user-image" style="background-image: url(<%=user.getUserPicPath()%>/<%=user.getUserPicSaveName()%>);"></div>
                      <div class="user-nickname"><%= user.getUserName() %></div>
                      <div class="user-skin-info">
 

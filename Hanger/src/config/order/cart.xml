@@ -10,16 +10,22 @@
 	
 	<select id="selectCart" resultClass="cart" parameterClass="String">
 		select 
-			cart.user_code as userCode, cart.item_code as itemCode, cart.cart_item_amount as cartItemAmount, 
-			cart.cart_item_recom as cartItemRecom, itemstock.STOCK_MARKET_PRICE as itemMarketPrice, 
-			itemstock.STOCK_SELL_PRICE as itemSellPrice, itemstock.STOCK_PURCHASE_PRICE as itemPurchasePrice,
-			item.item_name as itemName, item.item_pic_path as itemPicPath, item.item_pic_savename as itemPicSaveName,
-			item.item_detail_info as itemDetailInfo, item.item_sell_maxnum as itemSellMaxNum, itemstock.STOCK_AMOUNT as stockAmount,
-			item.ITEM_GROUP_CODE as itemGroupCode
+				cart.user_code as userCode, cart.item_code as itemCode, cart.cart_item_amount as cartItemAmount, 
+				cart.cart_item_recom as cartItemRecom, itemstock.STOCK_MARKET_PRICE as itemMarketPrice, 
+				itemstock.STOCK_SELL_PRICE as itemSellPrice, itemstock.STOCK_PURCHASE_PRICE as itemPurchasePrice,
+				item.item_name as itemName, item.item_pic_path as itemPicPath, item.item_pic_savename as itemPicSaveName,
+				item.item_detail_info as itemDetailInfo, item.item_sell_maxnum as itemSellMaxNum, itemstock.STOCK_AMOUNT as stockAmount,
+				item.ITEM_GROUP_CODE as itemGroupCode, 
+			    review.USER_NAME AS recomUserName, review.USER_CODE AS recomUserCode, 
+			    review.USER_PIC_PATH AS recomUserPicPath, review.USER_PIC_SAVE_NAME AS recomUesrPicSaveName
 		from 
-			cart cart, item item, item_stock itemstock
+				cart cart left join (SELECT rev.POSTING_CODE, us.USER_NAME, us.USER_CODE, us.USER_PIC_PATH, us.USER_PIC_SAVE_NAME
+		                           FROM REVIEW rev, USER us 
+		                           WHERE rev.USER_CODE = us.USER_CODE)review 
+		                           on cart.CART_ITEM_RECOM=review.POSTING_CODE,
+		     item item, item_stock itemstock
 		where
-			cart.item_code = item.item_code AND cart.user_code = #userCode# AND item.ITEM_CODE = itemstock.ITEM_CODE
+				cart.item_code = item.item_code AND cart.user_code = #userCode# AND item.ITEM_CODE = itemstock.ITEM_CODE;
 	</select>
 	
 	<select id="selectAmount" resultClass="String" parameterClass="HashMap">

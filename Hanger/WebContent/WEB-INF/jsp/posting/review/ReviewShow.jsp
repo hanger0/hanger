@@ -12,6 +12,7 @@
    
    //review
    String reviewCode = reviewList.get(0).getReviewCode();
+   System.out.println("리뷰 쇼 러니ㅏㅇ러ㅣㄴ얼냐어ㅑㅐ reviewCode : "+reviewCode);
    String reviewContent = reviewList.get(0).getReviewContent();
    String reviewTitle = reviewList.get(0).getReviewTitle();
    String reviewMainPicPath = reviewList.get(0).getReviewMainPicPath();
@@ -83,9 +84,21 @@
 }
 </style>
 <script>
-	function sameProduct() {
-		location.href = "/";
-	}
+$(function(){
+	$("#cartFormBtn").click(function(){
+		var itemCode=$("#itemSize").val();
+		var cartItemRecom='<%=reviewCode%>';
+		$.ajax({
+  			type: "POST", 
+  			url: "/cart.hang",
+  			dataType: "text",
+  			data: "itemCode="+itemCode+"&cartItemRecom="+cartItemRecom,
+  			success: function(text){
+  				alert(trim(text));
+  			}
+  		});
+	});
+})
 </script>
 <!-- 스크랩 스크립트 -->
 	<script>
@@ -319,9 +332,7 @@
 				}
 				e.preventDefault();
 			});
-//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★///////////////////////////////
-//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★///////////////////////////////
-//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★///////////////////////////////
+
 			$(".replyUpdateBtn").click(function(e){
 				var replyUdtBtn = $(this);
 				var updateReplyCode = replyUdtBtn.attr("replyCode");
@@ -437,14 +448,20 @@
 <%
 				if(!myReviewYn){
 %>				  
-                  <hr style = "margin-top:0px;margin-bottom:10px">
-                  	<select style = "width:100px;height:26px;">
-                  		<option value = "ml">ml</option>
-                  		<option value = "g">g</option>
-                  	</select>
+				<hr style = "margin-top:0px;margin-bottom:10px">			          	
+					<SELECT name="itemSize" id="itemSize" class="itemSize" onChange="selectSize()" style = "width:100px;height:26px;">
+                     	<%
+                     		for(int j=0; j<reviewList.size(); j++)
+                     		{
+                     	%>
+                     	<option value="<%=reviewList.get(j).getItemCode()%>"><%=reviewList.get(j).getItemSize()%></option>
+                     	<%
+                     		}
+                     	%>
+                    </SELECT>
                   	<p>
                   <div class = "sameproduct" style = "background-color:#1266FF;height:30px;">
-                  		<button style = "background-color:#1266FF;margin-top:3px" onClick = "sameProduct()" >
+                  		<button id="cartFormBtn" style = "background-color:#1266FF;margin-top:3px">
                   			<b><font color = "white">같은 제품 구매</font></b>
                   		</button>
                   </div>
@@ -500,7 +517,7 @@
 	<!--  제목과 메인 리뷰사진 --><hr style = "margin-top:0px;margin-bottom:20px">
 			<div class="info" align="center">
 				<div class="reviewTitle"  style = "margin-bottom:20px">
-					<font size="5"><b><%=reviewTitle%></b></font>
+					<font size="5"><b>"&nbsp;<%=reviewTitle%>&nbsp;"</b></font>
 				</div>
 				<div class="brandInfo">			
 					<img src="<%=reviewMainPicPath %>/<%=reviewMainPicSaveName %>" style="background-color: white; width: 400px; height: 300px">

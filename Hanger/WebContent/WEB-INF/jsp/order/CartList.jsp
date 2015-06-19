@@ -122,10 +122,12 @@ $(function(){
 						<td align="center" style="border-right: 1px solid gray; border-bottom: 2px solid gray; width: 30px">
 							<input id="checkBox" type="checkbox" value="off">
 						</td>
-						<td colspan="4" align="center"
+						<td colspan="3" align="center"
 							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>상품명</B></td>
 						<td align="center"
-							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>상품금액</B></td>
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>추천 리뷰</B></td>
+						<td align="center"
+							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><B>상품금액</B></td>	
 						<td align="center"
 							style="border-right: 1px solid gray; border-bottom: 2px solid gray"><b>수량</b></td>
 						<td align="center"
@@ -159,7 +161,7 @@ if(cartList != null){
 			cartItemAmount = itemSellMaxNum;
 		}
 		
-		if(cartItemRecom != null && cartItemRecom.length() < 0){
+		if(cartItemRecom != null && cartItemRecom.length() > 0){
 %>
 					<tr>
 						<td style="background-color: #747474"></td>
@@ -178,8 +180,17 @@ if(cartList != null){
 							<img src="<%= itemPicPath %>/<%= itemPicSaveName %>" width="80px"
 							height="80px" style="margin-left: -20px">
 						</td>
-						<td colspan="3" style="border-right: 1px solid gray;"><font
+						<td colspan="2" style="border-right: 1px solid gray;"><font
 							size="3"><b><%= itemName %></b></font></td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
+							rowspan="2">
+<%
+							if(cartItemRecom != null && cartItemRecom.length() > 0){
+%>
+								<%="너임마 "%>
+<%
+							}
+%>							
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
 							rowspan="2" itemSellPrice="<%= itemSellPrice %>"><%= cartItemAmount * itemSellPrice %>원
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;"
