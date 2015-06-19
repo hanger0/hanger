@@ -36,7 +36,7 @@
 	width: 120px;
 	height: 120px;
 	background: url("<%= user.getUserPicPath() %>/<%= user.getUserPicSaveName() %>") no-repeat center;
-	background-size: 100%;
+	background-size: 160%;
 	margin-top: 10px;
 }
 

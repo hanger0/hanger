@@ -22,8 +22,8 @@
 <script src="/js/common/common.js" type="text/javascript"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- JQuery Á¾·á -->
-<script type="text/javascript">
-$(document).ready(function() {
+<<script type="text/javascript">
+$(document).ready( function() {
 	$('.dropdown-toggle').dropdown();
 });
 </script>
@@ -67,8 +67,8 @@ $(document).ready(function() {
 }
 .dropimg
 {
-	width:120px;
-	height:80px;
+	width:140px;
+	height:100px;
 }
 </STYLE>
 <%
@@ -112,7 +112,12 @@ $(document).ready(function() {
     								String itemPicSavename= ((ItemListForReviewVo)itemListForReview.get(i)).getItemPicSavename();
     								String brandName= ((ItemListForReviewVo)itemListForReview.get(i)).getBrandName();
 %>
-    								<li role="presentation"><a role="menuitem" tabindex="-1" href="reviewWrite.hang?itemGroupCode=<%=itemGroupCode%>"><img src="<%=itemPicPath%>/<%=itemPicSavename %>" class="dropimg"/><P><%=itemName %></P></a></li>
+    								<li role="presentation">
+    								<a role="menuitem" tabindex="-1" href="reviewWrite.hang?itemGroupCode=<%=itemGroupCode%>">
+    								<img src="<%=itemPicPath%>/<%=itemPicSavename %>" class="dropimg"/>
+    								<P><B><font color=1266FF><%=itemName %></font></B></P>
+    								</a>
+    								</li>
       								<li role="presentation" class="divider"></li>      								
 <%
       							}

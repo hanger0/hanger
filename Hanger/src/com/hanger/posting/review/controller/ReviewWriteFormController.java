@@ -151,7 +151,7 @@ public class ReviewWriteFormController extends BaseController {
 
 			// 방금 작성한 리뷰 화면으로 넘어가기
 			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("myUserCode", userCode);
+			map.put("userCode", userCode);
 			map.put("itemGroupCode", itemGroupCode);
 
 			List<ReviewShowVo> reviewList = reviewShowDao.getReviewNowShow(map);

@@ -129,7 +129,7 @@ div, ul, li {
 	
 	<div class = "search" style = "background-color:yellow;margin-left:40%">
       <form class="navbar-form navbar-left"  role="search" method="get" action="/itemSearch.hang" >
-         <div class="form-group">
+         <div>
             <input type="text" name="keyWord" class="form-control" placeholder="Search" style="width: 200px">
             <button type="submit" class="btn btn-default">검색</button>
          </div>
@@ -210,21 +210,29 @@ div, ul, li {
 				function logout() {
 					location.href = "/logout.hang";
 				}
+				function upDateUser() {
+					location.href = "/updateUser.hang"
+				}
 			</script>
 			
-			<!-- 로그아웃 시작 -->
+			<!-- 로그아웃 -->
             <li class="logoutMenu">
             	<a href="#">
             	<span class="dropdown-toggle"  data-toggle="dropdown" aria-expanded="true" style="width:50px; height: 54px">
             		<span class="glyphicon glyphicon-menu-right" style="font-size: 24px"></span>
             	</span>
-            		<ul class="dropdown-menu" role="menu" style = "width:30px;height:100px;">
+            		<ul class="dropdown-menu" role="menu" style = "width:30px;height:125px;">
                           <div class="logoutGroup" style = "width:100px;height:100px;display:table;margin-left:auto;margin-right:auto">
                           <p>
-                            <font size = "2">고객 센터</font><p>
+                            <font size = "2" >고객 센터</font><p>
+                            <div class = "upDateUser" style = "width:100px;" onClick = "upDateUser()">
+                            	<font size = "2">정보 수정</font><p>
+                            </div>
                             <font size = "2">설정</font><p>
                             <hr style = "margin-top:-5px;margin-bottom:5px;">
-                            <font size = "2" onclick = "logout()">로그아웃</font>
+                            	<div class = "logout"  style = "width:100px" onClick = "logout()">
+                            		<font size = "2" >로그아웃</font>
+                          		</div>
                           </div>
                      </ul>
             	</a>

@@ -52,10 +52,12 @@ public class ReviewShowController extends BaseController {
 		String replyContent = req.getParameter("replyContent");
 		String replyCode = req.getParameter("replyCode");
     	String ip = req.getRemoteAddr();
-    	String checkReply = req.getParameter("checkReply");
+    	String checkReply = "";
     	String replyUseYn = req.getParameter("replyUseYn");
     	String replyuserCode = req.getParameter("replyuserCode");
-
+    	if(req.getParameter("checkReply") != null){
+    		checkReply = req.getParameter("checkReply");
+    	}
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("reviewCode", reviewCode);
 		map.put("userCode", userCode);
@@ -96,7 +98,6 @@ public class ReviewShowController extends BaseController {
 			replyDao.insertReply(replyMap);
 			moveUrl = "reply/replyInsert";
 		}
-		
 		else if(checkReply.equals("Update")) {
 			String udtReplyCode = req.getParameter("replyCode");
 			String udtReviewCode = req.getParameter("reviewCode");
@@ -127,7 +128,6 @@ public class ReviewShowController extends BaseController {
 			
 			moveUrl = "reply/replyUpdateInsert";
 		}
-		
 		else if(checkReply.equals("Delete")) {
 			replyDao.deleteReply(replyMap);
 			moveUrl = "reply/replyDelete";
@@ -135,7 +135,6 @@ public class ReviewShowController extends BaseController {
 		
 		else{
 			moveUrl = "posting/review/ReviewShow";
-			
 		}
 		ArrayList replyList = replyDao.selectReply(replyMap);
 		req.setAttribute("replyList", replyList);
