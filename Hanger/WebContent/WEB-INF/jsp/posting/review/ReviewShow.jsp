@@ -1,10 +1,14 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
 <%@ page import = "com.hanger.posting.review.vo.ReviewShowVo" %>
+<%@ page import = "com.hanger.reply.vo.ReplyVo" %>
 <%@ page import = "java.util.*" %>
 
 <%
 	String myUserCode = (String)session.getAttribute("myUserCode");
-   List<ReviewShowVo> reviewList = (List<ReviewShowVo>)request.getAttribute("reviewList");
+	String myUserPicPath = (String)session.getAttribute("myUserPicPath");
+	String myUserPicSaveName = (String)session.getAttribute("myUserPicSaveName");
+	List<ReviewShowVo> reviewList = (List<ReviewShowVo>)request.getAttribute("reviewList");
+	List<ReplyVo> replyList = (List<ReplyVo>)request.getAttribute("replyList");
    
    //review
    String reviewCode = reviewList.get(0).getReviewCode();
@@ -242,7 +246,121 @@
 					}
 				}
 			});			
-//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★/////////////////////////////////////////////////////////////////////			
+//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★/////////////////////////////////////////////////////////////////////
+
+			/***************************************AJAX 시작****************************************/
+			$('#replyBtnName').click(function(){
+				if(trim($('#replyContent').val()) === "")
+				{
+					$('#replyContent').select();
+					return false;
+				}
+				replyAction();
+			});
+	
+			$('#replyContent').keypress(function(event){
+				if(event.keyCode == 13)
+				{
+					if(trim($('#replyContent').val()) === "")
+					{
+						$('#replyContent').select();
+						return false;
+					}
+					replyAction();				
+					return false;
+				}
+			});
+			function replyAction(){
+				var replyinsBtn = $(this);
+				var replyContentVal = $('#replyContent').val();
+				var checkReplyVal = "Insert";
+				var reviewCodeVal = "<%=reviewCode%>";
+				$.ajax({
+					type: "POST", 
+					url: "/reviewShow.hang",
+					dataType: "text",
+					data: "reviewCode=" + reviewCodeVal + "&replyContent=" + replyContentVal +"&checkReply="+ checkReplyVal,
+					
+					success: function(text){
+						var result = trim(text);
+							$('#ajaxReviewList').append(result);
+							$('#replyContent').val("");
+					},
+					error:function(request,status,error){
+				        alert("ㅠㅠcode:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				    }
+				});	
+				e.preventDefault();
+			}
+			
+			$(".replyDeleteBtn").click(function(e){
+				var replyDelBtn = $(this);		
+				var deleteReplyCode = replyDelBtn.attr("replyCode");
+				var deleteCheckReply = "Delete";
+				var reviewCodeVal = "<%=reviewCode%>";
+				var t = confirm("댓글을 삭제 하시겠습니까?");
+				
+				if(t){
+					$.ajax({
+						type: "POST", 
+						url: "/reviewShow.hang",
+						dataType: "text",
+						data: "replyCode=" + deleteReplyCode + "&reviewCode=" + reviewCodeVal +"&checkReply="+ deleteCheckReply,
+						success: function(text){
+							var result = trim(text);
+								replyDelBtn.parent("div").parent("div").hide();
+						},
+						error:function(request,status,error){
+					        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					    }
+					});
+				}else{
+					return false;
+				}
+				e.preventDefault();
+			});
+//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★///////////////////////////////
+//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★///////////////////////////////
+//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★///////////////////////////////
+			$(".replyUpdateBtn").click(function(e){
+				var replyUdtBtn = $(this);
+				var updateReplyCode = replyUdtBtn.attr("replyCode");
+				var updateCheckReply = "Update";
+				var reviewCodeVal = "<%=reviewCode%>";
+				var replyContent = $('[class=replyCont]').text();
+				var replyUdtParent = replyUdtBtn.parent().parent();
+				var t = confirm("댓글을 편집하시겠습니까?");
+				
+				if (replyUdtParent.attr('class') === ('review replyUdtClass')){
+					if (t) {
+					$.ajax({
+						type: "POST", 
+						url: "/reviewShow.hang",
+						dataType: "text",
+						data: "replyCode=" + updateReplyCode + "&reviewCode=" + reviewCodeVal +"&checkReply="+ updateCheckReply +
+							 "&replyContent=" + replyContent,
+						
+						success: function(text){
+							alert("댓글 수정 진입");
+							var result = trim(text);
+								checkReplyVal = "Update";
+								alert("checkReplyVal ="+ checkReplyVal);
+								replyUdtParent.html(result);
+								replyUdtParent.addClass('replyUdtClassIns');
+								replyUdtParent.removeClass('replyUdtClass');
+						},
+						error:function(request,status,error){
+					        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					    }
+					});
+					} else{
+						return false;
+					}
+				}
+				/*else if (replyUdtParent.attr('class') === ('review replyUdtClassIns')){
+				}*/
+				e.preventDefault();
+			});
 		});
 	</script>
 <body style = "background-color:#EBEBEB">
@@ -254,7 +372,8 @@
    <div class ="thumbnail"  style = "width:100%;margin-bottom:20px;" align = "center" >
       			<div class="unpa-card user-card followable followed">
                      <!-- 클릭시 사용자 정보로 이동 -->
-                     <a href="/myPage.hang?yourUserCode=<%=writerCode%>">
+
+					<a href="/myPage.hang?yourUserCode=<%=writerCode%>">
                         <div class="unpa-user-labels"></div>
                         <div class="user-image"
                            style='background-image: url("<%=writerPicPath %>/<%=writerPicSaveName %>");'></div><br>
@@ -365,13 +484,13 @@
 						if(myScrapYn.equals("0")){ //스크랩이 안눌려있는 상태
 %>
 						<span class="glyphicon glyphicon-tag myicon scrap"	 style="width: 240px;height:100%; margin-left:20px;" align="center"> 
-							<font size="5" color="grey">스크랩(<%=reviewLikeCnt%>)</font>
+							<font size="5" color="grey">스크랩(<%=reviewScrapCnt%>)</font>
 						</span>
 <%
-						} else if(myLikeYn.equals("1")){ //이미 스크랩이 되어있는 상태
+						} else if(myScrapYn.equals("1")){ //이미 스크랩이 되어있는 상태
 %>
 						<span class="glyphicon glyphicon-tag myicon scrapCancel"	 style="width: 240px;height:100%; margin-left:20px;" align="center"> 
-							<font size="5" color=1266FF>스크랩(<%=reviewLikeCnt%>)</font>
+							<font size="5" color=1266FF>스크랩(<%=reviewScrapCnt%>)</font>
 						</span>
 <%
 						}
@@ -381,7 +500,7 @@
 	<!--  제목과 메인 리뷰사진 --><hr style = "margin-top:0px;margin-bottom:20px">
 			<div class="info" align="center">
 				<div class="reviewTitle"  style = "margin-bottom:20px">
-					<font size="5"><b>제목</b></font>
+					<font size="5"><b><%=reviewTitle%></b></font>
 				</div>
 				<div class="brandInfo">			
 					<img src="<%=reviewMainPicPath %>/<%=reviewMainPicSaveName %>" style="background-color: white; width: 400px; height: 300px">
@@ -394,52 +513,69 @@
 				</div>
             </div>
 	<!-- 댓글  시작 --><hr style = "margin-top:20px;margin-bottom:20px">
-		<div class ="container" style = "width:760px;margin-left:20px;margin-right:20px;margin-bottom:10px;padding:0px;">
+		<div class ="container" id="ajaxReviewList" style = "width:760px;margin-left:20px;margin-right:20px;margin-bottom:10px;padding:0px;">
 <%
-       for(int i = 0; i < 6; i++) {
+			if(replyList!=null&&replyList.size()>0)
+			{						
+				for(int i = 0; i < replyList.size(); i++) {
+					ReplyVo rv= replyList.get(i);					
  %>
-				<div class="review" style="width: 100%; height: 60px; padding: 0px;">
-				
-					<div class="replyimg col-sm-1" style="height: 100%; padding: 0px">
-						<img src="images/yebin.jpg" class="img-circle reimgs" style="width: 60px; height: 60px">
+				<div class = "review replyUdtClass" style="width: 100%; height: 60px; padding: 0px;">
+					<a href="/myPage.hang?yourUserCode=<%=rv.getUserCode()%>">
+					<div class="replyimg col-sm-1" style="height: 100%; padding: 0px;">
+						<img src="<%=rv.getUserPicPath()%>/<%=rv.getUserPicSaveName() %>" class="img-circle reimgs" style="width: 60px; height: 60px">
 					</div>
 					
-					<div class="name"	style="width: 685px; height:20px; float: left; margin-left:10px;margin-bottom:2px;">
-						<font size="2"><b>이름</b></font> 
-						<font size="1"	style="margin-left: 5px"><font color="gray">2015년 6월 8일</font></font>
+					<div class="name"	style="width: 600px; height:20px; float: left; margin-left:10px;margin-bottom:2px;">
+						<font size="2"><b><%=rv.getUserName() %></b></font> 
+						<font size="1"	style="margin-left: 5px"><font color="gray"><%=rv.getUpdDate() %> </font></font>
 					</div>
-	
+					</a>
+
+<%
+//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★/////////////////////////////////////////////////////////////////////
+//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★/////////////////////////////////////////////////////////////////////
+//////////////////////////////////☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★/////////////////////////////////////////////////////////////////////					
+				if(((String)rv.getUserCode()).equals(myUserCode))
+				{
+%>
+					<div class="updateDelete" style="float:right;">
+						<a class="replyUpdateBtn" replyCode="<%=rv.getReplyCode()%>"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
+						<a class="replyDeleteBtn" replyCode="<%=rv.getReplyCode()%>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>	
+					</div>
+<%
+				}
+%>
 					<div class="name"	style="width: 685px; height: 38px; float: left; margin-left:10px;">
-						<font size="2"> 댓글 내용 </font>
+						<font size="2"> <%=rv.getReplyContent() %> </font>
 					</div>
 					
 				</div>
 				
 				<hr style = "margin-top:10px;margin-bottom:10px">
 <%
-	}
+				}
+			}
 %>   
 			</div>
         </div>
 <!-- 리뷰 끝-->
 <!-- 리뷰 쓰기 시작-->
 		<div class="thumbnail" style = "width:800px;height:100px;padding:20px;">
-			<div class="replywrite" style = "width:100%;padding:0px;background-color:yellow" >
-				
+			<div class="replywrite" style = "width:100%;padding:0px;background-color:yellow" >				
 				<div class="replyimg col-sm-1" style="height: 100%; padding: 0px">
-					<img src="<%="" %>/<%="" %>" alt="" class="img-circle rewriteimg" style = "width:60px;height:60px;">
+					<img src="<%=myUserPicPath %>/<%=myUserPicSaveName %>" alt="" class="img-circle rewriteimg" style = "width:60px;height:60px;">
 				</div>
 				
 				<div class="replyinsert col-sm-10" style = "float: left;">
-					<input type="text" class="form-control insert" rows="1" style="resize:none;width:615px;height:60px"/>
+					<input type="text" name="replyContent" id="replyContent" class="form-control insert" rows="1" style="resize:none;width:615px;height:60px"/>
 				</div>
 				
 				<div class="replybtn col-sm-1"style = "float: left;" >
-					<button style = "width:55px;height:55px;background-color:white">
+					<button style = "width:55px;height:55px;background-color:white" id="replyBtnName">
 				          <span class="glyphicon glyphicon-pencil rebtn" aria-hidden="true"></span>
 					</button>
-				</div>
-				
+				</div>				
 			 </div>      
 		</div>
 	</div>

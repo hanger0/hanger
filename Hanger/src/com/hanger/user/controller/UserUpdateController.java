@@ -140,6 +140,11 @@ public class UserUpdateController extends BaseController {
 		String message = "";
 		if(resultInt > 0){
 			message = "수정완료 되었습니다.";
+			String myUserPicPath = savePath;
+			String myUserPicSaveName = userPicSaveName;			
+			session.setAttribute("myUserPicPath", myUserPicPath);
+			session.setAttribute("myUserPicSaveName", myUserPicSaveName);
+			
 		} else {
 			message = "수정실패 하셨습니다.";
 		}

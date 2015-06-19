@@ -199,7 +199,7 @@ public class RelationInsertController extends BaseController {
 		
 		ArrayList<UserVo> userList = userSearchDao.searchUser(map);
 
-		UserVo user = userSelectDao.selectUser(userCode);
+		UserVo user = userSelectDao.selectUser(myUserCode);
 		
 		HashMap<String, String> notiMap = new HashMap<String, String>();
 		notiMap.put("fromUserCode", myUserCode);

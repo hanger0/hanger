@@ -194,8 +194,8 @@ if(cartList != null) {
 		int itemAmount = Integer.parseInt((String)table.get("itemAmount"));
 		String itemDetailInfo = (String)table.get("itemDetailInfo");
 		
-		sellPrice = itemAmount * itemSellPrice;
-		maxSellPrice = itemAmount * itemSellPrice;
+		sellPrice += itemAmount * itemSellPrice;
+		maxSellPrice += itemAmount * itemSellPrice;
 		
 		if(cartItemRecom != null && cartItemRecom.length() < 0){
 %>
@@ -220,7 +220,7 @@ if(cartList != null) {
 						<td colspan="3" style="border-right: 1px solid gray;">
 							<font size="3"><b><%= itemName %></b></font>
 						</td>
-						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;" rowspan="2"><%= itemSellPrice %>원</td>
+						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;" rowspan="2"><%= itemSellPrice * itemAmount %>원</td>
 						<td style="border-bottom: 2px solid gray; border-right: 1px solid gray;" rowspan="2">무료배송</td>
 						<td style="border-bottom: 2px solid gray;" rowspan="2">
 							<font size="3"><b><%= itemAmount %></b></font>

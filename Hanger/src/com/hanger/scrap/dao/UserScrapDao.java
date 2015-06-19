@@ -15,7 +15,7 @@ public class UserScrapDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<UserScrapVo> selectUserScrap(HashMap map) {
+	public ArrayList<UserScrapVo> selectUserScrap(HashMap<String, String> map) {
 		return (ArrayList<UserScrapVo>)smct.queryForList("selectUserScrap", map) ;
 	}
 }

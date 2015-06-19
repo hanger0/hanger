@@ -29,7 +29,7 @@ public class ReviewShowController extends BaseController {
 		this.replyDao = replyDao ;
 	}
 
-	@RequestMapping(value = "/reviewShow.hang", method = RequestMethod.GET)
+	@RequestMapping("/reviewShow.hang")
 	public String MainReview(HttpServletRequest req) {
 		//
 		HttpSession session = req.getSession(false);
@@ -40,8 +40,6 @@ public class ReviewShowController extends BaseController {
 			return moveUrl;
 		}
 		
-		System.out.println("reviewShow.hang");
-
 		// review
 		String reviewCode = (String) req.getParameter("reviewCode");
 		String userCode = (String) session.getAttribute("myUserCode");
@@ -95,7 +93,14 @@ public class ReviewShowController extends BaseController {
 		replyMap.put("replyuserCode", replyuserCode);
 		
 		if(checkReply.equals("Insert")){
+			ArrayList<String> selectSeqList =replyDao.selectSeq();
+			String replySeq = selectSeqList.get(0);
+			replyMap.put("replySeq", replySeq);
 			replyDao.insertReply(replyMap);
+			ArrayList replyOne = replyDao.selectReply(replyMap);
+			req.setAttribute("replyOne", replyOne);
+			replyMap.remove("replySeq");
+			
 			moveUrl = "reply/replyInsert";
 		}
 		else if(checkReply.equals("Update")) {
@@ -132,9 +137,8 @@ public class ReviewShowController extends BaseController {
 			replyDao.deleteReply(replyMap);
 			moveUrl = "reply/replyDelete";
 		}
-		
 		else{
-			moveUrl = "posting/review/ReviewShow";
+			moveUrl = "posting/review/ReviewShow";			
 		}
 		ArrayList replyList = replyDao.selectReply(replyMap);
 		req.setAttribute("replyList", replyList);
@@ -143,7 +147,7 @@ public class ReviewShowController extends BaseController {
 		req.setAttribute("minPrice", minPrice);
 		req.setAttribute("reviewList", reviewList);
 		
-		moveUrl = "posting/review/ReviewShow";
+		//moveUrl = "posting/review/ReviewShow";
 		return moveUrl;
 
 	}

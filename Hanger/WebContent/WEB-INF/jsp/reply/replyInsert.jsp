@@ -2,44 +2,36 @@
 <%@ page import="com.hanger.reply.vo.ReplyVo" %>
 <%@ page import="java.util.*" %>
 <%
-	ArrayList<ReplyVo> replyList = (ArrayList<ReplyVo>)request.getAttribute("replyList");
-	System.out.println("replyList11111 : " + replyList);
-%>
+	ArrayList<ReplyVo> replyOne = (ArrayList<ReplyVo>)request.getAttribute("replyOne");
 
-<%
-
-	if(replyList != null){
+	if(replyOne != null&&replyOne.size()>0){
 		
-			ReplyVo reply = replyList.get(replyList.size()-1);
-			String replyContent = reply.getReplyContent();
-			String replyName = reply.getUserName();
-			String userPicPath = reply.getUserPicPath();
-			String userPicSaveName = reply.getUserPicSaveName();
-			String updDate = reply.getUpdDate();
-			System.out.println("replyContent : "+ replyContent);
+			ReplyVo rv = replyOne.get(0);
 %>
-	
- 		<div class = "review replyUdtClass" style = "width:100%;height:100px;">
-			<div class="replyimg col-sm-1">
-				<img src="<%= userPicPath %>/<%= userPicSaveName %>" alt="" class="img-circle reimgs" style = "width:100px;height:100px">
+			<div class="review" style="width: 100%; height: 60px; padding: 0px;">
+				<a href="/myPage.hang?yourUserCode=<%=rv.getUserCode()%>">
+				<div class="replyimg col-sm-1" style="height: 100%; padding: 0px;">
+					<img src="<%=rv.getUserPicPath()%>/<%=rv.getUserPicSaveName() %>" class="img-circle reimgs" style="width: 60px; height: 60px">
+				</div>
+				
+				<div class="name"	style="width: 600px; height:20px; float: left; margin-left:10px;margin-bottom:2px;">
+					<font size="2"><b><%=rv.getUserName() %></b></font> 
+					<font size="1"	style="margin-left: 5px"><font color="gray"><%=rv.getUpdDate() %> </font></font>
+				</div>
+				</a>
+				
+				<div class="updateDelete" style="float:right;">
+					<a class="replyUpdateBtn" replyCode="<%=rv.getReplyCode()%>" checkReply ="Update"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
+					<a class="replyDeleteBtn" replyCode="<%=rv.getReplyCode()%>" checkReply ="Delete"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>	
+				</div>
+
+				<div class="name"	style="width: 685px; height: 38px; float: left; margin-left:10px;">
+					<font size="2"> <%=rv.getReplyContent() %> </font>
+				</div>
+				
 			</div>
-			<div class = "name" style = "width:400px;height:30px;float:left;margin-left:5%;">
-				<font size = "3"><b><%=replyName %></b></font>
-				<font size = "2" style = "margin-left:3%"><font color = "gray"><%= updDate %></font></font>
-			</div>
-			<div class="updateDelete" style="float:right;">
-					<a id="replyUpdateBtn<%= replyList.size()-1%>"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
-					<a id="replyDeleteBtn<%= replyList.size()-1%>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-			</div>	
-			<br>
-			<BR>
-			<div class = "name replyCont" style = "width:700px;height:60px;float:left;margin-left:5%;">
-				<font size = "2">
-					<%= replyContent %>
-				</font> 
-			</div>
-		</div>
-	<HR>
+			
+			<hr style = "margin-top:10px;margin-bottom:10px">
 <%
 	}
 	

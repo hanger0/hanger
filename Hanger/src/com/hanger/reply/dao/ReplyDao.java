@@ -13,6 +13,9 @@ public class ReplyDao {
 	public ReplyDao(SqlMapClientTemplate smct) {
 		this.smct = smct ;
 	}
+	public ArrayList<String> selectSeq() {
+		return (ArrayList<String>)smct.queryForList("selectReplySeq") ;
+	}
 	public void insertReply(HashMap map) {
 		smct.insert("insertReply", map);
 	}

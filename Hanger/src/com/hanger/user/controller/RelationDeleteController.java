@@ -74,7 +74,7 @@ public class RelationDeleteController extends BaseController {
 			req.setAttribute("yourUserCode", yourUserCode);
 		}
 		
-		UserVo user = userSelectDao.selectUser(userCode);
+		UserVo user = userSelectDao.selectUser(myUserCode);
 		
 		req.setAttribute("user", user);
 		req.setAttribute("followingListSize", followingList.size()+"");
@@ -121,7 +121,7 @@ public class RelationDeleteController extends BaseController {
 			req.setAttribute("yourUserCode", yourUserCode);
 		}
 		
-		UserVo user = userSelectDao.selectUser(userCode);
+		UserVo user = userSelectDao.selectUser(myUserCode);
 		
 		req.setAttribute("user", user);
 		req.setAttribute("followingList", followingList);
@@ -163,7 +163,7 @@ public class RelationDeleteController extends BaseController {
 		ArrayList<UserVo> followingList = relationSearchDao.selectMyFollowingRelation(map);
 		ArrayList<UserVo> followerList = relationSearchDao.selectMyFollowerRelation(map);
 		
-		UserVo user = userSelectDao.selectUser(userCode);
+		UserVo user = userSelectDao.selectUser(myUserCode);
 		
 		req.setAttribute("user", user);
 		req.setAttribute("userList", userList);

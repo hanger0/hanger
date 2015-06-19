@@ -16,7 +16,7 @@ public class UserScrapVo {
 	private String userSkinTone ;
 	private String feature2Name ;
 	private String replyCount ;
-	private String postingCount ;
+	private String postingLikeCount ;
 	private String scrapCount ;
 	public String getPostingCode() {
 		return postingCode;
@@ -108,11 +108,11 @@ public class UserScrapVo {
 	public void setReplyCount(String replyCount) {
 		this.replyCount = replyCount;
 	}
-	public String getPostingCount() {
-		return postingCount;
+	public String getPostingLikeCount() {
+		return postingLikeCount;
 	}
-	public void setPostingCount(String postingCount) {
-		this.postingCount = postingCount;
+	public void setPostingLikeCount(String postingLikeCount) {
+		this.postingLikeCount = postingLikeCount;
 	}
 	public String getScrapCount() {
 		return scrapCount;

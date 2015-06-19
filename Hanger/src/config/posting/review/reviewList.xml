@@ -11,8 +11,8 @@
 			item.ITEM_PIC_PATH as itemPicPath, item.ITEM_PIC_SAVENAME as itemPicSaveName,
 			user.USER_NAME as userName, user.USER_PIC_PATH as userPicPath, user.USER_PIC_SAVE_NAME as userPicSaveName, 
 			user.USER_SKINTONE as userSkinTone, feature2.FEATURE2_NAME as featuer2Name,
-			COUNT(reply.USER_CODE) as replyCount, COUNT(postingLike.USER_CODE) as postingLikeCount, COUNT(scrap.USER_CODE) as scrapCount 
-		FROM REVIEW review1 left join (SELECT POSTING_CODE, USER_CODE FROM REPLY WHERE REPLY_USE_YN='Y') reply on review1.POSTING_CODE=reply.POSTING_CODE,
+			COUNT(distinct reply.REPLY_CODE) as replyCount, COUNT(distinct postingLike.USER_CODE) as postingLikeCount, COUNT(distinct scrap.USER_CODE) as scrapCount 
+		FROM REVIEW review1 left join (SELECT POSTING_CODE, USER_CODE, REPLY_CODE FROM REPLY WHERE REPLY_USE_YN='Y') reply on review1.POSTING_CODE=reply.POSTING_CODE,
          	REVIEW review2 left join POSTING_LIKE postingLike on review2.POSTING_CODE = postingLike.POSTING_CODE,
          	REVIEW review3 left join SCRAP scrap on review3.POSTING_CODE = scrap.POSTING_CODE,
          	USER user left join FEATURE2 feature2 on user.USER_SKINTYPE=feature2.FEATURE2_CODE , 

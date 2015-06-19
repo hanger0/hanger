@@ -55,11 +55,15 @@ public class UserLoginController extends BaseController {
 			String myName = (String)uvList.get(0).getUserName();
 			String userCode = (String)uvList.get(0).getUserCode();
 			String adminYn = (String)uvList.get(0).getUserAdminYn();
+			String myUserPicPath = (String)uvList.get(0).getUserPicPath();
+			String myUserPicSaveName = (String)uvList.get(0).getUserPicSaveName();
 			System.out.println("로그인 성공");
 			session.setAttribute("loginYn", "Y");
 			session.setAttribute("myUserId", userId);
 			session.setAttribute("myUserName", myName);
 			session.setAttribute("myUserCode", userCode);
+			session.setAttribute("myUserPicPath", myUserPicPath);
+			session.setAttribute("myUserPicSaveName", myUserPicSaveName);
 			session.setAttribute("adminYn", adminYn);
 			
 			ArrayList itemListForReview = (ArrayList)itemListForReviewDao.getItemListForReview(userCode);

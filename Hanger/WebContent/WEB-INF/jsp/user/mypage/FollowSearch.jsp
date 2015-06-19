@@ -45,11 +45,17 @@
 
 <script>
 $(function(){
-	$('#goFollowerList').click(function(){
+	$('#myGoFollowerList').click(function(){
 		location.href="/relationFollowerSearch.hang";
 	});
-	$('#goFollowingList').click(function(){
+	$('#myGoFollowingList').click(function(){
 		location.href="/relationFollowingSearch.hang";
+	});
+	$('#goFollowerList').click(function(){
+		location.href="/relationFollowerSearch.hang?yourUserCode=<%= yourUserCode %>";
+	});
+	$('#goFollowingList').click(function(){
+		location.href="/relationFollowingSearch.hang?yourUserCode=<%= yourUserCode %>";
 	});
 	function deleteFollowing(){
 		var f = document.deleteFollowing;
@@ -93,9 +99,12 @@ $(function(){
 		<div class="thumbnail" style = "height:80px;">
 			<form class="navbar-form navbar" style="width:100%;height:40px;" action="/userSearch.hang" method="post">
 				<div class="form-group" style = "display:table;margin-left:auto;margin-right:auto;margin-top:8px;width:100%">
+<% if(!yourUserCode.equals("")) { %>		
 					<button type="button" id="goFollowingList" class="btn btn-default" style = "margin-right:2%;">ÆÈ·ÎÀ×(<%= followingSize %>)</button>
 					<button type="button" id="goFollowerList" class="btn btn-default" style = "margin-right:23%;">ÆÈ·Î¿ö(<%= followerSize %>)</button>
-<% if(yourUserCode.equals("")){ %>
+<% } else if(yourUserCode.equals("")){ %>
+					<button type="button" id="myGoFollowingList" class="btn btn-default" style = "margin-right:2%;">ÆÈ·ÎÀ×(<%= followingSize %>)</button>
+					<button type="button" id="myGoFollowerList" class="btn btn-default" style = "margin-right:23%;">ÆÈ·Î¿ö(<%= followerSize %>)</button>
 					<input type="text" class="form-control" placeholder="È¸¿ø°Ë»ö" name="qt" value="<%= qt %>">
 					<button type="submit" class="btn btn-default" style = "margin-left:10px;">Submit</button>
 <% } %>

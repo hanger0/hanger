@@ -46,6 +46,11 @@ public class UserMyPageController extends BaseController {
 			
 		String myUserCode = (String)session.getAttribute("myUserCode");
 		String yourUserCode= req.getParameter("yourUserCode");
+		boolean mineYn=false;
+		if(myUserCode.equals(yourUserCode))
+		{
+			mineYn=true;
+		}
 
 		UserVo user = userSelectDao.selectUser(myUserCode);
 
@@ -55,7 +60,7 @@ public class UserMyPageController extends BaseController {
 		HashMap<String, String> notificationMap = new HashMap<String, String>() ;
 		notificationMap.put("", "");
 		
-		if (yourUserCode!=null&&!yourUserCode.equals("")) {
+		if (!mineYn&&yourUserCode!=null&&!yourUserCode.equals("")) {
 			userCodeMap.put("yourUserCode",yourUserCode);
 			user = userSelectDao.selectUser(yourUserCode);
 			req.setAttribute("yourUserCode", yourUserCode);

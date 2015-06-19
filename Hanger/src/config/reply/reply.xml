@@ -3,6 +3,9 @@
 <sqlMap namespace="Data">
 	<typeAlias alias="reply" type="com.hanger.reply.vo.ReplyVo"/>
 	
+	<select id="selectReplySeq" resultClass="String">
+		SELECT CONCAT("RE",LPAD((SELECT GET_SEQ('REPLY_CODE')), 10, '0'));
+	</select>
 	<insert id="insertReply" parameterClass="HashMap">
 		INSERT INTO REPLY
 						 (REPLY_CODE,
@@ -16,8 +19,8 @@
 						  UPD_DATE,
 						  UPD_IP)
 								 VALUES
-								 (CONCAT("RE",LPAD((SELECT GET_SEQ('REPLY_CODE')), 10, '0')),
-								 #userCode#,
+								 (#replySeq#,
+								 #myUserCode#,
 								 #reviewCode#,
 								 #replyContent#,
 								 #regId#,
@@ -43,13 +46,18 @@
 			  A.REPLY_USE_YN AS replyUseYn,
 			  B.USER_PIC_PATH as userPicPath,
 			  B.USER_PIC_SAVE_NAME AS userPicSaveName
-													 FROM reply A, user B	
-														 				 WHERE
-															 				  REPLY_USE_YN != 'N'
-															 				  AND
-															 				  A.POSTING_CODE = #reviewCode#
-															 				  AND
-															 				  A.USER_CODE = B.USER_CODE
+		FROM reply A, user B	
+		WHERE
+		  REPLY_USE_YN = 'Y'
+		  AND
+		  A.POSTING_CODE = #reviewCode#
+		  AND
+		  A.USER_CODE = B.USER_CODE
+	<dynamic>
+		<isNotEmpty property="replySeq">
+			AND A.REPLY_CODE=#replySeq#
+		</isNotEmpty>
+	</dynamic>
 	</select>
 	
 	

@@ -70,6 +70,7 @@
 	</bean>
 	<bean id="userScrapPageController" class="com.hanger.user.controller.UserScrapPageController">
 		<property name="userSelectDao" ref="userSelectDao"></property>
+		<property name="userScrapDao" ref="userScrapDao"></property>
 	</bean>
 
 	<!-- Relation 요청 url과 Controller 매핑 -->

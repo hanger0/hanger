@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="Data">
-	<typeAlias alias="scrap" type="com.hanger.scrap.vo.ScrapVo"/>
+	<typeAlias alias="userScrapVo" type="com.hanger.scrap.vo.UserScrapVo"/>
 	
-	<select id = "selectUserScrap" parameterClass="HashMap" resultClass = "scrap">
+	<select id = "selectUserScrap" parameterClass="HashMap" resultClass = "userScrapVo">
 	SELECT review1.POSTING_CODE as postingCode, review1.ITEM_GROUP_CODE as itemGroupCode,
 		review1.REVIEW_SCORE as reviewScore, review1.REVIEW_TITLE as reviewTitle, review1.REG_DATE as regDate,
 		item.ITEM_NAME as itemName, brand.BRAND_NAME as brandName,

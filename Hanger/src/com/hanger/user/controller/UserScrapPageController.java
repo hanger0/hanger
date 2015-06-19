@@ -1,5 +1,8 @@
 package com.hanger.user.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,14 +10,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hanger.common.controller.BaseController;
+import com.hanger.scrap.dao.UserScrapDao;
+import com.hanger.scrap.vo.UserScrapVo;
 import com.hanger.user.dao.UserSelectDao;
 import com.hanger.user.vo.UserVo;
 
 @Controller
 public class UserScrapPageController extends BaseController {
 	//
+	private UserScrapDao userScrapDao ;
 	private UserSelectDao userSelectDao;
 	
+	public void setUserScrapDao(UserScrapDao userScrapDao) {
+		this.userScrapDao = userScrapDao ;
+	}
 	public void setUserSelectDao(UserSelectDao userSelectDao) {
 		this.userSelectDao = userSelectDao;
 	}
@@ -30,17 +39,23 @@ public class UserScrapPageController extends BaseController {
 			return moveUrl;
 		}
 		
-		String userCode = (String)session.getAttribute("myUserCode");
+		String myUserCode = (String)session.getAttribute("myUserCode");
 		String yourUserCode= req.getParameter("yourUserCode");
 		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("myUserCode", myUserCode);
+		
+		ArrayList<UserScrapVo> userScrapList = userScrapDao.selectUserScrap(map);
+		
 		if (yourUserCode!=null&&!yourUserCode.equals("")) {
-			userCode = yourUserCode;
+			myUserCode = yourUserCode;
 			req.setAttribute("yourUserCode", yourUserCode);
 		}
 		
-		UserVo user = userSelectDao.selectUser(userCode);
+		UserVo user = userSelectDao.selectUser(myUserCode);
 		
 		req.setAttribute("user", user);
+		req.setAttribute("userScrapList", userScrapList);
 		req.setAttribute("mainUrl", myPageUrl);
 		req.setAttribute("myPageUrl", root + "user/mypage/Scrap.jsp");
 		
